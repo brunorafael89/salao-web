@@ -4,8 +4,6 @@ import api from "../../services/api";
 
 import { toast } from "react-toastify";
 
-import Input from "../../components/Input";
-
 import logo from "../../assets/images/logo.png";
 
 import "./styles.css";
@@ -37,7 +35,7 @@ function LoginPage() {
     <div className="container-login">
 
         <div className="login-img"> 
-            <img src={logo}/>
+            <img src={logo} alt="logo"/>
         </div>
 
         <div className="container-conteudo">
@@ -71,27 +69,7 @@ function LoginPage() {
                 </div>
             </form>
         </div>
-    </div>
-
-
-
-    // {/* <form onSubmit={logar}>
-    //   <Input
-    //     name="login"
-    //     label="Login"
-    //     value={login}
-    //     onChange={(e) => setLogin(e.target.value)}
-    //   />
-
-    //   <Input
-    //     name="senha"
-    //     label="Senha"
-    //     value={senha}
-    //     onChange={(e) => setSenha(e.target.value)}
-    //   />
-
-    //   <button type="submit">Entrar</button>
-    // </form> */}
+    </div>    
   );
 }
 
