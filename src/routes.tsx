@@ -1,0 +1,26 @@
+import React from "react";
+import { BrowserRouter, Route } from "react-router-dom";
+
+import Login from "./pages/Login";
+import Home from "./pages/Home";
+import FormaPagamentoPage from "./pages/FormaPagamento";
+import ExemploPage from "./pages/Exemplo";
+import ServicoPage from "./pages/Servico";
+import AgendamentoPage from "./pages/Agendamento";
+
+
+function Routes() {
+  return (
+    <BrowserRouter>
+      <Route path="/" exact component={Login} />
+      <Route path="/home" exact component={Home} />
+      <Route path="/formaPagamento" exact component={FormaPagamentoPage} />
+      <Route path="/exemplo" exact component={ExemploPage} />
+      <Route path="/servico" exact component={ServicoPage} />
+      <Route path="/agendamento" exact component={AgendamentoPage} /> 
+
+    </BrowserRouter>
+  );
+}
+
+export default Routes;
