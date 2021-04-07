@@ -9,15 +9,19 @@ function Home() {
   const [clientes, setClientes] = useState([]);
 
   useEffect(() => {
-    api.get("cliente").then((clientes) => {
-      setClientes(clientes.data);
-    });
-  }, []);
+    getClientes(); 
+  }, [])
+
+  async function getClientes(){
+    const response = await api.get("cliente");
+    setClientes(response.data);
+  }
 
   return (
     <>
       <Header />
       <MenuLateral />
+      
       <div className="container">
         {clientes.map((cliente: any) => (
           <div className="content">
