@@ -8,6 +8,7 @@ import ExemploPage from "./pages/Exemplo";
 import ServicoPage from "./pages/Servico";
 import AgendamentoPage from "./pages/Agendamento";
 import FuncaoPage from "./pages/Funcao";
+import ProfissionalPage from "./pages/Profissional";
 
 
 function Routes() {
@@ -20,6 +21,7 @@ function Routes() {
       <Route path="/servico" exact component={ServicoPage} />
       <Route path="/agendamento" exact component={AgendamentoPage} />
       <Route path="/funcao" exact component={FuncaoPage} /> 
+      <Route path="/profissional" exact component={ProfissionalPage} /> 
 
     </BrowserRouter>
   );

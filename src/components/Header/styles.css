@@ -18,9 +18,9 @@ header div.contacts{
 
 header div.contacts .logo{
     display: inline-block;
-    width: 80px;
+    width: 90px;
     height: 80px;
-    margin-left: 20px;
+    margin-left: 30px;
 }
 
 header div.contacts .logo img{
@@ -34,17 +34,18 @@ header div.contacts .direct-contacts{
     display: inline;
     position: absolute;
     top: 30px;
-    margin-left: 30px;
+    margin-left: 20px;
 }
 
 header div.contacts .direct-contacts span.material-icons{
     margin-left: 40px;
+    font-size: 22px;
 }
 
 header div.contacts .direct-contacts p{
     display: inline-block;
     transform: translateY(-5px);
-    font-size: 20px;
+    font-size: 18px;
     font-weight: bold;
 }
 
@@ -56,12 +57,13 @@ header div.contacts nav{
     position: absolute;
     top: 30px;
     right: 40px;
+    font-size: 15px;
 }
 
 header div.contacts nav ul{
     display: flex;
     justify-content: space-between;
-    width: 600px;
+    width: 500px;
 }
 
 header div.contacts nav ul li{
@@ -76,9 +78,13 @@ header div.contacts nav ul li:hover{
     color: #fcff46;
 }
 
+header div.contacts nav ul li span.material-icons{
+    font-size: 18px;
+}
+
 header div.contacts nav ul li a{
     display: inline-block;
     margin-left: 5px;
-    transform: translateY(-7px);
+    transform: translateY(-3px);
     color: inherit;
 }
