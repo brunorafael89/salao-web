@@ -64,8 +64,8 @@ function LoginPage() {
                 <div className="linha"></div>
 
                 <div className="login-opcoes">
-                    <a href=""> Esqueceu sua senha?</a>
-                    <a href=""> Ainda não tem cadastro? <strong>Cadastre-se!</strong></a>
+                    <a href="/"> Esqueceu sua senha?</a>
+                    <a href="Cadastro/"> Ainda não tem cadastro? <strong>Cadastre-se!</strong></a>
                 </div>
             </form>
         </div>
