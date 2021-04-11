@@ -4,6 +4,7 @@
     margin: 0;
     padding: 0;
     box-sizing: border-box;
+    font-family: 'Montserrat', 'Roboto', sans-serif;
 }
 
 li{
@@ -17,7 +18,6 @@ a{
 .out-container{
     width: 100vw;
     height: 100vh;
-    font-family: 'Montserrat', 'Roboto', sans-serif;
     overflow-x: hidden;
 }
 
