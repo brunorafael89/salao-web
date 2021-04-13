@@ -1,4 +1,5 @@
 import React from "react";
+import { Link } from 'react-router-dom';
 import { CgProfile } from "react-icons/cg"
 import { BiCalendarCheck } from "react-icons/bi"
 import { AiOutlineUserAdd } from "react-icons/ai"
@@ -22,7 +23,7 @@ function MenuLateral(){
                     </li> 
                     <li>
                         <span><BiCalendarCheck /></span>
-                        <a href="Agendamento"> Meus Agendamentos</a>
+                        <Link to="Agendamento"> Meus Agendamentos</Link>
                     </li>
                     <li>
                         <span><AiOutlineUserAdd /></span>
