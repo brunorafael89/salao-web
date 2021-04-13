@@ -20,16 +20,14 @@ function Home() {
   return (
     <>
       <Header />
-      <MenuLateral />
       
-      <div className="container">
-        {clientes.map((cliente: any) => (
-          <div className="content">
-            <h1>{cliente.nome}</h1>
-            <h1>{cliente.cpf}</h1>
-          </div>
-        ))}
-      </div>
+      <main>
+        <MenuLateral />
+
+        <div className="main-container">
+                <h1>Escolha uma opção do menu ao lado!</h1>
+            </div>
+      </main>
     </>
   );
 }

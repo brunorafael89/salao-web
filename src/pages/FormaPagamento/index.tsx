@@ -1,18 +1,16 @@
 import React, { FormEvent, useEffect, useState } from "react";
-import { useHistory } from "react-router-dom";
+// import { useHistory } from "react-router-dom";
 import api from "../../services/api";
+import Header from "../../components/Header/";
+import MenuLateral from "../../components/MenuLateral/";
 
 import { toast } from "react-toastify";
-
-import logo from "../../assets/images/logo.png";
-
 import { MdDeleteForever } from 'react-icons/md';
-
 
 import "./styles.css";
 
 function FormaPagamentoPage() {
-  const history = useHistory();
+//   const history = useHistory();
   const [formaPagamento, setFormaPagamento] = useState("");
   const [formasPagamentos, setFormasPagamentos] = useState([]);
 
@@ -55,70 +53,69 @@ function FormaPagamentoPage() {
   }
 
   return (
-    <div className="out-container">
-        <header className="header-login">
-            <div className="header-login-menu">
-                <div className="logo">
-                    <a href="/"><img src={logo} alt="logo salão Beauty"/></a>
+      <>
+        <Header />
+
+        <main>
+            <MenuLateral />
+
+            <div className="formaPagamento main-container">
+                <div className="formaPagamento cadastro-form">
+                    <h1>Cadastro de Formas de Pagamentos</h1>
+
+                    <form onSubmit={cadastrar} className="form"> 
+                        <input type="hidden" name="id" value="" />
+
+                        <label htmlFor="forma_pagamento">
+                            <span>Forma de Pagamento</span>
+                            <input type="text" 
+                            name="forma_pagamento" 
+                            value={formaPagamento}
+                            onChange={(e) => setFormaPagamento(e.target.value)}
+                            />
+                        </label>
+
+                        <div className="buttons">
+                            <button name="acao" value="cadastrar">Cadastrar</button>
+                            <button name="acao" value="alterar">Alterar</button>
+                        </div>
+                    </form>
                 </div>
 
-                <div className="welcome">
-                    <h1>Bem vindo!</h1>
-
-                    <p>Cadastre as suas formas de pagamento para que tenha mais opções no recebimento.</p>
+                <div className="table">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Forma de Pagamento</th>
+                                <th>Ação</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {formasPagamentos.map((forma: any) => (
+                                <tr>
+                                    <td>{forma.forma_pagamento}</td>
+                                    <td>
+                                        {/* <form> */}
+                                            <input type='hidden' name='id' value="" />
+                                            <div className='material' id='excluir' onClick={() => excluir(forma.forma_pagamento_id)}>
+                                                {/* <span className='material-icons'>delete_forever</span> */}
+                                                
+                                                <button name='acao' value='excluir'> <MdDeleteForever /> Excluir</button>
+                                            </div>
+                                            <div className='material'>
+                                                <span className='material-icons carregar'>upgrade</span>
+                                                <button name='acao' value='carregar' onClick={() => setFormaPagamento(forma.forma_pagamento)}>Carregar</button>
+                                            </div>
+                                        {/* </form> */}
+                                    </td>
+                                </tr>
+                            ))}
+                        </tbody>
+                    </table>
                 </div>
             </div>
-        </header>
-
-        <h1>Cadastro de Formas de Pagamentos</h1>
-
-        <form onSubmit={cadastrar} className="login-form"> 
-            <input type="hidden" name="id" value="" />
-
-            <label htmlFor="forma_pagamento">Forma de Pagamento</label>
-            <input type="text" 
-            name="forma_pagamento" 
-            value={formaPagamento}
-            onChange={(e) => setFormaPagamento(e.target.value)}
-            />
-
-            <button name="acao" value="cadastrar" type="submit">Cadastrar</button>
-            <button name="acao" value="alterar">Alterar</button>
-        </form>
-
-        <div className="table">
-            <table>
-                <thead>
-                    <tr>
-                        <th>Forma de Pagamento</th>
-                        <th>Ação</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    {formasPagamentos.map((forma: any) => (
-                        <tr>
-                            <td>{forma.forma_pagamento}</td>
-                            <td>
-                                {/* <form> */}
-                                    <input type='hidden' name='id' value="" />
-                                    <div className='material' id='excluir' onClick={() => excluir(forma.forma_pagamento_id)}>
-                                        {/* <span className='material-icons'>delete_forever</span> */}
-                                        
-                                        <button name='acao' value='excluir'> <MdDeleteForever /> Excluir</button>
-                                    </div>
-                                    <div className='material'>
-                                        <span className='material-icons carregar'>upgrade</span>
-                                        <button name='acao' value='carregar' onClick={() => setFormaPagamento(forma.forma_pagamento)}>Carregar</button>
-                                    </div>
-                                {/* </form> */}
-                            </td>
-                        </tr>
-                    ))}
-                </tbody>
-            </table>
-        </div>
-    </div>
-
+        </main>
+      </>
   );
 }
 
