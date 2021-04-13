@@ -1,13 +1,11 @@
-@import url('https://fonts.googleapis.com/css2?family=Alata&family=Montserrat:wght@400;700&display=swap');
 
-*{
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-    font-family: 'Montserrat', sans-serif;
+.profissional.main-container{
+    width: 83%;
+    padding: 90px 10px 10px 10px;
+    margin-left: 17%;
 }
 
-.profissional.cadastro-form{
+.profissional .cadastro-form{
     display: flex;
     flex-direction: column;
     width: 50%;
@@ -19,28 +17,20 @@
     border-radius: 20px;
 }
 
-/* .cadastro-form span{
-    color: #000;
-    font-size: 30px;
-    font-weight: bold;
-    margin: 20px 0;
-} */
-
-
-.cadastro-form .form{
+.profissional.cadastro-form .form{
     display: flex;
     flex-direction: column;
     width: 100%;
     place-items: center;
 }
 
-.cadastro-form .form label{
+.profissional.cadastro-form .form label{
     display: inline-block;
     width: 100%;
     margin: 5px 0;
 }
 
-.cadastro-form .form label span{
+.profissional.cadastro-form .form label span{
     display: inline-block;
     width: 18%;
     margin: unset;
@@ -48,7 +38,7 @@
     font-weight: normal;
 }
 
-.cadastro-form .form label input{
+.profissional.cadastro-form .form label input{
     width: 80%;
     margin: 5px 0;
     padding: 5px;
@@ -75,14 +65,14 @@
         color: #555; 
     }
 
-.cadastro-form .buttons{
+.profissional.cadastro-form .buttons{
     display: grid;
     grid-template-columns: repeat(2, 1fr);
     width: 100%;
     gap: 10px
 }
 
-.cadastro-form .buttons button{
+.profissional.cadastro-form .buttons button{
     display: grid;
     width: 100%;
     margin: 10px 0 0 0;
@@ -96,7 +86,7 @@
     cursor: pointer;
 }
 
-.cadastro-form .buttons button:hover{
+.profissional.cadastro-form .buttons button:hover{
     background-color: #5d2e69;
     font-weight: bold;
 }

@@ -8,15 +8,29 @@
     margin-top: 80px;
 }
 
-.menu-lateral a{
-    display: block;
-    padding: 15px;
-    font-size: 20px;
-    color: #fff;
+.menu-lateral li{
+    display: inline-block;
+    width: 100%;
 }
 
-.menu-lateral a:hover{
+.menu-lateral li:hover{
     background: #e000e0;
     font-weight: bold;
     cursor: pointer;
+}
+
+.menu-lateral li span{
+    display: inline-block;
+    margin-left: 20px;
+    padding: 15px 0;
+    transform: translateY(4px);
+    font-size: 24px;
+    color: #fff;
+}
+
+.menu-lateral a{
+    display: inline-block;
+    padding: 15px;
+    font-size: 20px;
+    color: #fff;
 }
