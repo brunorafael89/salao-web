@@ -1,5 +1,5 @@
 
-.container-conteudo{
+.main-container .container-conteudo{
     display: grid;
     grid-template-areas: "titulo titulo"
                          "calendario opcao"
@@ -8,7 +8,7 @@
     font-weight:bold;
 }
 
-.container-conteudo span{
+.main-container .container-conteudo span{
     grid-area: titulo;
     display: block;
     margin: 15px 0;
