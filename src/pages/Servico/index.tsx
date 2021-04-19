@@ -1,14 +1,27 @@
-import React, { useEffect, useState } from "react";
-import { toast } from "react-toastify";
-import api from "../../services/api";
+import React, { FormEvent, useEffect, useState } from "react";
 import Header from "../../components/Header/";
 import MenuLateral from "../../components/MenuLateral/";
+import api from "../../services/api";
+
+import { toast } from "react-toastify";
 
 import "./styles.css";
+
+// importando os icones
+import { MdDeleteForever } from "react-icons/md";
+import { MdUpdate } from "react-icons/md";
+
+
 
 function ServicoPage(){
     const [funcoes, setFuncoes] = useState([]);
     const [servicos, setServicos] = useState([]);
+
+    const [idFuncao, setIdFuncao] = useState("")
+    const [nomeServico, setNomeServico] = useState("");
+    const [valorServico, setValorServico] = useState("");
+    const [comissaoServico, setComissaoServico] = useState("");
+    const [tempoServico, setTempoServico] = useState("");
 
     useEffect(() => {
         getFuncoes() 
@@ -33,13 +46,27 @@ function ServicoPage(){
         }
     }
 
+    async function cadastrar(e: FormEvent){
+        e.preventDefault();
 
-
-
-
-
-
-
+        try{
+            await api.post("servico", {
+                funcao_id: idFuncao,
+                nome_servico: nomeServico,
+                valor_servico: valorServico,
+                comissao_servico: comissaoServico,
+                tempo_servico: tempoServico
+            });
+            setNomeServico("");
+            setValorServico("");
+            setComissaoServico("");
+            setTempoServico("");
+    
+            getServicos();
+        } catch(err){
+            toast.error("Erro ao cadastrar serviço!");
+        }
+    }
 
     return (
         <>
@@ -58,34 +85,55 @@ function ServicoPage(){
                 <div className="servico main-container">
                     <div className="servico cadastro-form">
                         <h1>Cadastro de Serviços</h1>
-                        <form className="form" method="post">
+                        <form className="form" onSubmit={cadastrar}>
                             <label htmlFor="funcao">
                                 <span>Função</span>
-                                <select name="funcao_id" >
+                                <select name="nome_funcao">
                                     {funcoes.map((funcao: any) => (
-                                        <option>{funcao.nome_funcao}</option>
-                                        ))}
+                                        <option id={funcao.funcao_id}>{funcao.nome_funcao}</option>
+                                        ))
+                                    }
                                 </select>
                             </label>
                                 
                             <label htmlFor="nome">
                                 <span>Nome do Servico</span>
-                                <input type="text" name="nome" value="Alisamento Japonês" />
+                                <input 
+                                    type="text" 
+                                    name="nome_servico" 
+                                    value={nomeServico}
+                                    onChange={(e)=> setNomeServico(e.target.value)}
+                                />
                             </label>
                             
                             <label htmlFor="valor">
                                 <span>Valor do Servico</span>
-                                <input type="text" name="valor" value="256.00" />
+                                <input 
+                                    type="text" 
+                                    name="valor_servico"
+                                    value={valorServico}
+                                    onChange={(e) => setValorServico(e.target.value)} 
+                                />
                             </label>
                             
                             <label htmlFor="comissao">
                                 <span>Comissão</span>
-                                <input type="text" name="comissao" value="50" />
+                                <input 
+                                    type="text" 
+                                    name="comissao_servico" 
+                                    value={comissaoServico}
+                                    onChange={(e) => setComissaoServico(e.target.value)}
+                                />
                             </label>
                             
                             <label htmlFor="tempo_servico">
                                 <span>Tempo de execução do Servico</span>
-                                <input type="text" name="tempo_servico" value="01:30:00" />
+                                <input 
+                                    type="time" 
+                                    name="tempo_servico" 
+                                    value={tempoServico}
+                                    onChange={(e) => setTempoServico(e.target.value)} 
+                                />
                             </label>
                             
                             <div className="buttons">
@@ -110,7 +158,11 @@ function ServicoPage(){
                             <tbody>
                                 {servicos.map((servico: any) => (
                                     <tr>
-                                        <td>Cabeleireira</td>
+                                        <td>
+                                            {funcoes.map((funcao: any) => (
+                                                funcao.funcao_id === servico.funcao_id ? funcao.nome_funcao : ""
+                                            ))}
+                                        </td>
                                         <td>{servico.nome}</td>
                                         <td>{servico.valor}</td>
                                         <td>{servico.comissao}</td>
@@ -119,11 +171,13 @@ function ServicoPage(){
                                             <form method='post'>
                                                 <input type='hidden' name='id' value='{$serv->servicos_id}' />
                                                 <div className='material' id='excluir'>
-                                                    <span className='material-icons'>delete_forever</span>
+                                                    {/* <span className='material-icons'>delete_forever</span> */}
+                                                    <span className='material-icons'><MdDeleteForever /></span>
                                                     <button name='acao' value='excluir'>Excluir</button>
                                                 </div>
                                                 <div className='material'>
-                                                    <span className='material-icons carregar'>upgrade</span>
+                                                    {/* <span className='material-icons carregar'>upgrade</span> */}
+                                                    <span className='material-icons carregar'><MdUpdate /></span>
                                                     <button name='acao' value='carregar'>Carregar</button>
                                                 </div>
                                             </form>

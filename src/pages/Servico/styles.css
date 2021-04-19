@@ -76,12 +76,11 @@
 .servico.cadastro-form .form label select{
     width: 80%;
     padding: 6px;
-    text-align: center;
     border: none;
     border-bottom: 1px solid #000;
     font-size: 16px;
     background-color: #fff;
-    color: #fff;
+    color: #000;
 }
 
 .servico.cadastro-form .buttons{
