@@ -90,7 +90,7 @@ function ProfissionalPage(){
                                 type="date" 
                                 name="data_nasc" 
                                 value={dataNascProfissional} 
-                                onChange={ (e) => setNomeProfissional(e.target.value) }
+                                onChange={ (e) => setDataNascProfissional(e.target.value) }
                             />
                         </label>
 
@@ -99,7 +99,7 @@ function ProfissionalPage(){
                             <input type="text" 
                                 name="cpf" 
                                 value={cpfProfissional} 
-                                onChange={ (e) => setNomeProfissional(e.target.value) }
+                                onChange={ (e) => setCpfProfissional(e.target.value) }
                                 placeholder="Apenas números"/>
                         </label>
 
@@ -109,7 +109,7 @@ function ProfissionalPage(){
                                 type="text" 
                                 name="telefone" 
                                 value={telefoneProfissional} 
-                                onChange={ (e) => setNomeProfissional(e.target.value) }
+                                onChange={ (e) => setTelefoneProfissional(e.target.value) }
                                 placeholder="Apenas números"/>
                         </label>
 
@@ -119,7 +119,7 @@ function ProfissionalPage(){
                                 type="email" 
                                 name="email" 
                                 value={emailProfissional} 
-                                onChange={ (e) => setNomeProfissional(e.target.value) }
+                                onChange={ (e) => setEmailProfissional(e.target.value) }
                                 placeholder="example@mail.com"/>
                         </label>
 
@@ -129,7 +129,7 @@ function ProfissionalPage(){
                                 type="password" 
                                 name="senha"
                                 value={senhaProfissional} 
-                                onChange={ (e) => setNomeProfissional(e.target.value) }
+                                onChange={ (e) => setSenhaProfissional(e.target.value) }
                             />
                         </label>
 
