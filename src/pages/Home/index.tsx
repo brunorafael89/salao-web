@@ -1,21 +1,10 @@
-import React, { useEffect, useState } from "react";
+import React from "react";
 import Header from "../../components/Header";
 import MenuLateral from "../../components/MenuLateral";
-import api from "../../services/api";
 
 import "./styles.css";
 
 function Home() {
-  const [clientes, setClientes] = useState([]);
-
-  useEffect(() => {
-    getClientes(); 
-  }, [])
-
-  async function getClientes(){
-    const response = await api.get("cliente");
-    setClientes(response.data);
-  }
 
   return (
     <>

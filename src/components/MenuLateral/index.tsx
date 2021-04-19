@@ -19,7 +19,7 @@ function MenuLateral(){
                 <ul>
                     <li>
                         <span><CgProfile/></span>
-                        <a href="/cadastro.html"> Meu Perfil</a>
+                        <a href="Cadastro"> Meu Perfil</a>
                     </li> 
                     <li>
                         <span><BiCalendarCheck /></span>
