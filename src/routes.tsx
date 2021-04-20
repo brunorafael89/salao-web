@@ -9,6 +9,7 @@ import ServicoPage from "./pages/Servico";
 import AgendamentoPage from "./pages/Agendamento";
 import FuncaoPage from "./pages/Funcao";
 import ProfissionalPage from "./pages/Profissional";
+import CadastroPage from "./pages/Cadastro";
 import PrincipalPage from "./pages/Principal";
 import TabelaPrecoPage from "./pages/TabelaPreco";
 
@@ -24,7 +25,8 @@ function Routes() {
       <Route path="/servico" exact component={ServicoPage} />
       <Route path="/agendamento" exact component={AgendamentoPage} />
       <Route path="/funcao" exact component={FuncaoPage} /> 
-      <Route path="/profissional" exact component={ProfissionalPage} /> 
+      <Route path="/profissional" exact component={ProfissionalPage} /<
+      <Route path="/cadastro" exact component={CadastroPage} />
       <Route path="/TabelaPreco" exact component={TabelaPrecoPage} />
 
     </BrowserRouter>

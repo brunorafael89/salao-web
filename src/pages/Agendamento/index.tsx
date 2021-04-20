@@ -50,7 +50,7 @@ function AgendamentoPage() {
 
             <main>
                 <MenuLateral />
-                <div className="main-container bottom">
+                <div className="main-container">
                     <div className="container-conteudo">
                         <span>Agende seu serviço aqui!</span>
 
