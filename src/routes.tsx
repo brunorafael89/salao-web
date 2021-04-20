@@ -25,7 +25,7 @@ function Routes() {
       <Route path="/servico" exact component={ServicoPage} />
       <Route path="/agendamento" exact component={AgendamentoPage} />
       <Route path="/funcao" exact component={FuncaoPage} /> 
-      <Route path="/profissional" exact component={ProfissionalPage} /<
+      <Route path="/profissional" exact component={ProfissionalPage} />
       <Route path="/cadastro" exact component={CadastroPage} />
       <Route path="/TabelaPreco" exact component={TabelaPrecoPage} />
 
