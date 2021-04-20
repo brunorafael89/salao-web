@@ -40,7 +40,7 @@ function TabelaPrecoPage(){
                 </div>
             </header>
     
-            <main>
+            <main className="TabelaPreco_main-container">
                 <section>
                     <div className="tab-title" id="cabelos">
                         <h1>Cabelos</h1>
