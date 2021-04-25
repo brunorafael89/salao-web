@@ -6,13 +6,13 @@ import { MdExitToApp } from "react-icons/md";
 import { GiMaggot } from "react-icons/gi";
 import { FaRegHandPeace } from "react-icons/fa";
 import { GiFemaleLegs } from "react-icons/gi";
+import { GiHamburgerMenu } from "react-icons/gi";
 import "./styles.css";
 
 function TabelaPrecoPage(){
     return (
         <>
-            <div className="out-container">
-            <header>
+            <header className="header-tab-preco">
                 <div className="menu-fixed"> 
                     <div className="contacts">
                         <div className="logo">
@@ -25,7 +25,7 @@ function TabelaPrecoPage(){
                         </div>
         
                         <div className="hamburguer">
-                            <span className="material-icons">menu</span>
+                            <span className="material-icons"><GiHamburgerMenu/></span>
                         </div>
         
                         <nav>
@@ -150,8 +150,11 @@ function TabelaPrecoPage(){
                 <div className="cta-btn">
                 </div>
             </main>
-        </div>
-    </>
+
+            <footer>
+                <p>Made by B²CS&copy;</p>
+            </footer>
+        </>
     )
 }
 
