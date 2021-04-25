@@ -15,46 +15,44 @@ import depilacao from "../../assets/images/depilacao.jpg";
 import pes from "../../assets/images/pes.jpg";
 import logo from "../../assets/images/logo.png";
 import map from "../../assets/images/map.svg";
+import { GiHamburgerMenu } from "react-icons/gi";
 
 
 import "./styles.css";
-import  "../../assets/js/principal";
+// import "../../assets/js/principal";
 
 function PrincipalPage(){
     return (
         <>
-            <header>
-                <div className="menu-fixed">
-                    <div className="contacts">
-                        <div className="logo">
-                            <img src={logo} alt="logo" />
-                        </div>
-
-                        <div className="direct-contacts">
-                            <span className="material-icons"><FiPhone/></span> <p> (21)2404-0695 </p>
-                            <span className="material-icons"><FiMail/></span> <p> E-mail: beauty_salao@gmail.com </p>
-                        </div>
-
-                        <div className="hamburguer">
-                            <span className="material-icons">menu</span>
-                        </div>
-
-                        <nav>
-                            <ul>
-                                <li><span className="material-icons"><MdExitToApp/></span><a href="login">Login/Cadastro</a></li>
-                                <li><span className="material-icons"><AiOutlineStar/></span><a href="#services">Serviços</a></li>
-                                <li><span className="material-icons"><MdAttachMoney/></span><a href="TabelaPreco">Tabela de Preços</a></li>
-                                <li><span className="material-icons"><MdPermContactCalendar/></span><a href="#contact">Contato</a></li>
-                            </ul>
-                        </nav>
+            <header className="header-principal">
+                <div className="contacts">
+                    <div className="logo">
+                        <img src={logo} alt="logo" />
                     </div>
-                </div>
-                <div className="background">
-                <img alt="Foto de um salão de beleza"/>
 
-                <div className="cta-btn">
+                    <div className="direct-contacts">
+                        <span className="material-icons"><FiPhone/></span> <p> (21)2404-0695 </p>
+                        <span className="material-icons"><FiMail/></span> <p> E-mail: beauty_salao@gmail.com </p>
+                    </div>
+
+                    <div className="hamburguer">
+                        <span className="material-icons"><GiHamburgerMenu/></span>
+                    </div>
+
+                    <nav>
+                        <ul>
+                            <li><span className="material-icons"><MdExitToApp/></span><a href="login">Login/Cadastro</a></li>
+                            <li><span className="material-icons"><AiOutlineStar/></span><a href="#services">Serviços</a></li>
+                            <li><span className="material-icons"><MdAttachMoney/></span><a href="TabelaPreco">Tabela de Preços</a></li>
+                        </ul>
+                    </nav>
                 </div>
-            </div>
+
+                <div className="background">
+                    <img alt="Foto de um salão de beleza"/>
+
+                    <div className="cta-btn"></div>
+                </div>
             </header>
             <main>
                 <section className="page" id="services">
@@ -87,7 +85,7 @@ function PrincipalPage(){
                             </div>
 
                             <div className="service-description">
-                                <p className="service-description-p">A vida é muito mais fácil com uma bela escova nos cabelos.</p>|
+                                <p className="service-description-p">A vida é muito mais fácil com uma bela escova nos cabelos.</p>
                             </div>
                         </article>
 
