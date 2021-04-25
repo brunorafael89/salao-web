@@ -8,6 +8,7 @@
 /* ESTILO DO CABECALHO */
 .header-tab-preco{
     width: 100vw;
+    position: unset;
     background-color: #ac6ebb;
 }
 

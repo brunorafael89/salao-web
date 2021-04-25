@@ -1,3 +1,8 @@
+.header-principal{
+    width: 100vw;
+    position: unset;
+}
+
 /* ESTILO DO CORPO DA PÁGINA - SERVIÇOS */
 .page:first-child{
     /* position: relative; */
