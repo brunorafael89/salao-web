@@ -1,9 +1,6 @@
 /* ESTILO DO CABEÇALHO */
 header{
     width: 100vw;
-}
-
-header .menu-fixed{
     position: fixed;
     z-index: 1;
 }
