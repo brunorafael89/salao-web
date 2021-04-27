@@ -1,13 +1,15 @@
-import React from "react";
-import { SiGooglecalendar } from "react-icons/si";
+import React from 'react';
+import { TOKEN_KEY } from "../../services/auth";
+import { VscCalendar } from "react-icons/vsc";
+
 
 window.addEventListener('load', function(){
-    // const btnAgendar = document.querySelector('.cta-btn')
-    // if( btnAgendar ){
-    //     btnAgendar.addEventListener('click', function(){
-    //         agendarHorario()
-    //     })
-    // }
+    const btnAgendar = document.querySelector('.cta-btn')
+    if( btnAgendar ){
+        btnAgendar.addEventListener('click', function(){
+            agendarHorario()
+        })
+    }
 
     // const btnHamburguer = document.querySelector('.hamburguer')
     // btnHamburguer.addEventListener('click', function(){
@@ -24,20 +26,19 @@ function divCtaBtn(){
     const linkAgendamento = document.createElement('a')
 
     spnMaterial.classList.add('material-icons')
-    // spnMaterial.append(<SiGooglecalendar/>)
+    spnMaterial.append(<VscCalendar/>)
 
-    // linkAgendamento.append('Agende seu horário')
+    linkAgendamento.append('Agende seu horário')
+    linkAgendamento.setAttribute('href', '/agendamento')
 
-    // divCtaBtn.appendChild(spnMaterial)
-    // divCtaBtn.appendChild(linkAgendamento)
-    // divCtaBtn.setAttribute('title', 'Realizar Agendamento')
+    divCtaBtn.appendChild(spnMaterial)
+    divCtaBtn.appendChild(linkAgendamento)
+    divCtaBtn.setAttribute('title', 'Realizar Agendamento')
 }
 
-// function agendarHorario(){
-//     if( !localStorage.getItem(cliente_id) ){
-//         location.href = '../login.html'
-//     } else {
-//         location.href = '../agendamento.html'
-//     }
-// }
+function agendarHorario(){
+    if( !localStorage.getItem(TOKEN_KEY) ){
+        // location.href = '/Login'
+    }
+}
 
