@@ -8,7 +8,7 @@
     font-weight:bold;
 }
 
-.main-container .container-conteudo span{
+.main-container .container-conteudo .titulo{
     grid-area: titulo;
     display: block;
     margin: 15px 0;
@@ -239,19 +239,102 @@ main .main-container .search i:hover{
 FIM DA ÁREA DE TESTE COM O CAMPO DE PESQUISA
 ===========================================*/
 
-@media all and (min-width: 480px) and (max-width: 720px){
-    main .menu-lateral{
-        display: none;
-    }
+@media all and (min-width: 320px) and (max-width: 480px){
     main .main-container{
         width: 100%;
-        padding: 10px;
-        margin: unset;
+        padding: 10px 0;
+        margin-left: unset;
     }
 
-    main .main-container .historico-agendamento{
+    .main-container .container-conteudo{
+        display: grid;
+        grid-template-areas: unset;
+        grid-template-columns: 1fr;
+        padding: unset;
+        gap: 10px;
+        font-weight:bold;
+    }
+    
+    .main-container .container-conteudo .titulo{
+        grid-area: unset;
+        font-size: 22px;        
+    }
+    
+    .calendario-table{
+        margin: 0 auto;
+        width: 70%;
+        height: 100%;
+        border-collapse: collapse;
+        background-color: white;
+    }
+    
+    .calendario-table .calendario-tr.calendario-header:first-child{
+        background-color: #610d75;
+        color: #fff;
+        font-size: 24px;
+        font-weight: bold;
+    }
+    
+    .calendario-table .calendario-tr.calendario-header:nth-child(2){
+        background-color: #d281e6;
+        color: #fff;
+        font-weight: bold;
+    }
+    
+    td.calendario-td{
+        width: 50px;
+        height: 50px;
+        border: 1px solid black;
+        text-align: center;
+    }
+    
+    td.calendario-td:empty{
+        background-color: #ddd;
+    }
+    
+    td.calendario-td:hover{
+        background-color: #abcdef;
+    }
+    
+    td.calendario-td5{
+        text-transform: capitalize;
+    }
+    
+    td.calendario-td.selecionado{
+        background-color: #fda2a2;
+    }
+    
+    .main-container .container-conteudo .agendamento-form{
+        grid-area: unset;
+        width: 100%;
+        padding: 10px;
+        background-color: #fff;
+        border-radius: 20px;
+    }
+    
+    .main-container .container-conteudo .agendamento-form .form label{
         width: 100%;
         margin: 10px 0;
+        position: relative;
+    }
+    
+    .main-container .container-conteudo .agendamento-form .form label span{
+        font-size: 12px;
+    }
+    
+    .main-container .container-conteudo .agendamento-form .form label select{
+        width: 60%;
+        font-size: 12px;
+    }
+    
+    .main-container .container-conteudo .agendamento-form .form label input{
+        width: 60%;
+        font-size: 12px;
+    }
+    
+    main .main-container .historico-agendamento{
+        width: 100%;
+        margin: 20px auto;
         padding: unset;
     }
     
@@ -259,5 +342,106 @@ FIM DA ÁREA DE TESTE COM O CAMPO DE PESQUISA
         width: 100%;
         border-collapse: collapse;
         text-align: center;
+    }
+    
+    main .main-container .historico-agendamento table thead th{
+        padding: 5px;
+        border: none;
+        background-color: #610d75;
+        color: #fff;
+    }
+    
+    main .main-container .historico-agendamento table tbody tr{
+        border: none;
+    }
+    
+    main .main-container .historico-agendamento table tbody td{
+        padding: 5px;
+    }
+    
+    main .main-container .historico-agendamento table tbody td .material-icons.concluido{
+        color: #1fc829;
+    }
+    
+    main .main-container .historico-agendamento table tbody td .material-icons.andamento{
+        color: #eeee2f;
+    }
+    
+    main .main-container .historico-agendamento table tbody td .material-icons.cancelado{
+        color: #ff0000;
+    }
+    
+    main .main-container .historico-agendamento table tbody tr:nth-child(even){
+        background-color: #ccc;
+    }
+}
+
+@media all and (min-width: 480px) and (max-width: 768px){
+    main .main-container{
+        width: 100%;
+        padding: 10px;
+        margin: unset;
+    }
+
+    .main-container .container-conteudo .agendamento-form .form label span{
+        font-size: 14px;
+    }
+    
+    .main-container .container-conteudo .agendamento-form .form label select{
+        width: 60%;
+        font-size: 14px;
+    }
+    
+    .main-container .container-conteudo .agendamento-form .form label input{
+        width: 60%;
+        font-size: 14px;
+    }
+
+    .main-container .historico-agendamento{
+        width: 100%;
+        margin: 10px 0;
+        padding: unset;
+    }
+    
+    .main-container .historico-agendamento table{
+        width: 100%;
+        border-collapse: collapse;
+        text-align: center;
+    }
+}
+
+@media all and (min-width: 768px) and (max-width: 1366px){
+    main .main-container{
+        width: unset;
+        padding: 80px 10px;
+        margin-left: 320px;
+    }
+
+    .main-container .container-conteudo{
+        height: unset;
+    }
+
+    .main-container .container-conteudo .agendamento-form .form label {
+        margin: 10px 0;
+    }
+
+    .main-container .container-conteudo .agendamento-form .form label span {
+        margin: 10px 0;
+        font-size: 18px;
+        font-weight: bold;
+    }
+
+    .main-container .container-conteudo .agendamento-form .form label select{
+        width: 60%;
+    }
+    
+    .main-container .container-conteudo .agendamento-form .form label input{
+        width: 60%;
+    }
+
+    main .main-container .historico-agendamento {
+        width: 100%;
+        margin: 20px auto;
+        padding: unset;
     }
 }
