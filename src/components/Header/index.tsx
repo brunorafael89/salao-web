@@ -29,9 +29,9 @@ function Header(){
 
                 <nav>
                     <ul>
-                        <li><span className="material-icons"><MdExitToApp/></span><a href="index.html">Sair</a></li>
-                        <li><span className="material-icons"><AiOutlineHome/></span><a href="principal.html">Página Principal</a></li>
-                        <li><span className="material-icons"><RiMoneyDollarBoxLine/></span><a href="tabelaPreco.html">Tabela de Preços</a></li>
+                        <li><span className="material-icons"><MdExitToApp/></span><a href="/">Sair</a></li>
+                        <li><span className="material-icons"><AiOutlineHome/></span><a href="home">Página Principal</a></li>
+                        <li><span className="material-icons"><RiMoneyDollarBoxLine/></span><a href="TabelaPreco">Tabela de Preços</a></li>
                         <li><span className="material-icons"><AiOutlineShoppingCart/></span><a href="#contact">Carrinho</a></li>
                     </ul>
                 </nav>
