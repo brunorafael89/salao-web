@@ -22,8 +22,8 @@ a{
 
 main .main-container{
     width: 83%;
-    padding: 80px 10px;
-    margin-left: 17%;
+    padding: 80px 10px 0 0;
+    margin-left: 330px;
 }
 
 main .main-container .historico-agendamento{
