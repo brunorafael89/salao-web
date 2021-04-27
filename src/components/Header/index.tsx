@@ -5,6 +5,7 @@ import { FiPhone } from "react-icons/fi";
 import { FiMail } from "react-icons/fi";
 import { RiMoneyDollarBoxLine } from "react-icons/ri";
 import { MdExitToApp } from "react-icons/md";
+import { GiHamburgerMenu } from "react-icons/gi";
 import logo from "../../assets/images/logo.png";
 
 import "./styles.css";
@@ -23,7 +24,7 @@ function Header(){
                 </div>
 
                 <div className="hamburguer">
-                    <span className="material-icons">menu</span>
+                    <span className="material-icons"><GiHamburgerMenu/></span>
                 </div>
 
                 <nav>
