@@ -27,13 +27,13 @@ function CadastroPage(){
 
         try{
             const response = await api.post("cliente", {
-                nome,
-                cpf,
-                sexo,
-                data_nasc,
-                telefone,
-                email,
-                senha
+                nome: nome,
+                cpf: cpf,
+                sexo: sexo,
+                data_nasc: data_nasc,
+                telefone: telefone,
+                email: email,
+                senha: senha
             })
 
             // setToken(response.data);
