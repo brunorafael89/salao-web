@@ -1,9 +1,3 @@
-*{
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-}
-
 .out-container{
     width: 100vw;
     height: 100vh;
@@ -11,13 +5,14 @@
     overflow-x: hidden;
 }
 
-/* ESTILO DO CABEĂ‡ALHO */
-header{
+/* ESTILO DO CABECALHO */
+.header-tab-preco{
     width: 100vw;
+    position: unset;
     background-color: #ac6ebb;
 }
 
-header div.contacts{
+.header-tab-preco div.contacts{
     height: 80px;
     width: 100vw;
     color: #fff;
@@ -25,70 +20,70 @@ header div.contacts{
     position: relative;
 }
 
-header div.contacts .logo{
+.header-tab-preco div.contacts .logo{
     display: inline-block;
     width: 80px;
     height: 80px;
     margin-left: 20px;
 }
 
-header div.contacts .logo img{
+.header-tab-preco div.contacts .logo img{
     display: inline;
     width: 100%;
     height: 100%;
 }
 
-header div.contacts .direct-contacts{
+.header-tab-preco div.contacts .direct-contacts{
     display: inline;
     position: absolute;
     top: 30px;
     margin-left: 30px;
 }
 
-header div.contacts .direct-contacts span.material-icons{
+.header-tab-preco div.contacts .direct-contacts span.material-icons{
     margin-left: 40px;
 }
 
-header div.contacts .direct-contacts p{
+.header-tab-preco div.contacts .direct-contacts p{
     display: inline-block;
     transform: translateY(-5px);
     font-size: 20px;
     font-weight: bold;
 }
 
-header div.contacts nav{
+.header-tab-preco div.contacts nav{
     position: absolute;
     top: 30px;
     right: 40px;
+    font-size: 16px;
 }
 
-header div.contacts nav ul{
+.header-tab-preco div.contacts nav ul{
     display: flex;
     justify-content: space-between;
     width: 500px;
 }
 
-header div.contacts nav ul li{
+.header-tab-preco div.contacts nav ul li{
     display: inline-block;
     height: 30px;
     color: #fff;
     transition: all .127s ease;
 }
 
-header div.contacts nav ul li:hover{
+.header-tab-preco div.contacts nav ul li:hover{
     font-weight: bolder;
     color: #fcff46;
 }
 
-header div.contacts nav ul li a{
+.header-tab-preco div.contacts nav ul li a{
     display: inline-block;
     margin-left: 5px;
-    transform: translateY(-7px);
     color: inherit;
     text-decoration: none;
 }
 
-header div.contacts .hamburguer{
+.header-tab-preco div.contacts .hamburguer{
     display: none;
 }
 
@@ -158,13 +153,14 @@ section .tab-services{
 }
 
 @media all and (min-width: 320px) and (max-width: 480px){
-    header{
+    .header-tab-preco{
         width: 100vw;
+        height: 100px;
         background-color: #ac6ebb;
         position: relative;
     }
     
-    header div.contacts{
+    .header-tab-preco div.contacts{
         position: relative;
         height: unset;
         width: unset;
@@ -172,111 +168,117 @@ section .tab-services{
         background-color: unset;
     }
     
-    header div.contacts .logo{
+    .header-tab-preco div.contacts .logo{
         display: inline-block;
         width: 100px;
         height: 100px;
         /* margin-left: 20px; */
     }
     
-    header div.contacts .logo img{
+    .header-tab-preco div.contacts .logo img{
         display: inline;
         width: 100%;
         height: 100%;
     }
 
-    header div.contacts .direct-contacts{
+    .header-tab-preco div.contacts .direct-contacts{
         display: none;
     }
 
-    header div.contacts .hamburguer{
+    .header-tab-preco div.contacts .hamburguer{
         display: block;
         position: absolute;
-        top: 35px;
+        top: 25px;
         right: 25px;
         cursor: pointer;
     }
 
-    header div.contacts .hamburguer span.material-icons{
+    .header-tab-preco div.contacts .hamburguer span.material-icons{
         display: inline-block;
         width: 100%;
         color: #fff;
         font-size: 34px;
     }
     
-    header div.contacts nav{
+    .header-tab-preco div.contacts nav{
         display: none;
         position: unset;
         top: 30px;
         right: 40px;
     }
 
-    header div.contacts nav ul{
+    .header-tab-preco div.contacts nav ul{
         display: block;
         width: unset;
     }
     
-    header div.contacts nav ul li{
+    .header-tab-preco div.contacts nav ul li{
         display: block;
         height: unset;
     }
 
-    header div.contacts nav ul li span{
+    .header-tab-preco div.contacts nav ul li span{
         display: inline-block;
         padding: 10px;
     }
     
-    header div.contacts nav ul li:hover{
+    .header-tab-preco div.contacts nav ul li:hover{
         font-weight: bolder;
         color: #fcff46;
         background-color: #83548e;
     }
     
-    header div.contacts nav ul li a{
+    .header-tab-preco div.contacts nav ul li a{
         display: inline-block;
         margin-left: unset;
         transform: translateY(-7px);
         color: inherit;
     }
 
-    header div.contacts .hamburguer + nav.show{
+    .header-tab-preco div.contacts .hamburguer + nav.show{
         display: block;
     }
 
-    main section:first-child .tab-price{
+    .TabelaPreco_main-container section:first-child .tab-price{
         display: grid;
         grid-template-columns: 1fr;
         place-items: unset;
     }
 
-    main section:nth-child(2) .tab-price, main section:nth-child(3) .tab-price{
+    .TabelaPreco_main-container section:nth-child(2) .tab-price, .TabelaPreco_main-container section:nth-child(3) .tab-price{
         display: grid;
         grid-template-columns: 1fr;
         place-items: unset;
         gap: unset;
     }
 
-    main section .tab-price .card{
+    .TabelaPreco_main-container section .tab-price .card{
         margin: 10px 0;
     }
 
-    main section .tab-price .card h2{
+    .TabelaPreco_main-container section .tab-price .card h2{
         font-size: 20px;
     }
 
-    main section .tab-services{
+    .TabelaPreco_main-container section .tab-title{
+        text-align: center;
+        padding: unset;
+        font-size: 20px;
+    }
+
+    .TabelaPreco_main-container section .tab-services{
         display: grid;
         grid-template-columns: 1fr auto;
         padding: 0;
         font-size: 14px;
     }
 
-    main section .tab-services span + span{
+    .TabelaPreco_main-container section .tab-services span + span{
         display: flex;
         place-items: center;
     }
 
-    main div.cta-btn{
+    .TabelaPreco_main-container div.cta-btn{
         display: inline-block;
         width: 100%;
         height: unset;
@@ -290,25 +292,45 @@ section .tab-services{
         position: unset;
     }
 
-    main div.cta-btn:hover{
+    .TabelaPreco_main-container div.cta-btn:hover{
         background-color: #670081;
         color: #fcff46;
         font-weight: bold;
     }
 
-    main div.cta-btn .material-icons{
+    .TabelaPreco_main-container div.cta-btn .material-icons{
         display: inherit;
         transform: translate(30px, 5px);
     }
 
-    main div.cta-btn a{
+    .TabelaPreco_main-container div.cta-btn a{
         padding: 20px 40px;
         display: inline-block;
     }
 }
 
-@media all and (min-width: 480px) and (max-width: 720px){
+@media all and (min-width: 480px) and (max-width: 768px){
+    
 }
 
-@media screen and (min-width: 720px) and (max-width: 1280px){
+@media screen and (min-width: 768px) and (max-width: 1366px){
+    .header-tab-preco div.contacts .direct-contacts{
+        display: none;
+        position: absolute;
+        top: 30px;
+        margin-left: 0px;
+    }
+
+    .header-tab-preco div.contacts nav{
+        position: absolute;
+        top: 30px;
+        right: 40px;
+        font-size: 16px;
+    }
+
+    .header-tab-preco div.contacts nav ul{
+        display: flex;
+        justify-content: space-between;
+        width: 450px;
+    }
 }

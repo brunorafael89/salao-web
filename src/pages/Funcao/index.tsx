@@ -4,8 +4,8 @@ import Header from "../../components/Header/";
 import MenuLateral from "../../components/MenuLateral/";
 
 import { toast } from "react-toastify";
-
-import { FiActivity } from "react-icons/fi"
+import {FaTrashAlt} from "react-icons/fa";
+import {GrUpgrade} from "react-icons/gr";
 
 import "./styles.css";
 
@@ -81,16 +81,16 @@ function FuncaoPage(){
                                     <tr>
                                         <td>{funcao.nome_funcao}</td>
                                         <td>
-                                            {/* <form method='post'> */}
+                                            <form>
                                                 <div className='material excluir'>
-                                                    {/* <span className='material-icons'>delete_forever</span> */}
-                                                    <button name='acao' value='excluir' onClick={() => excluir(funcao.funcao_id)}> <FiActivity /> Excluir</button>
+                                                    <span className='material-icons'><FaTrashAlt/></span>
+                                                    <button name='acao' value='excluir' onClick={() => excluir(funcao.funcao_id)}>Excluir</button>
                                                 </div>
                                                 <div className='material carregar'>
-                                                    <span className='material-icons carregar'>upgrade</span>
+                                                    <span className='material-icons carregar'><GrUpgrade/></span>
                                                     <button name='acao' value='carregar'>Carregar</button>
                                                 </div>
-                                            {/* </form> */}
+                                            </form>
                                         </td>
                                     </tr>
                                 ))}

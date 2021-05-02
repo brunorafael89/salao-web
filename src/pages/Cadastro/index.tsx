@@ -27,17 +27,17 @@ function CadastroPage(){
 
         try{
             const response = await api.post("cliente", {
-                nome,
-                cpf,
-                sexo,
-                data_nasc,
-                telefone,
-                email,
-                senha
+                nome: nome,
+                cpf: cpf,
+                sexo: sexo,
+                data_nasc: data_nasc,
+                telefone: telefone,
+                email: email,
+                senha: senha
             })
 
             // setToken(response.data);
-            toast.success("response.data");
+            toast.success(response.data);
 
             history.push('/');
         } catch(err){
@@ -46,13 +46,13 @@ function CadastroPage(){
     }
 
     return (
-        <div className="container-cadastro"> 
-            <div className="container-conteudo"> 
+        <div className="cliente container-cadastro"> 
+            <div className="cliente container-conteudo"> 
                 <div className="cadastro-img"> 
                     <img src={imgCadastro} alt="serviço de escova"/>
                 </div>
 
-                <div className="cadastro-form">
+                <div className="cliente cadastro-form">
                     <span>Faça seu Cadastro</span>
                     <form className="form" onSubmit={cadastrar}>
                         <input 
@@ -75,7 +75,7 @@ function CadastroPage(){
                             <span>Sexo:</span>
                             <select id="sexo" value={sexo} onChange={(e) => setSexo(e.target.value)}>
                                 {SexoList.map((item) => (
-                                    <option value={item.id} selected>{item.name}</option>
+                                    <option value={item.id}>{item.name}</option>
                                 ))}
                             </select>
                         </label>

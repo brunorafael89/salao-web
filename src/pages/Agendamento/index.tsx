@@ -4,17 +4,21 @@ import MenuLateral from "../../components/MenuLateral"
 import { toast } from "react-toastify";
 import api from "../../services/api";
 import "./styles.css";
+import {MdCheckCircle, MdCancel} from "react-icons/md";
+import {AiFillClockCircle} from "react-icons/ai";
 
 function AgendamentoPage() {
 
     const [agendamentos, setAgendamentos] = useState([]);
     const [servicos, setServicos] = useState([]);
     const [profissionais, setProfissionais] = useState([]);
+    const [formaPagamentos, setFormaPagamento] = useState([]);
 
     useEffect(() => {
         getAgendamentos() 
         getProfissionais()
         getServicos()
+        getFormaPagamento()
     }, [])
 
     async function getAgendamentos(){
@@ -22,7 +26,7 @@ function AgendamentoPage() {
             const response = await api.get("agendamento"); 
             setAgendamentos(response.data)
         } catch(err) {
-            toast.error("Erro ao consultar formas de pagamentos");
+            toast.error("Erro ao consultar a agenda");
         }
     } 
     
@@ -31,7 +35,7 @@ function AgendamentoPage() {
             const response = await api.get("servicos"); 
             setServicos(response.data)
         } catch(err) {
-            toast.error("Erro ao consultar formas de pagamentos");
+            toast.error("Erro ao consultar os serviços");
         }
     }   
 
@@ -40,7 +44,16 @@ function AgendamentoPage() {
             const response = await api.get("profissional"); 
             setProfissionais(response.data)
         } catch(err) {
-            toast.error("Erro ao consultar formas de pagamentos");
+            toast.error("Erro ao consultar os profissionais");
+        }
+    }
+
+    async function getFormaPagamento(){
+        try {
+            const response = await api.get("formaPagamento"); 
+            setFormaPagamento(response.data)
+        } catch(err) {
+            toast.error("Erro ao consultar as formas de pagamentos");
         }
     }   
 
@@ -52,36 +65,50 @@ function AgendamentoPage() {
                 <MenuLateral />
                 <div className="main-container">
                     <div className="container-conteudo">
-                        <span>Agende seu serviço aqui!</span>
+                        <span className="titulo">Agende seu serviço aqui!</span>
 
                         {/* <calendario id="calendario1"></calendario> */}
 
                         <div className="agendamento-form">
                             <form className="form" method="post">
-                                <label htmlFor="">Data agendamento
+                                <label htmlFor="">
+                                    <span>Em que Data?</span>
                                     <input type="date" placeholder="Escolha uma data" />
                                 </label>
                                 
-                                <label htmlFor="">Escolha o Serviço
+                                <label htmlFor="">
+                                    <span>Qual Serviço?</span>
                                     <select name="servico" id="">
-                                    <option value="">Selecione o Serviço</option>
-                                    {servicos.map((servico: any) => (
-                                        <option value={servico.servicos_id}>{servico.nome}</option>
-                                    ))}
+                                        <option value="">Selecione o Serviço</option>
+                                        {servicos.map((servico: any) => (
+                                            <option value={servico.servicos_id}>{servico.nome}</option>
+                                        ))}
                                     </select>
                                 </label>
                                 
-                                <label htmlFor="">Escolha o Profissional
+                                <label htmlFor="">
+                                    <span>Qual Profissional?</span>
                                     <select name="profissional" id="">
-                                    <option value="">Selecione o profissional</option>
-                                    {profissionais.map((profissional: any) => (
-                                        <option value={profissional.profissional_id}>{profissional.nome}</option>
-                                    ))}
-                                    </select>                                  
+                                        <option value="">Selecione o profissional</option>
+                                        {profissionais.map((profissional: any) => (
+                                            <option value={profissional.profissional_id}>{profissional.nome}</option>
+                                        ))}
+                                    </select>
                                 </label>
 
-                                <label htmlFor=""> Horário
+                                <label htmlFor="">
+                                    <span>Qual Horário?</span>
                                     <input type="time" placeholder="horário"/>           
+                                </label>
+
+                                <label htmlFor="">
+                                    <span>Qual Pagamento?</span>
+                                    <select name="pagamento" id="">
+                                        <option value="">Selecione o pagamento</option>
+                                        {formaPagamentos.map((formaPagamento: any) => (
+                                            <option value={formaPagamento.forma_pagamento_id}>{formaPagamento.forma_pagamento}</option>
+                                        ))}
+                                    </select>
                                 </label>
 
                                 <button> Agendar </button>
@@ -107,7 +134,9 @@ function AgendamentoPage() {
                                     <td>{agendamento.inicio_atendimento}</td>
                                     <td>{agendamento.data_atendimento}</td>
                                     <td>{agendamento.funcionario_id}</td>
-                                    <td><span className="material-icons concluido">check_circle</span></td>
+                                    <td><span className="material-icons concluido"><MdCheckCircle/></span></td>
+                                    {/* <td><span className="material-icons andamento"><AiFillClockCircle/></span></td> */}
+                                    {/* <td><span className="material-icons cancelado"><MdCancel/></span></td> */}
                                 </tr>
                                 ))}
                             </tbody>

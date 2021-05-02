@@ -8,7 +8,7 @@
     background: linear-gradient(to right, blueviolet, bisque);
 }
 
-.login-img{
+.container-login .login-img{
     display: block;
     width: 250px;
     height: 250px;
@@ -16,7 +16,7 @@
     transform: translateY(100px);
 }
 
-.login-img img{
+.container-login .login-img img{
     width: 250px;
     height: 250px;
     filter: brightness(10);
@@ -30,7 +30,7 @@
     margin: 0 auto;
 }
 
-.login-form{
+.container-login .container-conteudo .login-form{
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -40,7 +40,7 @@
     border-radius: 20px;
 }
 
-.login-form span{
+.container-login .container-conteudo .login-form span{
     color: white;
     font-size: 30px;
     font-weight: bold;
@@ -48,7 +48,7 @@
     margin-bottom: 20px;
 }
 
-.login-form .form{
+.container-login .container-conteudo .login-form .form{
     display: flex;
     flex-direction: column;
     width: 100%;
@@ -144,7 +144,7 @@
     border-radius: 10px;
 }
 
-@media screen and (min-width: 320px) and (max-width: 480px){
+@media all and (min-width: 320px) and (max-width: 480px){
     .container-login{
         display: grid;
         width: 100vw;
@@ -154,17 +154,19 @@
         background: blueviolet;
     }
 
-    .login-img{
+    .container-login .login-img{
         display: none;
     }
 
-    .container-conteudo{
-        display: flex;
+    .container-login .container-conteudo{
+        display: inline-flex;
+        flex-direction: column;
         width: 100%;
         height: 450px;
+        margin: 0 auto;
     }
 
-    .login-form{
+    .container-login .container-conteudo .login-form{
         display: flex;
         width: 100%;
         height: 100%;
@@ -174,7 +176,7 @@
         align-items: center;
     }
 
-    .login-form span{
+    .container-login .container-conteudo .login-form span{
         color: white;
         font-size: 30px;
         font-weight: bold;
@@ -182,7 +184,7 @@
         margin-bottom: 20px;
     }
 
-    .login-form .form{
+    .container-login .container-conteudo .login-form .form{
         display: flex;
         flex-direction: column;
         width: 100%;
@@ -192,7 +194,7 @@
         margin-bottom: 20px;
     }
 
-    .login-form input{
+    .container-login .container-conteudo .login-form input{
         width: 100%;
         padding: 12px 15px;
         border: 1px solid white;
@@ -204,7 +206,7 @@
         outline: none;
     }
 
-    .login-form button{
+    .container-login .container-conteudo .login-form button{
         width: 100%;
         padding: 12px 5px;
         margin-top: 20px;
@@ -217,7 +219,7 @@
         cursor: pointer;
     }
 
-    .login-form .linha{
+    .container-login .container-conteudo .login-form .linha{
         width: 70%;
         height: 1px;
         background-color: #dcdcdc;
@@ -225,11 +227,40 @@
         margin-bottom: 10px;
     }
 
-    .login-form .login-opcoes{
+    .container-login .container-conteudo .login-form .login-opcoes{
         display: flex;
         flex-direction: column;
         align-items: center;
         justify-content: center;
         margin-top: 10px;
+    }
+}
+
+@media all and (min-width: 480px) and (max-width: 768px){
+}
+
+@media all and (min-width: 768px) and (max-width: 1366px){
+    .container-login .login-img{
+        display: block;
+        width: 250px;
+        height: 250px;
+        margin: 0 auto;
+        transform: translateY(20px);
+    }
+
+    .container-login .container-conteudo {
+        display: inline-flex;
+        flex-direction: column;
+        width: 650px;
+        height: 400px;
+        margin: 0 auto;
+    }
+
+    .container-login .container-conteudo .login-form span {
+        color: white;
+        font-size: 30px;
+        font-weight: bold;
+        margin-top: 30px;
+        margin-bottom: 10px;
     }
 }
