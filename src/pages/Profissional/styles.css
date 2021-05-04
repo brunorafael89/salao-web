@@ -1,11 +1,11 @@
 
 .profissional.main-container{
     width: 83%;
-    padding: 90px 10px 10px 10px;
-    margin-left: 17%;
+    padding: 90px 10px 0 0;
+    margin-left: 330px;
 }
 
-.profissional .cadastro-form{
+.profissional.cadastro-form{
     display: flex;
     flex-direction: column;
     width: 50%;

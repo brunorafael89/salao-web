@@ -3,6 +3,8 @@ import Header from "../../components/Header";
 import MenuLateral from "../../components/MenuLateral";
 import api from "../../services/api";
 import { toast } from "react-toastify";
+import { FaTrashAlt } from "react-icons/fa";
+import { AiOutlineUpload } from "react-icons/ai";
 
 import "./styles.css";
 import "../../components/Table/styles.css";
@@ -161,30 +163,21 @@ function ProfissionalPage(){
                                     <td>{profissional.telefone}</td>
                                     <td>{profissional.email}</td>
                                     <td>
-                                        <div className='material excluir'>
-                                            <button name='acao' value='excluir' onClick={() => excluir(profissional.profissional_id)}>Excluir</button>
-                                        </div>
-                                        <div className='material carregar'>
-                                            <button name='acao' value='carregar' onClick={() => carregar(profissional.profissional_id)}>Carregar</button>
-                                        </div>
+                                        <form>
+                                            <div className='material excluir'>
+                                                <button name='acao' value='excluir' onClick={() => excluir(profissional.profissional_id)}>
+                                                    <span className='material-icons carregar'><FaTrashAlt/></span>
+                                                </button>
+                                            </div>
+                                            <div className='material carregar'>
+                                                <button name='acao' value='carregar' onClick={() => carregar(profissional.profissional_id)}>
+                                                    <span className='material-icons carregar'><AiOutlineUpload/></span>
+                                                </button>
+                                            </div>
+                                        </form>
                                     </td>
                                 </tr>
                             ))}
-                            <tr>
-                                {/* 
-                                    <form method='post'>
-                                        <div className='material excluir'>
-                                            <span className='material-icons'>delete_forever</span>
-                                            <button name='acao' value='excluir'>Excluir</button>
-                                        </div>
-                                        <div className='material carregar'>
-                                            <span className='material-icons carregar'>upgrade</span>
-                                            <button name='acao' value='carregar'>Carregar</button>
-                                        </div>
-                                    </form>
-                                </td> */}
-
-                            </tr>
                         </tbody>
                     </table>
                 </div>
