@@ -51,7 +51,7 @@ function MenuLateral(){
                     </li>
                     <li>
                         <span><SiCashapp /></span>
-                        <a href="FormaPagamento">Caixa</a>
+                        <a href="FormaPagamento">Formas de Pagamento</a>
                     </li>
                 </ul>
             </nav>
