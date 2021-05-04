@@ -6,6 +6,7 @@ import MenuLateral from "../../components/MenuLateral/";
 
 import { toast } from "react-toastify";
 import { MdDeleteForever } from 'react-icons/md';
+import { GrUpgrade } from "react-icons/gr";
 
 import "./styles.css";
 
@@ -95,18 +96,15 @@ function FormaPagamentoPage() {
                                 <tr>
                                     <td>{forma.forma_pagamento}</td>
                                     <td>
-                                        {/* <form> */}
+                                        <form>
                                             <input type='hidden' name='id' value="" />
                                             <div className='material' id='excluir' onClick={() => excluir(forma.forma_pagamento_id)}>
-                                                {/* <span className='material-icons'>delete_forever</span> */}
-                                                
                                                 <button name='acao' value='excluir'> <MdDeleteForever /> Excluir</button>
                                             </div>
                                             <div className='material'>
-                                                <span className='material-icons carregar'>upgrade</span>
-                                                <button name='acao' value='carregar' onClick={() => setFormaPagamento(forma.forma_pagamento)}>Carregar</button>
+                                                <button name='acao' value='carregar' onClick={() => setFormaPagamento(forma.forma_pagamento)}><GrUpgrade/>Carregar</button>
                                             </div>
-                                        {/* </form> */}
+                                        </form>
                                     </td>
                                 </tr>
                             ))}
