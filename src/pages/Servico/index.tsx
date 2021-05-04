@@ -2,14 +2,14 @@ import React, { FormEvent, useEffect, useState } from "react";
 import Header from "../../components/Header/";
 import MenuLateral from "../../components/MenuLateral/";
 import api from "../../services/api";
-
 import { toast } from "react-toastify";
+
 
 import "./styles.css";
 
 // importando os icones
-import { MdDeleteForever } from "react-icons/md";
-import { MdUpdate } from "react-icons/md";
+import { FaTrashAlt } from "react-icons/fa";
+import { AiOutlineUpload } from "react-icons/ai";
 
 
 
@@ -57,6 +57,7 @@ function ServicoPage(){
                 comissao_servico: comissaoServico,
                 tempo_servico: tempoServico
             });
+            setIdFuncao("");
             setNomeServico("");
             setValorServico("");
             setComissaoServico("");
@@ -171,14 +172,14 @@ function ServicoPage(){
                                             <form method='post'>
                                                 <input type='hidden' name='id' value='{$serv->servicos_id}' />
                                                 <div className='material' id='excluir'>
-                                                    {/* <span className='material-icons'>delete_forever</span> */}
-                                                    <span className='material-icons'><MdDeleteForever /></span>
-                                                    <button name='acao' value='excluir'>Excluir</button>
+                                                    <button name='acao' value='excluir'>
+                                                        <span className='material-icons'><FaTrashAlt/></span>
+                                                    </button>
                                                 </div>
                                                 <div className='material'>
-                                                    {/* <span className='material-icons carregar'>upgrade</span> */}
-                                                    <span className='material-icons carregar'><MdUpdate /></span>
-                                                    <button name='acao' value='carregar'>Carregar</button>
+                                                    <button name='acao' value='carregar'>
+                                                        <span className='material-icons carregar'><AiOutlineUpload/></span>
+                                                    </button>
                                                 </div>
                                             </form>
                                         </td>
