@@ -33,7 +33,8 @@ function CadastroPage(){
                 data_nasc: data_nasc,
                 telefone: telefone,
                 email: email,
-                senha: senha
+                senha: senha,
+                login: email
             })
 
             // setToken(response.data);

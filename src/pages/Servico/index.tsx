@@ -22,6 +22,7 @@ function ServicoPage(){
     const [valorServico, setValorServico] = useState("");
     const [comissaoServico, setComissaoServico] = useState("");
     const [tempoServico, setTempoServico] = useState("");
+    const [idServico, setIdServico] = useState("");
 
     useEffect(() => {
         getFuncoes() 
@@ -46,26 +47,82 @@ function ServicoPage(){
         }
     }
 
-    async function cadastrar(e: FormEvent){
+    async function salvar(e: FormEvent){
         e.preventDefault();
 
+        if (idFuncao){
+            alterar();
+        }
+        else {
+            cadastrar();
+        }
+    }
+
+
+    async function cadastrar(){
+
         try{
-            await api.post("servico", {
+            await api.post("servicos", {
                 funcao_id: idFuncao,
-                nome_servico: nomeServico,
-                valor_servico: valorServico,
-                comissao_servico: comissaoServico,
+                nome: nomeServico,
+                valor: valorServico,
+                comissao: comissaoServico,
                 tempo_servico: tempoServico
             });
             setNomeServico("");
             setValorServico("");
             setComissaoServico("");
             setTempoServico("");
+
+            toast.success("Serviço cadastrado com sucesso!");
     
             getServicos();
         } catch(err){
             toast.error("Erro ao cadastrar serviço!");
         }
+    }
+
+    async function alterar(){
+        try{
+            await api.put(`servicos/${idServico}`, {
+                funcao_id: idFuncao,
+                nome: nomeServico,
+                valor: valorServico,
+                comissao: comissaoServico,
+                tempo_servico: tempoServico
+            });
+            setNomeServico("");
+            setValorServico("");
+            setComissaoServico("");
+            setTempoServico("");
+
+            toast.success("Serviço alterado com sucesso!");
+    
+            getServicos();
+        } catch(err){
+            toast.error("Erro ao alterar serviço!");
+        }
+    }
+
+    async function excluir(id:number){
+        // api.delete('servicos/' + id) ASSIM TBM FUNCIONA  
+
+        try{
+            await api.delete(`servicos/${id}`)
+            getServicos();
+            toast.success("Serviço excluído com sucesso!");
+        } catch(err){
+            toast.error("Erro ao excluir serviço!");
+        }
+    }   
+    
+    async function carregar(servico:any){
+        setNomeServico(servico.nome);
+        setValorServico(servico.valor);
+        setComissaoServico(servico.comissao);
+        setTempoServico(servico.tempo_servico);
+        setIdFuncao(servico.funcao_id);
+        setIdServico(servico.servicos_id);
     }
 
     return (
@@ -85,14 +142,19 @@ function ServicoPage(){
                 <div className="servico main-container">
                     <div className="servico cadastro-form">
                         <h1>Cadastro de Serviços</h1>
-                        <form className="form" onSubmit={cadastrar}>
+                        <form className="form" onSubmit={salvar}>
                             <label htmlFor="funcao">
                                 <span>Função</span>
-                                <select name="nome_funcao">
+                                <select name="nome_funcao" onChange={(e)=> setIdFuncao(e.target.value)}>
                                     {funcoes.map((funcao: any) => (
-                                        <option id={funcao.funcao_id}>{funcao.nome_funcao}</option>
-                                        ))
-                                    }
+                                        <option 
+                                            id={funcao.funcao_id} 
+                                            value={funcao.funcao_id} 
+                                            selected={idFuncao && idFuncao == funcao.funcao_id ? true : false}
+                                        >
+                                            {funcao.nome_funcao}
+                                        </option>
+                                    ))}
                                 </select>
                             </label>
                                 
@@ -138,7 +200,7 @@ function ServicoPage(){
                             
                             <div className="buttons">
                                 <button name="acao" value="cadastrar" type="submit">Cadastrar</button>
-                                <button name="acao" value="alterar">Alterar</button>
+                                <button name="acao" value="alterar" type="submit">Alterar</button>
                             </div>
                         </form>
                     </div>
@@ -168,19 +230,19 @@ function ServicoPage(){
                                         <td>{servico.comissao}</td>
                                         <td>{servico.tempo_servico}</td>
                                         <td>
-                                            <form method='post'>
+                                            {/* <form > */}
                                                 <input type='hidden' name='id' value='{$serv->servicos_id}' />
                                                 <div className='material' id='excluir'>
                                                     {/* <span className='material-icons'>delete_forever</span> */}
                                                     <span className='material-icons'><MdDeleteForever /></span>
-                                                    <button name='acao' value='excluir'>Excluir</button>
+                                                    <button name='acao' value='excluir' onClick={() => excluir(servico.servicos_id)}>Excluir</button>
                                                 </div>
                                                 <div className='material'>
                                                     {/* <span className='material-icons carregar'>upgrade</span> */}
                                                     <span className='material-icons carregar'><MdUpdate /></span>
-                                                    <button name='acao' value='carregar'>Carregar</button>
+                                                    <button name='acao' value='carregar' onClick={() => carregar(servico)}>Carregar</button>
                                                 </div>
-                                            </form>
+                                            {/* </form> */}
                                         </td>
                                     </tr>
                                 ))}
