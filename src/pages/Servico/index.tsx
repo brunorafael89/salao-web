@@ -2,14 +2,14 @@ import React, { FormEvent, useEffect, useState } from "react";
 import Header from "../../components/Header/";
 import MenuLateral from "../../components/MenuLateral/";
 import api from "../../services/api";
-
 import { toast } from "react-toastify";
+
 
 import "./styles.css";
 
 // importando os icones
-import { MdDeleteForever } from "react-icons/md";
-import { MdUpdate } from "react-icons/md";
+import { FaTrashAlt } from "react-icons/fa";
+import { AiOutlineUpload } from "react-icons/ai";
 
 
 
@@ -50,7 +50,7 @@ function ServicoPage(){
     async function salvar(e: FormEvent){
         e.preventDefault();
 
-        if (idFuncao){
+        if (idServico){
             alterar();
         }
         else {
@@ -69,10 +69,7 @@ function ServicoPage(){
                 comissao: comissaoServico,
                 tempo_servico: tempoServico
             });
-            setNomeServico("");
-            setValorServico("");
-            setComissaoServico("");
-            setTempoServico("");
+            limpar()
 
             toast.success("Serviço cadastrado com sucesso!");
     
@@ -91,10 +88,7 @@ function ServicoPage(){
                 comissao: comissaoServico,
                 tempo_servico: tempoServico
             });
-            setNomeServico("");
-            setValorServico("");
-            setComissaoServico("");
-            setTempoServico("");
+            limpar()
 
             toast.success("Serviço alterado com sucesso!");
     
@@ -124,6 +118,17 @@ function ServicoPage(){
         setIdFuncao(servico.funcao_id);
         setIdServico(servico.servicos_id);
     }
+
+    async function limpar(){
+        setNomeServico("");
+        setValorServico("");
+        setComissaoServico("");
+        setTempoServico("");
+        setIdFuncao("");
+        setIdServico("");
+    }
+
+
 
     return (
         <>
@@ -233,14 +238,14 @@ function ServicoPage(){
                                             {/* <form > */}
                                                 <input type='hidden' name='id' value='{$serv->servicos_id}' />
                                                 <div className='material' id='excluir'>
-                                                    {/* <span className='material-icons'>delete_forever</span> */}
-                                                    <span className='material-icons'><MdDeleteForever /></span>
-                                                    <button name='acao' value='excluir' onClick={() => excluir(servico.servicos_id)}>Excluir</button>
+                                                    <button name='acao' value='excluir' onClick={() => excluir(servico.servicos_id)}>
+                                                        <span className='material-icons'><FaTrashAlt/></span>
+                                                    </button>
                                                 </div>
                                                 <div className='material'>
-                                                    {/* <span className='material-icons carregar'>upgrade</span> */}
-                                                    <span className='material-icons carregar'><MdUpdate /></span>
-                                                    <button name='acao' value='carregar' onClick={() => carregar(servico)}>Carregar</button>
+                                                    <button name='acao' value='carregar' onClick={() => carregar(servico)}>
+                                                        <span className='material-icons carregar'><AiOutlineUpload/></span>
+                                                    </button>
                                                 </div>
                                             {/* </form> */}
                                         </td>

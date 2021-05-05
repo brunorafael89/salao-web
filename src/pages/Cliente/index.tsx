@@ -4,7 +4,7 @@ import MenuLateral from "../../components/MenuLateral";
 
 import { toast } from "react-toastify";
 import {FaTrashAlt} from "react-icons/fa";
-import {GrUpgrade} from "react-icons/gr";
+import { AiOutlineUpload } from "react-icons/ai";
 import "./styles.css";
 import api from "../../services/api";
 
@@ -166,12 +166,14 @@ function ClientePage(){
                                     <td>
                                         <form>
                                             <div className='material excluir'>
-                                                {/* <span className='material-icons'><FaTrashAlt/></span> */}
-                                                <button value='excluir' onClick={() => excluir(cliente.cliente_id)}><FaTrashAlt/></button>
+                                                <button type="submit" onClick={() => excluir(cliente.cliente_id)}>
+                                                    <span className='material-icons'><FaTrashAlt/></span>
+                                                </button>
                                             </div>
                                             <div className='material carregar'>
-                                                <span className='material-icons carregar'><GrUpgrade/></span>
-                                                <button value='carregar'></button>
+                                                <button value='carregar'>
+                                                    <span className='material-icons carregar'><AiOutlineUpload/></span>
+                                                </button>
                                             </div>
                                         </form>
                                     </td>

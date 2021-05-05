@@ -1,11 +1,10 @@
-
-.profissional.main-container{
+.profissional-funcao.main-container{
     width: 83%;
     padding: 90px 10px 0 0;
     margin-left: 330px;
 }
 
-.profissional.cadastro-form{
+.profissional-funcao.cadastro-form{
     display: flex;
     flex-direction: column;
     width: 50%;
@@ -17,65 +16,49 @@
     border-radius: 20px;
 }
 
-.profissional.cadastro-form .form{
+.profissional-funcao.cadastro-form .form{
     display: flex;
     flex-direction: column;
     width: 100%;
     place-items: center;
 }
 
-.profissional.cadastro-form .form label{
+.profissional-funcao.cadastro-form .form label{
     display: inline-block;
     width: 100%;
     margin: 5px 0;
+    position: relative;
 }
 
-.profissional.cadastro-form .form label span{
+.profissional-funcao.cadastro-form .form label span{
     display: inline-block;
     width: 18%;
     margin: unset;
-    font-size: 20px;
+    font-size: 24px;
     font-weight: normal;
 }
 
-.profissional.cadastro-form .form label input{
-    width: 80%;
-    margin: 5px 0;
-    padding: 5px;
+.profissional-funcao.cadastro-form .form label select{
+    position: absolute;
+    right: 0;
+    width: 65%;
+    text-align: center;
     border: none;
     border-bottom: 1px solid #000;
+    padding: 5px;
+    background-color: #fff;
     font-size: 18px;
-    outline: none;
-    
-    }
-    ::-webkit-input-placeholder {
-        color: #555;
-    }
-     
-    :-moz-placeholder { /* Firefox 18- */
-        color: #555;
-    }
-     
-    ::-moz-placeholder {  /* Firefox 19+ */
-        color: #555; 
-        
-    }
-     
-    :-ms-input-placeholder {  
-        color: #555; 
-    }
+}
 
-.profissional.cadastro-form .buttons{
+.profissional-funcao.cadastro-form .buttons{
     display: grid;
     grid-template-columns: repeat(2, 1fr);
     width: 100%;
-    gap: 10px
+    gap: 20px
 }
 
-.profissional.cadastro-form .buttons button{
-    display: grid;
+.profissional-funcao.cadastro-form .buttons button{
     width: 100%;
-    margin: 10px 0 0 0;
     padding: 10px;
     border: none;
     border-radius: 5px;
@@ -83,10 +66,12 @@
     color: #fff;
     font-size: 20px;
     transition: all .224s ease;
+    display: grid;
+    margin: 10px 0;
     cursor: pointer;
 }
 
-.profissional.cadastro-form .buttons button:hover{
+.profissional-funcao.cadastro-form .form button:hover{
     background-color: #5d2e69;
     font-weight: bold;
 }
@@ -196,7 +181,7 @@
     }
 }
 
-@media screen and (min-width: 480px) and (max-width: 720px){
+@media screen and (min-width: 480px) and (max-width: 768px){
     .container-cadastro{
         display: grid;
         width: 100vw;
@@ -299,4 +284,8 @@
         justify-content: center;
         margin-top: 10px;
     }
+}
+
+@media screen and (min-width: 768px) and (max-width: 1366px){
+
 }

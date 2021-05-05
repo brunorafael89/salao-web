@@ -5,7 +5,7 @@ import MenuLateral from "../../components/MenuLateral/";
 
 import { toast } from "react-toastify";
 import {FaTrashAlt} from "react-icons/fa";
-import {GrUpgrade} from "react-icons/gr";
+import { AiOutlineUpload } from "react-icons/ai";
 
 import "./styles.css";
 
@@ -83,12 +83,14 @@ function FuncaoPage(){
                                         <td>
                                             <form>
                                                 <div className='material excluir'>
-                                                    <span className='material-icons'><FaTrashAlt/></span>
-                                                    <button name='acao' value='excluir' onClick={() => excluir(funcao.funcao_id)}>Excluir</button>
+                                                    <button name='acao' value='excluir' onClick={() => excluir(funcao.funcao_id)}>
+                                                        <span className='material-icons'><FaTrashAlt/></span>
+                                                    </button>
                                                 </div>
                                                 <div className='material carregar'>
-                                                    <span className='material-icons carregar'><GrUpgrade/></span>
-                                                    <button name='acao' value='carregar'>Carregar</button>
+                                                    <button name='acao' value='carregar'>
+                                                        <span className='material-icons carregar'><AiOutlineUpload/></span>
+                                                    </button>
                                                 </div>
                                             </form>
                                         </td>

@@ -13,6 +13,7 @@ import CadastroPage from "./pages/Cadastro";
 import PrincipalPage from "./pages/Principal";
 import TabelaPrecoPage from "./pages/TabelaPreco";
 import ClientePage from "./pages/Cliente";
+import ProfissionalFuncaoPage from "./pages/ProfissionalFuncao";
 
 
 function Routes() {
@@ -30,6 +31,7 @@ function Routes() {
       <Route path="/cadastro" exact component={CadastroPage} />
       <Route path="/TabelaPreco" exact component={TabelaPrecoPage} />
       <Route path="/Cliente" exact component={ClientePage} />
+      <Route path="/ProfissionalFuncao" exact component={ProfissionalFuncaoPage} />
 
     </BrowserRouter>
   );

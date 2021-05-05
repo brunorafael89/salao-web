@@ -8,8 +8,9 @@
 }
 
 body{
-    background-image: url('../../assets/images/background_salao.jpg');
-    overflow-x: hidden;
+    /* background-image: url('../../assets/images/background_salao.jpg'); */
+    overflow-x: hidden; /*Impede que a página se movimente no sentido horizontal*/
+    scroll-behavior: smooth; /*Deixa o deslizamento da página suave*/
 }
 
 li{

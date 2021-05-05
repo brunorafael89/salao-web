@@ -5,7 +5,7 @@ import { toast } from "react-toastify";
 import api from "../../services/api";
 import "./styles.css";
 import {MdCheckCircle, MdCancel} from "react-icons/md";
-import {AiFillClockCircle} from "react-icons/ai";
+// import {AiFillClockCircle} from "react-icons/ai";
 
 function AgendamentoPage() {
 
@@ -131,9 +131,15 @@ function AgendamentoPage() {
                                 {agendamentos.map((agendamento: any) => (
                                     <tr>
                                     <td>{agendamento.data_atendimento}</td>
-                                    <td>{agendamento.inicio_atendimento}</td>
-                                    <td>{agendamento.data_atendimento}</td>
-                                    <td>{agendamento.funcionario_id}</td>
+                                    <td>{agendamento.horario_agendamento}</td>
+                                    <td>
+                                        {}
+                                    </td>
+                                    <td>
+                                        {profissionais.map((profissional: any) => (
+                                            agendamento.funcionario_id === profissional.profissional_id ? profissional.nome : ""
+                                        ))}
+                                    </td>
                                     <td><span className="material-icons concluido"><MdCheckCircle/></span></td>
                                     {/* <td><span className="material-icons andamento"><AiFillClockCircle/></span></td> */}
                                     {/* <td><span className="material-icons cancelado"><MdCancel/></span></td> */}
