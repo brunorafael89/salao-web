@@ -43,7 +43,11 @@ function MenuLateral(){
                     </li>
                     <li>
                         <span><MdPoll /></span>
-                        <a href="Relatorios">Relatórios</a>
+                        <a href="RelatorioServico">Relatórios Serviços</a>
+                    </li>
+                    <li>
+                        <span><MdPoll /></span>
+                        <a href="RelatorioComissao">Relatórios Comissões</a>
                     </li>
                     <li>
                         <span><AiOutlineAudit /></span>
