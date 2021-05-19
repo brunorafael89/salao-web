@@ -3,20 +3,15 @@ import Header from "../../components/Header/";
 import MenuLateral from "../../components/MenuLateral/";
 import api from "../../services/api";
 import { toast } from "react-toastify";
-
-
 import "./styles.css";
 
 // importando os icones
 import { FaTrashAlt } from "react-icons/fa";
 import { AiOutlineUpload } from "react-icons/ai";
 
-
-
 function ServicoPage(){
     const [funcoes, setFuncoes] = useState([]);
     const [servicos, setServicos] = useState([]);
-
     const [idFuncao, setIdFuncao] = useState("")
     const [nomeServico, setNomeServico] = useState("");
     const [valorServico, setValorServico] = useState("");

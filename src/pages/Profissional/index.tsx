@@ -17,6 +17,7 @@ function ProfissionalPage(){
     const [telefoneProfissional, setTelefoneProfissional] = useState("")
     const [emailProfissional, setEmailProfissional] = useState("")
     const [senhaProfissional, setSenhaProfissional] = useState("")
+    const [idProfissional, setIdProfissional] = useState("")
 
     useEffect( () => {
         getProfissional()
@@ -27,27 +28,31 @@ function ProfissionalPage(){
         setProfissionais(response.data);
     }
 
-    async function cadastrar(e: FormEvent){
+    async function salvar(e: FormEvent){
         e.preventDefault();
 
+        if (idProfissional){
+            alterar();
+        }
+        else {
+            cadastrar();
+        }
+    }
+
+    async function cadastrar(){
+
         try{
-            await api.post("profissional", {nome: nomeProfissional});
-            setNomeProfissional("");
+            await api.post("profissional", {
+                nome: nomeProfissional,
+                data_nasc: dataNascProfissional,
+                cpf: cpfProfissional,
+                telefone: telefoneProfissional,
+                email: emailProfissional,
+                senha: senhaProfissional
+            });
+            limpar()
 
-            await api.post("profissional", {data_nasc: dataNascProfissional});
-            setDataNascProfissional("");
-
-            await api.post("profissional", {cpf: cpfProfissional});
-            setCpfProfissional("");
-
-            await api.post("profissional", {telefone: telefoneProfissional});
-            setTelefoneProfissional("");
-
-            await api.post("profissional", {email: emailProfissional});
-            setEmailProfissional("");
-
-            await api.post("profissional", {senha: senhaProfissional});
-            setSenhaProfissional("");
+            toast.success("Profissional cadastrado com sucesso!");
 
             getProfissional();
         } catch(err) {
@@ -55,15 +60,55 @@ function ProfissionalPage(){
         }
     }
 
-    async function excluir(id: number){
-        await api.delete(`profissional/${id}`);
-        getProfissional();
-        toast.success("Profissional Excluído com sucesso");
+    async function excluir(id:number){
+        try{
+            await api.delete(`profissional/${id}`)
+            getProfissional();
+            toast.success("Profissional Excluído com sucesso");
+        } catch(err){
+            toast.error("Erro ao excluir profissional!");
+        }
     }
 
     //Função responsável por preencher o formulário com os dados da tabela
-    async function carregar(id: number){
-        
+    async function carregar(profissional:any){
+        setNomeProfissional(profissional.nome);
+        setDataNascProfissional(profissional.dataNasc);
+        setCpfProfissional(profissional.cpf);
+        setTelefoneProfissional(profissional.telefone);
+        setEmailProfissional(profissional.email);
+        setSenhaProfissional(profissional.senha);
+        setIdProfissional(profissional.profissional_id);
+    }
+
+    async function limpar() {
+        setNomeProfissional("");
+        setDataNascProfissional("");
+        setCpfProfissional("");
+        setTelefoneProfissional("");
+        setEmailProfissional("");
+        setSenhaProfissional("");
+        setIdProfissional("");
+    }
+
+    async function alterar(){
+        try{
+            await api.put(`profissional/${idProfissional}`, {
+                nome: nomeProfissional,
+                data_nasc: dataNascProfissional,
+                cpf: cpfProfissional,
+                telefone: telefoneProfissional,
+                email: emailProfissional,
+                senha: senhaProfissional
+            });
+            limpar()
+
+            toast.success("Profissional alterado com sucesso!");
+    
+            getProfissional();
+        } catch(err){
+            toast.error("Erro ao alterar profissional!");
+        }
     }
 
     return (
@@ -74,7 +119,7 @@ function ProfissionalPage(){
             <div className="profissional main-container">
                 <div className="profissional cadastro-form">
                     <h1>Cadastro de Profissional</h1>
-                    <form className="form" onSubmit={cadastrar}>
+                    <form className="form" onSubmit={salvar}>
                         <label htmlFor="nome">
                             <span>Nome</span>
                             <input 
@@ -163,18 +208,19 @@ function ProfissionalPage(){
                                     <td>{profissional.telefone}</td>
                                     <td>{profissional.email}</td>
                                     <td>
-                                        <form>
-                                            <div className='material excluir'>
+                                        {/* <form> */}
+                                        <input type='hidden' name='id' value='{$serv->profissional_id}' />
+                                            <div className='material' id='excluir'>
                                                 <button name='acao' value='excluir' onClick={() => excluir(profissional.profissional_id)}>
                                                     <span className='material-icons carregar'><FaTrashAlt/></span>
                                                 </button>
                                             </div>
                                             <div className='material carregar'>
-                                                <button name='acao' value='carregar' onClick={() => carregar(profissional.profissional_id)}>
+                                                <button name='acao' value='carregar' onClick={() => carregar(profissional)}>
                                                     <span className='material-icons carregar'><AiOutlineUpload/></span>
                                                 </button>
                                             </div>
-                                        </form>
+                                        {/* </form> */}
                                     </td>
                                 </tr>
                             ))}
