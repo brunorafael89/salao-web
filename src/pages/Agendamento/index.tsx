@@ -3,9 +3,11 @@ import Header from "../../components/Header"
 import MenuLateral from "../../components/MenuLateral"
 import { toast } from "react-toastify";
 import api from "../../services/api";
-import "./styles.css";
-import {MdCheckCircle, MdCancel} from "react-icons/md";
+import {MdCheckCircle} from "react-icons/md";
+// import {MdCancel} from "react-icons/md";
 // import {AiFillClockCircle} from "react-icons/ai";
+// import "../../components/Calendar/calendario";
+import "./styles.css";
 
 function AgendamentoPage() {
 
