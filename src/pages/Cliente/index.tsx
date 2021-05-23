@@ -1,18 +1,20 @@
 import React, { FormEvent, useEffect, useState } from "react";
 import Header from "../../components/Header";
 import MenuLateral from "../../components/MenuLateral";
-
+import api from "../../services/api";
 import { toast } from "react-toastify";
+import "./styles.css";
+
+// importando os icones
 import {FaTrashAlt} from "react-icons/fa";
 import { AiOutlineUpload } from "react-icons/ai";
-import "./styles.css";
-import api from "../../services/api";
+import format from "date-fns/format";
 
 function ClientePage(){
     const [clientes, setClientes] = useState([]);
     const [nomeCliente, setNomeCliente] = useState("");
     const [cpfCliente, setCpfCliente] = useState("");
-    const [dataNascCliente, setDataNascCliente] = useState("");
+    const [dataNascCliente, setDataNascCliente] = useState(format(new Date(), "yyyy-mm-dd"));
     const [telefoneCliente, setTelefoneCliente] = useState("");
     const [sexoCliente, setSexoCliente] = useState("");
     const SexoList = [
@@ -21,18 +23,33 @@ function ClientePage(){
     ];
     const [emailCliente, setEmailCliente] = useState("");
     const [senhaCliente, setSenhaCliente] = useState("");
+    const [idCliente, setIdCliente] = useState("");
 
     useEffect(()=>{
         getCliente()
     }, [])
 
     async function getCliente(){
-        const response = await api.get("cliente")
-        setClientes(response.data);
+        try {
+            const response = await api.get("cliente");
+            setClientes(response.data)
+        } catch(err) {
+            toast.error("Erro ao consultar cliente");
+            }        
     }
 
-    async function cadastrar(e: FormEvent){
+    async function salvar(e: FormEvent){
         e.preventDefault();
+
+        if (idCliente){
+            editar();
+        }
+        else {
+            cadastrar();
+        }
+    }
+
+    async function cadastrar(){
         
         try{
             await api.post("cliente", {
@@ -43,16 +60,68 @@ function ClientePage(){
                 sexo: sexoCliente,
                 email: emailCliente,
                 senha: senhaCliente
-            })
+            });
+            limpar()
+            
+            toast.success("Cliente cadastrado com sucesso!");
+
+            getCliente();
         } catch (err){
-            toast.error("Falha ao cadastrar cliente")
+            toast.error("Falha ao cadastrar cliente");
+        }
+    }
+
+    async function editar(){
+        try{
+            await api.put(`cliente/${idCliente}`, {
+                nome: nomeCliente,
+                cpf: cpfCliente,
+                data_nasc: dataNascCliente,
+                telefone: telefoneCliente,
+                sexo: sexoCliente,
+                email: emailCliente,
+                senha: senhaCliente
+            });
+            limpar()
+
+            toast.success("Cliente alterado com sucesso!");
+    
+            getCliente();
+        } catch(err){
+            toast.error("Erro ao editar cliente!");
         }
     }
 
     async function excluir(id: number){
-        await api.delete(`cliente/${id}`)
-        getCliente()
-        toast.success("Cliente excluído com sucesso")
+        try{
+            await api.delete(`cliente/${id}`)
+            getCliente();
+            toast.success("Cliente excluído com sucesso!");
+        } catch(err){
+            toast.error("Erro ao excluir cliente!");
+        }
+    }
+
+    async function carregar(cliente:any){
+        setNomeCliente(cliente.nome);
+        setCpfCliente(cliente.cpf);
+        setDataNascCliente(cliente.data_nasc);
+        setTelefoneCliente(cliente.telefone);
+        setSexoCliente(cliente.sexo);
+        setEmailCliente(cliente.email);
+        setSenhaCliente(cliente.senha);
+        setIdCliente(cliente.cliente_id);
+    }
+
+    async function limpar(){
+        setNomeCliente("");
+        setCpfCliente("");
+        setDataNascCliente("");
+        setTelefoneCliente("");
+        setSexoCliente("");
+        setEmailCliente("");
+        setSenhaCliente("");
+        setIdCliente("");
     }
 
     return (
@@ -64,7 +133,7 @@ function ClientePage(){
                 <div className="cad-cliente cadastro-form">
                     <h1>Cadastro de Clientes</h1>
         
-                    <form className="form" onSubmit={cadastrar}>
+                    <form className="form" onSubmit={salvar}>
                         <label htmlFor="nome">
                             <span>Nome</span>
                             <input 
@@ -89,8 +158,10 @@ function ClientePage(){
                             <span>Data Nascimento</span>
                             <input 
                                 type="date" 
-                                name="data_nasc" 
-                                value={dataNascCliente}
+                                name="data_nasc"
+                                value={dataNascCliente} 
+                                //value={format(new Date(dataNascCliente), "yyyy-mm-dd")}
+                                //value="2013-01-08"
                                 onChange={(e) => setDataNascCliente(e.target.value)} 
                             />
                         </label>
@@ -135,8 +206,8 @@ function ClientePage(){
                         </label>
 
                         <div className="buttons">
-                            <button className="form-btn" id="cadastrar" type="submit">Cadastrar</button>
-                            <button className="form-btn" id="editar" type="submit">Editar</button>
+                            <button name="acao" value="cadastrar" type="submit">Cadastrar</button>
+                            <button name="acao" value="editar" type="submit">Editar</button>
                         </div>
                     </form>
                 </div>
@@ -164,18 +235,19 @@ function ClientePage(){
                                     <td>{cliente.email}</td>
                                     <td>{cliente.sexo}</td>
                                     <td>
-                                        <form>
-                                            <div className='material excluir'>
-                                                <button type="submit" onClick={() => excluir(cliente.cliente_id)}>
+                                        {/* <form> */}
+                                        <input type='hidden' name='id' value='{$serv->cliente_id}' />
+                                            <div className='material' id='excluir'>                                            
+                                                <button name="acao" value='excluir' onClick={() => excluir(cliente.cliente_id)}>
                                                     <span className='material-icons'><FaTrashAlt/></span>
                                                 </button>
                                             </div>
                                             <div className='material carregar'>
-                                                <button value='carregar'>
+                                                <button name="acao" value='carregar' onClick={() => carregar(cliente)}>
                                                     <span className='material-icons carregar'><AiOutlineUpload/></span>
                                                 </button>
                                             </div>
-                                        </form>
+                                        {/* </form> */}
                                     </td>
                                 </tr>
                             ))}

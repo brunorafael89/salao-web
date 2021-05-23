@@ -13,6 +13,7 @@ import "./styles.css";
 function FormaPagamentoPage() {
 //   const history = useHistory();
   const [formaPagamento, setFormaPagamento] = useState("");
+  const [idFormapagamento, setIdFormapagamento] = useState("");
   const [formasPagamentos, setFormasPagamentos] = useState([]);
 
 
@@ -29,8 +30,18 @@ function FormaPagamentoPage() {
         }
     }
 
-  async function cadastrar(e: FormEvent) {
-    e.preventDefault();
+    async function salvar(e: FormEvent){
+        e.preventDefault();
+
+        if (idFormapagamento){
+            editar();
+        }
+        else {
+            cadastrar();
+        }
+    }
+
+  async function cadastrar() {
 
     try {   
       await api.post("formaPagamento", {
@@ -48,9 +59,33 @@ function FormaPagamentoPage() {
     }
   }
 
+  async function editar(){
+    try{
+        await api.put(`formaPagamento/${idFormapagamento}`, {
+            forma_pagamento: formaPagamento,
+        });
+        limpar()
+
+        toast.success("Forma de pagamento alterado com sucesso!");
+
+        getFormasPagamentos();
+    } catch(err){
+        toast.error("Erro ao editar forma de pagamento!");
+        }
+    }   
+
+    async function limpar(){
+        setFormaPagamento("");
+    }
+
+
   async function excluir(id: number){
     await api.delete(`formaPagamento/${id}`);
     getFormasPagamentos() 
+  }
+
+  async function carregar(formaPagamento:any){
+    setFormaPagamento(formaPagamento.forma_pagamento);
   }
 
   return (
@@ -64,9 +99,8 @@ function FormaPagamentoPage() {
                 <div className="formaPagamento cadastro-form">
                     <h1>Cadastro de Formas de Pagamentos</h1>
 
-                    <form onSubmit={cadastrar} className="form"> 
-                        <input type="hidden" name="id" value="" />
-
+                    <form className="form" onSubmit={salvar}> 
+                        {/* <input type="hidden" name="id" value="" /> */}
                         <label htmlFor="forma_pagamento">
                             <span>Forma de Pagamento</span>
                             <input type="text" 
@@ -77,8 +111,8 @@ function FormaPagamentoPage() {
                         </label>
 
                         <div className="buttons">
-                            <button name="acao" value="cadastrar">Cadastrar</button>
-                            <button name="acao" value="alterar">Alterar</button>
+                            <button name="acao" value="cadastrar" type="submit">Cadastrar</button>
+                            <button name="acao" value="alterar" type="submit">Alterar</button>
                         </div>
                     </form>
                 </div>
@@ -96,15 +130,15 @@ function FormaPagamentoPage() {
                                 <tr>
                                     <td>{forma.forma_pagamento}</td>
                                     <td>
-                                        <form>
-                                            <input type='hidden' name='id' value="" />
+                                        {/* <form> */}
+                                            <input type='hidden' name='id' value='{$serv->forma_pagamento_id}' />
                                             <div className='material' id='excluir' onClick={() => excluir(forma.forma_pagamento_id)}>
                                                 <button name='acao' value='excluir'> <MdDeleteForever /> Excluir</button>
                                             </div>
-                                            <div className='material'>
-                                                <button name='acao' value='carregar' onClick={() => setFormaPagamento(forma.forma_pagamento)}><GrUpgrade/>Carregar</button>
+                                            <div className='material carregar'>
+                                                <button name='acao' value='carregar' onClick={() => carregar(forma)}><GrUpgrade/>Carregar</button>
                                             </div>
-                                        </form>
+                                        {/* </form> */}
                                     </td>
                                 </tr>
                             ))}

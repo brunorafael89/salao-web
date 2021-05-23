@@ -2,16 +2,17 @@ import React, { FormEvent, useEffect, useState } from "react";
 import api from "../../services/api";
 import Header from "../../components/Header/";
 import MenuLateral from "../../components/MenuLateral/";
-
 import { toast } from "react-toastify";
+import "./styles.css";
+
 import {FaTrashAlt} from "react-icons/fa";
 import { AiOutlineUpload } from "react-icons/ai";
 
-import "./styles.css";
 
 function FuncaoPage(){
     const [funcoes, setFuncoes] = useState([]);
     const [nomeFuncao, setNomeFuncao] = useState("");
+    const [idFuncao, setIDFuncao] = useState("");
 
     useEffect(() => {
         getFuncao() 
@@ -22,21 +23,61 @@ function FuncaoPage(){
         setFuncoes(response.data);
     }
 
-    async function excluir(id: number){
-        await api.delete(`funcao/${id}`);
-        getFuncao();
-        toast.success("Função excluida com sucesso!");
-    }
-
-    async function cadastrar(e: FormEvent){
+    async function salvar(e: FormEvent){
         e.preventDefault();
 
+        if (idFuncao){
+            alterar();
+        }
+        else {
+            cadastrar();
+        }
+    }
+
+    async function excluir(id: number){
+
+        try{
+            await api.delete(`funcao/${id}`);
+            getFuncao();
+            toast.success("Função excluida com sucesso!");
+        } catch(err){
+            toast.error("Erro ao excluir função!");
+        }
+    } 
+
+    async function cadastrar(){
+        
         try {
-            await api.post("funcao", { nome_funcao: nomeFuncao });
+            await api.post( "funcao", { nome_funcao: nomeFuncao });
             setNomeFuncao("");
             getFuncao();
         } catch(err) {
             toast.error("Erro ao cadastrar função!");
+        }
+    }
+
+    async function carregar(funcao:any){
+        setNomeFuncao(funcao.nome_funcao);
+        setIDFuncao(funcao.funcao_id);
+    }
+
+    async function limpar(){
+        setNomeFuncao("");
+        setIDFuncao("");
+    }
+
+    async function alterar(){
+        try{
+            await api.put(`funcao/${idFuncao}`, {
+                nome_funcao: nomeFuncao
+            });
+            limpar()
+
+            toast.success("Função alterado com sucesso!");
+    
+            getFuncao();
+        } catch(err){
+            toast.error("Erro ao alterar função!");
         }
     }
 
@@ -50,7 +91,7 @@ function FuncaoPage(){
                 <div className="funcao main-container">
                     <div className="funcao cadastro-form">
                         <h1>Cadastro de Função</h1>
-                        <form className="form" onSubmit={cadastrar}>    
+                        <form className="form" onSubmit={salvar}>    
                             <label htmlFor="funcao">
                                 <span>Nome da função</span>
                                 <input 
@@ -81,18 +122,19 @@ function FuncaoPage(){
                                     <tr>
                                         <td>{funcao.nome_funcao}</td>
                                         <td>
-                                            <form>
+                                            {/* <form> */}
+                                            <input type='hidden' name='id' value='{$serv->funcao_id}' />
                                                 <div className='material excluir'>
                                                     <button name='acao' value='excluir' onClick={() => excluir(funcao.funcao_id)}>
                                                         <span className='material-icons'><FaTrashAlt/></span>
                                                     </button>
                                                 </div>
                                                 <div className='material carregar'>
-                                                    <button name='acao' value='carregar'>
+                                                    <button name='acao' value='carregar' onClick={() => carregar(funcao)}>
                                                         <span className='material-icons carregar'><AiOutlineUpload/></span>
                                                     </button>
                                                 </div>
-                                            </form>
+                                            {/* </form> */}
                                         </td>
                                     </tr>
                                 ))}
