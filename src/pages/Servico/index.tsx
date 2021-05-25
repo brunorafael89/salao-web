@@ -6,8 +6,8 @@ import { toast } from "react-toastify";
 import "./styles.css";
 
 // importando os icones
-import { FaTrashAlt } from "react-icons/fa";
 import { AiOutlineUpload } from "react-icons/ai";
+import { MdDeleteForever } from "react-icons/md";
 
 function ServicoPage(){
     const [funcoes, setFuncoes] = useState([]);
@@ -150,7 +150,7 @@ function ServicoPage(){
                                         <option 
                                             id={funcao.funcao_id} 
                                             value={funcao.funcao_id} 
-                                            selected={idFuncao && idFuncao == funcao.funcao_id ? true : false}
+                                            selected={idFuncao && idFuncao === funcao.funcao_id ? true : false}
                                         >
                                             {funcao.nome_funcao}
                                         </option>
@@ -230,19 +230,18 @@ function ServicoPage(){
                                         <td>{servico.comissao}</td>
                                         <td>{servico.tempo_servico}</td>
                                         <td>
-                                            {/* <form > */}
-                                                <input type='hidden' name='id' value='{$serv->servicos_id}' />
-                                                <div className='material' id='excluir'>
+                                            <div className="form" >
+                                                <div className='material excluir'>
                                                     <button name='acao' value='excluir' onClick={() => excluir(servico.servicos_id)}>
-                                                        <span className='material-icons'><FaTrashAlt/></span>
+                                                        <span className='material-icons'><MdDeleteForever/></span>
                                                     </button>
                                                 </div>
-                                                <div className='material'>
+                                                <div className='material carregar'>
                                                     <button name='acao' value='carregar' onClick={() => carregar(servico)}>
                                                         <span className='material-icons carregar'><AiOutlineUpload/></span>
                                                     </button>
                                                 </div>
-                                            {/* </form> */}
+                                            </div>
                                         </td>
                                     </tr>
                                 ))}

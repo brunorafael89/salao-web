@@ -1,5 +1,4 @@
 import React from "react";
-// import Header from "../../components/Header/";
 import { MdPermContactCalendar } from "react-icons/md";
 import { AiOutlineStar } from "react-icons/ai";
 import { FiPhone } from "react-icons/fi";
@@ -17,9 +16,8 @@ import logo from "../../assets/images/logo.png";
 import map from "../../assets/images/map.svg";
 import { GiHamburgerMenu } from "react-icons/gi";
 
-
 import "./styles.css";
-// import "../../assets/js/principal";
+import Components from "../../components/CallToAction"
 
 function PrincipalPage(){
     return (
@@ -51,7 +49,7 @@ function PrincipalPage(){
                 <div className="background">
                     <img alt="Foto de um salão de beleza"/>
 
-                    <div className="cta-btn"></div>
+                    <Components/>
                 </div>
             </header>
             <main>

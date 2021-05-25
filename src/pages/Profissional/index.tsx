@@ -3,16 +3,18 @@ import Header from "../../components/Header";
 import MenuLateral from "../../components/MenuLateral";
 import api from "../../services/api";
 import { toast } from "react-toastify";
-import { FaTrashAlt } from "react-icons/fa";
 import { AiOutlineUpload } from "react-icons/ai";
+import { MdDeleteForever } from "react-icons/md";
 
 import "./styles.css";
 import "../../components/Table/styles.css";
 
+import format from "date-fns/format";
+
 function ProfissionalPage(){
     const [profissionais, setProfissionais] = useState([])
     const [nomeProfissional, setNomeProfissional] = useState("")
-    const [dataNascProfissional, setDataNascProfissional] = useState("")
+    const [dataNascProfissional, setDataNascProfissional] = useState(format(new Date(), "dd/MM/yyyy"))
     const [cpfProfissional, setCpfProfissional] = useState("")
     const [telefoneProfissional, setTelefoneProfissional] = useState("")
     const [emailProfissional, setEmailProfissional] = useState("")
@@ -55,6 +57,8 @@ function ProfissionalPage(){
             toast.success("Profissional cadastrado com sucesso!");
 
             getProfissional();
+
+            toast.success("Profissional cadastrado com sucesso");
         } catch(err) {
             toast.error("Erro ao cadastrar o profissional");
         }
@@ -203,16 +207,15 @@ function ProfissionalPage(){
                             { profissionais.map((profissional: any) => (
                                 <tr>
                                     <td>{profissional.nome}</td>
-                                    <td>{profissional.data_nasc}</td>
+                                    <td>{format(new Date(profissional.data_nasc), "dd/MM/yyyy")}</td>
                                     <td>{profissional.cpf}</td>
                                     <td>{profissional.telefone}</td>
                                     <td>{profissional.email}</td>
                                     <td>
-                                        {/* <form> */}
-                                        <input type='hidden' name='id' value='{$serv->profissional_id}' />
-                                            <div className='material' id='excluir'>
+                                        <div className="form">
+                                            <div className='material excluir'>
                                                 <button name='acao' value='excluir' onClick={() => excluir(profissional.profissional_id)}>
-                                                    <span className='material-icons carregar'><FaTrashAlt/></span>
+                                                    <span className="material-icons"><MdDeleteForever/></span>
                                                 </button>
                                             </div>
                                             <div className='material carregar'>
@@ -220,7 +223,7 @@ function ProfissionalPage(){
                                                     <span className='material-icons carregar'><AiOutlineUpload/></span>
                                                 </button>
                                             </div>
-                                        {/* </form> */}
+                                        </div>
                                     </td>
                                 </tr>
                             ))}

@@ -146,10 +146,20 @@ section .tab-services{
     right: 20px;
 }
 
-.TabelaPreco_main-container .cta-btn .material-icons{
+.TabelaPreco_main-container .cta-btn a{
+    color: inherit;
+}
+
+.TabelaPreco_main-container .cta-btn a .material-icons{
     display: grid;
     place-items: center;
     height: 100%;
+}
+
+.TabelaPreco_main-container .cta-btn a .material-icons svg{
+    display: inline-block;
+    width: 30px;
+    height: 30px;
 }
 
 @media all and (min-width: 320px) and (max-width: 480px){

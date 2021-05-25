@@ -5,8 +5,8 @@ import MenuLateral from "../../components/MenuLateral/";
 import { toast } from "react-toastify";
 import "./styles.css";
 
-import {FaTrashAlt} from "react-icons/fa";
 import { AiOutlineUpload } from "react-icons/ai";
+import { MdDeleteForever } from "react-icons/md";
 
 
 function FuncaoPage(){
@@ -122,11 +122,10 @@ function FuncaoPage(){
                                     <tr>
                                         <td>{funcao.nome_funcao}</td>
                                         <td>
-                                            {/* <form> */}
-                                            <input type='hidden' name='id' value='{$serv->funcao_id}' />
+                                            <div className="form">
                                                 <div className='material excluir'>
                                                     <button name='acao' value='excluir' onClick={() => excluir(funcao.funcao_id)}>
-                                                        <span className='material-icons'><FaTrashAlt/></span>
+                                                        <span className='material-icons'><MdDeleteForever/></span>
                                                     </button>
                                                 </div>
                                                 <div className='material carregar'>
@@ -134,7 +133,7 @@ function FuncaoPage(){
                                                         <span className='material-icons carregar'><AiOutlineUpload/></span>
                                                     </button>
                                                 </div>
-                                            {/* </form> */}
+                                            </div>
                                         </td>
                                     </tr>
                                 ))}

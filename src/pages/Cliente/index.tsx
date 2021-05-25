@@ -6,15 +6,16 @@ import { toast } from "react-toastify";
 import "./styles.css";
 
 // importando os icones
-import {FaTrashAlt} from "react-icons/fa";
 import { AiOutlineUpload } from "react-icons/ai";
+import { MdDeleteForever } from "react-icons/md";
+
 import format from "date-fns/format";
 
 function ClientePage(){
     const [clientes, setClientes] = useState([]);
     const [nomeCliente, setNomeCliente] = useState("");
     const [cpfCliente, setCpfCliente] = useState("");
-    const [dataNascCliente, setDataNascCliente] = useState(format(new Date(), "yyyy-mm-dd"));
+    const [dataNascCliente, setDataNascCliente] = useState(format(new Date(), "dd/MM/yyyy"));
     const [telefoneCliente, setTelefoneCliente] = useState("");
     const [sexoCliente, setSexoCliente] = useState("");
     const SexoList = [
@@ -159,8 +160,8 @@ function ClientePage(){
                             <input 
                                 type="date" 
                                 name="data_nasc"
-                                value={dataNascCliente} 
-                                //value={format(new Date(dataNascCliente), "yyyy-mm-dd")}
+                                value={dataNascCliente}
+                                // value={format(new Date(dataNascCliente), "yyyy-mm-dd")}
                                 //value="2013-01-08"
                                 onChange={(e) => setDataNascCliente(e.target.value)} 
                             />
@@ -207,7 +208,7 @@ function ClientePage(){
 
                         <div className="buttons">
                             <button name="acao" value="cadastrar" type="submit">Cadastrar</button>
-                            <button name="acao" value="editar" type="submit">Editar</button>
+                            <button name="acao" value="editar" type="submit">Alterar</button>
                         </div>
                     </form>
                 </div>
@@ -229,17 +230,16 @@ function ClientePage(){
                             {clientes.map((cliente: any) => (
                                 <tr>
                                     <td>{cliente.nome}</td>
-                                    <td>{cliente.data_nasc}</td>
+                                    <td>{format(new Date(cliente.data_nasc), "dd/MM/yyyy")}</td>
                                     <td>{cliente.cpf}</td>
                                     <td>{cliente.telefone}</td>
                                     <td>{cliente.email}</td>
                                     <td>{cliente.sexo}</td>
                                     <td>
-                                        {/* <form> */}
-                                        <input type='hidden' name='id' value='{$serv->cliente_id}' />
-                                            <div className='material' id='excluir'>                                            
+                                        <div className="form">
+                                            <div className='material excluir'>                                            
                                                 <button name="acao" value='excluir' onClick={() => excluir(cliente.cliente_id)}>
-                                                    <span className='material-icons'><FaTrashAlt/></span>
+                                                    <span className='material-icons'><MdDeleteForever/></span>
                                                 </button>
                                             </div>
                                             <div className='material carregar'>
@@ -247,7 +247,7 @@ function ClientePage(){
                                                     <span className='material-icons carregar'><AiOutlineUpload/></span>
                                                 </button>
                                             </div>
-                                        {/* </form> */}
+                                        </div>
                                     </td>
                                 </tr>
                             ))}

@@ -6,7 +6,7 @@ import MenuLateral from "../../components/MenuLateral/";
 
 import { toast } from "react-toastify";
 import { MdDeleteForever } from 'react-icons/md';
-import { GrUpgrade } from "react-icons/gr";
+import { AiOutlineUpload } from "react-icons/ai";
 
 import "./styles.css";
 
@@ -100,7 +100,6 @@ function FormaPagamentoPage() {
                     <h1>Cadastro de Formas de Pagamentos</h1>
 
                     <form className="form" onSubmit={salvar}> 
-                        {/* <input type="hidden" name="id" value="" /> */}
                         <label htmlFor="forma_pagamento">
                             <span>Forma de Pagamento</span>
                             <input type="text" 
@@ -130,15 +129,18 @@ function FormaPagamentoPage() {
                                 <tr>
                                     <td>{forma.forma_pagamento}</td>
                                     <td>
-                                        {/* <form> */}
-                                            <input type='hidden' name='id' value='{$serv->forma_pagamento_id}' />
-                                            <div className='material' id='excluir' onClick={() => excluir(forma.forma_pagamento_id)}>
-                                                <button name='acao' value='excluir'> <MdDeleteForever /> Excluir</button>
+                                        <div className="form">
+                                            <div className='material excluir' onClick={() => excluir(forma.forma_pagamento_id)}>
+                                                <button name='acao' value='excluir'> 
+                                                    <span className='material-icons'><MdDeleteForever/></span>
+                                                </button>
                                             </div>
                                             <div className='material carregar'>
-                                                <button name='acao' value='carregar' onClick={() => carregar(forma)}><GrUpgrade/>Carregar</button>
+                                                <button name='acao' value='carregar' onClick={() => carregar(forma)}>
+                                                    <span className='material-icons carregar'><AiOutlineUpload/></span>
+                                                </button>
                                             </div>
-                                        {/* </form> */}
+                                        </div>
                                     </td>
                                 </tr>
                             ))}

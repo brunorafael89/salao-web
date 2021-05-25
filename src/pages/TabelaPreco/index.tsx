@@ -7,7 +7,9 @@ import { GiMaggot } from "react-icons/gi";
 import { FaRegHandPeace } from "react-icons/fa";
 import { GiFemaleLegs } from "react-icons/gi";
 import { GiHamburgerMenu } from "react-icons/gi";
+
 import "./styles.css";
+import Components from "../../components/CallToAction"
 
 function TabelaPrecoPage(){
     return (
@@ -147,8 +149,7 @@ function TabelaPrecoPage(){
                     </div>
                 </section>
     
-                <div className="cta-btn">
-                </div>
+                <Components/>
             </main>
 
             <footer>

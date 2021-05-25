@@ -52,13 +52,13 @@ div.table table tbody tr:nth-child(even){
     background-color: #ccc;
 }
 
-div.table table tbody tr td form{
+div.table table tbody tr td .form{
     display: grid;
     grid-template-columns: repeat(2, 1fr);
     gap: 2px;
 }
 
-div.table table tbody tr td form div.material{
+div.table table tbody tr td .form div.material{
     display: inline-block;
     border: 1px solid #a000b7;
     border-radius: 5px;
@@ -67,34 +67,34 @@ div.table table tbody tr td form div.material{
     cursor: pointer;
 }
 
-div.table table tbody tr td form div.material.excluir{
+div.table table tbody tr td .form div.material.excluir{
     background-color: #fff;
 }
 
-div.table table tbody tr td form div.material.carregar{
+div.table table tbody tr td .form div.material.carregar{
     background-color: #a000b7;
     color: #fff;
 }
 
-div.table table tbody tr td form div.material button{
+div.table table tbody tr td .form div.material button{
     border: none;
     transform: translate(-5px, -4px);
     background-color: transparent;
     color: #a000b7;
     cursor: pointer;
 }
-div.table table tbody tr td form div.material button[value="carregar"]{
+div.table table tbody tr td .form div.material button[value="carregar"]{
     color: #fff;
 }
 
-div.table table tbody tr td form div.material button span.material-icons{
+div.table table tbody tr td .form div.material button span.material-icons{
     display: inline-block;
     color: #a000b7;
     transform: translate(5px, 6px);
     font-size: 22px;
 }
 
-div.table table tbody tr td form div.material button span.material-icons.carregar{
+div.table table tbody tr td .form div.material button span.material-icons.carregar{
     display: inline-block;
     color: #fff;
     transform: translateY(5px, 6px);

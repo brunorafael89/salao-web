@@ -15,6 +15,7 @@ import TabelaPrecoPage from "./pages/TabelaPreco";
 import ClientePage from "./pages/Cliente";
 import ProfissionalFuncaoPage from "./pages/ProfissionalFuncao";
 import RelatorioServicoPage from "./pages/RelatorioServico";
+import RelatorioComissaoPage from "./pages/RelatorioComissao";
 
 
 function Routes() {
@@ -30,10 +31,11 @@ function Routes() {
       <Route path="/funcao" exact component={FuncaoPage} /> 
       <Route path="/profissional" exact component={ProfissionalPage} />
       <Route path="/cadastro" exact component={CadastroPage} />
-      <Route path="/TabelaPreco" exact component={TabelaPrecoPage} />
-      <Route path="/Cliente" exact component={ClientePage} />
-      <Route path="/ProfissionalFuncao" exact component={ProfissionalFuncaoPage} />
-      <Route path="/RelatorioServico" exact component={RelatorioServicoPage} />
+      <Route path="/tabelaPreco" exact component={TabelaPrecoPage} />
+      <Route path="/cliente" exact component={ClientePage} />
+      <Route path="/profissionalFuncao" exact component={ProfissionalFuncaoPage} />
+      <Route path="/relatorioServico" exact component={RelatorioServicoPage} />
+      <Route path="/relatorioComissao" exact component={RelatorioComissaoPage} />
 
     </BrowserRouter>
   );

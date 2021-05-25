@@ -2,8 +2,8 @@ import React, { FormEvent, useEffect, useState } from "react";
 import api from "../../services/api";
 import Header from "../../components/Header";
 import MenuLateral from "../../components/MenuLateral";
-import { FaTrashAlt } from "react-icons/fa";
-import { GrUpgrade } from "react-icons/gr";
+import { MdDeleteForever } from "react-icons/md";
+import { AiOutlineUpload } from "react-icons/ai";
 import { toast } from "react-toastify";
 import "./styles.css";
 
@@ -128,7 +128,7 @@ function ProfissionalFuncaoPage(){
                             <select name="profissional_id"  onChange={(e)=> setIdProfissional(e.target.value)}>
                                 <option>Selecione o Profissional</option>
                                 {profissionais.map((profissional: any) => (
-                                    <option value={profissional.profissional_id} selected={idProfissional && idProfissional == profissional.profissional_id ? true : false}>{profissional.nome}</option>
+                                    <option value={profissional.profissional_id} selected={idProfissional && idProfissional === profissional.profissional_id ? true : false}>{profissional.nome}</option>
                                 ))}
                             </select>
                         </label>
@@ -138,7 +138,7 @@ function ProfissionalFuncaoPage(){
                             <select name="funcao_id"  onChange={(e)=> setIdFuncao(e.target.value)}>
                                 <option>Selecione a função</option>
                                 {funcoes.map((funcao: any) => (
-                                    <option value={funcao.funcao_id} selected={idFuncao && idFuncao == funcao.funcao_id ? true : false}>{funcao.nome_funcao}</option>
+                                    <option value={funcao.funcao_id} selected={idFuncao && idFuncao === funcao.funcao_id ? true : false}>{funcao.nome_funcao}</option>
                                 ))}
                             </select>
                         </label>
@@ -173,18 +173,18 @@ function ProfissionalFuncaoPage(){
                                         ))}
                                     </td>
                                     <td>
-                                        {/* <form> */}
-                                        <input type='hidden' name='id' value='{$serv->profissional_id}' />
-                                            <div className='material' id ='excluir'>
-                                                {/* <span className='material-icons'>delete_forever</span> */}
-                                                <button name='acao' value='excluir'onClick={() => excluir(profiFuncao.profissional_id, profiFuncao.funcao_id)}><FaTrashAlt/>
+                                        <div className="form">
+                                            <div className='material excluir'>
+                                                <button name='acao' value='excluir' onClick={() => excluir(profiFuncao.profissional_id, profiFuncao.funcao_id)}>
+                                                    <span className="material-icons"><MdDeleteForever /></span>
                                                 </button>
                                             </div>
                                             <div className='material carregar'>
-                                                {/* <span className='material-icons carregar'>upgrade</span> */}
-                                                <button name='acao' value='carregar' onClick={() => carregar(profiFuncao)}><GrUpgrade/></button>
+                                                <button name='acao' value='carregar' onClick={() => carregar(profiFuncao)}>
+                                                    <span className='material-icons carregar'><AiOutlineUpload/></span>
+                                                </button>
                                             </div>
-                                        {/* </form> */}
+                                        </div>
                                     </td>
                                 </tr>
                             ))}
