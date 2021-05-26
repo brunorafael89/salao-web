@@ -7,12 +7,15 @@ import api from "../../services/api";
 import {MdCheckCircle} from "react-icons/md";
 // import {MdCancel} from "react-icons/md";
 // import {AiFillClockCircle} from "react-icons/ai";
+
 import "./styles.css";
+import format from "date-fns/format";
 
 function AgendamentoPage() {
 
     const [agendamentos, setAgendamentos] = useState([]);
     const [servicos, setServicos] = useState([]);
+    const [clientes, setClientes] = useState([]);
     const [profissionais, setProfissionais] = useState([]);
     const [formaPagamentos, setFormaPagamento] = useState([]);
 
@@ -20,6 +23,7 @@ function AgendamentoPage() {
         getAgendamentos() 
         getProfissionais()
         getServicos()
+        getClientes()
         getFormaPagamento()
     }, [])
 
@@ -47,6 +51,15 @@ function AgendamentoPage() {
             setProfissionais(response.data)
         } catch(err) {
             toast.error("Erro ao consultar os profissionais");
+        }
+    }
+
+    async function getClientes(){
+        try {
+            const response = await api.get("cliente"); 
+            setClientes(response.data)
+        } catch(err) {
+            toast.error("Erro ao consultar os clientes");
         }
     }
 
@@ -123,25 +136,29 @@ function AgendamentoPage() {
                             <thead>
                                 <tr>
                                     <th>Dia</th>
-                                    <th>hora</th>
-                                    <th>Serviço</th>
+                                    <th>Hora</th>
+                                    <th>Cliente</th>
                                     <th>Profissional</th>
+                                    <th>Serviço</th>
                                     <th>Status</th>
                                 </tr>
                             </thead>
                             <tbody>
                                 {agendamentos.map((agendamento: any) => (
                                     <tr>
-                                    <td>{agendamento.data_atendimento}</td>
+                                    <td>{format(new Date(agendamento.data_atendimento), "dd/MM/yyyy")}</td>
                                     <td>{agendamento.horario_agendamento}</td>
                                     <td>
-                                        {}
+                                        {clientes.map((cliente: any) => (
+                                            agendamento.cliente_id === cliente.cliente_id ? cliente.nome : ""
+                                        ))}
                                     </td>
                                     <td>
                                         {profissionais.map((profissional: any) => (
                                             agendamento.funcionario_id === profissional.profissional_id ? profissional.nome : ""
-                                        ))}
+                                            ))}
                                     </td>
+                                    <td>{}</td>
                                     <td><span className="material-icons concluido"><MdCheckCircle/></span></td>
                                     {/* <td><span className="material-icons andamento"><AiFillClockCircle/></span></td> */}
                                     {/* <td><span className="material-icons cancelado"><MdCancel/></span></td> */}
