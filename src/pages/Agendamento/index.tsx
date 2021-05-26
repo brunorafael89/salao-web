@@ -1,12 +1,12 @@
 import React, { useEffect, useState } from "react";
 import Header from "../../components/Header"
 import MenuLateral from "../../components/MenuLateral"
+import Calendar from 'react-calendar'
 import { toast } from "react-toastify";
 import api from "../../services/api";
 import {MdCheckCircle} from "react-icons/md";
 // import {MdCancel} from "react-icons/md";
 // import {AiFillClockCircle} from "react-icons/ai";
-// import "../../components/Calendar/calendario";
 import "./styles.css";
 
 function AgendamentoPage() {
@@ -69,7 +69,7 @@ function AgendamentoPage() {
                     <div className="container-conteudo">
                         <span className="titulo">Agende seu serviço aqui!</span>
 
-                        {/* <calendario id="calendario1"></calendario> */}
+                        <Calendar/>
 
                         <div className="agendamento-form">
                             <form className="form" method="post">

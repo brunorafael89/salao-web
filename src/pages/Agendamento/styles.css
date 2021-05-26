@@ -18,7 +18,7 @@
     
 }
 
-.calendario-table{
+.react-calendar{
     grid-area: calendario;
     margin: 0 auto;
     width: 70%;
@@ -27,7 +27,60 @@
     background-color: white;
 }
 
-.calendario-table .calendario-tr.calendario-header:first-child{
+.react-calendar__navigation{
+    display: flex;
+    padding: 5px;
+    background-color: #610d75;
+}
+
+.react-calendar__navigation__arrow, .react-calendar__navigation__label{
+    margin: 2px;
+    padding: 5px 10px;
+    background-color: transparent;
+    border: none;
+    border-radius: 5px;
+    color: #fff;
+    cursor: pointer;
+}
+
+.react-calendar__navigation__arrow:hover, .react-calendar__navigation__label:hover{
+    background-color: #d281e6;
+    font-weight: bold;
+}
+
+.react-calendar__month-view__weekdays{
+    text-align: center;
+}
+
+.react-calendar__month-view__weekdays__weekday{
+    margin: 5px
+}
+
+.react-calendar__month-view__days > button, 
+.react-calendar__year-view__months > button, 
+.react-calendar__decade-view__years > button,
+.react-calendar__century-view__decades > button{
+    padding: 22px;
+    border: none;
+    background-color: #fff;
+    cursor: pointer;
+}
+
+.react-calendar__month-view__days > button:hover, 
+.react-calendar__year-view__months > button:hover,
+.react-calendar__decade-view__years > button:hover,
+.react-calendar__century-view__decades >button:hover{
+    background-color: #abcdef;
+}
+
+.react-calendar__tile.react-calendar__month-view__days__day.react-calendar__month-view__days__day--neighboringMonth{
+    background-color: #aaa;
+    color:  #fff;
+}
+
+
+/* Estilização do calendário antigo */
+/* .calendario-table .calendario-tr.calendario-header:first-child{
     background-color: #610d75;
     color: #fff;
     font-size: 24px;
@@ -63,10 +116,14 @@ td.calendario-td.selecionado{
     background-color: #fda2a2;
 }
 
+Fim da estilização do calendário antigo
+*/
+
 .agendamento-form{
     grid-area: opcao;
-    width: 100%;
+    min-width: 705px;
     padding: 10px;
+    margin-right: 75px;
     background-color: #fff;
     border-radius: 20px;
 }
@@ -80,6 +137,9 @@ td.calendario-td.selecionado{
     width: 100%;
     margin: 15px 0;
     position: relative;
+}
+.agendamento-form .form label:first-child{
+    margin: 0;
 }
 
 .agendamento-form .form label span{
