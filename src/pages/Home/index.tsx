@@ -14,8 +14,12 @@ function Home() {
         <MenuLateral />
 
         <div className="main-container">
-                <h1>Escolha uma opção do menu ao lado!</h1>
+          <div className="title-area">
+            <div className="title-box">
+              <h1 className="title">Escolha uma opção do menu</h1>
             </div>
+          </div>
+        </div>
       </main>
     </>
   );
