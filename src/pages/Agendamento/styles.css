@@ -121,7 +121,7 @@ Fim da estilização do calendário antigo
 
 .agendamento-form{
     grid-area: opcao;
-    min-width: 705px;
+    min-width: 580px;
     padding: 10px;
     margin-right: 75px;
     background-color: #fff;
