@@ -7,8 +7,7 @@ import api from "../../services/api";
 // import {MdCheckCircle} from "react-icons/md";
 // import {MdCancel} from "react-icons/md";
 import {AiFillClockCircle} from "react-icons/ai";
-import format from "date-fns/format";
-import { addMinutes, isBefore, subMinutes } from "date-fns";
+import { addMinutes, isBefore, subMinutes, format, isAfter, isEqual } from "date-fns";
 
 import "./styles.css";
 
@@ -29,7 +28,7 @@ function AgendamentoPage() {
     const [data_agendamento, setDataAgendamento] = useState(new Date());
     const [total, setTotal] = useState('');
     const [horario_agendamento, setHorarioAgendamento] = useState('');
-    
+    const [servicoSelecionado, setServicoSelecionado] = useState<any>();
 
     useEffect(() => {
         getAgendamentos() 
@@ -85,41 +84,50 @@ function AgendamentoPage() {
         }
     }
 
+    // function getHorarios(servico:any){
+    //     servico = JSON.parse(servico)
+    //     const dataInicial = new Date()
+    //     dataInicial.setHours(9, 0, 0);
+
+    //     let dataSomada = dataInicial;
+        
+    //     const dataFinal = new Date()
+    //     dataFinal.setHours(18, 0, 0)
+       
+    //     const horarios = [];
+        
+    //     const tempo:any[] = servico.tempo_servico.split(':')
+    //     const hora = Number(tempo[0]) * 60;
+    //     const minuto = Number(tempo[1]);
+    //     const novaHora = hora + minuto;
+
+    //     let horaFormatada = format(dataSomada, "HH:mm");
+    //     horarios.push(horaFormatada);
+
+    //     const dataLimiteAgendamento = subMinutes(dataFinal, novaHora);
+    
+    //     while(isBefore(dataSomada, dataLimiteAgendamento)){
+    
+    //         dataSomada = addMinutes(dataSomada, novaHora);
+            
+    //         let horaFormatada = format(dataSomada, "HH:mm");
+    
+    //         horarios.push(horaFormatada);
+    //     }
+    
+    //     setHorarios(horarios);
+    //     getProfissionais(servico.funcao_id)
+    //     setTotal(servico.valor)
+    //     setIdServicos(servico.servicos_id)
+    // }
+
     function getHorarios(servico:any){
         servico = JSON.parse(servico)
-        const dataInicial = new Date()
-        dataInicial.setHours(9, 0, 0);
-
-        let dataSomada = dataInicial;
         
-        const dataFinal = new Date()
-        dataFinal.setHours(18, 0, 0)
-       
-        const horarios = [];
-        
-        const tempo:any[] = servico.tempo_servico.split(':')
-        const hora = Number(tempo[0]) * 60;
-        const minuto = Number(tempo[1]);
-        const novaHora = hora + minuto;
-
-        let horaFormatada = format(dataSomada, "HH:mm");
-        horarios.push(horaFormatada);
-
-        const dataLimiteAgendamento = subMinutes(dataFinal, novaHora);
-    
-        while(isBefore(dataSomada, dataLimiteAgendamento)){
-    
-            dataSomada = addMinutes(dataSomada, novaHora);
-            
-            let horaFormatada = format(dataSomada, "HH:mm");
-    
-            horarios.push(horaFormatada);
-        }
-    
-        setHorarios(horarios);
         getProfissionais(servico.funcao_id)
         setTotal(servico.valor)
         setIdServicos(servico.servicos_id)
+        setServicoSelecionado(servico)
     }
 
     async function agendar(e: FormEvent){
@@ -150,6 +158,7 @@ function AgendamentoPage() {
 
     function limpar(){
         setDataAgendamento(new Date())
+        setDataAtendimento(new Date())
         setIdServicos('')
         setIdProfissional('')
         setIdFormapagamento('')
@@ -159,7 +168,80 @@ function AgendamentoPage() {
     }
 
     function setData(data: Date){
-        setDataAgendamento(data);
+        setDataAtendimento(data);
+    }
+
+    async function getHorariosProfissionais(id:string) {
+        setIdProfissional(id)
+        const response = await api.get(`agendamento/getAgendamentoProfissional/${id}/${format(data_atendimento, "yyyy-MM-dd")}`)
+
+        let datasProfissional: any[] = response.data.map((h:any) => {
+            return converteTempoEmData(h.horario_agendamento, h.tempo_servico);
+        });
+
+        const dataInicial = new Date()
+        dataInicial.setHours(9, 0, 0);
+
+        let dataInicioAgendamento = dataInicial;
+        let dataFinalAgendamento = dataInicial;
+        
+        const dataFinal = new Date()
+        dataFinal.setHours(18, 0, 0)
+       
+        const horarios = [];
+        
+        const tempo:any[] = servicoSelecionado.tempo_servico.split(':')
+        const hora = Number(tempo[0]) * 60;
+        const minuto = Number(tempo[1]);
+        const tempoServioMinutos = hora + minuto;
+
+        let horaFormatada = format(dataInicioAgendamento, "HH:mm");
+        horarios.push(horaFormatada);
+
+        const dataLimiteAgendamento = subMinutes(dataFinal, tempoServioMinutos);
+    
+        while(isBefore(dataInicioAgendamento, dataLimiteAgendamento)){
+    
+            dataInicioAgendamento = addMinutes(dataInicioAgendamento, tempoServioMinutos);
+            dataFinalAgendamento = addMinutes(dataInicioAgendamento, tempoServioMinutos);
+            dataFinalAgendamento = subMinutes(dataFinalAgendamento, 1);
+            
+            let horaFormatada = format(dataInicioAgendamento, "HH:mm");
+
+            let achou = false;
+
+            for(var i=0; i<datasProfissional.length; i++){
+                if(
+                    (isAfter(dataInicioAgendamento, datasProfissional[i].dataInicial) && isBefore(dataInicioAgendamento, datasProfissional[i].dataFinal)) 
+                    || (isAfter(dataFinalAgendamento, datasProfissional[i].dataInicial) && isBefore(dataFinalAgendamento, datasProfissional[i].dataFinal))
+                ){
+                    achou = true;
+                    datasProfissional.splice(i, 1);
+                    break;
+                }
+            }
+
+            if(!achou){
+                horarios.push(horaFormatada);
+            }
+        }
+    
+        setHorarios(horarios);
+    }
+    
+    function converteTempoEmData(horario: string, tempoServico: string){
+        const tempo:any[] = tempoServico.split(':')
+        const hora = Number(tempo[0]) * 60;
+        const minuto = Number(tempo[1]);
+        const novaHora = hora + minuto;
+
+        const dataInicial = new Date(format(new Date(), "yyyy-MM-dd") + " " + horario);
+        const dataFinal = addMinutes(dataInicial, novaHora);
+
+        return {
+            dataInicial,
+            dataFinal
+        }
     }
     
 
@@ -173,13 +255,13 @@ function AgendamentoPage() {
                     <div className="container-conteudo">
                         <span className="titulo">Agende seu serviço aqui!</span>
 
-                        <Calendar onChange={(data) => setData(data)} minDate={new Date()}/>
+                        <Calendar onChange={(data) => setData(data)} />
 
                         <div className="agendamento-form">
                             <form className="form" onSubmit={agendar}>
                                 <label htmlFor="">
                                     <span>Em que Data?</span>
-                                    <input type="text" disabled value={format(data_agendamento, "dd/MM/yyy")}/>
+                                    <input type="text" disabled value={format(data_atendimento, "dd/MM/yyy")}/>
                                 </label>
                                 
                                 <label htmlFor="">
@@ -194,7 +276,7 @@ function AgendamentoPage() {
                                 
                                 <label htmlFor="">
                                     <span>Qual Profissional?</span>
-                                    <select name="profissional" id="" value={idProfissional} onChange={(e) => setIdProfissional(e.target.value)}>
+                                    <select name="profissional" id="" value={idProfissional} onChange={(e) => getHorariosProfissionais(e.target.value)}>
                                         <option value="">Selecione o profissional</option>
                                         {profissionais.map((profissional: any) => (
                                             <option value={profissional.profissional_id}>{profissional.nome}</option>
