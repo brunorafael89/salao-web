@@ -3,6 +3,7 @@ import { BrowserRouter, Route } from "react-router-dom";
 
 import Login from "./pages/Login";
 import Home from "./pages/Home";
+import PerfilPage from "./pages/Perfil";
 import FormaPagamentoPage from "./pages/FormaPagamento";
 import ExemploPage from "./pages/Exemplo";
 import ServicoPage from "./pages/Servico";
@@ -16,6 +17,7 @@ import ClientePage from "./pages/Cliente";
 import ProfissionalFuncaoPage from "./pages/ProfissionalFuncao";
 import RelatorioServicoPage from "./pages/RelatorioServico";
 import RelatorioComissaoPage from "./pages/RelatorioComissao";
+import CarrinhoPage from "./pages/Carrinho";
 
 
 function Routes() {
@@ -24,6 +26,7 @@ function Routes() {
       <Route path="/" exact component={PrincipalPage} />
       <Route path="/login" exact component={Login} />
       <Route path="/home" exact component={Home} />
+      <Route path="/perfil" exact component={PerfilPage} />
       <Route path="/formaPagamento" exact component={FormaPagamentoPage} />
       <Route path="/exemplo" exact component={ExemploPage} />
       <Route path="/servico" exact component={ServicoPage} />
@@ -36,6 +39,7 @@ function Routes() {
       <Route path="/profissionalFuncao" exact component={ProfissionalFuncaoPage} />
       <Route path="/relatorioServico" exact component={RelatorioServicoPage} />
       <Route path="/relatorioComissao" exact component={RelatorioComissaoPage} />
+      <Route path="/carrinho" exact component={CarrinhoPage} />
 
     </BrowserRouter>
   );
