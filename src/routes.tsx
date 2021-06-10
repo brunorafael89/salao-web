@@ -3,6 +3,7 @@ import { BrowserRouter, Route } from "react-router-dom";
 
 import Login from "./pages/Login";
 import Home from "./pages/Home";
+import PerfilPage from "./pages/Perfil";
 import FormaPagamentoPage from "./pages/FormaPagamento";
 import ExemploPage from "./pages/Exemplo";
 import ServicoPage from "./pages/Servico";
@@ -16,6 +17,7 @@ import ClientePage from "./pages/Cliente";
 import ProfissionalFuncaoPage from "./pages/ProfissionalFuncao";
 import RelatorioServicoPage from "./pages/RelatorioServico";
 import RelatorioComissaoPage from "./pages/RelatorioComissao";
+import CarrinhoPage from "./pages/Carrinho";
 
 import FuncionarioPrivateRouter from "./routes/FuncionarioPrivateRouter";
 import ClientePrivateRouter from "./routes/ClientePrivateRouter";
@@ -42,6 +44,7 @@ function Routes() {
       <FuncionarioPrivateRouter path="/profissionalFuncao" exact component={ProfissionalFuncaoPage} />
       <FuncionarioPrivateRouter path="/relatorioServico" exact component={RelatorioServicoPage} />
       <FuncionarioPrivateRouter path="/relatorioComissao" exact component={RelatorioComissaoPage} />
+      <Route path="/carrinho" exact component={CarrinhoPage} />
 
     </BrowserRouter>
   );

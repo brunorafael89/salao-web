@@ -19,7 +19,7 @@ function AgendamentoPage() {
     const [clientes, setClientes] = useState([]);
     const [IdServicos, setIdServicos] = useState("");
     const [idFormapagamento, setIdFormapagamento] = useState("");
-    const [idFuncionario, setIdFuncionario] = useState("");
+    // const [idFuncionario, setIdFuncionario] = useState("");
     const [profissionais, setProfissionais] = useState([]);
     const [formaPagamentos, setFormaPagamento] = useState([]);
     const [horarios, setHorarios] = useState<string[]>([]);
@@ -145,7 +145,7 @@ function AgendamentoPage() {
         e.preventDefault();
         try{
             await api.post('agendamento', {
-                funcionario_id: idFuncionario,
+                // funcionario_id: idFuncionario,
                 profissional_id: idProfissional,
                 cliente_id: idCliente,
                 data_atendimento: data_atendimento,
@@ -178,7 +178,7 @@ function AgendamentoPage() {
         setHorarioAgendamento('')
     }
 
-    function setData(data: Date){
+    function setData(data: any){
         setDataAtendimento(data);
         getAgendamentosDataCliente(data);
     }
@@ -285,6 +285,12 @@ function AgendamentoPage() {
                                         ))}
                                     </select>
                                 </label>
+
+                                <label htmlFor="">
+                                    <span>Valor do serviço</span>
+                                    
+                                    <input type="text" disabled value={`R$${servicoSelecionado?.valor},00`}/>
+                                </label>
                                 
                                 <label htmlFor="">
                                     <span>Qual Profissional?</span>
@@ -308,7 +314,7 @@ function AgendamentoPage() {
 
                                 <label htmlFor="">
                                     <span>Qual Pagamento?</span>
-                                    <select name="pagamento" id="" value={idFormapagamento} onChange={(e) => setIdFormapagamento(e.target.value)}>
+                                    <select name="pagamento" id="" /*value={idFormapagamento}*/ onChange={(e) => setIdFormapagamento(e.target.value)}>
                                         <option value="">Selecione o pagamento</option>
                                         {formaPagamentos.map((formaPagamento: any) => (
                                             <option value={formaPagamento.forma_pagamento_id}>{formaPagamento.forma_pagamento}</option>
@@ -316,7 +322,7 @@ function AgendamentoPage() {
                                     </select>
                                 </label>
 
-                                <button type='submit'> Agendar </button>
+                                <button type='submit'> Adicionar ao carrinho </button>
                             </form>                       
                         </div>
                     </div>
@@ -336,34 +342,35 @@ function AgendamentoPage() {
                             <tbody>
                                 {agendamentos.map((agendamento: any) => (
                                     <tr>
-                                    <td>{format(new Date(agendamento.data_atendimento), "dd/MM/yyyy")}</td>
-                                    <td>{agendamento.horario_agendamento}</td>
-                                    <td>
-                                        {clientes.map((cliente: any) => (
-                                            agendamento.cliente_id === cliente.cliente_id ? cliente.nome : ""
-                                        ))}
-                                    </td>
-                                    <td>
-                                        {agendamento.nome}                                        
-                                    </td>
-                                    <td>
-                                        {servicos.map((servico: any) => (
-                                                    agendamento.servicos_id === servico.servicos_id ? servico.nome : ""
-                                                ))}
+                                        <td>{format(new Date(agendamento.data_atendimento), "dd/MM/yyyy")}</td>
+                                        <td>{agendamento.horario_agendamento}</td>
+                                        <td>
+                                            {clientes.map((cliente: any) => (
+                                                agendamento.cliente_id === cliente.cliente_id ? cliente.nome : ""
+                                            ))}
                                         </td>
-                                    {/* <td><span className="material-icons concluido"><MdCheckCircle/></span></td>
-                                    Pagamento autorizado */}
-                                    <td><span className="material-icons andamento"><AiFillClockCircle/></span></td>
-                                    {/* <td><span className="material-icons cancelado"><MdCancel/></span></td> */}
+                                        <td>
+                                            {agendamento.nome}                                        
+                                        </td>
+                                        <td>
+                                            {servicos.map((servico: any) => (
+                                                        agendamento.servicos_id === servico.servicos_id ? servico.nome : ""
+                                                    ))}
+                                            </td>
+                                        {/* <td><span className="material-icons concluido"><MdCheckCircle/></span></td>
+                                        Pagamento autorizado */}
+                                        <td><span className="material-icons andamento"><AiFillClockCircle/></span></td>
+                                        {/* <td><span className="material-icons cancelado"><MdCancel/></span></td> */}
 
-                                    {/* <div className="form">
-                                            <div className='material excluir'>
-                                                <button name='acao' value='excluir' onClick={() => excluir(profiFuncao.profissional_id, profiFuncao.funcao_id)}>
-                                                    <span className="material-icons"><MdDeleteForever />cancelar agendamento</span>
-                                                </button>
+                                        {/* <div className="form">
+                                                <div className='material excluir'>
+                                                    <button name='acao' value='excluir' onClick={() => excluir(profiFuncao.profissional_id, profiFuncao.funcao_id)}>
+                                                        <span className="material-icons"><MdDeleteForever />cancelar agendamento</span>
+                                                    </button>
+                                                </div>
                                             </div>
-                                            */}
-                                </tr>
+                                        */}
+                                    </tr>
                                 ))}
                             </tbody>
                         </table>
