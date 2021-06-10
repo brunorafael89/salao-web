@@ -179,7 +179,7 @@
     }
 }
 
-@media screen and (min-width: 480px) and (max-width: 720px){
+@media screen and (min-width: 480px) and (max-width: 768px){
     .funcao.cadastro-form{
         display: flex;
         width: 100%;
@@ -243,5 +243,13 @@
         border-radius: 20px;
         box-shadow: 3px 3px 7px black;
         cursor: pointer;
+    }
+}
+
+@media screen and (min-width: 768px) and (max-width: 1366px){
+    .funcao.main-container {
+        width: 76%;
+        padding: 90px 10px 0 0;
+        margin-left: 320px;
     }
 }

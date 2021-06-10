@@ -77,7 +77,7 @@ function ProfissionalPage(){
     //Função responsável por preencher o formulário com os dados da tabela
     async function carregar(profissional:any){
         setNomeProfissional(profissional.nome);
-        setDataNascProfissional(profissional.dataNasc);
+        setDataNascProfissional(profissional.data_nasc);
         setCpfProfissional(profissional.cpf);
         setTelefoneProfissional(profissional.telefone);
         setEmailProfissional(profissional.email);
@@ -118,119 +118,122 @@ function ProfissionalPage(){
     return (
         <>
             <Header />
-            <MenuLateral />
 
-            <div className="profissional main-container">
-                <div className="profissional cadastro-form">
-                    <h1>Cadastro de Profissional</h1>
-                    <form className="form" onSubmit={salvar}>
-                        <label htmlFor="nome">
-                            <span>Nome</span>
-                            <input 
-                                type="text" 
-                                name="nome"
-                                value={nomeProfissional} 
-                                onChange={ (e) => setNomeProfissional(e.target.value) }
-                                placeholder="Entre com o nome completo"
-                            />
-                        </label>
+            <main>
+                <MenuLateral />
 
-                        <label htmlFor="data_nasc">
-                            <span>Data Nascimento</span>
-                            <input 
-                                type="date" 
-                                name="data_nasc" 
-                                value={dataNascProfissional} 
-                                onChange={ (e) => setDataNascProfissional(e.target.value) }
-                            />
-                        </label>
+                <div className="profissional main-container">
+                    <div className="profissional cadastro-form">
+                        <h1>Cadastro de Profissional</h1>
+                        <form className="form" onSubmit={salvar}>
+                            <label htmlFor="nome">
+                                <span>Nome</span>
+                                <input 
+                                    type="text" 
+                                    name="nome"
+                                    value={nomeProfissional} 
+                                    onChange={ (e) => setNomeProfissional(e.target.value) }
+                                    placeholder="Entre com o nome completo"
+                                />
+                            </label>
 
-                        <label htmlFor="cpf">
-                            <span>CPF</span>
-                            <input type="text" 
-                                name="cpf" 
-                                value={cpfProfissional} 
-                                onChange={ (e) => setCpfProfissional(e.target.value) }
-                                placeholder="Apenas números"/>
-                        </label>
+                            <label htmlFor="data_nasc">
+                                <span>Data Nascimento</span>
+                                <input 
+                                    type="date" 
+                                    name="data_nasc" 
+                                    value={dataNascProfissional} 
+                                    onChange={ (e) => setDataNascProfissional(e.target.value) }
+                                />
+                            </label>
 
-                        <label htmlFor="telefone">
-                            <span>Telefone</span>
-                            <input 
-                                type="text" 
-                                name="telefone" 
-                                value={telefoneProfissional} 
-                                onChange={ (e) => setTelefoneProfissional(e.target.value) }
-                                placeholder="Apenas números"/>
-                        </label>
+                            <label htmlFor="cpf">
+                                <span>CPF</span>
+                                <input type="text" 
+                                    name="cpf" 
+                                    value={cpfProfissional} 
+                                    onChange={ (e) => setCpfProfissional(e.target.value) }
+                                    placeholder="Apenas números"/>
+                            </label>
 
-                        <label htmlFor="email">
-                            <span>Email</span>
-                            <input 
-                                type="email" 
-                                name="email" 
-                                value={emailProfissional} 
-                                onChange={ (e) => setEmailProfissional(e.target.value) }
-                                placeholder="example@mail.com"/>
-                        </label>
+                            <label htmlFor="telefone">
+                                <span>Telefone</span>
+                                <input 
+                                    type="text" 
+                                    name="telefone" 
+                                    value={telefoneProfissional} 
+                                    onChange={ (e) => setTelefoneProfissional(e.target.value) }
+                                    placeholder="Apenas números"/>
+                            </label>
 
-                        <label htmlFor="senha">
-                            <span>Senha</span>
-                            <input 
-                                type="password" 
-                                name="senha"
-                                value={senhaProfissional} 
-                                onChange={ (e) => setSenhaProfissional(e.target.value) }
-                            />
-                        </label>
+                            <label htmlFor="email">
+                                <span>Email</span>
+                                <input 
+                                    type="email" 
+                                    name="email" 
+                                    value={emailProfissional} 
+                                    onChange={ (e) => setEmailProfissional(e.target.value) }
+                                    placeholder="example@mail.com"/>
+                            </label>
 
-                        <div className="buttons">
-                            <button name="acao" value="cadastrar" type="submit">Cadastrar</button>
-                            <button name="acao" value="alterar" type="submit">Alterar</button>
-                        </div>
-                    </form>
-                </div>
+                            <label htmlFor="senha">
+                                <span>Senha</span>
+                                <input 
+                                    type="password" 
+                                    name="senha"
+                                    value={senhaProfissional} 
+                                    onChange={ (e) => setSenhaProfissional(e.target.value) }
+                                />
+                            </label>
 
-                <div className="table">
-                    <table>
-                        <thead>
-                            <tr>
-                                <th>Nome</th>
-                                <th>Data de Nascimento</th>
-                                <th>CPF</th>
-                                <th>Telefone</th>
-                                <th>Email</th>
-                                <th>Ação</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            { profissionais.map((profissional: any) => (
+                            <div className="buttons">
+                                <button name="acao" value="cadastrar" type="submit">Cadastrar</button>
+                                <button name="acao" value="alterar" type="submit">Alterar</button>
+                            </div>
+                        </form>
+                    </div>
+
+                    <div className="table">
+                        <table>
+                            <thead>
                                 <tr>
-                                    <td>{profissional.nome}</td>
-                                    <td>{format(new Date(profissional.data_nasc), "dd/MM/yyyy")}</td>
-                                    <td>{profissional.cpf}</td>
-                                    <td>{profissional.telefone}</td>
-                                    <td>{profissional.email}</td>
-                                    <td>
-                                        <div className="form">
-                                            <div className='material excluir'>
-                                                <button name='acao' value='excluir' onClick={() => excluir(profissional.profissional_id)}>
-                                                    <span className="material-icons"><MdDeleteForever/></span>
-                                                </button>
-                                            </div>
-                                            <div className='material carregar'>
-                                                <button name='acao' value='carregar' onClick={() => carregar(profissional)}>
-                                                    <span className='material-icons carregar'><AiOutlineUpload/></span>
-                                                </button>
-                                            </div>
-                                        </div>
-                                    </td>
+                                    <th>Nome</th>
+                                    <th>Data de Nascimento</th>
+                                    <th>CPF</th>
+                                    <th>Telefone</th>
+                                    <th>Email</th>
+                                    <th>Ação</th>
                                 </tr>
-                            ))}
-                        </tbody>
-                    </table>
+                            </thead>
+                            <tbody>
+                                { profissionais.map((profissional: any) => (
+                                    <tr>
+                                        <td>{profissional.nome}</td>
+                                        <td>{format(new Date(profissional.data_nasc), "dd/MM/yyyy")}</td>
+                                        <td>{profissional.cpf}</td>
+                                        <td>{profissional.telefone}</td>
+                                        <td>{profissional.email}</td>
+                                        <td>
+                                            <div className="form">
+                                                <div className='material excluir'>
+                                                    <button name='acao' value='excluir' onClick={() => excluir(profissional.profissional_id)}>
+                                                        <span className="material-icons"><MdDeleteForever/></span>
+                                                    </button>
+                                                </div>
+                                                <div className='material carregar'>
+                                                    <button name='acao' value='carregar' onClick={() => carregar(profissional)}>
+                                                        <span className='material-icons carregar'><AiOutlineUpload/></span>
+                                                    </button>
+                                                </div>
+                                            </div>
+                                        </td>
+                                    </tr>
+                                ))}
+                            </tbody>
+                        </table>
+                    </div>
                 </div>
-            </div>
+            </main>
         </>
     )
 }

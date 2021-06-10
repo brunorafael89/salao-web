@@ -129,132 +129,135 @@ function ClientePage(){
         <>
             <Header/>
 
-            <MenuLateral/>
-            <div className="cad-cliente main-container">
-                <div className="cad-cliente cadastro-form">
-                    <h1>Cadastro de Clientes</h1>
+            <main>
+                <MenuLateral/>
+                
+                <div className="cad-cliente main-container">
+                    <div className="cad-cliente cadastro-form">
+                        <h1>Cadastro de Clientes</h1>
+            
+                        <form className="form" onSubmit={salvar}>
+                            <label htmlFor="nome">
+                                <span>Nome</span>
+                                <input 
+                                    type="text" 
+                                    name="nome" 
+                                    value={nomeCliente}
+                                    onChange={(e)=>setNomeCliente(e.target.value)}
+                                />
+                            </label>
         
-                    <form className="form" onSubmit={salvar}>
-                        <label htmlFor="nome">
-                            <span>Nome</span>
-                            <input 
-                                type="text" 
-                                name="nome" 
-                                value={nomeCliente}
-                                onChange={(e)=>setNomeCliente(e.target.value)}
-                            />
-                        </label>
-    
-                        <label htmlFor="cpf">
-                            <span>CPF</span>
-                            <input 
-                                type="text" 
-                                name="cpf" 
-                                value={cpfCliente}
-                                onChange={(e) => setCpfCliente(e.target.value)} 
-                            />
-                        </label>
-    
-                        <label htmlFor="data_nasc">
-                            <span>Data Nascimento</span>
-                            <input 
-                                type="date" 
-                                name="data_nasc"
-                                value={dataNascCliente}
-                                // value={format(new Date(dataNascCliente), "yyyy-mm-dd")}
-                                //value="2013-01-08"
-                                onChange={(e) => setDataNascCliente(e.target.value)} 
-                            />
-                        </label>
-
-                        <label htmlFor="telefone">
-                            <span>Telefone</span>
-                            <input 
-                                type="text" 
-                                name="telefone" 
-                                value={telefoneCliente}
-                                onChange={(e) => setTelefoneCliente(e.target.value)}
-                            />
-                        </label>
-
-                        <label>
-                            <span>Sexo:</span>
-                            <select id="sexo" value={sexoCliente} onChange={(e) => setSexoCliente(e.target.value)}>
-                                {SexoList.map((item) => (
-                                    <option value={item.id}>{item.name}</option>
-                                ))}
-                            </select>
-                        </label>
-
-                        <label htmlFor="email">
-                            <span>Email</span>
-                            <input 
-                                type="email" 
-                                name="email" 
-                                value={emailCliente}
-                                onChange={(e) => setEmailCliente(e.target.value)}
-                            />
-                        </label>
-    
-                        <label htmlFor="senha">
-                            <span>Senha</span>
-                            <input 
-                                type="password" 
-                                name="senha"
-                                value={senhaCliente}
-                                onChange={(e) => setSenhaCliente(e.target.value)}
-                            />
-                        </label>
-
-                        <div className="buttons">
-                            <button name="acao" value="cadastrar" type="submit">Cadastrar</button>
-                            <button name="acao" value="editar" type="submit">Alterar</button>
-                        </div>
-                    </form>
-                </div>
+                            <label htmlFor="cpf">
+                                <span>CPF</span>
+                                <input 
+                                    type="text" 
+                                    name="cpf" 
+                                    value={cpfCliente}
+                                    onChange={(e) => setCpfCliente(e.target.value)} 
+                                />
+                            </label>
         
-                <div className="table">
-                    <table>
-                        <thead>
-                            <tr>
-                                <th>Nome</th>
-                                <th>Data_Nascimento</th>
-                                <th>CPF</th>
-                                <th>Telefone</th>
-                                <th>Email</th>
-                                <th>Sexo</th>
-                                <th>Ação</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            {clientes.map((cliente: any) => (
+                            <label htmlFor="data_nasc">
+                                <span>Data Nascimento</span>
+                                <input 
+                                    type="date" 
+                                    name="data_nasc"
+                                    value={dataNascCliente}
+                                    // value={format(new Date(dataNascCliente), "yyyy-mm-dd")}
+                                    //value="2013-01-08"
+                                    onChange={(e) => setDataNascCliente(e.target.value)} 
+                                />
+                            </label>
+
+                            <label htmlFor="telefone">
+                                <span>Telefone</span>
+                                <input 
+                                    type="text" 
+                                    name="telefone" 
+                                    value={telefoneCliente}
+                                    onChange={(e) => setTelefoneCliente(e.target.value)}
+                                />
+                            </label>
+
+                            <label>
+                                <span>Sexo:</span>
+                                <select id="sexo" value={sexoCliente} onChange={(e) => setSexoCliente(e.target.value)}>
+                                    {SexoList.map((item) => (
+                                        <option value={item.id}>{item.name}</option>
+                                    ))}
+                                </select>
+                            </label>
+
+                            <label htmlFor="email">
+                                <span>Email</span>
+                                <input 
+                                    type="email" 
+                                    name="email" 
+                                    value={emailCliente}
+                                    onChange={(e) => setEmailCliente(e.target.value)}
+                                />
+                            </label>
+        
+                            <label htmlFor="senha">
+                                <span>Senha</span>
+                                <input 
+                                    type="password" 
+                                    name="senha"
+                                    value={senhaCliente}
+                                    onChange={(e) => setSenhaCliente(e.target.value)}
+                                />
+                            </label>
+
+                            <div className="buttons">
+                                <button name="acao" value="cadastrar" type="submit">Cadastrar</button>
+                                <button name="acao" value="editar" type="submit">Alterar</button>
+                            </div>
+                        </form>
+                    </div>
+            
+                    <div className="table">
+                        <table>
+                            <thead>
                                 <tr>
-                                    <td>{cliente.nome}</td>
-                                    <td>{format(new Date(cliente.data_nasc), "dd/MM/yyyy")}</td>
-                                    <td>{cliente.cpf}</td>
-                                    <td>{cliente.telefone}</td>
-                                    <td>{cliente.email}</td>
-                                    <td>{cliente.sexo}</td>
-                                    <td>
-                                        <div className="form">
-                                            <div className='material excluir'>                                            
-                                                <button name="acao" value='excluir' onClick={() => excluir(cliente.cliente_id)}>
-                                                    <span className='material-icons'><MdDeleteForever/></span>
-                                                </button>
-                                            </div>
-                                            <div className='material carregar'>
-                                                <button name="acao" value='carregar' onClick={() => carregar(cliente)}>
-                                                    <span className='material-icons carregar'><AiOutlineUpload/></span>
-                                                </button>
-                                            </div>
-                                        </div>
-                                    </td>
+                                    <th>Nome</th>
+                                    <th>Data_Nascimento</th>
+                                    <th>CPF</th>
+                                    <th>Telefone</th>
+                                    <th>Email</th>
+                                    <th>Sexo</th>
+                                    <th>Ação</th>
                                 </tr>
-                            ))}
-                        </tbody>
-                    </table>
+                            </thead>
+                            <tbody>
+                                {clientes.map((cliente: any) => (
+                                    <tr>
+                                        <td>{cliente.nome}</td>
+                                        <td>{format(new Date(cliente.data_nasc), "dd/MM/yyyy")}</td>
+                                        <td>{cliente.cpf}</td>
+                                        <td>{cliente.telefone}</td>
+                                        <td>{cliente.email}</td>
+                                        <td>{cliente.sexo}</td>
+                                        <td>
+                                            <div className="form">
+                                                <div className='material excluir'>                                            
+                                                    <button name="acao" value='excluir' onClick={() => excluir(cliente.cliente_id)}>
+                                                        <span className='material-icons'><MdDeleteForever/></span>
+                                                    </button>
+                                                </div>
+                                                <div className='material carregar'>
+                                                    <button name="acao" value='carregar' onClick={() => carregar(cliente)}>
+                                                        <span className='material-icons carregar'><AiOutlineUpload/></span>
+                                                    </button>
+                                                </div>
+                                            </div>
+                                        </td>
+                                    </tr>
+                                ))}
+                            </tbody>
+                        </table>
+                    </div>
                 </div>
-            </div>
+            </main>
         </>
     )
 }

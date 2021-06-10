@@ -374,6 +374,7 @@ FIM DA ÁREA DE TESTE COM O CAMPO DE PESQUISA
         width: 100%;
         margin: 20px auto;
         padding: unset;
+        overflow-x: auto;
     }
     
     main .main-container .historico-agendamento table{

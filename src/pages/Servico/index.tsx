@@ -146,6 +146,7 @@ function ServicoPage(){
                             <label htmlFor="funcao">
                                 <span>Função</span>
                                 <select name="nome_funcao" onChange={(e)=> setIdFuncao(e.target.value)}>
+                                <option value="">Selecione a Função</option>
                                     {funcoes.map((funcao: any) => (
                                         <option 
                                             id={funcao.funcao_id} 

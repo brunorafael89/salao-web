@@ -88,7 +88,8 @@
 }
 
 .TabelaPreco_main-container{
-    margin: 10px;  
+    margin: 10px auto;
+    max-width: 1200px;
 }
 
 .TabelaPreco_main-container section{
@@ -106,6 +107,14 @@
     gap: 10px;
 }
 
+.TabelaPreco_main-container section:first-child .tab-price .card{
+    width: 100%;
+}
+
+.TabelaPreco_main-container section:first-child .tab-price .card h2{
+    text-align: center;
+}
+
 .TabelaPreco_main-container section:nth-child(2) .tab-price, main section:nth-child(3) .tab-price{
     display: grid;
     grid-template-columns: repeat(2, 1fr);
@@ -121,8 +130,10 @@ section .tab-title{
 
 section .tab-services{
     display: grid;
-    grid-template-columns: auto 1fr;
+    grid-template-columns: 1fr auto;
     padding: 10px;
+    width: 100%;
+    max-width: 615px;
 }
 
 .tab-services .service-name, .tab-services .service-price{
@@ -308,13 +319,13 @@ section .tab-services{
         font-weight: bold;
     }
 
-    .TabelaPreco_main-container div.cta-btn .material-icons{
+    /* .TabelaPreco_main-container div.cta-btn .material-icons{
         display: inherit;
         transform: translate(30px, 5px);
-    }
+    } */
 
     .TabelaPreco_main-container div.cta-btn a{
-        padding: 20px 40px;
+        padding: 15px 35px;
         display: inline-block;
     }
 }

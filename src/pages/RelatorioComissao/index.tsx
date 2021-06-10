@@ -6,6 +6,9 @@ import { toast } from "react-toastify";
 import api from "../../services/api";
 import {IoMdPrint} from "react-icons/io";
 import {RiFileExcel2Line} from "react-icons/ri";
+
+import { CSVLink } from "react-csv";
+
 import "./styles.css";
 
 function  RelatorioComissaoPage(){
@@ -52,60 +55,68 @@ function  RelatorioComissaoPage(){
     }
 
 
+    // Deixei estes dados como exemplo para saber se o botão de exportar está funcionando
+    // é necessário trazer as informações do banco de dados
+    const csvData = [
+        ["Nome", "Função", "CPF"],
+        ["Carlos Augusto", "Cabeleireiro", "123123123"],
+        ["Carlos Afonso", "Pedicure", "123123124"]
+    ]
+
     return (
         <>
             <Header/>
 
-            <MenuLateral/>
-            <div className="relatorio-comissao main-container">
-                <h1>Relatorio de Comissão</h1>
-                <section className="info-select">
-                    <div className="select-profissional">
-                        <label htmlFor="">
-                            <span className="spn-titulo">Selecione o profissional</span>
-                            <select name="comissao" id="" onChange={(e) => setIdProfissional(e.target.value)}>
-                                <option value="">Selecione o profissional</option>
-                                        {profissionais.map((profissional: any) => (
-                                            <option value={profissional.profissional_id}>{profissional.nome}</option>
-                                        ))}
-                            </select>
-                        </label>
-                    </div>
-    
-                    <div className="select-data">
-                        <span className="spn-titulo">Selecione o período</span>
-                        <form onSubmit={geraRelatorio}>
+            <main>
+                <MenuLateral/>
+
+                <div className="relatorio-comissao main-container">
+                    <h1>Relatorio de Comissão</h1>
+                    <section className="info-select">
+                        <div className="select-profissional">
                             <label htmlFor="">
-                                <span>De:</span>
-                                <input type="date" />
+                                <span className="spn-titulo">Selecione o profissional</span>
+                                <select name="comissao" id="" onChange={(e) => setIdProfissional(e.target.value)}>
+                                    <option value="">Selecione o profissional</option>
+                                            {profissionais.map((profissional: any) => (
+                                                <option value={profissional.profissional_id}>{profissional.nome}</option>
+                                            ))}
+                                </select>
                             </label>
+                        </div>
+        
+                        <div className="select-data">
+                            <span className="spn-titulo">Selecione o período</span>
+                            <form onSubmit={geraRelatorio}>
+                                <label htmlFor="">
+                                    <span>De:</span>
+                                    <input type="date" />
+                                </label>
 
-                            <label htmlFor="">
-                                <span>Até:</span>
-                                <input type="date" />
-                            </label>
+                                <label htmlFor="">
+                                    <span>Até:</span>
+                                    <input type="date" />
+                                </label>
 
-                            <button className="buttons" type="submit">Gerar Relatório</button>
-                        </form>
-                    </div>
-                </section>
+                                <button className="buttons" type="submit">Gerar Relatório</button>
+                            </form>
+                        </div>
+                    </section>
 
-                <div className="table">
-                    <table>
-                        <thead>
-                            <tr>
-                                
-                                <th>Profissional</th>
-                                <th>Data</th>
-                                <th>Serviço</th>
-                                <th>Valor do Serviço</th>
-                                <th>Comissão</th>
-                                <th>Valor da comissão</th>
-                               
-                            </tr>
-                        </thead>
-                        <tbody>
-                            {relatorioComissoes.map((relatorioComissao: any) => (
+                        <div className="table">
+                            <table>
+                                <thead>
+                                    <tr>                                
+                                        <th>Profissional</th>
+                                        <th>Data</th>
+                                        <th>Serviço</th>
+                                        <th>Valor do Serviço</th>
+                                        <th>Comissão</th>
+                                        <th>Valor da comissão</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    {relatorioComissoes.map((relatorioComissao: any) => (
                                         <tr>
                                             <td>{relatorioComissao.nome}</td>
                                             <td>{format(new Date(relatorioComissao.data), "dd/MM/yyyy")}</td>
@@ -115,22 +126,32 @@ function  RelatorioComissaoPage(){
                                             <td>{relatorioComissao.valor_comissao}</td>
                                         </tr>
                                     ))}
-                        </tbody>
-                    </table>
-                </div>
+                                </tbody>
+                            </table>
+                        </div>
 
-                <div className="buttons-export">
-                    <label htmlFor="">
-                        <button className="buttons" type="submit">Imprimir</button>
-                        <span className="material-icons"><IoMdPrint/></span>
-                    </label>
+                    <div className="buttons-export">
+                        <label htmlFor="">
+                            <button className="buttons" type="submit">Imprimir</button>
+                            <span className="material-icons"><IoMdPrint/></span>
+                        </label>
 
-                    <label htmlFor="">
-                        <button className="buttons" type="submit">Exportar para Excel</button>
-                        <span className="material-icons"><RiFileExcel2Line/></span>
-                    </label>
+                        <label htmlFor="">
+                            {/* {relatorioComissoes.map((relatorioComissao: any) => ( */}
+                                <CSVLink
+                                    className="buttons"
+                                    data={csvData}
+                                    filename={`relatorioComissao.csv`}
+                                    // filename={`relatorioComissao${relatorioComissao.nome}.csv`}
+                                >
+                                    Exportar para Excel
+                                </CSVLink>
+                            {/* ))} */}
+                            <span className="material-icons"><RiFileExcel2Line/></span>
+                        </label>
+                    </div>
                 </div>
-            </div>
+            </main>
         </>
     )
 }
