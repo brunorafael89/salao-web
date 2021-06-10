@@ -70,14 +70,14 @@ function ProfissionalPage(){
             getProfissional();
             toast.success("Profissional Excluído com sucesso");
         } catch(err){
-            toast.error("Erro ao excluir profissional!");
+            toast.error("Profissional não pode ser exluído, possui agendamentos");
         }
     }
 
     //Função responsável por preencher o formulário com os dados da tabela
     async function carregar(profissional:any){
         setNomeProfissional(profissional.nome);
-        setDataNascProfissional(profissional.dataNasc);
+        setDataNascProfissional(profissional.data_nasc);
         setCpfProfissional(profissional.cpf);
         setTelefoneProfissional(profissional.telefone);
         setEmailProfissional(profissional.email);
@@ -139,9 +139,9 @@ function ProfissionalPage(){
                             <span>Data Nascimento</span>
                             <input 
                                 type="date" 
-                                name="data_nasc" 
-                                value={dataNascProfissional} 
-                                onChange={ (e) => setDataNascProfissional(e.target.value) }
+                                name="data_nasc"
+                                value={format(new Date(dataNascProfissional), "yyyy-MM-dd")}
+                                onChange={(e) => setDataNascProfissional(e.target.value)} 
                             />
                         </label>
 

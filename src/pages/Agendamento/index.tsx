@@ -10,9 +10,10 @@ import {AiFillClockCircle} from "react-icons/ai";
 import { addMinutes, isBefore, subMinutes, format, isAfter, isEqual } from "date-fns";
 
 import "./styles.css";
+import { getUser } from "../../services/auth";
 
 function AgendamentoPage() {
-
+    const user = getUser();
     const [agendamentos, setAgendamentos] = useState([]);
     const [servicos, setServicos] = useState([]);
     const [clientes, setClientes] = useState([]);
@@ -23,7 +24,7 @@ function AgendamentoPage() {
     const [formaPagamentos, setFormaPagamento] = useState([]);
     const [horarios, setHorarios] = useState<string[]>([]);
     const [idProfissional, setIdProfissional] = useState('');
-    const [idCliente, setIdCliente] = useState(1);
+    const [idCliente, setIdCliente] = useState(user.clienteId);
     const [data_atendimento, setDataAtendimento] = useState(new Date());
     const [data_agendamento, setDataAgendamento] = useState(new Date());
     const [total, setTotal] = useState('');
@@ -31,7 +32,7 @@ function AgendamentoPage() {
     const [servicoSelecionado, setServicoSelecionado] = useState<any>();
 
     useEffect(() => {
-        getAgendamentos() 
+        getAgendamentos()
         // getProfissionais()
         getServicos()
         getClientes()
@@ -41,8 +42,18 @@ function AgendamentoPage() {
 
     async function getAgendamentos(){
         try {
-            const response = await api.get("agendamento"); 
+            const response = await api.get(`agendamento/${idCliente}`); 
             setAgendamentos(response.data)
+        } catch(err) {
+            toast.error("Erro ao consultar a agenda");
+        }
+    } 
+
+    async function getAgendamentosDataCliente(dataSelecionada: Date){
+        try {
+            const dataFormatada = dataSelecionada.getUTCFullYear() + "-" + (dataSelecionada.getUTCMonth() + 1) + "-" + dataSelecionada.getUTCDate()
+            const response = await api.get(`agendamento/${idCliente}/${dataFormatada}`); 
+            console.log(response.data)
         } catch(err) {
             toast.error("Erro ao consultar a agenda");
         }
@@ -169,6 +180,7 @@ function AgendamentoPage() {
 
     function setData(data: Date){
         setDataAtendimento(data);
+        getAgendamentosDataCliente(data);
     }
 
     async function getHorariosProfissionais(id:string) {
@@ -255,7 +267,7 @@ function AgendamentoPage() {
                     <div className="container-conteudo">
                         <span className="titulo">Agende seu serviço aqui!</span>
 
-                        <Calendar onChange={(data) => setData(data)} />
+                        <Calendar onChange={(data) => setData(data)} minDate={new Date()}/>
 
                         <div className="agendamento-form">
                             <form className="form" onSubmit={agendar}>
