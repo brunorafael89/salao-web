@@ -70,7 +70,7 @@ function ProfissionalPage(){
             getProfissional();
             toast.success("Profissional Excluído com sucesso");
         } catch(err){
-            toast.error("Erro ao excluir profissional!");
+            toast.error("Profissional não pode ser exluído, possui agendamentos");
         }
     }
 

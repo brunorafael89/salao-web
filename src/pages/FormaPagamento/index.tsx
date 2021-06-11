@@ -86,7 +86,8 @@ function FormaPagamentoPage() {
 
   async function carregar(formaPagamento:any){
     setFormaPagamento(formaPagamento.forma_pagamento);
-  }
+    setIdFormapagamento(formaPagamento.forma_pagamento_id)
+  } 
 
   return (
       <>

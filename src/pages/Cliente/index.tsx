@@ -112,6 +112,7 @@ function ClientePage(){
         setEmailCliente(cliente.email);
         setSenhaCliente(cliente.senha);
         setIdCliente(cliente.cliente_id);
+        console.log(format(new Date(dataNascCliente), "yyyy-MM-dd"))
     }
 
     async function limpar(){
@@ -163,8 +164,6 @@ function ClientePage(){
                                     type="date" 
                                     name="data_nasc"
                                     value={dataNascCliente}
-                                    // value={format(new Date(dataNascCliente), "yyyy-mm-dd")}
-                                    //value="2013-01-08"
                                     onChange={(e) => setDataNascCliente(e.target.value)} 
                                 />
                             </label>
