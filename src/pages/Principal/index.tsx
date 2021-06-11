@@ -47,8 +47,6 @@ function PrincipalPage(){
                 </div>
 
                 <div className="background">
-                    <img alt="Foto de um salão de beleza"/>
-
                     <Components/>
                 </div>
             </header>

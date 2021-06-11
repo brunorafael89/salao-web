@@ -37,7 +37,7 @@
 
 .relatorio-comissao.main-container .info-select .select-profissional,
 .relatorio-comissao.main-container .info-select .select-data{
-    padding: 20px;
+    padding: 10px;
     
 }
 
@@ -55,7 +55,7 @@
 
 .relatorio-comissao.main-container .info-select .select-data form{
     display: flex;
-     /*flex-direction: column; */
+     flex-direction: inherit;
 }
 
 .relatorio-comissao.main-container .info-select .select-data form label{
@@ -68,14 +68,16 @@
 .relatorio-comissao.main-container .info-select .select-data form label span{
     font-size: 18px;
     font-weight: bold;
+    margin-right: 5px;
 }
 
 .relatorio-comissao.main-container .info-select .select-data form label input{
     display: inline-block;
-    width: calc(100% - 70px);
+    width: calc(100% - 50px);
     padding: 10px;
     border: 1px solid;
     border-radius: 5px;
+    font-size: 18px;
 }
 
 .relatorio-comissao.main-container .info-select .select-data form .buttons{

@@ -118,80 +118,83 @@ function ProfissionalFuncaoPage(){
         <>
             <Header/>
 
-            <MenuLateral/>
-            <div className="profissional-funcao main-container">
-                <div className="profissional-funcao cadastro-form">
-                    <h1>Relação de Profissional - Função</h1>
-                    <form className="form" onSubmit={salvar}>
-                        <label htmlFor="profissional">
-                            <span>Profissional</span>
-                            <select name="profissional_id"  onChange={(e)=> setIdProfissional(e.target.value)}>
-                                <option>Selecione o Profissional</option>
-                                {profissionais.map((profissional: any) => (
-                                    <option value={profissional.profissional_id} selected={idProfissional && idProfissional === profissional.profissional_id ? true : false}>{profissional.nome}</option>
-                                ))}
-                            </select>
-                        </label>
+            <main>
+                <MenuLateral/>
+                
+                <div className="profissional-funcao main-container">
+                    <div className="profissional-funcao cadastro-form">
+                        <h1>Relação de Profissional - Função</h1>
+                        <form className="form" onSubmit={salvar}>
+                            <label htmlFor="profissional">
+                                <span>Profissional</span>
+                                <select name="profissional_id"  onChange={(e)=> setIdProfissional(e.target.value)}>
+                                    <option>Selecione o Profissional</option>
+                                    {profissionais.map((profissional: any) => (
+                                        <option value={profissional.profissional_id} selected={idProfissional && idProfissional === profissional.profissional_id ? true : false}>{profissional.nome}</option>
+                                    ))}
+                                </select>
+                            </label>
 
-                        <label htmlFor="funcao">
-                            <span>Função</span>
-                            <select name="funcao_id"  onChange={(e)=> setIdFuncao(e.target.value)}>
-                                <option>Selecione a função</option>
-                                {funcoes.map((funcao: any) => (
-                                    <option value={funcao.funcao_id} selected={idFuncao && idFuncao === funcao.funcao_id ? true : false}>{funcao.nome_funcao}</option>
-                                ))}
-                            </select>
-                        </label>
+                            <label htmlFor="funcao">
+                                <span>Função</span>
+                                <select name="funcao_id"  onChange={(e)=> setIdFuncao(e.target.value)}>
+                                    <option>Selecione a função</option>
+                                    {funcoes.map((funcao: any) => (
+                                        <option value={funcao.funcao_id} selected={idFuncao && idFuncao === funcao.funcao_id ? true : false}>{funcao.nome_funcao}</option>
+                                    ))}
+                                </select>
+                            </label>
 
-                        <div className="buttons">
-                            <button name="acao" value="cadastrar" type="submit">Cadastrar</button>
-                            <button name="acao" value="alterar" type="button" onClick={() => alterar()}>Alterar</button>
-                        </div>
-                    </form>
-                </div>
-    
-                <div className="table">
-                    <table>
-                        <thead>
-                            <tr>
-                                <th>Profissional</th>
-                                <th>Função</th>
-                                <th>Ação</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            {profissionaisFuncoes.map((profiFuncao: any) => (
+                            <div className="buttons">
+                                <button name="acao" value="cadastrar" type="submit">Cadastrar</button>
+                                <button name="acao" value="alterar" type="button" onClick={() => alterar()}>Alterar</button>
+                            </div>
+                        </form>
+                    </div>
+        
+                    <div className="table">
+                        <table>
+                            <thead>
                                 <tr>
-                                    <td>
-                                        {profissionais.map((prof: any) => (
-                                            profiFuncao.profissional_id === prof.profissional_id ? prof.nome : ""
-                                        ))}
-                                    </td>
-                                    <td>
-                                        {funcoes.map((funcao: any) => (
-                                            profiFuncao.funcao_id === funcao.funcao_id ? funcao.nome_funcao : ""
-                                        ))}
-                                    </td>
-                                    <td>
-                                        <div className="form">
-                                            <div className='material excluir'>
-                                                <button name='acao' value='excluir' onClick={() => excluir(profiFuncao.profissional_id, profiFuncao.funcao_id)}>
-                                                    <span className="material-icons"><MdDeleteForever /></span>
-                                                </button>
-                                            </div>
-                                            <div className='material carregar'>
-                                                <button name='acao' value='carregar' onClick={() => carregar(profiFuncao)}>
-                                                    <span className='material-icons carregar'><AiOutlineUpload/></span>
-                                                </button>
-                                            </div>
-                                        </div>
-                                    </td>
+                                    <th>Profissional</th>
+                                    <th>Função</th>
+                                    <th>Ação</th>
                                 </tr>
-                            ))}
-                        </tbody>
-                    </table>
+                            </thead>
+                            <tbody>
+                                {profissionaisFuncoes.map((profiFuncao: any) => (
+                                    <tr>
+                                        <td>
+                                            {profissionais.map((prof: any) => (
+                                                profiFuncao.profissional_id === prof.profissional_id ? prof.nome : ""
+                                            ))}
+                                        </td>
+                                        <td>
+                                            {funcoes.map((funcao: any) => (
+                                                profiFuncao.funcao_id === funcao.funcao_id ? funcao.nome_funcao : ""
+                                            ))}
+                                        </td>
+                                        <td>
+                                            <div className="form">
+                                                <div className='material excluir'>
+                                                    <button name='acao' value='excluir' onClick={() => excluir(profiFuncao.profissional_id, profiFuncao.funcao_id)}>
+                                                        <span className="material-icons"><MdDeleteForever /></span>
+                                                    </button>
+                                                </div>
+                                                <div className='material carregar'>
+                                                    <button name='acao' value='carregar' onClick={() => carregar(profiFuncao)}>
+                                                        <span className='material-icons carregar'><AiOutlineUpload/></span>
+                                                    </button>
+                                                </div>
+                                            </div>
+                                        </td>
+                                    </tr>
+                                ))}
+                            </tbody>
+                        </table>
+                    </div>
                 </div>
-            </div>
+            </main>
         </>
     )
 }

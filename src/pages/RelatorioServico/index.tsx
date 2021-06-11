@@ -7,6 +7,8 @@ import api from "../../services/api";
 import {IoMdPrint} from "react-icons/io";
 import {RiFileExcel2Line} from "react-icons/ri";
 
+import { CSVLink } from "react-csv";
+
 import "./styles.css";
 
 function RelatorioServicoPage(){
@@ -52,12 +54,21 @@ function RelatorioServicoPage(){
         setRelatorioServico(response.data)
     }
 
+        // Deixei estes dados como exemplo para saber se o botão de exportar está funcionando
+    // é necessário trazer as informações do banco de dados
+    const csvData = [
+        ["Nome", "Função", "CPF"],
+        ["Carlos Augusto", "Cabeleireiro", "123123123"],
+        ["Carlos Afonso", "Pedicure", "123123124"]
+    ]
+
     return (
         <>
             <Header />
 
-            <MenuLateral />
-
+            <main>
+                <MenuLateral />
+                
                 <div className="relatorio-servico main-container">
                     <h1>Relatorio de Serviços</h1>
                 
@@ -134,11 +145,21 @@ function RelatorioServicoPage(){
                         </label>
 
                         <label htmlFor="">
-                            <button className="buttons" type="submit">Exportar para Excel</button>
+                            {/* {relatorioComissoes.map((relatorioComissao: any) => ( */}
+                                <CSVLink
+                                    className="buttons"
+                                    data={csvData}
+                                    filename={`relatorioServico.csv`}
+                                    // filename={`relatorioComissao${relatorioComissao.nome}.csv`}
+                                >
+                                    Exportar para Excel
+                                </CSVLink>
+                            {/* ))} */}
                             <span className="material-icons"><RiFileExcel2Line/></span>
                         </label>
                     </div>
                 </div>
+            </main>
         </>
     )
 }

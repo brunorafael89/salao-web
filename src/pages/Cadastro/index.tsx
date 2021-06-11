@@ -116,6 +116,12 @@ function CadastroPage(){
                         {/* <input id="repSenha" type="password" placeholder="Repita a senha" /> */}
 
                         <button type="submit"> Cadastrar </button>
+
+                        <div className="linha"></div>
+
+                        <div className="cadastro-opcoes">
+                            <a href="Login"> Já possui cadastro? <strong>Faça o login!</strong></a>
+                        </div>
                     </form>
                 </div>
             </div>

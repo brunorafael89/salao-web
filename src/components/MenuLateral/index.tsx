@@ -14,6 +14,13 @@ import "./styles.css";
 import { getUser } from "../../services/auth";
 
 function MenuLateral(){
+    function openClassCadastro(){
+        document.querySelector('#dropCadastro')?.classList.toggle('show')
+    }
+
+    function openClassRelatorio(){
+        document.querySelector('#dropRelatorio')?.classList.toggle('show')
+    }
     const user = getUser();
 
     return (

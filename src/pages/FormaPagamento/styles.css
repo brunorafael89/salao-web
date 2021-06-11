@@ -73,24 +73,25 @@
 }
 
 @media screen and (min-width: 320px) and (max-width: 480px){
-    .cadastro-form{
-        display: flex;
+    .formaPagamento.main-container{
         width: 100%;
-        height: 100%;
-        background-color: transparent;
-        border-radius: 20px;
+        padding: 0px;
+        margin-left: 0;
+    }
+
+    .formaPagamento.cadastro-form{
+        display: flex;
         flex-direction: column;
         align-items: center;
+        width: 100%;
+        background-color: transparent;
     }
 
-    .cadastro-form span{
-        color: white;
-        font-size: 30px;
-        font-weight: bold;
-        margin: unset;
+    .formaPagamento.cadastro-form > h1{
+        font-size: 21px;
     }
 
-    .cadastro-form .form{
+    .formaPagamento.cadastro-form .form{
         display: flex;
         flex-direction: column;
         width: 100%;
@@ -99,147 +100,83 @@
         margin: 20px 0;
     }
 
-    .cadastro-form .form label{
+    .formaPagamento.cadastro-form .form label{
         display: inline-block;
         width: 100%;
         margin: 5px 0;
     }
 
-    .cadastro-form .form label span{
-        display: inline-block;
-        width: 18%;
+    .formaPagamento.cadastro-form .form label span{
+        display: block;
+        width: 100%;
         margin: unset;
-        font-size: 20px;
-        font-weight: normal;
+        font-size: 18px;
+        font-weight: bold;
+        color: #000;
     }
 
-    .cadastro-form .form label input{
+    .formaPagamento.cadastro-form .form label input{
+        display: block;
         width: 100%;
-        padding: 12px 15px;
-        border: 1px solid white;
-        border-radius: 20px;
-        background-color: #ac6ebb;
-        margin-top: 5px;
-        margin-bottom: 5px;
-        color: white;
+        padding: 8px 0px;
+        border-bottom: 1px solid #000;
+        margin: 5px 0;
+        color: #000;
         outline: none;
     }
 
-    .cadastro-form .button button{
+    .formaPagamento.cadastro-form .buttons{
+        display: grid;
+        grid-template-columns: 1fr;
         width: 100%;
-        padding: 12px 5px;
-        margin-top: 20px;
-        background-color: #610d75;
-        color: #fff;
-        font-weight: bold;
+        grid-gap: 10px;
+        gap: 10px;
+    }
+
+    .formaPagamento.cadastro-form .buttons button{
+        display: grid;
+        width: 100%;
+        margin: 10px 0 0 0;
+        padding: 10px;
         border: none;
-        border-radius: 20px;
-        box-shadow: 3px 3px 7px black;
+        border-radius: 5px;
+        background-color: #d281e6;
+        color: #fff;
+        font-size: 20px;
+        transition: all .224s ease;
         cursor: pointer;
+    }
+    
+    .formaPagamento.cadastro-form .buttons button:hover{
+        background-color: #5d2e69;
+        font-weight: bold;
     }
 }
 
-@media screen and (min-width: 480px) and (max-width: 720px){
-    .container-cadastro{
-        display: grid;
-        width: 100vw;
-        height: 100vh;
-        padding: 10px 0;
-        place-items: center;
-        justify-content: center;
-        background: blueviolet;
-        overflow: auto;
-    }
-
-    .cadastro-img{
-        display: none;
-    }
-
-    .container-conteudo{
-        display: flex;
-        width: inherit;
-        height: unset;
-        padding: 20px;
-    }
-
-    .cadastro-form{
-        display: flex;
+@media screen and (min-width: 480px) and (max-width: 768px){
+    .formaPagamento.main-container{
         width: 100%;
-        height: 100%;
-        background-color: transparent;
-        border-radius: 20px;
-        flex-direction: column;
-        align-items: center;
+        padding: 0px;
+        margin-left: 0;
+    }
+}
+
+@media screen and (min-width: 768px) and (max-width: 1366px){
+    .formaPagamento.main-container {
+        width: 76%;
+        padding: 90px 10px 0 0;
+        margin-left: 320px;
     }
 
-    .cadastro-form span{
-        color: white;
-        font-size: 30px;
-        font-weight: bold;
-        margin: unset;
+    .formaPagamento.cadastro-form {
+        width: 62%;
     }
 
-    .cadastro-form .form{
-        display: flex;
-        flex-direction: column;
-        width: 100%;
-        align-items: center;
-        justify-content: center;
-        margin: 20px 0;
+    .formaPagamento.cadastro-form .form label span {
+        width: 40%;
     }
 
-    .cadastro-form input{
-        width: 100%;
-        padding: 12px 15px;
-        border: 1px solid white;
-        border-radius: 20px;
-        background-color: #ac6ebb;
-        margin-top: 5px;
-        margin-bottom: 5px;
-        color: white;
-        outline: none;
-    }
-
-    .cadastro-form .form label{
-        display: inline-block;
-        width: 100%;
-        margin: 5px 0;
-    }
-
-    .cadastro-form .form label span{
-        display: inline-block;
-        width: 18%;
-        margin: unset;
-        font-size: 20px;
-        font-weight: normal;
-    }
-
-    .cadastro-form button{
-        width: 100%;
-        padding: 12px 5px;
-        margin-top: 20px;
-        background-color: #610d75;
-        color: #fff;
-        font-weight: bold;
-        border: none;
-        border-radius: 20px;
-        box-shadow: 3px 3px 7px black;
-        cursor: pointer;
-    }
-
-    .cadastro-form .linha{
-        width: 70%;
-        height: 1px;
-        background-color: #dcdcdc;
-        margin-top: 15px;
-        margin-bottom: 10px;
-    }
-
-    .cadastro-form .cadastro-opcoes{
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-        justify-content: center;
-        margin-top: 10px;
+    .formaPagamento.cadastro-form .form label input {
+        width: 60%;
     }
 }

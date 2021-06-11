@@ -7,12 +7,18 @@
     padding: 90px 0;
 }
 
-.menu-lateral li{
-    display: inline-block;
-    width: 100%;
+.menu-lateral ul{
+    list-style: none;
+    width: inherit;
 }
 
-.menu-lateral li:hover{
+.menu-lateral ul li{
+    display: block;
+    position: relative;
+}
+
+.menu-lateral ul li:hover
+{
     background: #e000e0;
     font-weight: bold;
     cursor: pointer;
@@ -27,12 +33,25 @@
     color: #fff;
 }
 
-.menu-lateral a{
+.menu-lateral li #dropCadastro, 
+.menu-lateral li #dropRelatorio{
+    display: none;
+}
+
+.menu-lateral li #dropCadastro.show, 
+.menu-lateral li #dropRelatorio.show{
+    display: block;
+    width: 100%;
+    background-color: #542154;
+}
+
+main .menu-lateral ul li a{
     display: inline-block;
     padding: 15px;
     font-size: 20px;
     color: #fff;
 }
+
 
 @media all and (min-width: 320px) and (max-width: 480px){
     main .menu-lateral{
