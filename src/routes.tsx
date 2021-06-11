@@ -22,6 +22,7 @@ import CarrinhoPage from "./pages/Carrinho";
 import FuncionarioPrivateRouter from "./routes/FuncionarioPrivateRouter";
 import ClientePrivateRouter from "./routes/ClientePrivateRouter";
 import PrivateRouter from "./routes/PrivateRouter";
+import FuncionarioPage from "./pages/Funcionario";
 
 function Routes() {
   return (
@@ -41,6 +42,7 @@ function Routes() {
       <FuncionarioPrivateRouter path="/funcao" exact component={FuncaoPage} /> 
       <FuncionarioPrivateRouter path="/profissional" exact component={ProfissionalPage} />
       <FuncionarioPrivateRouter path="/cliente" exact component={ClientePage} />
+      <FuncionarioPrivateRouter path="/funcionario" exact component={FuncionarioPage} />
       <FuncionarioPrivateRouter path="/profissionalFuncao" exact component={ProfissionalFuncaoPage} />
       <FuncionarioPrivateRouter path="/relatorioServico" exact component={RelatorioServicoPage} />
       <FuncionarioPrivateRouter path="/relatorioComissao" exact component={RelatorioComissaoPage} />

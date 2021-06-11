@@ -36,6 +36,10 @@ function MenuLateral(){
                         <>
                             <li>
                                 <span><AiOutlineUserAdd /></span>
+                                <a href="Funcionario">Cadastro de Funcionario</a>
+                            </li>                        
+                            <li>
+                                <span><AiOutlineUserAdd /></span>
                                 <a href="Cliente">Cadastro de Cliente</a>
                             </li>                        
                             <li>
