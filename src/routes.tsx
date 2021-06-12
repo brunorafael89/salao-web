@@ -17,6 +17,7 @@ import ClientePage from "./pages/Cliente";
 import ProfissionalFuncaoPage from "./pages/ProfissionalFuncao";
 import RelatorioServicoPage from "./pages/RelatorioServico";
 import RelatorioComissaoPage from "./pages/RelatorioComissao";
+import AgendaProfissionalPage from "./pages/AgendaProfissional";
 import CarrinhoPage from "./pages/Carrinho";
 
 import FuncionarioPrivateRouter from "./routes/FuncionarioPrivateRouter";
@@ -31,6 +32,8 @@ function Routes() {
       <Route path="/login" exact component={Login} />
       <Route path="/cadastro" exact component={CadastroPage} />
       <Route path="/tabelaPreco" exact component={TabelaPrecoPage} />
+      <Route path="/perfil" exact component={PerfilPage} />
+      <Route path="/carrinho" exact component={CarrinhoPage} />
 
       <PrivateRouter path="/home" exact component={Home} />
 
@@ -46,7 +49,7 @@ function Routes() {
       <FuncionarioPrivateRouter path="/profissionalFuncao" exact component={ProfissionalFuncaoPage} />
       <FuncionarioPrivateRouter path="/relatorioServico" exact component={RelatorioServicoPage} />
       <FuncionarioPrivateRouter path="/relatorioComissao" exact component={RelatorioComissaoPage} />
-      <Route path="/carrinho" exact component={CarrinhoPage} />
+      <FuncionarioPrivateRouter path="/agendaProfissional" exact component={AgendaProfissionalPage} />
 
     </BrowserRouter>
   );
