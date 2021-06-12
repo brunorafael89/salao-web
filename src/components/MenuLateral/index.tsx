@@ -6,6 +6,7 @@ import { AiOutlineUserAdd, AiOutlineTool, AiOutlineTeam, AiOutlineAudit, AiOutli
 import { FaConciergeBell } from "react-icons/fa"
 import { MdPoll } from "react-icons/md"
 import { SiCashapp } from "react-icons/si"
+import { IoIosAdd } from "react-icons/io";
 
 import "./styles.css";
 import { getUser } from "../../services/auth";
@@ -18,8 +19,10 @@ function MenuLateral(){
     function openClassRelatorio(){
         document.querySelector('#dropRelatorio')?.classList.toggle('show')
     }
+
     const user = getUser();
     console.log(user)
+
     return (
         <div className="menu-lateral">
             <nav>
@@ -39,43 +42,57 @@ function MenuLateral(){
                     {user.funcionarioId && (
                         <>
                             <li>
-                                <span><AiOutlineUserAdd /></span>
-                                <a href="Funcionario">Cadastrar Funcionários</a>
-                            </li>                        
-                            <li>
-                                <span><AiOutlineUserAdd /></span>
-                                <a href="Cliente">Cadastrar Clientes</a>
-                            </li>                        
-                            <li>
-                                <span><AiOutlineTool /></span>
-                                <a href="Funcao">Cadastrar Função</a>
+                                <span><AiOutlineSchedule /></span>
+                                <a href="ControleAgenda">Controle Agenda</a>
                             </li>
                             <li>
-                                <span><AiOutlineTeam /></span>
-                                <a href="Profissional">Cadastrar Profissional</a>
+                                <span><IoIosAdd/></span>
+                                <a href="#" onClick={openClassCadastro}>Cadastros</a>
+                                <ul id="dropCadastro">
+                                    <li>
+                                        <span><AiOutlineUserAdd /></span>
+                                        <a href="Funcionario">Cadastrar Funcionários</a>
+                                    </li>                        
+                                    <li>
+                                        <span><AiOutlineUserAdd /></span>
+                                        <a href="Cliente">Cadastrar Clientes</a>
+                                    </li>                        
+                                    <li>
+                                        <span><AiOutlineTool /></span>
+                                        <a href="Funcao">Cadastrar Função</a>
+                                    </li>
+                                    <li>
+                                        <span><AiOutlineTeam /></span>
+                                        <a href="Profissional">Cadastrar Profissional</a>
+                                    </li>
+                                    <li>
+                                        <span><FaConciergeBell /></span>
+                                        <a href="Servico">Cadastrar Serviço</a>
+                                    </li>
+                                    <li>
+                                        <span><AiOutlineAudit /></span>
+                                        <a href="ProfissionalFuncao">Profissional-Função</a>
+                                    </li>
+                                    <li>
+                                        <span><SiCashapp /></span>
+                                        <a href="FormaPagamento">Formas de Pagamento</a>
+                                    </li>
+                                </ul>
                             </li>
                             <li>
-                                <span><FaConciergeBell /></span>
-                                <a href="Servico">Cadastrar Serviço</a>
+                                <span><IoIosAdd/></span>
+                                <a href="#" onClick={openClassRelatorio}>Relatórios</a>
+                                <ul id="dropRelatorio">
+                                    <li>
+                                        <span><MdPoll /></span>
+                                        <a href="RelatorioServico">Relatórios Serviços</a>
+                                    </li>
+                                    <li>
+                                        <span><MdPoll /></span>
+                                        <a href="RelatorioComissao">Relatórios Comissões</a>
+                                    </li>
+                                </ul>
                             </li>
-                            <li>
-                                <span><MdPoll /></span>
-                                <a href="RelatorioServico">Relatórios Serviços</a>
-                            </li>
-                            <li>
-                                <span><MdPoll /></span>
-                                <a href="RelatorioComissao">Relatórios Comissões</a>
-                            </li>
-                            <li>
-                                <span><AiOutlineAudit /></span>
-                                <a href="ProfissionalFuncao">Profissional-Função</a>
-                            </li>
-                            <li>
-                                <span><SiCashapp /></span>
-                                <a href="FormaPagamento">Formas de Pagamento</a>
-                            </li>
-
-                            
                         </>
                     )}
                         {user.profissionalId && (
