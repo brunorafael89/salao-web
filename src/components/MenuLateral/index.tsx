@@ -2,12 +2,9 @@ import React from "react";
 import { Link } from 'react-router-dom';
 import { CgProfile } from "react-icons/cg"
 import { BiCalendarCheck } from "react-icons/bi"
-import { AiOutlineUserAdd } from "react-icons/ai"
-import { AiOutlineTool } from "react-icons/ai"
-import { AiOutlineTeam } from "react-icons/ai"
+import { AiOutlineUserAdd, AiOutlineTool, AiOutlineTeam, AiOutlineAudit, AiOutlineSchedule } from "react-icons/ai"
 import { FaConciergeBell } from "react-icons/fa"
 import { MdPoll } from "react-icons/md"
-import { AiOutlineAudit } from "react-icons/ai"
 import { SiCashapp } from "react-icons/si"
 
 import "./styles.css";
@@ -31,7 +28,7 @@ function MenuLateral(){
                         <>
                             <li>
                                 <span><CgProfile/></span>
-                                <a href="Cadastro"> Meu Perfil</a>
+                                <a href="Perfil"> Meu Perfil</a>
                             </li> 
                             <li>
                                 <span><BiCalendarCheck /></span>
@@ -43,11 +40,11 @@ function MenuLateral(){
                         <>
                             <li>
                                 <span><AiOutlineUserAdd /></span>
-                                <a href="Funcionario">Cadastro de Funcionario</a>
+                                <a href="Funcionario">Cadastrar Funcionários</a>
                             </li>                        
                             <li>
                                 <span><AiOutlineUserAdd /></span>
-                                <a href="Cliente">Cadastro de Cliente</a>
+                                <a href="Cliente">Cadastrar Clientes</a>
                             </li>                        
                             <li>
                                 <span><AiOutlineTool /></span>
@@ -76,6 +73,10 @@ function MenuLateral(){
                             <li>
                                 <span><SiCashapp /></span>
                                 <a href="FormaPagamento">Formas de Pagamento</a>
+                            </li>
+                            <li>
+                                <span><AiOutlineSchedule /></span>
+                                <a href="AgendaProfissional">Agenda Profissional</a>
                             </li>
                         </>
                     )}
