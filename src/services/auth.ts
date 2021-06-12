@@ -19,4 +19,7 @@ export const getUser = () => {
 
 export const isAuthenticated = () => localStorage.getItem(TOKEN_KEY) !== null;
 
-export const logout = () => localStorage.removeItem(TOKEN_KEY);
+export const logout = () => {
+  localStorage.removeItem(TOKEN_KEY)
+  localStorage.removeItem(USER_KEY)
+};
