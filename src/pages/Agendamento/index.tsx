@@ -281,7 +281,7 @@ function AgendamentoPage() {
                                     <select name="servico" id=""  onChange={(e) => getHorarios(e.target.value)}>
                                         <option value="">Selecione o Serviço</option>
                                         {servicos.map((servico: any) => (
-                                            <option value={JSON.stringify(servico)}>{servico.nome} (R${servico.valor},00)</option>
+                                            <option value={JSON.stringify(servico)}>{servico.nome}</option>
                                         ))}
                                     </select>
                                 </label>

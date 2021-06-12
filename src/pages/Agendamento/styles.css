@@ -68,11 +68,19 @@
     position: relative;
 }
 
+.react-calendar__month-view__days > button:hover:not(:disabled), 
+.react-calendar__year-view__months > button:hover:not(:disabled),
+.react-calendar__decade-view__years > button:hover:not(:disabled),
+.react-calendar__century-view__decades >button:hover:not(:disabled){
+    background-color: #bc05d4;
+    color: #fff;
+}
+
 .react-calendar__tile.react-calendar__tile--now.react-calendar__month-view__days__day{
     background-color: #e49df5;
 }
 
-.react-calendar__month-view__days > button::after{
+/* .react-calendar__month-view__days > button::after{
     content: '';
     position: absolute;
     bottom: 5px;
@@ -81,20 +89,6 @@
     height: 10px;
     border-radius: 50%;
     background-color: #b1e648;
-}
-
-.react-calendar__month-view__days > button:hover, 
-.react-calendar__year-view__months > button:hover,
-.react-calendar__decade-view__years > button:hover,
-.react-calendar__century-view__decades >button:hover{
-    background-color: #bc05d4;
-    color: #fff;
-}
-
-/* .react-calendar__tile.react-calendar__month-view__days__day.today,
-.react-calendar__tile.react-calendar__tile--now.react-calendar__month-view__days__day.react-calendar__month-view__days__day--weekend.today{
-    background-color: #bd7bbd;  cor de fundo do dia atual do calendário
-    border-radius: 5px;  arredondamento da borda do dia atual do calendário
 } */
 
 .react-calendar__tile.react-calendar__month-view__days__day.react-calendar__month-view__days__day--neighboringMonth{
