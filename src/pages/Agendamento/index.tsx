@@ -4,8 +4,7 @@ import MenuLateral from "../../components/MenuLateral"
 import Calendar from 'react-calendar'
 import { toast } from "react-toastify";
 import api from "../../services/api";
-// import {MdCheckCircle} from "react-icons/md";
-// import {MdCancel} from "react-icons/md";
+// import {MdCheckCircle, MdCancel} from "react-icons/md";
 import {AiFillClockCircle} from "react-icons/ai";
 import { addMinutes, isBefore, subMinutes, format, isAfter, isEqual } from "date-fns";
 
