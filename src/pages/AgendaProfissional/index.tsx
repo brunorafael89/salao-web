@@ -1,6 +1,5 @@
 import format from "date-fns/format";
-import React, { useEffect } from "react";
-import { useState } from "react";
+import React, { useEffect, useState } from "react";
 import Header from "../../components/Header";
 import MenuLateral from "../../components/MenuLateral";
 import api from "../../services/api";
@@ -83,12 +82,10 @@ function AgendaProfissionalPage(){
                     <div className="buttons-export">
                         <label htmlFor="">
                             <button className="buttons" type="submit">Iniciar</button>
-                            
                         </label>
 
                         <label htmlFor="">
                             <button className="buttons" type="submit">Encerrar</button>
-                            
                         </label>
                     </div>
                 </div>

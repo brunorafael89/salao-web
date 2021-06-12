@@ -48,22 +48,6 @@ main .agenda-profissional.main-container h2{
     box-shadow: 4px 4px 10px #abc;
 }
 
-.buttons-export label .material-icons{
-    font-size: 38px;
-}
-
-.buttons-export label span{
-    display: inline-block;
-    height: 30px;
-    width: 30px;
-    transform: translateY(10px);
-}
-
-.buttons-export label span img{
-    height: 100%;
-    width: 100%;
-}
-
 @media screen and (min-width: 320px) and (max-width: 480px){
     main .agenda-profissional.main-container{
         width: 100%;
