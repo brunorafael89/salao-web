@@ -19,7 +19,7 @@ function MenuLateral(){
         document.querySelector('#dropRelatorio')?.classList.toggle('show')
     }
     const user = getUser();
-
+    console.log(user)
     return (
         <div className="menu-lateral">
             <nav>
@@ -74,12 +74,16 @@ function MenuLateral(){
                                 <span><SiCashapp /></span>
                                 <a href="FormaPagamento">Formas de Pagamento</a>
                             </li>
+
+                            
+                        </>
+                    )}
+                        {user.profissionalId && (
                             <li>
                                 <span><AiOutlineSchedule /></span>
                                 <a href="AgendaProfissional">Agenda Profissional</a>
                             </li>
-                        </>
-                    )}
+                        )}
                 </ul>
             </nav>
         </div>

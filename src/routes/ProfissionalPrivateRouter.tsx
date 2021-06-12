@@ -6,14 +6,14 @@ interface RProps extends RouteProps {
     component: React.ComponentType;
 }
 
-const GerentePrivateRouter: React.FC<RProps> = ({ component: Component, ...rest }) => {
+const ProfissionalPrivateRouter: React.FC<RProps> = ({ component: Component, ...rest }) => {
     const user = getUser();
     
     return (
         <Route 
             {...rest}
             render={({ location }) => {
-                return user.perfilAcessoId == 4
+                return user.profissionalId 
                 ? (<Component />)
                 : (
                     <Redirect 
@@ -28,4 +28,4 @@ const GerentePrivateRouter: React.FC<RProps> = ({ component: Component, ...rest 
     )
 }
 
-export default GerentePrivateRouter;
+export default ProfissionalPrivateRouter;
