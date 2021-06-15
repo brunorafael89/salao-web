@@ -1,17 +1,20 @@
 import React from "react";
-import { AiOutlineShoppingCart } from "react-icons/ai";
-import { AiOutlineHome } from "react-icons/ai";
-import { FiPhone } from "react-icons/fi";
-import { FiMail } from "react-icons/fi";
+import { AiOutlineShoppingCart, AiOutlineHome } from "react-icons/ai";
+import { FiPhone, FiMail } from "react-icons/fi";
 import { RiMoneyDollarBoxLine } from "react-icons/ri";
 import { MdExitToApp } from "react-icons/md";
 import { GiHamburgerMenu } from "react-icons/gi";
 import logo from "../../assets/images/logo.png";
 import { logout } from "../../services/auth";
+import MenuLateral from "../MenuLateral";
 
 import "./styles.css";
 
 function Header(){
+    function openClassOption(){
+        document.querySelector('nav')?.classList.toggle('show')
+    }
+
     return (
         <>
             <header>
@@ -25,7 +28,7 @@ function Header(){
                         <span className="material-icons"><FiMail/></span> <p> E-mail: beauty_salao@gmail.com </p>
                     </div>
 
-                    <div className="hamburguer">
+                    <div className="hamburguer" onClick={openClassOption}>
                         <span className="material-icons"><GiHamburgerMenu/></span>
                     </div>
 
@@ -35,6 +38,7 @@ function Header(){
                             <li><span className="material-icons"><AiOutlineHome/></span><a href="home">Página Principal</a></li>
                             <li><span className="material-icons"><RiMoneyDollarBoxLine/></span><a href="TabelaPreco">Tabela de Preços</a></li>
                             <li><span className="material-icons"><AiOutlineShoppingCart/></span><a href="Carrinho">Carrinho</a></li>
+                            {/* <li><MenuLateral/></li> */}
                         </ul>
                     </nav>
                 </div>

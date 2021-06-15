@@ -20,6 +20,10 @@ import "./styles.css";
 import Components from "../../components/CallToAction"
 
 function PrincipalPage(){
+    function openClassOption(){
+        document.querySelector('nav')?.classList.toggle('show')
+    }
+
     return (
         <>
             <header className="header-principal">
@@ -33,7 +37,7 @@ function PrincipalPage(){
                         <span className="material-icons"><FiMail/></span> <p> E-mail: beauty_salao@gmail.com </p>
                     </div>
 
-                    <div className="hamburguer">
+                    <div className="hamburguer" onClick={openClassOption}>
                         <span className="material-icons"><GiHamburgerMenu/></span>
                     </div>
 

@@ -138,6 +138,7 @@ header div.background div.cta-btn a .material-icons{
     header div.contacts{
         position: relative;
         width: unset;
+        height: unset;
         color: #fff;
         background-color: unset;
     }

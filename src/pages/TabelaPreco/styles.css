@@ -186,7 +186,7 @@ section .tab-services{
         height: unset;
         width: unset;
         color: #fff;
-        background-color: unset;
+        /* background-color: unset; */
     }
     
     .header-tab-preco div.contacts .logo{
