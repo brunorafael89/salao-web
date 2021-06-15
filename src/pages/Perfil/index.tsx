@@ -1,18 +1,76 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import api from "../../services/api";
 import Header from "../../components/Header";
 import MenuLateral from "../../components/MenuLateral";
-
-// importação de teste de imagem de perfil
-import profile from '../../assets/images/logo.png';
+import { toast } from "react-toastify";
+import format from "date-fns/format"
+import { getUser, logout } from "../../services/auth";
 
 import "./styles.css";
 
 function PerfilPage(){
-    async function alterar(){
-        await api.put('cliente', {
+    const [idCliente, setIdClientes] = useState("")
+    const [nomeCliente, setNomeClientes] = useState("")
+    const [cpfCliente, setCpfClientes] = useState("")
+    const [dataNascCliente, setDataNascClientes] = useState(format(new Date(), "dd-MM-yyyy"))
+    const [telefoneCliente, setTelefoneClientes] = useState("")
+    const [sexoCliente, setSexoClientes] = useState("")
+    const SexoList = [
+        { id: 'F', name: 'Feminino' },
+        { id: 'M', name: 'Masculino' },
+    ];
+    const [emailCliente, setEmailClientes] = useState("")
+    const [senhaCliente, setSenhaClientes] = useState("")
 
+    const user = getUser()
+    const userID = user.clienteId
+
+    useEffect( ()=>{
+        getClientes()
+    }, [] )
+
+    async function getClientes(){
+        try{
+            const response = await api.get(`cliente/${userID}`);
+            setIdClientes(response.data.cliente_id)
+            setNomeClientes(response.data.nome)
+            setCpfClientes(response.data.cpf)
+            setDataNascClientes(response.data.data_nasc)
+            setTelefoneClientes(response.data.telefone)
+            setSexoClientes(response.data.sexo)
+            setEmailClientes(response.data.email)
+            setSenhaClientes(response.data.senha)
+        } catch(err){
+            toast.error("Erro ao consultar clientes")
+        }
+    }
+    
+    //A função não está funcionando as informações não estão sendo enviadas no corpo da requisição
+    async function editar(){ 
+        await api.put(`cliente/${idCliente}`, {
+            nome: nomeCliente,
+            data_nasc: dataNascCliente,
+            telefone: telefoneCliente,
+            sexo: sexoCliente,
+            email: emailCliente,
+            senha: senhaCliente
         })
+
+        toast.success('Cliente editado com sucesso')
+
+        getClientes();
+    }
+
+    async function desativar(idCliente: number){
+        try{
+            await api.delete(`cliente/${idCliente}`);
+    
+            toast.success('Sua conta foi desativada em nossa base')
+
+            logout()
+        } catch(err){
+            toast.error('Erro ao desativar a conta')
+        }
     }
 
     return (
@@ -25,54 +83,80 @@ function PerfilPage(){
                 <div className="area-cliente main-container">
                     <div className="area-cliente cadastro-form">
                         <h1>Meu Perfil</h1>
-            
-                        <form className="form" onSubmit={alterar}>
+
+                        <form className="form" onSubmit={editar}>
                             <label htmlFor="nome">
                                 <span>Nome</span>
-                                <input type="text" name="nome" value="Camila Moreira" />
+                                <input 
+                                    type="text" 
+                                    name="nome" 
+                                    value={ nomeCliente }
+                                    onChange={ (e) => setNomeClientes(e.target.value) }
+                                />
                             </label>
 
                             <label htmlFor="cpf">
                                 <span>CPF</span>
-                                <input type="text" name="cpf" value="123.456.789.01"  />
+                                <input 
+                                    type="text" 
+                                    name="cpf" 
+                                    value={ cpfCliente }
+                                    readOnly
+                                />
                             </label>
 
                             <label htmlFor="data_nasc">
                                 <span>Data Nascimento</span>
-                                <input type="text" name="data_nasc" value="06/04/1989" />
+                                <input 
+                                    type="date" 
+                                    name="data_nasc" 
+                                    // value={format(new Date(dataNascCliente), "yyyy-MM-dd")} 
+                                    onChange={ (e) => setDataNascClientes(e.target.value) }
+                                />
                             </label>
 
                             <label htmlFor="telefone">
                                 <span>Telefone</span>
-                                <input type="text" name="telefone" value="(21)33314917"/>
+                                <input 
+                                    type="text" 
+                                    name="telefone" 
+                                    value={ telefoneCliente }
+                                    onChange={ (e) => setTelefoneClientes(e.target.value) }
+                                />
                             </label>
 
                             <label htmlFor="sexo">
                                 <span>Sexo:</span>
-                                <select name="" id="sexo">
-                                    <option value="F" selected>Feminino</option>
-                                    <option value="M" >Masculino</option>
+                                    <select id="sexo" value={sexoCliente} onChange={(e) => setSexoClientes(e.target.value)}>
+                                    {SexoList.map((item) => (
+                                        <option value={item.id}>{item.name}</option>
+                                    ))}
                                 </select>
                             </label>
 
                             <label htmlFor="email">
                                 <span>Email</span>
-                                <input type="email" name="email" value="camila@gmail.com" />
+                                <input 
+                                    type="email" 
+                                    name="email" 
+                                    value={emailCliente} 
+                                    onChange={ (e) => setEmailClientes(e.target.value) }
+                                />
                             </label>
-                            
+
                             <label htmlFor="senha">
                                 <span>Senha</span>
-                                <input type="password" name="senha" value="*****" />
+                                <input 
+                                    type="password" 
+                                    name="senha" 
+                                    value={senhaCliente} 
+                                    onChange={ (e)=> setSenhaClientes(e.target.value) }
+                                />
                             </label>
-        
-                            <label htmlFor="mudarSenha">
-                                <span>Digite nova senha</span>
-                                <input type="password" name="mudsenha" value="" />
-                            </label>          
 
                             <div className="buttons">
-                                <button className="form-btn" id="editar" name="acao" value="editar">Editar</button>
-                                <button className="form-btn" id="desativar" name="acao" value="desativar">Desativar Cadastro</button>
+                                <button className="form-btn" type="submit">Editar</button>
+                                <button className="form-btn" onClick={() => desativar(userID)}>Desativar Cadastro</button>
                             </div>
                         </form>
                     </div>
