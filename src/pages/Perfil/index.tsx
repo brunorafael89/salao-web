@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, FormEvent } from "react";
 import api from "../../services/api";
 import Header from "../../components/Header";
 import MenuLateral from "../../components/MenuLateral";
@@ -46,7 +46,8 @@ function PerfilPage(){
     }
     
     //A função não está funcionando as informações não estão sendo enviadas no corpo da requisição
-    async function editar(){ 
+    async function editar(e: FormEvent){
+        e.preventDefault() 
         await api.put(`cliente/${idCliente}`, {
             nome: nomeCliente,
             data_nasc: dataNascCliente,

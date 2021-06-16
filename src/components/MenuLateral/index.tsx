@@ -21,7 +21,6 @@ function MenuLateral(){
     }
 
     const user = getUser();
-    console.log(user)
 
     return (
         <div className="menu-lateral">

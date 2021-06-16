@@ -6,7 +6,7 @@ import { toast } from "react-toastify";
 import api from "../../services/api";
 // import {MdCheckCircle, MdCancel} from "react-icons/md";
 import {AiFillClockCircle} from "react-icons/ai";
-import { addMinutes, isBefore, subMinutes, format, isAfter, isEqual } from "date-fns";
+import { addMinutes, isBefore, subMinutes, format, isAfter, isEqual, addSeconds } from "date-fns";
 
 import "./styles.css";
 import { getUser } from "../../services/auth";
@@ -29,6 +29,7 @@ function AgendamentoPage() {
     const [total, setTotal] = useState('');
     const [horario_agendamento, setHorarioAgendamento] = useState('');
     const [servicoSelecionado, setServicoSelecionado] = useState<any>();
+    const [agendamentosHjCliente, setAgendamentosHjCliente] = useState<any[]>([]);
 
     useEffect(() => {
         getAgendamentos()
@@ -52,7 +53,13 @@ function AgendamentoPage() {
         try {
             const dataFormatada = dataSelecionada.getUTCFullYear() + "-" + (dataSelecionada.getUTCMonth() + 1) + "-" + dataSelecionada.getUTCDate()
             const response = await api.get(`agendamento/${idCliente}/${dataFormatada}`); 
-            console.log(response.data)
+
+            let datasAgendamentosDataCliente: any[] = response.data.map((h:any) => {
+                return converteTempoEmData(h.horario_agendamento, h.tempo_servico, h.data_atendimento);
+            });
+            setAgendamentosHjCliente(datasAgendamentosDataCliente)
+            console.log(datasAgendamentosDataCliente)
+
         } catch(err) {
             toast.error("Erro ao consultar a agenda");
         }
@@ -186,17 +193,17 @@ function AgendamentoPage() {
         setIdProfissional(id)
         const response = await api.get(`agendamento/getAgendamentoProfissional/${id}/${format(data_atendimento, "yyyy-MM-dd")}`)
 
-        let datasProfissional: any[] = response.data.map((h:any) => {
-            return converteTempoEmData(h.horario_agendamento, h.tempo_servico);
+        const datasProfissional: any[] = response.data.map((h:any) => {
+            return converteTempoEmData(h.horario_agendamento, h.tempo_servico, h.data_atendimento);
         });
 
-        const dataInicial = new Date()
+        const dataInicial = new Date(data_atendimento)
         dataInicial.setHours(9, 0, 0);
 
         let dataInicioAgendamento = dataInicial;
         let dataFinalAgendamento = dataInicial;
         
-        const dataFinal = new Date()
+        const dataFinal = new Date(data_atendimento)
         dataFinal.setHours(18, 0, 0)
        
         const horarios = [];
@@ -206,16 +213,17 @@ function AgendamentoPage() {
         const minuto = Number(tempo[1]);
         const tempoServioMinutos = hora + minuto;
 
-        let horaFormatada = format(dataInicioAgendamento, "HH:mm");
-        horarios.push(horaFormatada);
+        // let horaFormatada = format(dataInicioAgendamento, "HH:mm");
+        // horarios.push(horaFormatada);
 
         const dataLimiteAgendamento = subMinutes(dataFinal, tempoServioMinutos);
+
+        const datasClientes = JSON.parse(JSON.stringify(agendamentosHjCliente));
+        // const datasProfissionais = JSON.parse(JSON.stringify(datasProfissional));
     
         while(isBefore(dataInicioAgendamento, dataLimiteAgendamento)){
-    
-            dataInicioAgendamento = addMinutes(dataInicioAgendamento, tempoServioMinutos);
-            dataFinalAgendamento = addMinutes(dataInicioAgendamento, tempoServioMinutos);
-            dataFinalAgendamento = subMinutes(dataFinalAgendamento, 1);
+
+            dataInicioAgendamento = addSeconds(dataInicioAgendamento, 1);
             
             let horaFormatada = format(dataInicioAgendamento, "HH:mm");
 
@@ -232,21 +240,39 @@ function AgendamentoPage() {
                 }
             }
 
+            for(var i=0; i<datasClientes.length; i++){
+                if(
+                    (isAfter(dataInicioAgendamento, new Date(datasClientes[i].dataInicial)) && isBefore(dataInicioAgendamento, new Date(datasClientes[i].dataFinal))) 
+                    || (isAfter(dataFinalAgendamento, new Date(datasClientes[i].dataInicial)) && isBefore(dataFinalAgendamento, new Date(datasClientes[i].dataFinal)))
+                ){
+                    achou = true;
+                    datasClientes.splice(i, 1);
+                    break;
+                }
+            }
+
             if(!achou){
                 horarios.push(horaFormatada);
             }
+
+            dataInicioAgendamento = addMinutes(dataInicioAgendamento, tempoServioMinutos);
+            dataFinalAgendamento = addMinutes(dataInicioAgendamento, tempoServioMinutos);
+            dataFinalAgendamento = subMinutes(dataFinalAgendamento, 1);
         }
     
         setHorarios(horarios);
     }
     
-    function converteTempoEmData(horario: string, tempoServico: string){
+    function converteTempoEmData(horario: string, tempoServico: string, data_atendimento: any){
         const tempo:any[] = tempoServico.split(':')
         const hora = Number(tempo[0]) * 60;
         const minuto = Number(tempo[1]);
         const novaHora = hora + minuto;
 
-        const dataInicial = new Date(format(new Date(), "yyyy-MM-dd") + " " + horario);
+        const dataInicial = data_atendimento 
+            ? new Date(format(new Date(data_atendimento), "yyyy-MM-dd") + " " + horario)
+            : new Date(format(new Date(), "yyyy-MM-dd") + " " + horario)
+
         const dataFinal = addMinutes(dataInicial, novaHora);
 
         return {
@@ -285,11 +311,13 @@ function AgendamentoPage() {
                                     </select>
                                 </label>
 
+                                {servicoSelecionado && (
                                 <label htmlFor="">
                                     <span>Valor do serviço</span>
                                     
                                     <input type="text" disabled value={`R$${servicoSelecionado?.valor},00`}/>
                                 </label>
+                                )}
                                 
                                 <label htmlFor="">
                                     <span>Qual Profissional?</span>
