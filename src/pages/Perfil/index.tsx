@@ -1,4 +1,5 @@
 import React, { useState, useEffect, FormEvent } from "react";
+import { useHistory } from "react-router-dom";
 import api from "../../services/api";
 import Header from "../../components/Header";
 import MenuLateral from "../../components/MenuLateral";
@@ -25,6 +26,8 @@ function PerfilPage(){
     const user = getUser()
     const userID = user.clienteId
 
+    const history = useHistory()
+
     useEffect( ()=>{
         getClientes()
     }, [] )
@@ -50,6 +53,7 @@ function PerfilPage(){
         e.preventDefault() 
         await api.put(`cliente/${idCliente}`, {
             nome: nomeCliente,
+            cpf: cpfCliente,
             data_nasc: dataNascCliente,
             telefone: telefoneCliente,
             sexo: sexoCliente,
@@ -67,8 +71,10 @@ function PerfilPage(){
             await api.delete(`cliente/${idCliente}`);
     
             toast.success('Sua conta foi desativada em nossa base')
-
+            
             logout()
+
+            history.push('/')
         } catch(err){
             toast.error('Erro ao desativar a conta')
         }

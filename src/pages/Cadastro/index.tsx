@@ -40,7 +40,7 @@ function CadastroPage(){
             // setToken(response.data);
             toast.success(response.data);
 
-            history.push('/');
+            history.push('Login');
         } catch(err){
             toast.error("Falha ao cadastrar o/a cliente!");
         }

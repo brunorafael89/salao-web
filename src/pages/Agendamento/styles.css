@@ -217,6 +217,28 @@ main .main-container .historico-agendamento table tbody tr:nth-child(even){
     background-color: #ccc;
 }
 
+main .main-container .historico-agendamento table tbody .form{
+    display: grid;
+    place-content: center;
+}
+
+main .main-container .historico-agendamento table tbody .form button{
+    width: 30px;
+    height: 30px;
+    border: 1px solid #ff0000;
+    border-radius: 50%;
+    background-color: #fff;
+    color: #d8484e;
+    font-size: 20px;
+    transition: all .224s ease;
+    cursor: pointer;
+}
+
+main .main-container .historico-agendamento table tbody .form button:hover{
+    background-color: #d8484e;
+    color: #fff;
+} */
+
 /* ============================================== 
 TESTE DE COMO FICARÁ O CAMPO DE PESQUISAR NA TELA
 =============================================== */
@@ -322,7 +344,7 @@ FIM DA ÁREA DE TESTE COM O CAMPO DE PESQUISA
         position: relative;
     }
 
-    .react-calendar__month-view__days > button::after {
+    /* .react-calendar__month-view__days > button::after {
         content: '';
         position: absolute;
         bottom: 5px;
@@ -331,7 +353,7 @@ FIM DA ÁREA DE TESTE COM O CAMPO DE PESQUISA
         height: 5px;
         border-radius: 50%;
         background-color: #b1e648;
-    }
+    } */
     
     .main-container .container-conteudo .agendamento-form{
         grid-area: unset;
@@ -475,7 +497,7 @@ FIM DA ÁREA DE TESTE COM O CAMPO DE PESQUISA
         position: relative;
     }
 
-    .react-calendar__month-view__days > button::after {
+    /* .react-calendar__month-view__days > button::after {
         content: '';
         position: absolute;
         bottom: 5px;
@@ -484,7 +506,7 @@ FIM DA ÁREA DE TESTE COM O CAMPO DE PESQUISA
         height: 5px;
         border-radius: 50%;
         background-color: #b1e648;
-    }
+    } */
 
     .main-container .container-conteudo .agendamento-form {
         grid-area: opcao;

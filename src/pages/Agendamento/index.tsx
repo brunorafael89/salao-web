@@ -5,6 +5,7 @@ import Calendar from 'react-calendar'
 import { toast } from "react-toastify";
 import api from "../../services/api";
 // import {MdCheckCircle, MdCancel} from "react-icons/md";
+import {MdDeleteForever} from "react-icons/md";
 import {AiFillClockCircle} from "react-icons/ai";
 import { addMinutes, isBefore, subMinutes, format, isAfter, isEqual, addSeconds } from "date-fns";
 
@@ -18,7 +19,7 @@ function AgendamentoPage() {
     const [clientes, setClientes] = useState([]);
     const [IdServicos, setIdServicos] = useState("");
     const [idFormapagamento, setIdFormapagamento] = useState("");
-    // const [idFuncionario, setIdFuncionario] = useState("");
+    const [idAgendamento, setIdAgendamento] = useState("");
     const [profissionais, setProfissionais] = useState([]);
     const [formaPagamentos, setFormaPagamento] = useState([]);
     const [horarios, setHorarios] = useState<string[]>([]);
@@ -47,7 +48,7 @@ function AgendamentoPage() {
         } catch(err) {
             toast.error("Erro ao consultar a agenda");
         }
-    } 
+    }
 
     async function getAgendamentosDataCliente(dataSelecionada: Date){
         try {
@@ -281,6 +282,10 @@ function AgendamentoPage() {
         }
     }
     
+    async function cancelarAgendamento(idAgendamento: Number){
+        await api.delete(`agendamento/${idAgendamento}`)
+        getAgendamentos()
+    }
 
     return (
         <>
@@ -292,7 +297,10 @@ function AgendamentoPage() {
                     <div className="container-conteudo">
                         <span className="titulo">Agende seu serviço aqui!</span>
 
-                        <Calendar onChange={(data) => setData(data)} minDate={new Date()}/>
+                        <Calendar 
+                            onChange={(data) => setData(data)} 
+                            minDate={new Date()}
+                        />
 
                         <div className="agendamento-form">
                             <form className="form" onSubmit={agendar}>
@@ -315,7 +323,7 @@ function AgendamentoPage() {
                                 <label htmlFor="">
                                     <span>Valor do serviço</span>
                                     
-                                    <input type="text" disabled value={`R$${servicoSelecionado?.valor},00`}/>
+                                    <input type="text" disabled value={ `R$${servicoSelecionado?.valor},00`}/>
                                 </label>
                                 )}
                                 
@@ -363,7 +371,9 @@ function AgendamentoPage() {
                                     <th>Cliente</th>
                                     <th>Profissional</th>
                                     <th>Serviço</th>
+                                    <th>Valor</th>
                                     <th>Status</th>
+                                    <th>Ação</th>
                                 </tr>
                             </thead>
                             <tbody>
@@ -381,22 +391,27 @@ function AgendamentoPage() {
                                         </td>
                                         <td>
                                             {servicos.map((servico: any) => (
-                                                        agendamento.servicos_id === servico.servicos_id ? servico.nome : ""
-                                                    ))}
-                                            </td>
-                                        {/* <td><span className="material-icons concluido"><MdCheckCircle/></span></td>
-                                        Pagamento autorizado */}
-                                        <td><span className="material-icons andamento"><AiFillClockCircle/></span></td>
+                                                agendamento.servicos_id === servico.servicos_id ? servico.nome : ""
+                                            ))}
+                                        </td>
+                                        <td>
+                                        {servicos.map((servico: any) => (
+                                                agendamento.servicos_id === servico.servicos_id ? `R$${servico.valor},00` : ""
+                                            ))} 
+                                        </td>
+                                        {/* <td><span className="material-icons concluido"><MdCheckCircle/></span></td> Pagamento autorizado */}
+                                        <td><span className="material-icons andamento"><AiFillClockCircle/></span></td> {/* Agendamento ainda não finalizado pela recepcionista */}
                                         {/* <td><span className="material-icons cancelado"><MdCancel/></span></td> */}
 
-                                        {/* <div className="form">
+                                        <td>
+                                            <div className="form">
                                                 <div className='material excluir'>
-                                                    <button name='acao' value='excluir' onClick={() => excluir(profiFuncao.profissional_id, profiFuncao.funcao_id)}>
-                                                        <span className="material-icons"><MdDeleteForever />cancelar agendamento</span>
+                                                    <button name='acao' id={agendamento.agendamento_id} onClick={()=>cancelarAgendamento(agendamento.agendamento_id)}>
+                                                        <span className="material-icons"><MdDeleteForever /></span>
                                                     </button>
                                                 </div>
                                             </div>
-                                        */}
+                                        </td>
                                     </tr>
                                 ))}
                             </tbody>
