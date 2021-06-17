@@ -10,13 +10,14 @@ import "./styles.css";
 import "../../components/Table/styles.css";
 
 import format from "date-fns/format";
+import ValidarCPF from "../../components/ValidarCPF";
 
 function FuncionarioPage(){
     const [funcionarios, setFuncionarios] = useState([])
     const [idFuncionario, setIdFuncionario] = useState("")
     const [nomeFuncionario, setNomeFuncionario] = useState("")
     const [cargoFuncionario, setCargoFuncionario] = useState("")
-    const [dataNascFuncionario, setDataNascFuncionario] = useState(format(new Date(), "dd/MM/yyyy"))
+    const [dataNascFuncionario, setDataNascFuncionario] = useState(format(new Date(), "yyyy-MM-dd"))
     const [cpfFuncionario, setCpfFuncionario] = useState("")
     const [telefoneFuncionario, setTelefoneFuncionario] = useState("")
     const [emailFuncionario, setEmailFuncionario] = useState("")
@@ -43,26 +44,31 @@ function FuncionarioPage(){
     }
 
     async function cadastrar(){
+        const validaCPF = ValidarCPF(cpfFuncionario)
 
-        try{
-            await api.post("funcionario", {
-                nome: nomeFuncionario,
-                cargo: cargoFuncionario,
-                data_nasc: dataNascFuncionario,
-                cpf: cpfFuncionario,
-                telefone: telefoneFuncionario,
-                email: emailFuncionario,
-                senha: senhaFuncionario
-            });
-            limpar()
-
-            toast.success("Funcionario cadastrado com sucesso!");
-
-            getFuncionario();
-
-            toast.success("Funcionario cadastrado com sucesso");
-        } catch(err) {
-            toast.error("Erro ao cadastrar o funcionario");
+        if( validaCPF === true ){
+            try{
+                await api.post("funcionario", {
+                    nome: nomeFuncionario,
+                    cargo: cargoFuncionario,
+                    data_nasc: dataNascFuncionario,
+                    cpf: cpfFuncionario,
+                    telefone: telefoneFuncionario,
+                    email: emailFuncionario,
+                    senha: senhaFuncionario
+                });
+                limpar()
+    
+                toast.success("Funcionario cadastrado com sucesso!");
+    
+                getFuncionario();
+    
+                toast.success("Funcionario cadastrado com sucesso");
+            } catch(err) {
+                toast.error("Erro ao cadastrar o funcionario");
+            }
+        } else {
+            toast.error("CPF inválido");
         }
     }
 
@@ -91,7 +97,7 @@ function FuncionarioPage(){
     async function limpar() {
         setNomeFuncionario("");
         setCargoFuncionario("");
-        setDataNascFuncionario("");
+        setDataNascFuncionario(format(new Date(), "yyyy/MM/dd"));
         setCpfFuncionario("");
         setTelefoneFuncionario("");
         setEmailFuncionario("");
@@ -158,7 +164,7 @@ function FuncionarioPage(){
                                     type="date" 
                                     name="data_nasc"
                                     value={format(new Date(dataNascFuncionario), "yyyy-MM-dd")}
-                                    onChange={(e) => setDataNascFuncionario(e.target.value)} 
+                                    onChange={(e) => setDataNascFuncionario(e.target.value)}
                                 />
                             </label>
 

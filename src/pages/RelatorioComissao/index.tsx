@@ -90,7 +90,8 @@ function  RelatorioComissaoPage(){
                             <form onSubmit={geraRelatorio}>
                                 <label htmlFor="">
                                     <span>De:</span>
-                                    <input type="date" />
+                                    <input 
+                                        type="date" />
                                 </label>
 
                                 <label htmlFor="">

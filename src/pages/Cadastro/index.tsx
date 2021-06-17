@@ -5,6 +5,7 @@ import imgCadastro from "../../assets/images/escova.jpg";
 
 import { toast } from "react-toastify";
 import "./styles.css";
+import ValidarCPF from "../../components/ValidarCPF";
 
 // import { setToken } from "../../services/auth";
 
@@ -25,24 +26,30 @@ function CadastroPage(){
     async function cadastrar(e: FormEvent){
         e.preventDefault();
 
-        try{
-            const response = await api.post("cliente", {
-                nome: nome,
-                cpf: cpf,
-                sexo: sexo,
-                data_nasc: data_nasc,
-                telefone: telefone,
-                email: email,
-                senha: senha,
-                login: email
-            })
+        const validaCPF = ValidarCPF(cpf)
 
-            // setToken(response.data);
-            toast.success(response.data);
-
-            history.push('Login');
-        } catch(err){
-            toast.error("Falha ao cadastrar o/a cliente!");
+        if(validaCPF === true){
+            try{
+                const response = await api.post("cliente", {
+                    nome: nome,
+                    cpf: cpf,
+                    sexo: sexo,
+                    data_nasc: data_nasc,
+                    telefone: telefone,
+                    email: email,
+                    senha: senha,
+                    login: email
+                })
+    
+                // setToken(response.data);
+                toast.success(response.data);
+    
+                history.push('Login');
+            } catch(err){
+                toast.error("Falha ao cadastrar o/a cliente!");
+            }
+        } else {
+            toast.error("CPF inválido!");
         }
     }
 

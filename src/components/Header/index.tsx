@@ -38,7 +38,7 @@ function Header(){
                             <li><span className="material-icons"><AiOutlineHome/></span><a href="home">Página Principal</a></li>
                             <li><span className="material-icons"><RiMoneyDollarBoxLine/></span><a href="TabelaPreco">Tabela de Preços</a></li>
                             <li><span className="material-icons"><AiOutlineShoppingCart/></span><a href="Carrinho">Carrinho</a></li>
-                            {/* <li><MenuLateral/></li> */}
+                            <li><MenuLateral/></li>
                         </ul>
                     </nav>
                 </div>

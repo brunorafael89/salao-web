@@ -10,6 +10,7 @@ import { AiOutlineUpload } from "react-icons/ai";
 import { MdDeleteForever } from "react-icons/md";
 
 import format from "date-fns/format";
+import ValidarCPF from "../../components/ValidarCPF";
 
 function ClientePage(){
     const [clientes, setClientes] = useState([]);
@@ -51,24 +52,29 @@ function ClientePage(){
     }
 
     async function cadastrar(){
-        
-        try{
-            await api.post("cliente", {
-                nome: nomeCliente,
-                cpf: cpfCliente,
-                data_nasc: dataNascCliente,
-                telefone: telefoneCliente,
-                sexo: sexoCliente,
-                email: emailCliente,
-                senha: senhaCliente
-            });
-            limpar()
-            
-            toast.success("Cliente cadastrado com sucesso!");
+        const validaCPF = ValidarCPF(cpfCliente)
 
-            getCliente();
-        } catch (err){
-            toast.error("Falha ao cadastrar cliente");
+        if( validaCPF === true ){
+            try{
+                await api.post("cliente", {
+                    nome: nomeCliente,
+                    cpf: cpfCliente,
+                    data_nasc: dataNascCliente,
+                    telefone: telefoneCliente,
+                    sexo: sexoCliente,
+                    email: emailCliente,
+                    senha: senhaCliente
+                });
+                limpar()
+                
+                toast.success("Cliente cadastrado com sucesso!");
+
+                getCliente();
+            } catch (err){
+                toast.error("Falha ao cadastrar cliente");
+            }
+        } else {
+            toast.error("CPF inválido");
         }
     }
 

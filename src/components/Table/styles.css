@@ -77,8 +77,10 @@ div.table table tbody tr td .form div.material.carregar{
 }
 
 div.table table tbody tr td .form div.material button{
+    display: grid;
+    place-items: center;
+    width: 100%;
     border: none;
-    transform: translate(-5px, -4px);
     background-color: transparent;
     color: #a000b7;
     cursor: pointer;
@@ -90,7 +92,7 @@ div.table table tbody tr td .form div.material button[value="carregar"]{
 div.table table tbody tr td .form div.material button span.material-icons{
     display: inline-block;
     color: #a000b7;
-    transform: translate(5px, 6px);
+    transform: translateY(2px);
     font-size: 22px;
 }
 

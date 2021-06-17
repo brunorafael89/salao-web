@@ -128,6 +128,10 @@ header div.background div.cta-btn a .material-icons{
     transform: translateY(2px);
 }
 
+header .menu-lateral{
+    display: none;
+}
+
 @media all and (min-width: 320px) and (max-width: 480px){
     header{
         width: 100vw;
@@ -217,6 +221,49 @@ header div.background div.cta-btn a .material-icons{
     header div.background{
         display: none;
     }
+
+    header .menu-lateral{
+        display: block;
+        width: unset;
+        height: unset;
+        position: unset;
+        background: unset;
+        padding: unset;
+    }
+
+    header div.contacts .hamburguer ~ nav.show .menu-lateral nav{
+        display: block;
+        position: unset;
+        font-size: 15px;
+    }
+
+    header .menu-lateral nav ul{
+        display: block;
+        width: unset;
+    }
+
+    header .menu-lateral nav ul li {
+        display: block;
+        height: unset;
+        color: #fff;
+        transition: all .127s ease;
+    }
+
+    header .menu-lateral nav ul li span {
+        display: inline-block;
+        margin-left: unset;
+        padding: unset;
+        transform: unset;
+        font-size: 20px;
+        color: #fff;
+    }
+
+    header .menu-lateral nav ul li a {
+        display: inline-block;
+        padding: unset;
+        font-size: 16px;
+        color: #fff;
+    }
 }
 
 @media all and (min-width: 480px) and (max-width: 768px){
@@ -227,6 +274,10 @@ header div.background div.cta-btn a .material-icons{
 
 @media all and (min-width: 768px) and (max-width: 1366px){
     header div.contacts .direct-contacts{
+        display: none;
+    }
+
+    header .menu-lateral{
         display: none;
     }
 }

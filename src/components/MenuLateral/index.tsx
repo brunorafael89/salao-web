@@ -13,10 +13,30 @@ import { getUser } from "../../services/auth";
 
 function MenuLateral(){
     function openClassCadastro(){
-        document.querySelector('#dropCadastro')?.classList.toggle('show')
+        // if( !document.querySelector('main ul#dropCadastro') ){
+        //     openHeaderCadastro()
+        // } else {
+        //     document.querySelector('main ul#dropCadastro')?.classList.toggle('show')
+        // }
+
+        document.querySelector('main ul#dropCadastro') 
+        ? document.querySelector('main ul#dropCadastro')?.classList.toggle('show')
+        : openHeaderCadastro() 
     }
 
     function openClassRelatorio(){
+        if( !document.querySelector('main ul#dropRelatorio') ){
+            openHeaderRelatorio()
+        } else {
+            document.querySelector('main ul#dropRelatorio')?.classList.toggle('show')
+        }
+    }
+
+    function openHeaderCadastro(){
+        document.querySelector('#dropCadastro')?.classList.toggle('show')
+    }
+
+    function openHeaderRelatorio(){
         document.querySelector('#dropRelatorio')?.classList.toggle('show')
     }
 
