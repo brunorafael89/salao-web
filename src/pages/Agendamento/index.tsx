@@ -18,10 +18,10 @@ function AgendamentoPage() {
     const [servicos, setServicos] = useState([]);
     const [clientes, setClientes] = useState([]);
     const [IdServicos, setIdServicos] = useState("");
-    const [idFormapagamento, setIdFormapagamento] = useState("");
+    // const [idFormapagamento, setIdFormapagamento] = useState("");
+    // const [formaPagamentos, setFormaPagamento] = useState([]);
     const [idAgendamento, setIdAgendamento] = useState("");
     const [profissionais, setProfissionais] = useState([]);
-    const [formaPagamentos, setFormaPagamento] = useState([]);
     const [horarios, setHorarios] = useState<string[]>([]);
     const [idProfissional, setIdProfissional] = useState('');
     const [idCliente, setIdCliente] = useState(user.clienteId);
@@ -34,10 +34,10 @@ function AgendamentoPage() {
 
     useEffect(() => {
         getAgendamentos()
-        // getProfissionais()
         getServicos()
         getClientes()
-        getFormaPagamento()
+        // getProfissionais()
+        // getFormaPagamento()
         
         
     }, [])
@@ -94,14 +94,14 @@ function AgendamentoPage() {
         }
     }
 
-    async function getFormaPagamento(){
-        try {
-            const response = await api.get("formaPagamento"); 
-            setFormaPagamento(response.data)
-        } catch(err) {
-            toast.error("Erro ao consultar as formas de pagamentos");
-        }
-    }
+    // async function getFormaPagamento(){
+    //     try {
+    //         const response = await api.get("formaPagamento"); 
+    //         setFormaPagamento(response.data)
+    //     } catch(err) {
+    //         toast.error("Erro ao consultar as formas de pagamentos");
+    //     }
+    // }
 
     // function getHorarios(servico:any){
     //     servico = JSON.parse(servico)
@@ -161,7 +161,7 @@ function AgendamentoPage() {
                 total: total,
                 horario_agendamento: format(new Date(), "yyyy-MM-dd") + " " + horario_agendamento + ":00 America/Sao_Paulo",
                 servico_id: IdServicos,
-                forma_pagamento_id: idFormapagamento
+                // forma_pagamento_id: idFormapagamento
 
             });
             limpar();
@@ -180,7 +180,7 @@ function AgendamentoPage() {
         setDataAtendimento(new Date())
         setIdServicos('')
         setIdProfissional('')
-        setIdFormapagamento('')
+        // setIdFormapagamento('')
         setHorarios([])
         setTotal('')
         setHorarioAgendamento('')
@@ -348,15 +348,15 @@ function AgendamentoPage() {
                                     </select>         
                                 </label>
 
-                                <label htmlFor="">
+                                {/* <label htmlFor="">
                                     <span>Qual Pagamento?</span>
-                                    <select name="pagamento" id="" /*value={idFormapagamento}*/ onChange={(e) => setIdFormapagamento(e.target.value)}>
+                                    <select name="pagamento" id="" value={idFormapagamento} onChange={(e) => setIdFormapagamento(e.target.value)}>
                                         <option value="">Selecione o pagamento</option>
                                         {formaPagamentos.map((formaPagamento: any) => (
                                             <option value={formaPagamento.forma_pagamento_id}>{formaPagamento.forma_pagamento}</option>
                                         ))}
                                     </select>
-                                </label>
+                                </label> */}
 
                                 <button type='submit'> Adicionar ao carrinho </button>
                             </form>                       
@@ -402,7 +402,6 @@ function AgendamentoPage() {
                                         </td>
                                         {/* <td><span className="material-icons concluido"><MdCheckCircle/></span></td> Pagamento autorizado */}
                                         <td><span className="material-icons andamento"><AiFillClockCircle/></span></td> {/* Agendamento ainda não finalizado pela recepcionista */}
-                                        {/* <td><span className="material-icons cancelado"><MdCancel/></span></td> */}
 
                                         <td>
                                             <div className="form">
