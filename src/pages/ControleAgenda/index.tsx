@@ -1,15 +1,17 @@
 import React, { FormEvent, useState } from "react";
 import Header from "../../components/Header";
 import MenuLateral from "../../components/MenuLateral";
-
+import { toast } from "react-toastify";
 // import {MdCheckCircle, MdCancel} from "react-icons/md";
 import {AiFillClockCircle} from "react-icons/ai";
 
 import "./styles.css";
 import format from "date-fns/format";
 import api from "../../services/api";
+import { useHistory } from "react-router-dom";
 
 function ControleAgendaPage(){
+    const history = useHistory();
     const [agendamentos, setAgendamentos] = useState([]);
     const [servicos, setServicos] = useState([]);
     const [clientes, setClientes] = useState([]);
@@ -21,6 +23,38 @@ function ControleAgendaPage(){
 
         const response = await api.get(`agendamento/getAgendamentoData/${format(new Date(data), "yyyy-MM-dd")}`)
         setAgendamentos(response.data)
+    }
+
+    function selecionarAtendimentos(){
+        const agendamentosSelecionados = agendamentos.filter((agendamento: any) => {
+            if (agendamento.selecionado) return agendamento; 
+        });
+
+        if(!agendamentosSelecionados.length) {
+            toast.warning("Pelo menos um atendimento precisa ser selecionado");
+            return;
+        }
+
+        let clienteId: any;
+        let agendamentosClientesDiferentes = false;
+
+        agendamentosSelecionados.map((agendamento: any) => {
+            if(!clienteId) {
+                clienteId = agendamento.cliente_id;
+            } else if(clienteId != agendamento.cliente_id) {
+                agendamentosClientesDiferentes = true;
+            }
+        });
+
+        if(agendamentosClientesDiferentes){
+            toast.warning("Só pode selecionar agendamentos do mesmo cliente");
+            return;
+        }
+
+        history.push({ 
+            pathname: '/Carrinho',
+            state: agendamentosSelecionados
+        })
     }
 
     return (
@@ -68,31 +102,29 @@ function ControleAgendaPage(){
                                 </tr>
                             </thead>
                             <tbody>
-                            {agendamentos.map((agendamento: any) => (
-                                <>
-                                    <tr>
-                                        <td>
-                                            <form action="">
-                                                <input type="checkbox" />
-                                            </form>
-                                        </td>
-                                        <td>{agendamento.nomeCliente}</td>
-                                        <td>{format(new Date(agendamento.data_atendimento), "dd/MM/yyyy")}</td>
-                                        <td>{agendamento.horario_agendamento}</td>
-                                        <td>{agendamento.nomeServico}</td>
-                                        <td>{agendamento.nomeProfissional}</td>
-                                        <td>Cartão de Crédito</td>
-                                        <td><span className="material-icons andamento"><AiFillClockCircle /></span></td>
-                                        <td>R${agendamento.valor},00</td>                                        
-                                    </tr>
-                                </>
+                            {agendamentos.map((agendamento: any) => (                                
+                                <tr key={agendamento.agendamento_id}>
+                                    <td>
+                                        <form action="">
+                                            <input type="checkbox" value={agendamento.selecionado} onChange={() => agendamento.selecionado = !agendamento.selecionado}/>
+                                        </form>
+                                    </td>
+                                    <td>{agendamento.nomeCliente}</td>
+                                    <td>{format(new Date(agendamento.data_atendimento), "dd/MM/yyyy")}</td>
+                                    <td>{agendamento.horario_agendamento}</td>
+                                    <td>{agendamento.nomeServico}</td>
+                                    <td>{agendamento.nomeProfissional}</td>
+                                    <td>Cartão de Crédito</td>
+                                    <td><span className="material-icons andamento"><AiFillClockCircle /></span></td>
+                                    <td>R${agendamento.valor},00</td>                                        
+                                </tr>                                
                             ))}
                             </tbody>
                         </table>
                     </div>
 
                     <div className="buttons-checkout">
-                        <button className="buttons" type="submit">Finalizar Atendimento</button>
+                        <button className="buttons" type="button" onClick={selecionarAtendimentos}>Selecionar Atendimentos</button>
                     </div>
                 </div>
             </main>
