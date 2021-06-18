@@ -1,4 +1,4 @@
-import React from "react";
+import React, { FormEvent, useState } from "react";
 import Header from "../../components/Header";
 import MenuLateral from "../../components/MenuLateral";
 
@@ -6,8 +6,23 @@ import MenuLateral from "../../components/MenuLateral";
 import {AiFillClockCircle} from "react-icons/ai";
 
 import "./styles.css";
+import format from "date-fns/format";
+import api from "../../services/api";
 
 function ControleAgendaPage(){
+    const [agendamentos, setAgendamentos] = useState([]);
+    const [servicos, setServicos] = useState([]);
+    const [clientes, setClientes] = useState([]);
+    const [profissionais, setProfissionais] = useState([]);
+    const [data, setData] = useState(new Date());
+
+    async function verAgenda(e:FormEvent) {
+        e.preventDefault()
+
+        const response = await api.get(`agendamento/getAgendamentoData/${format(new Date(data), "yyyy-MM-dd")}`)
+        setAgendamentos(response.data)
+    }
+
     return (
         <>
             <Header/>
@@ -20,10 +35,15 @@ function ControleAgendaPage(){
                         <div className="select-data">
                             <span className="spn-titulo">Selecione o dia</span>
                             
-                            <form>
+                            <form onSubmit={verAgenda}>
                                 <label htmlFor="">
                                     <span>Dia:</span>
-                                    <input type="date" />
+                                    <input 
+                                        type="date" 
+                                        name="data"
+                                        value={format(new Date(data), "yyyy-MM-dd")}
+                                        onChange={(e) => setData(new Date(e.target.value))} 
+                                    />
                                 </label>
 
                                 <button className="buttons" type="submit">Ver Agenda</button>
@@ -48,38 +68,25 @@ function ControleAgendaPage(){
                                 </tr>
                             </thead>
                             <tbody>
-                                <tr>
-                                    <td>
-                                        <form action="">
-                                            <input type="checkbox" 
-                                            />
-                                        </form>
-                                    </td>
-                                    <td>Hanny Baby</td>
-                                    <td>10/06/2021</td>
-                                    <td>09:00</td>
-                                    <td>Escova</td>
-                                    <td>Rogério Almeida</td>
-                                    <td>Cartão de Crédito</td>
-                                    <td><span className="material-icons andamento"><AiFillClockCircle/></span></td>
-                                    <td>40,00</td>
-                                </tr>
-                                <tr>
-                                    <td>
-                                        <form action="">
-                                            <input type="checkbox" 
-                                            />
-                                        </form>
-                                    </td>
-                                    <td>Marluce Veiga</td>
-                                    <td>10/06/2021</td>
-                                    <td>09:40</td>
-                                    <td>Escova</td>
-                                    <td>Rogério Almeida</td>
-                                    <td>Cartão de Débito</td>
-                                    <td><span className="material-icons andamento"><AiFillClockCircle/></span></td>
-                                    <td>40,00</td>
-                                </tr>
+                            {agendamentos.map((agendamento: any) => (
+                                <>
+                                    <tr>
+                                        <td>
+                                            <form action="">
+                                                <input type="checkbox" />
+                                            </form>
+                                        </td>
+                                        <td>{agendamento.nomeCliente}</td>
+                                        <td>{format(new Date(agendamento.data_atendimento), "dd/MM/yyyy")}</td>
+                                        <td>{agendamento.horario_agendamento}</td>
+                                        <td>{agendamento.nomeServico}</td>
+                                        <td>{agendamento.nomeProfissional}</td>
+                                        <td>Cartão de Crédito</td>
+                                        <td><span className="material-icons andamento"><AiFillClockCircle /></span></td>
+                                        <td>R${agendamento.valor},00</td>                                        
+                                    </tr>
+                                </>
+                            ))}
                             </tbody>
                         </table>
                     </div>

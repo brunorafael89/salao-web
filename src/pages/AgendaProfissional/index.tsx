@@ -58,21 +58,12 @@ function AgendaProfissionalPage(){
                                                 />
                                             </form>
                                         </td>
-                                        <td>
-                                           {agendamento.nomeCliente}
-                                        </td>
+                                        <td>{agendamento.nomeCliente}</td>
                                         <td>{format(new Date(agendamento?.data_atendimento), "dd/MM/yyyy")}</td>
                                         <td>{agendamento.horario_agendamento}</td>
-                                        <td>
-                                            {agendamento.nomeServico}
-                                        </td>
-                                        <td>
-                                            {agendamento.valor}
-                                        </td>
-                                        <td>
-                                            {agendamento.comissao}
-                                        </td>
-                                    
+                                        <td>{agendamento.nomeServico}</td>
+                                        <td>{agendamento.valor}</td>
+                                        <td>{agendamento.comissao}</td>                                    
                                     </tr>
                                 ))}                    
                             </tbody>

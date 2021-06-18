@@ -81,6 +81,7 @@ function FormaPagamentoPage() {
 
   async function excluir(id: number){
     await api.delete(`formaPagamento/${id}`);
+    toast.success("Forma de pagamento excluído com sucesso!");
     getFormasPagamentos() 
   }
 
@@ -136,8 +137,8 @@ function FormaPagamentoPage() {
                                                     <span className='material-icons'><MdDeleteForever/></span>
                                                 </button>
                                             </div>
-                                            <div className='material carregar'>
-                                                <button name='acao' value='carregar' onClick={() => carregar(forma)}>
+                                            <div className='material carregar' onClick={() => carregar(forma)}>
+                                                <button name='acao' value='carregar'>
                                                     <span className='material-icons carregar'><AiOutlineUpload/></span>
                                                 </button>
                                             </div>

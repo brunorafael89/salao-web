@@ -150,6 +150,7 @@ function RelatorioServicoPage(){
                                     className="buttons"
                                     data={csvData}
                                     filename={`relatorioServico.csv`}
+                                    separator=";"
                                     // filename={`relatorioComissao${relatorioComissao.nome}.csv`}
                                 >
                                     Exportar para Excel

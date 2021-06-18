@@ -15,6 +15,7 @@ import ValidarCPF from "../../components/ValidarCPF";
 function FuncionarioPage(){
     const [funcionarios, setFuncionarios] = useState([])
     const [idFuncionario, setIdFuncionario] = useState("")
+    const [perfilacessoFuncionario, setIdPerfilacessoFuncionario] = useState("")
     const [nomeFuncionario, setNomeFuncionario] = useState("")
     const [cargoFuncionario, setCargoFuncionario] = useState("")
     const [dataNascFuncionario, setDataNascFuncionario] = useState(format(new Date(), "yyyy-MM-dd"))
@@ -25,6 +26,7 @@ function FuncionarioPage(){
 
     useEffect( () => {
         getFuncionario()
+        // getPerfilacesso()
     }, [] )
 
     async function getFuncionario(){
@@ -110,8 +112,7 @@ function FuncionarioPage(){
             await api.put(`funcionario/${idFuncionario}`, {
                 nome: nomeFuncionario,
                 cargo: cargoFuncionario,
-                data_nasc: dataNascFuncionario,
-                cpf: cpfFuncionario,
+                data_nasc: format(new Date(dataNascFuncionario), "yyyy-MM-dd"),
                 telefone: telefoneFuncionario,
                 email: emailFuncionario,
                 senha: senhaFuncionario
@@ -156,7 +157,7 @@ function FuncionarioPage(){
                                     value={cargoFuncionario} 
                                     onChange={ (e) => setCargoFuncionario(e.target.value) }
                                     placeholder="Recepcionista ou Gerente"/>
-                            </label>
+                            </label>                
 
                             <label htmlFor="data_nasc">
                                 <span>Data Nascimento</span>
@@ -174,7 +175,8 @@ function FuncionarioPage(){
                                     name="cpf" 
                                     value={cpfFuncionario} 
                                     onChange={ (e) => setCpfFuncionario(e.target.value) }
-                                    placeholder="Apenas números"/>
+                                    readOnly
+                                />
                             </label>
 
                             <label htmlFor="telefone">

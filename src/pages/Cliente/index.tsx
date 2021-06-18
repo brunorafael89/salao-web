@@ -82,7 +82,6 @@ function ClientePage(){
         try{
             await api.put(`cliente/${idCliente}`, {
                 nome: nomeCliente,
-                cpf: cpfCliente,
                 data_nasc: dataNascCliente,
                 telefone: telefoneCliente,
                 sexo: sexoCliente,
@@ -160,6 +159,7 @@ function ClientePage(){
                                     name="cpf" 
                                     value={cpfCliente}
                                     onChange={(e) => setCpfCliente(e.target.value)} 
+                                    readOnly
                                 />
                             </label>
         

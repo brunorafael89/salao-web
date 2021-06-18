@@ -39,6 +39,7 @@ function AgendamentoPage() {
         getClientes()
         getFormaPagamento()
         
+        
     }, [])
 
     async function getAgendamentos(){
@@ -53,7 +54,7 @@ function AgendamentoPage() {
     async function getAgendamentosDataCliente(dataSelecionada: Date){
         try {
             const dataFormatada = dataSelecionada.getUTCFullYear() + "-" + (dataSelecionada.getUTCMonth() + 1) + "-" + dataSelecionada.getUTCDate()
-            const response = await api.get(`agendamento/${idCliente}/${dataFormatada}`); 
+            const response = await api.get(`agendamento/getAgendamentoCliente/${idCliente}/${dataFormatada}`); 
 
             let datasAgendamentosDataCliente: any[] = response.data.map((h:any) => {
                 return converteTempoEmData(h.horario_agendamento, h.tempo_servico, h.data_atendimento);
@@ -406,9 +407,11 @@ function AgendamentoPage() {
                                         <td>
                                             <div className="form">
                                                 <div className='material excluir'>
+                                                    {!agendamento.inicio_atendimento && (
                                                     <button name='acao' id={agendamento.agendamento_id} onClick={()=>cancelarAgendamento(agendamento.agendamento_id)}>
                                                         <span className="material-icons"><MdDeleteForever /></span>
                                                     </button>
+                                                    )}
                                                 </div>
                                             </div>
                                         </td>

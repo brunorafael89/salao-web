@@ -57,8 +57,7 @@ function ProfissionalPage(){
             toast.success("Profissional cadastrado com sucesso!");
 
             getProfissional();
-
-            toast.success("Profissional cadastrado com sucesso");
+            
         } catch(err) {
             toast.error("Erro ao cadastrar o profissional");
         }
@@ -100,7 +99,6 @@ function ProfissionalPage(){
             await api.put(`profissional/${idProfissional}`, {
                 nome: nomeProfissional,
                 data_nasc: dataNascProfissional,
-                cpf: cpfProfissional,
                 telefone: telefoneProfissional,
                 email: emailProfissional,
                 senha: senhaProfissional
@@ -153,7 +151,8 @@ function ProfissionalPage(){
                                     name="cpf" 
                                     value={cpfProfissional} 
                                     onChange={ (e) => setCpfProfissional(e.target.value) }
-                                    placeholder="Apenas números"/>
+                                    readOnly
+                                />                                    
                             </label>
 
                             <label htmlFor="telefone">
