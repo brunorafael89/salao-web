@@ -17,8 +17,8 @@ function RelatorioServicoPage(){
     const [IdServicos, setIdServicos] = useState("");
     const [profissionais, setProfissionais] = useState([]);
     const [idProfissional, setIdProfissional] = useState('');
-    const [dataFrom, setDataFrom] = useState(format(new Date(), "yyyy-MM-dd"));
-    const [dataTo, setDataTo] = useState(format(new Date(), "yyyy-MM-dd"));
+    const [dataFrom, setDataFrom] = useState(new Date());
+    const [dataTo, setDataTo] = useState(new Date());
 
     useEffect(() => {
         // getAgendamentos() 
@@ -51,8 +51,10 @@ function RelatorioServicoPage(){
 
     async function geraRelatorio(e: FormEvent){
         e.preventDefault();
+        const dataFromFormatada = format(dataFrom, "yyyy-MM-dd");
+        const dataToFormatada = format(dataTo, "yyyy-MM-dd");
 
-        const response = await api.get(`relatorio/servico/${idProfissional}/${IdServicos}/${dataFrom}/${dataTo}`);
+        const response = await api.get(`relatorio/servico/${idProfissional}/${IdServicos}/${dataFromFormatada}/${dataToFormatada}`);
 
         setRelatorioServico(response.data)
     }
@@ -81,7 +83,7 @@ function RelatorioServicoPage(){
                                     <select name="servico" onChange={(e) => setIdServicos(e.target.value)}>
                                         <option value="">Selecione o serviço</option>
                                         {servicos.map((servico: any) => (
-                                            <option value={servico.servico_id}>{servico.nome}</option>
+                                            <option value={servico.servicos_id}>{servico.nome}</option>
                                         ))}
                                     </select>
                                 </label>
@@ -106,7 +108,7 @@ function RelatorioServicoPage(){
                                     <span>De:</span>
                                     <input 
                                         type="date" 
-                                        onChange={(e)=>setDataFrom(e.target.value)}
+                                        onChange={(e)=>setDataFrom(new Date(e.target.value))}
                                     />
                                 </label>
 
@@ -114,7 +116,7 @@ function RelatorioServicoPage(){
                                     <span>Até:</span>
                                     <input 
                                         type="date" 
-                                        onChange={(e)=>setDataTo(e.target.value)}
+                                        onChange={(e)=>setDataTo(new Date(e.target.value))}
                                     />
                                 </label>
 
@@ -136,9 +138,9 @@ function RelatorioServicoPage(){
                             <tbody>
                                 {relatorioServicos.map((relatorioServico: any) => (
                                     <tr>
-                                        <td>{relatorioServico.nome}</td>
-                                        <td>{format(new Date(relatorioServico.data), "dd/MM/yyyy")}</td>
-                                        <td>{relatorioServico.hora}</td>
+                                        <td>{relatorioServico.nome_profissional}</td>
+                                        <td>{format(new Date(relatorioServico.data_atendimento), "dd/MM/yyyy")}</td>
+                                        <td>{relatorioServico.horario_agendamento}</td>
                                         <td>{relatorioServico.nome_servico}</td>
                                     </tr>
                                  ))}

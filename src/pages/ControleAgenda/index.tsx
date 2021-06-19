@@ -105,16 +105,18 @@ function ControleAgendaPage(){
                             {agendamentos.map((agendamento: any) => (                                
                                 <tr key={agendamento.agendamento_id}>
                                     <td>
+                                        {!agendamento.forma_pagamento_id && (
                                         <form action="">
                                             <input type="checkbox" value={agendamento.selecionado} onChange={() => agendamento.selecionado = !agendamento.selecionado}/>
                                         </form>
+                                        )}
                                     </td>
                                     <td>{agendamento.nomeCliente}</td>
                                     <td>{format(new Date(agendamento.data_atendimento), "dd/MM/yyyy")}</td>
                                     <td>{agendamento.horario_agendamento}</td>
                                     <td>{agendamento.nomeServico}</td>
                                     <td>{agendamento.nomeProfissional}</td>
-                                    <td>Cartão de Crédito</td>
+                                    <td>{agendamento.forma_pagamento}</td>
                                     <td><span className="material-icons andamento"><AiFillClockCircle /></span></td>
                                     <td>R${agendamento.valor},00</td>                                        
                                 </tr>                                

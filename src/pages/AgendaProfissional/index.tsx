@@ -4,8 +4,10 @@ import Header from "../../components/Header";
 import MenuLateral from "../../components/MenuLateral";
 import api from "../../services/api";
 import { getUser } from "../../services/auth";
+import {AiFillClockCircle} from "react-icons/ai";
 
 import "./styles.css";
+import { toast } from "react-toastify";
 
 function AgendaProfissionalPage(){
     const user = getUser();
@@ -23,6 +25,51 @@ function AgendaProfissionalPage(){
         getAgenda()
     }, [])
 
+    async function iniciar() {
+        const agendamentoSelecionado: any[] = agendaProfissionais.filter((agendamento: any) => {
+            if(agendamento.selecionado) return agendamento;
+        })
+
+        if(!agendamentoSelecionado.length){
+            toast.warning("Necessário selecionar um atendimento");
+            return;
+        }
+
+        if(agendamentoSelecionado.length > 1){
+            toast.warning("Somente pode selecionar um atendimento");
+            return;
+        }
+
+        if(agendamentoSelecionado[0].inicio_atendimento){
+            toast.warning("Serviço já iniciado!");
+            return;
+        }
+
+        await api.get(`agendamento/iniciarAtendimento/${agendamentoSelecionado[0].agendamento_id}`)
+
+        getAgenda()
+    }
+
+    async function encerrar() {
+        const agendamentoSelecionado: any[] = agendaProfissionais.filter((agendamento: any) => {
+            if(agendamento.selecionado) return agendamento;
+        })
+
+        if(!agendamentoSelecionado.length){
+            toast.warning("Necessário selecionar um atendimento");
+            return;
+        }
+
+        if(agendamentoSelecionado.length > 1){
+            toast.warning("Somente pode selecionar um atendimento");
+            return;
+        }
+
+        await api.get(`agendamento/encerrarAtendimento/${agendamentoSelecionado[0].agendamento_id}`)
+
+        getAgenda()
+    }
+
     return (
         <>
             <Header/>
@@ -39,6 +86,7 @@ function AgendaProfissionalPage(){
                             <thead>
                                 <tr>
                                     <th>Selecionar</th>
+                                    <th>Status</th>
                                     <th>Cliente</th>
                                     <th>Data Agendamento</th>
                                     <th>Hora Agendamento</th>
@@ -51,13 +99,22 @@ function AgendaProfissionalPage(){
                                 {agendaProfissionais.map((agendamento: any) => (
                                     <tr>
                                         <td>
+                                            {!agendamento.fim_atendimento && (
                                             <form action="">
-                                                <input 
-                                                    type="checkbox" 
-                                                    name=""
-                                                />
+                                                <input type="checkbox" value={agendamento.selecionado} onChange={() => agendamento.selecionado = !agendamento.selecionado}/>
                                             </form>
+                                            )}
                                         </td>
+                                        {!agendamento.inicio_atendimento && !agendamento.fim_atendimento && (
+                                        <td></td>
+                                        )}
+                                        {agendamento.inicio_atendimento && !agendamento.fim_atendimento && (
+                                        <td>em atendimento</td>
+                                        )}
+                                        {agendamento.inicio_atendimento && agendamento.fim_atendimento && (
+                                        <td>finalizado</td>
+                                        )}
+                                        {/* <td><span className="material-icons andamento"><AiFillClockCircle /></span></td> */}
                                         <td>{agendamento.nomeCliente}</td>
                                         <td>{format(new Date(agendamento?.data_atendimento), "dd/MM/yyyy")}</td>
                                         <td>{agendamento.horario_agendamento}</td>
@@ -72,11 +129,11 @@ function AgendaProfissionalPage(){
 
                     <div className="buttons-export">
                         <label htmlFor="">
-                            <button className="buttons" type="submit">Iniciar</button>
+                            <button className="buttons" type="button" onClick={iniciar}>Iniciar</button>
                         </label>
 
                         <label htmlFor="">
-                            <button className="buttons" type="submit">Encerrar</button>
+                            <button className="buttons" type="button" onClick={encerrar}>Encerrar</button>
                         </label>
                     </div>
                 </div>

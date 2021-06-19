@@ -54,6 +54,11 @@ function CartPage(){
             return;
         }
 
+        api.post("pagamento",{
+            forma_pagamento_id: idFormapagamento,
+            atendimentos: agendamentos
+        })
+
         history.replace("ControleAgenda");
     }
 
