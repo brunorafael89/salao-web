@@ -151,7 +151,7 @@ function ProfissionalPage(){
                                     name="cpf" 
                                     value={cpfProfissional} 
                                     onChange={ (e) => setCpfProfissional(e.target.value) }
-                                    readOnly
+                                    readOnly={!!idProfissional}
                                 />                                    
                             </label>
 

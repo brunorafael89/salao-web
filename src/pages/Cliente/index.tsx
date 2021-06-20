@@ -159,7 +159,7 @@ function ClientePage(){
                                     name="cpf" 
                                     value={cpfCliente}
                                     onChange={(e) => setCpfCliente(e.target.value)} 
-                                    readOnly
+                                    readOnly={!!idCliente}
                                 />
                             </label>
         
