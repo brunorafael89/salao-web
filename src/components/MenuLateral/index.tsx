@@ -60,6 +60,10 @@ function MenuLateral(){
                     )}
                     {user.funcionarioId && (
                         <>
+                             <li>
+                                <span><BiCalendarCheck /></span>
+                                <Link to="AgendamentoFunc">Agendamentos</Link>
+                            </li>
                             <li>
                                 <span><AiOutlineSchedule /></span>
                                 <a href="ControleAgenda">Controle Agenda</a>

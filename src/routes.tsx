@@ -26,6 +26,7 @@ import ClientePrivateRouter from "./routes/ClientePrivateRouter";
 import PrivateRouter from "./routes/PrivateRouter";
 import FuncionarioPage from "./pages/Funcionario";
 import ProfissionalPrivateRouter from "./routes/ProfissionalPrivateRouter";
+import AgendamentoFunc from "./pages/AgendamentoFunc";
 
 function Routes() {
   return (
@@ -52,6 +53,7 @@ function Routes() {
       <FuncionarioPrivateRouter path="/relatorioServico" exact component={RelatorioServicoPage} />
       <FuncionarioPrivateRouter path="/relatorioComissao" exact component={RelatorioComissaoPage} />
       <FuncionarioPrivateRouter path="/controleAgenda" exact component={ControleAgendaPage} />      
+      <FuncionarioPrivateRouter path="/agendamentoFunc" exact component={AgendamentoFunc} />      
       
       <ProfissionalPrivateRouter path="/agendaProfissional" exact component={AgendaProfissionalPage} />
     </BrowserRouter>

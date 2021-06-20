@@ -1,8 +1,9 @@
-import React, { FormEvent, useState } from "react";
+import React, { FormEvent, useEffect, useState } from "react";
 import Header from "../../components/Header";
 import MenuLateral from "../../components/MenuLateral";
 import { toast } from "react-toastify";
 // import {MdCheckCircle, MdCancel} from "react-icons/md";
+import {MdDeleteForever} from "react-icons/md";
 import {AiFillClockCircle} from "react-icons/ai";
 
 import "./styles.css";
@@ -15,6 +16,7 @@ function ControleAgendaPage(){
     const [agendamentos, setAgendamentos] = useState([]);
     const [servicos, setServicos] = useState([]);
     const [clientes, setClientes] = useState([]);
+    const [idCliente, setIdCliente] = useState([]);
     const [profissionais, setProfissionais] = useState([]);
     const [data, setData] = useState(new Date());
 
@@ -31,7 +33,7 @@ function ControleAgendaPage(){
         });
 
         if(!agendamentosSelecionados.length) {
-            toast.warning("Pelo menos um atendimento precisa ser selecionado");
+            toast.warning("Selecione pelo menos um atendimento");
             return;
         }
 
@@ -55,6 +57,10 @@ function ControleAgendaPage(){
             pathname: '/Carrinho',
             state: agendamentosSelecionados
         })
+    }
+
+    async function cancelarAgendamento(idAgendamento: Number){
+        await api.delete(`agendamento/${idAgendamento}`)
     }
 
     return (
@@ -98,7 +104,7 @@ function ControleAgendaPage(){
                                     <th>Forma de Pagamento</th>
                                     <th>Status</th>
                                     <th>Valor</th>
-                                    
+                                    <th>Ação</th>
                                 </tr>
                             </thead>
                             <tbody>
@@ -118,7 +124,18 @@ function ControleAgendaPage(){
                                     <td>{agendamento.nomeProfissional}</td>
                                     <td>{agendamento.forma_pagamento}</td>
                                     <td><span className="material-icons andamento"><AiFillClockCircle /></span></td>
-                                    <td>R${agendamento.valor},00</td>                                        
+                                    <td>R${agendamento.valor},00</td>         
+                                    <td>
+                                        {!agendamento.inicio_atendimento && (
+                                            <div className="form">
+                                                <div className='material excluir'>                                                    
+                                                    <button name='acao' id={agendamento.agendamento_id} onClick={()=>cancelarAgendamento(agendamento.agendamento_id)}>
+                                                        <span className="material-icons"><MdDeleteForever /></span>
+                                                    </button>
+                                                </div>
+                                            </div>
+                                        )}
+                                    </td>                               
                                 </tr>                                
                             ))}
                             </tbody>

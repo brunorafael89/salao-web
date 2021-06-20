@@ -12,7 +12,7 @@ import { addMinutes, isBefore, subMinutes, format, isAfter, isEqual, addSeconds 
 import "./styles.css";
 import { getUser } from "../../services/auth";
 
-function AgendamentoPage() {
+function AgendamentoFunc() {
     const user = getUser();
     const [agendamentos, setAgendamentos] = useState([]);
     const [servicos, setServicos] = useState([]);
@@ -31,11 +31,14 @@ function AgendamentoPage() {
     const [horario_agendamento, setHorarioAgendamento] = useState('');
     const [servicoSelecionado, setServicoSelecionado] = useState<any>();
     const [agendamentosHjCliente, setAgendamentosHjCliente] = useState<any[]>([]);
-
+    const [funcionarios, setFuncionarios] = useState([])
+    const [idFuncionario, setIdFuncionario] = useState("")
+    
     useEffect(() => {
         getAgendamentos()
         getServicos()
         getClientes()
+        // getFuncionario()
         // getProfissionais()
         // getFormaPagamento()
         
@@ -44,7 +47,7 @@ function AgendamentoPage() {
 
     async function getAgendamentos(){
         try {
-            const response = await api.get(`agendamento/${idCliente}`); 
+            const response = await api.get("agendamento"); 
             setAgendamentos(response.data)
         } catch(err) {
             toast.error("Erro ao consultar a agenda");
@@ -92,6 +95,11 @@ function AgendamentoPage() {
         } catch(err) {
             toast.error("Erro ao consultar os clientes");
         }
+    }
+
+    async function getFuncionario(){
+        const response = await api.get("funcionario");
+        setFuncionarios(response.data);
     }
 
     // async function getFormaPagamento(){
@@ -288,6 +296,8 @@ function AgendamentoPage() {
         getAgendamentos()
     }
 
+    
+
     return (
         <>
             <Header />
@@ -296,7 +306,7 @@ function AgendamentoPage() {
                 <MenuLateral />
                 <div className="main-container">
                     <div className="container-conteudo">
-                        <span className="titulo">Agende seu serviço aqui!</span>
+                        <span className="titulo">Agendamentos!</span>
 
                         <Calendar 
                             onChange={(data) => setData(data)} 
@@ -310,6 +320,16 @@ function AgendamentoPage() {
                                     <input type="text" disabled value={format(data_atendimento, "dd/MM/yyy")}/>
                                 </label>
                                 
+                                <label htmlFor="">
+                                    <span>Qual Cliente?</span>
+                                    <select name="cliente" id="" value={idCliente} onChange={(e) => setIdCliente(e.target.value)}>
+                                        <option value="">Selecione o cliente</option>
+                                        {clientes.map((cliente: any) => (
+                                            <option value={cliente.cliente_id}>{cliente.nome}</option>
+                                        ))}
+                                    </select>
+                                </label>
+
                                 <label htmlFor="">
                                     <span>Qual Serviço?</span>
                                     <select name="servico" id=""  onChange={(e) => getHorarios(e.target.value)}>
@@ -425,4 +445,4 @@ function AgendamentoPage() {
     );
 }
 
-export default AgendamentoPage;
+export default AgendamentoFunc;

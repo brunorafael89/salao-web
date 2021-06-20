@@ -175,7 +175,7 @@ function FuncionarioPage(){
                                     name="cpf" 
                                     value={cpfFuncionario} 
                                     onChange={ (e) => setCpfFuncionario(e.target.value) }
-                                    readOnly
+                                    readOnly={!!idFuncionario}
                                 />
                             </label>
 
