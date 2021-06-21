@@ -127,17 +127,17 @@ function CartPage(){
                                 </tbody>
                             </table>
 
-                            <label htmlFor="">
-                                <span>Qual Pagamento?</span>
-                                <select name="pagamento" id="" /*value={idFormapagamento}*/ onChange={(e) => setIdFormapagamento(e.target.value)}>
-                                    <option value="">Selecione o pagamento</option>
-                                    {formaPagamentos.map((formaPagamento: any) => (
-                                        <option value={formaPagamento.forma_pagamento_id}>{formaPagamento.forma_pagamento}</option>
-                                    ))}
-                                </select>
-                            </label>
-
                             <section className="cart-information">
+                                <label className="payment-method">
+                                    <span>Qual Pagamento?</span>
+                                    <select name="pagamento" id="" /*value={idFormapagamento}*/ onChange={(e) => setIdFormapagamento(e.target.value)}>
+                                        <option value="">Selecione o pagamento</option>
+                                        {formaPagamentos.map((formaPagamento: any) => (
+                                            <option value={formaPagamento.forma_pagamento_id}>{formaPagamento.forma_pagamento}</option>
+                                        ))}
+                                    </select>
+                                </label>
+
                                 <div>
                                     <label htmlFor="">
                                         <span>Subtotal</span> <span>R$ {total},00</span>
@@ -149,8 +149,8 @@ function CartPage(){
                             </section>
 
                             <div className="cart-buttons">
-                                <button type="button" onClick={() => history.push("ControleAgenda")}>Agendar mais serviços</button>
-                                <button type="button" onClick={finalizar}>Finalizar Agendamento</button>
+                                <button type="button" onClick={() => history.push("ControleAgenda")}>Adicionar mais serviços</button>
+                                <button type="button" onClick={finalizar}>Finalizar Atendimento</button>
                             </div>
                         </div>
                     </div>

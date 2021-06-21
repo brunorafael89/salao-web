@@ -13,7 +13,7 @@ function PerfilPage(){
     const [idCliente, setIdClientes] = useState("")
     const [nomeCliente, setNomeClientes] = useState("")
     const [cpfCliente, setCpfClientes] = useState("")
-    const [dataNascCliente, setDataNascClientes] = useState(format(new Date(), "dd-MM-yyyy"))
+    const [dataNascCliente, setDataNascClientes] = useState(format(new Date(), "dd-MMs-yyyy"))
     const [telefoneCliente, setTelefoneClientes] = useState("")
     const [sexoCliente, setSexoClientes] = useState("")
     const SexoList = [
@@ -48,7 +48,6 @@ function PerfilPage(){
         }
     }
     
-    //A função não está funcionando as informações não estão sendo enviadas no corpo da requisição
     async function editar(e: FormEvent){
         e.preventDefault() 
         await api.put(`cliente/${idCliente}`, {
@@ -117,7 +116,7 @@ function PerfilPage(){
                                 <input 
                                     type="date" 
                                     name="data_nasc" 
-                                    // value={format(new Date(dataNascCliente), "yyyy-MM-dd")} 
+                                    // value={format(new Date(dataNascCliente), "yyyy-mm-dd")}
                                     onChange={ (e) => setDataNascClientes(e.target.value) }
                                 />
                             </label>

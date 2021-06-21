@@ -64,8 +64,6 @@ function FuncionarioPage(){
                 toast.success("Funcionario cadastrado com sucesso!");
     
                 getFuncionario();
-    
-                toast.success("Funcionario cadastrado com sucesso");
             } catch(err) {
                 toast.error("Erro ao cadastrar o funcionario");
             }

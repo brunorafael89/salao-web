@@ -197,7 +197,7 @@ function PrincipalPage(){
                         <div className="site-map-address-description">
                             <p>Rua Maravilha, 326 - Bangu - Rio de Janeiro</p>
                             <p>Horário de atendimento:</p>
-                            <p>De terça a sabado de 09:00 às 20:00</p>
+                            <p>De terça a sabado de 09:00 às 18:00</p>
                         </div>
                     </div>
                 </section>

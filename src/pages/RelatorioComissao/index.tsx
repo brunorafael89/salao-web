@@ -133,22 +133,15 @@ function  RelatorioComissaoPage(){
 
                     <div className="buttons-export">
                         <label htmlFor="">
-                            <button className="buttons" type="submit">Imprimir</button>
-                            <span className="material-icons"><IoMdPrint/></span>
-                        </label>
-
-                        <label htmlFor="">
-                            {/* {relatorioComissoes.map((relatorioComissao: any) => ( */}
-                                <CSVLink
-                                    className="buttons"
-                                    data={csvData}
-                                    filename={`relatorioComissao.csv`}
-                                    separator=";"
-                                    // filename={`relatorioComissao${relatorioComissao.nome}.csv`}
-                                >
-                                    Exportar para Excel
-                                </CSVLink>
-                            {/* ))} */}
+                            <CSVLink
+                                className="buttons"
+                                data={csvData}
+                                filename={`relatorioComissao.csv`}
+                                separator=";"
+                                // filename={`relatorioComissao${relatorioComissao.nome}.csv`}
+                            >
+                                Exportar para Excel
+                            </CSVLink>
                             <span className="material-icons"><RiFileExcel2Line/></span>
                         </label>
                     </div>
