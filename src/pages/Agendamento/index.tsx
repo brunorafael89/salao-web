@@ -348,17 +348,7 @@ function AgendamentoPage() {
                                     </select>         
                                 </label>
 
-                                {/* <label htmlFor="">
-                                    <span>Qual Pagamento?</span>
-                                    <select name="pagamento" id="" value={idFormapagamento} onChange={(e) => setIdFormapagamento(e.target.value)}>
-                                        <option value="">Selecione o pagamento</option>
-                                        {formaPagamentos.map((formaPagamento: any) => (
-                                            <option value={formaPagamento.forma_pagamento_id}>{formaPagamento.forma_pagamento}</option>
-                                        ))}
-                                    </select>
-                                </label> */}
-
-                                <button type='submit'> AGENDAR </button>
+                                <button type='submit'> Agendar </button>
                             </form>                       
                         </div>
                     </div>

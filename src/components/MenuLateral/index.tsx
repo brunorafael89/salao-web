@@ -118,12 +118,12 @@ function MenuLateral(){
                             </li>
                         </>
                     )}
-                        {user.profissionalId && (
-                            <li>
-                                <span><AiOutlineSchedule /></span>
-                                <a href="AgendaProfissional">Agenda Profissional</a>
-                            </li>
-                        )}
+                    {user.profissionalId && (
+                        <li>
+                            <span><AiOutlineSchedule /></span>
+                            <a href="AgendaProfissional">Agenda Profissional</a>
+                        </li>
+                    )}
                 </ul>
             </nav>
         </div>

@@ -9,7 +9,7 @@ interface ContainerMensagemProps {
 const ContainerMensagem: React.FC<ContainerMensagemProps> = ({ mensagem }) => {
 
     return (
-        <div className="main-container">
+        <div className="mensagem main-container">
             <div className="title-area">
             <div className="title-box">
                 <h1 className="title">{mensagem}</h1>

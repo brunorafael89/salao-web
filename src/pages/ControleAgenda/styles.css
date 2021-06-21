@@ -168,6 +168,10 @@ main .controle-agenda.main-container{
         padding: 10px;
     }
 
+    .controle-agenda.main-container .info-select .select-data form .buttons:hover{
+        padding: unset;
+    }
+
     .buttons-checkout .buttons {
         display: block;
         width: 100%;

@@ -1,5 +1,5 @@
 import React from "react";
-import { AiOutlineShoppingCart, AiOutlineHome } from "react-icons/ai";
+import { AiOutlineHome } from "react-icons/ai";
 import { FiPhone, FiMail } from "react-icons/fi";
 import { RiMoneyDollarBoxLine } from "react-icons/ri";
 import { MdExitToApp } from "react-icons/md";
@@ -37,7 +37,6 @@ function Header(){
                             <li><span className="material-icons"><MdExitToApp/></span><a href="/" onClick={logout}>Sair</a></li>
                             <li><span className="material-icons"><AiOutlineHome/></span><a href="home">Página Principal</a></li>
                             <li><span className="material-icons"><RiMoneyDollarBoxLine/></span><a href="TabelaPreco">Tabela de Preços</a></li>
-                            {/* <li><span className="material-icons"><AiOutlineShoppingCart/></span><a href="Carrinho">Carrinho</a></li> */}
                             <li><MenuLateral/></li>
                         </ul>
                     </nav>

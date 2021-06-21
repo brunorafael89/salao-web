@@ -7,7 +7,7 @@
     cursor: pointer;
 }
 
-.relatorio-servico.relatorio-servico.main-container{
+.relatorio-servico.main-container{
     width: 83%;
     padding: 90px 10px 0 0;
     margin-left: 17%;
@@ -23,9 +23,7 @@
 }
 
 .relatorio-servico.main-container .info-select .spn-titulo{
-    display: inline-block;
-    width: 250px;
-    margin-right: 15px;
+    display: block;
     font-size: 20px;
     font-weight: bold;
     color: #6a346a;
@@ -53,40 +51,40 @@
     cursor: pointer;
 }
 
-.relatorio-servico.main-container .info-select .select-data form{
-    display: flex;
+.relatorio-servico.main-container .info-select .select-data {
+    /* display: flex; */
     /* flex-direction: column; */
 }
 
-.relatorio-servico.main-container .info-select .select-data form label{
+.relatorio-servico.main-container .info-select .select-data  label{
     display: inline-block;
     width: 33%;
     min-width: 230px;
     margin: 10px 0;
 }
 
-.relatorio-servico.main-container .info-select .select-data form label span{
+.relatorio-servico.main-container .info-select .select-data  label span{
     margin-right: 5px;
     font-size: 18px;
     font-weight: bold;
 }
 
-.relatorio-servico.main-container .info-select .select-data form label input{
+.relatorio-servico.main-container .info-select .select-data  label input{
     display: inline-block;
-    width: calc(100% - 70px);
+    width: calc(100% - 50px);
     padding: 10px;
     border: 1px solid;
     border-radius: 5px;
 }
 
-.relatorio-servico.main-container .info-select .select-data form .buttons{
-    margin: 10px 0;
-    padding: 0 55px;
+.relatorio-servico.main-container .info-select .select-data  .buttons{
+    margin: 5px 0;
+    padding: 10px 50px;
 }
 
-.relatorio-servico.main-container .info-select .select-data form .buttons:hover{
-    margin: 10px 0;
-    padding: 0 51px;
+.relatorio-servico.main-container .info-select .select-data  .buttons:hover{
+    margin: 5px 0;
+    padding: 10px 46px;
     font-weight: bold;
     box-shadow: 4px 4px 10px #abc;
 }
@@ -130,6 +128,7 @@
     .relatorio-servico.main-container{
         width: 100%;
         padding: 10px;
+        margin-left: unset      ;
     }
 
     .relatorio-servico.main-container h1 {
@@ -139,6 +138,7 @@
 
     .relatorio-servico.main-container .info-select {
         width: 100%;
+        display: unset;
     }
 
     .relatorio-servico.main-container .info-select .select-servico, 
@@ -171,24 +171,24 @@
         cursor: pointer;
     }
 
-    .relatorio-servico.main-container .info-select .select-data form {
+    .relatorio-servico.main-container .info-select .select-data {
         display: flex;
         flex-direction: column;
     }
 
-    .relatorio-servico.main-container .info-select .select-data form label {
+    .relatorio-servico.main-container .info-select .select-data label {
         display: inline-block;
         width: 100%;
         min-width: 230px;
         margin: 10px 0;
     }
 
-    .relatorio-servico.main-container .info-select .select-data form label span {
+    .relatorio-servico.main-container .info-select .select-data label span {
         font-size: 18px;
         font-weight: bold;
     }
 
-    .relatorio-servico.main-container .info-select .select-data form label input {
+    .relatorio-servico.main-container .info-select .select-data label input {
         display: inline-block;
         width: calc(100% - 70px);
         padding: 10px;
@@ -197,9 +197,11 @@
         text-align: center;
     }
 
-    .relatorio-servico.main-container .info-select .select-data form .buttons {
+    .relatorio-servico.main-container .info-select .select-data .buttons {
+        display: block;
+        width: 100%;
         margin: 10px 0;
-        padding: 20px 55px;
+        padding: 10px 0;
     }
 
     .buttons-export {
@@ -220,9 +222,52 @@
 }
 
 @media all and (min-width: 480px) and (max-width: 768px){
-
+    .relatorio-servico.main-container{
+        width: 100%;
+        padding: 10px;
+        margin-left: unset      ;
+    }
 }
 
 @media all and (min-width: 768px) and (max-width: 1366px){
+    .relatorio-servico.main-container{
+        width: 76%;
+        padding: 90px 10px 0 0;
+        margin-left: 320px;
+    }
 
+    .relatorio-servico.main-container .info-select {
+        width: 100%;
+        grid-template-columns: repeat(2, 1fr);
+        grid-gap: 10px;
+    }
+
+    .relatorio-servico.main-container .info-select .select-servico, 
+    .relatorio-servico.main-container .info-select .select-profissional, 
+    .relatorio-servico.main-container .info-select .select-data {
+        padding: 10px;
+    }
+
+    .relatorio-servico.main-container .info-select .spn-titulo + select {
+        width: calc(100%);
+    }
+
+    .relatorio-servico.main-container .info-select .select-data {
+        display: unset;
+    }
+
+    .relatorio-servico.main-container .info-select .select-data label {
+        width: 50%;
+    }
+
+    .relatorio-servico.main-container .info-select .select-data label input {
+        width: calc(100% - 45px);
+    }
+
+    .relatorio-servico.main-container .info-select .select-data .buttons {
+        margin: 10px 0;
+        padding: 10px;
+        display: block;
+        width: 100%;
+    }
 }

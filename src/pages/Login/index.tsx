@@ -40,34 +40,33 @@ function LoginPage() {
 
         <div className="container-conteudo">
           <form onSubmit={logar} className="login-form"> 
-            
-                <span>Faça seu login</span>
-                
-                <div className="form">
-                    <input 
-                      type="text" 
-                      name="login" 
-                      placeholder="E-mail"
-                      value={login}
-                      onChange={(e) => setLogin(e.target.value)}
-                    />
-                    <input 
-                      type="password" 
-                      name="senha" 
-                      placeholder="Senha"
-                      value={senha}
-                      onChange={(e) => setSenha(e.target.value)}
-                    />
-                    <button name="acao" value="entrar" type="submit"> Entrar </button>
-                </div>
+            <span>Faça seu login</span>
+              
+            <div className="form">
+              <input 
+                type="text" 
+                name="login" 
+                placeholder="E-mail"
+                value={login}
+                onChange={(e) => setLogin(e.target.value)}
+              />
+              <input 
+                type="password" 
+                name="senha" 
+                placeholder="Senha"
+                value={senha}
+                onChange={(e) => setSenha(e.target.value)}
+              />
+              <button name="acao" value="entrar" type="submit"> Entrar </button>
+            </div>
 
-                <div className="linha"></div>
+            <div className="linha"></div>
 
-                <div className="login-opcoes">
-                    <a href="/"> Esqueceu sua senha?</a>
-                    <a href="Cadastro"> Ainda não tem cadastro? <strong>Cadastre-se!</strong></a>
-                </div>
-            </form>
+            <div className="login-opcoes">
+              <a href="/"> Esqueceu sua senha?</a>
+              <a href="Cadastro"> Ainda não tem cadastro? <strong>Cadastre-se!</strong></a>
+            </div>
+          </form>
         </div>
     </div>    
   );

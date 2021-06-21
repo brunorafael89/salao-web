@@ -75,8 +75,8 @@ function RelatorioServicoPage(){
                 <div className="relatorio-servico main-container">
                     <h1>Relatorio de Serviços</h1>
                 
-                    <section className="info-select">
-                        <form onSubmit={geraRelatorio}>
+                    <section>
+                        <form className="info-select" onSubmit={geraRelatorio}>
                             <div className="select-servico">
                                 <label htmlFor="servicos">
                                     <span className="spn-titulo">Selecione o serviço</span>

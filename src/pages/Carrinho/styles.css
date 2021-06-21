@@ -114,11 +114,26 @@
 }
 
 .cart-table .cart-information{
+    display: flex;
+    justify-content: space-between;
+}
+
+.cart-table .cart-information .payment-method{
+    padding: 10px;
+}
+
+.cart-table .cart-information .payment-method span{
     display: block;
-    width: 350px;
-    /* border: 1px solid black; */
+    font-size: 24px;
+    font-weight: bold;
+}
+
+.cart-table .cart-information .payment-method select{
     padding: 5px;
-    margin: 5px 5px 5px auto;
+    display: block;
+    width: 100%;
+    border-radius: 5px;
+    background-color: transparent;
 }
 
 .cart-table .cart-information > div{
