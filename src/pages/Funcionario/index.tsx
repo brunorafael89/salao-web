@@ -12,17 +12,28 @@ import "../../components/Table/styles.css";
 import format from "date-fns/format";
 import ValidarCPF from "../../components/ValidarCPF";
 
+const FUNCIONARIO: any = {
+    Recepcionista: {
+        id: 3,
+        cargo: "Recepcionista"
+    },
+    Gerente: {
+        id: 4,
+        cargo: "Gerente"
+    }
+}
+
 function FuncionarioPage(){
     const [funcionarios, setFuncionarios] = useState([])
     const [idFuncionario, setIdFuncionario] = useState("")
     const [perfilacessoFuncionario, setIdPerfilacessoFuncionario] = useState("")
     const [nomeFuncionario, setNomeFuncionario] = useState("")
-    const [cargoFuncionario, setCargoFuncionario] = useState("")
+    const [cargoFuncionario, setCargoFuncionario] = useState<string>("");
     const [dataNascFuncionario, setDataNascFuncionario] = useState(format(new Date(), "yyyy-MM-dd"))
     const [cpfFuncionario, setCpfFuncionario] = useState("")
     const [telefoneFuncionario, setTelefoneFuncionario] = useState("")
     const [emailFuncionario, setEmailFuncionario] = useState("")
-    const [senhaFuncionario, setSenhaFuncionario] = useState("")
+    const [senhaFuncionario, setSenhaFuncionario] = useState("");
 
     useEffect( () => {
         getFuncionario()
@@ -48,6 +59,8 @@ function FuncionarioPage(){
     async function cadastrar(){
         const validaCPF = ValidarCPF(cpfFuncionario)
 
+        if(cadastroInvalido()) return;
+
         if( validaCPF === true ){
             try{
                 await api.post("funcionario", {
@@ -57,7 +70,8 @@ function FuncionarioPage(){
                     cpf: cpfFuncionario,
                     telefone: telefoneFuncionario,
                     email: emailFuncionario,
-                    senha: senhaFuncionario
+                    senha: senhaFuncionario,
+                    perfil_id: FUNCIONARIO[cargoFuncionario].id
                 });
                 limpar()
     
@@ -69,6 +83,37 @@ function FuncionarioPage(){
             }
         } else {
             toast.error("CPF inválido");
+        }
+    }
+
+    function cadastroInvalido(){
+       if(!nomeFuncionario) {
+            toast.warning("Nome precisa ser preenchido!");
+            return true;
+       }
+       if(!cargoFuncionario){
+            toast.warning("Cargo precisa ser preenchido!");
+            return true;
+        }
+        if(!dataNascFuncionario){
+            toast.warning("Data precisa ser preenchida!");
+            return true;
+        }
+        if(!cpfFuncionario){
+            toast.warning("CPF precisa ser preenchido!");
+            return true;
+        }
+        if(!telefoneFuncionario){
+            toast.warning("Telefone precisa ser preenchido!");
+            return true;
+        }
+        if(!emailFuncionario){
+            toast.warning("Email precisa ser preenchido!");
+            return true;
+        }
+        if(!senhaFuncionario){
+            toast.warning("Senha precisa ser preenchida!");
+            return true;
         }
     }
 
@@ -147,7 +192,7 @@ function FuncionarioPage(){
                                 />
                             </label>
 
-                            <label htmlFor="cargo">
+                            {/* <label htmlFor="cargo">
                                 <span>Cargo</span>
                                 <input 
                                     type="text" 
@@ -155,6 +200,16 @@ function FuncionarioPage(){
                                     value={cargoFuncionario} 
                                     onChange={ (e) => setCargoFuncionario(e.target.value) }
                                     placeholder="Recepcionista ou Gerente"/>
+                            </label> */}
+
+                            <label htmlFor="">
+                                <span>Cargo</span>
+                                <select name="cargo" id="" onChange={ (e) => setCargoFuncionario(e.target.value) }>
+                                    <option value="">Selecione o cargo</option>
+                                    
+                                    <option value="Recepcionista">Recepcionista</option>
+                                    <option value="Gerente">Gerente</option>                                    
+                                </select>
                             </label>                
 
                             <label htmlFor="data_nasc">

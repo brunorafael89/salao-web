@@ -27,6 +27,7 @@ import PrivateRouter from "./routes/PrivateRouter";
 import FuncionarioPage from "./pages/Funcionario";
 import ProfissionalPrivateRouter from "./routes/ProfissionalPrivateRouter";
 import AgendamentoFunc from "./pages/AgendamentoFunc";
+import GerentePrivateRouter from "./routes/GerentePrivateRouter";
 
 function Routes() {
   return (
@@ -42,16 +43,18 @@ function Routes() {
 
       <ClientePrivateRouter path="/agendamento" exact component={AgendamentoPage} />
 
-      <FuncionarioPrivateRouter path="/formaPagamento" exact component={FormaPagamentoPage} />
-      <FuncionarioPrivateRouter path="/exemplo" exact component={ExemploPage} />
-      <FuncionarioPrivateRouter path="/servico" exact component={ServicoPage} />
-      <FuncionarioPrivateRouter path="/funcao" exact component={FuncaoPage} /> 
+      <GerentePrivateRouter path="/formaPagamento" exact component={FormaPagamentoPage} />
+      <GerentePrivateRouter path="/servico" exact component={ServicoPage} />
+      <GerentePrivateRouter path="/funcao" exact component={FuncaoPage} />
+      <GerentePrivateRouter path="/funcionario" exact component={FuncionarioPage} />
+      <GerentePrivateRouter path="/relatorioServico" exact component={RelatorioServicoPage} />
+      <GerentePrivateRouter path="/relatorioComissao" exact component={RelatorioComissaoPage} />
+
+      {/* <FuncionarioPrivateRouter path="/exemplo" exact component={ExemploPage} /> */}
+      
       <FuncionarioPrivateRouter path="/profissional" exact component={ProfissionalPage} />
-      <FuncionarioPrivateRouter path="/cliente" exact component={ClientePage} />
-      <FuncionarioPrivateRouter path="/funcionario" exact component={FuncionarioPage} />
-      <FuncionarioPrivateRouter path="/profissionalFuncao" exact component={ProfissionalFuncaoPage} />
-      <FuncionarioPrivateRouter path="/relatorioServico" exact component={RelatorioServicoPage} />
-      <FuncionarioPrivateRouter path="/relatorioComissao" exact component={RelatorioComissaoPage} />
+      <FuncionarioPrivateRouter path="/cliente" exact component={ClientePage} />      
+      <FuncionarioPrivateRouter path="/profissionalFuncao" exact component={ProfissionalFuncaoPage} />      
       <FuncionarioPrivateRouter path="/controleAgenda" exact component={ControleAgendaPage} />      
       <FuncionarioPrivateRouter path="/agendamentoFunc" exact component={AgendamentoFunc} />      
       

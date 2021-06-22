@@ -21,6 +21,14 @@ main .agenda-profissional.main-container h2{
     max-width: 600px;
 }
 
+.agenda-profissional.table table tbody td .material-icons.concluido{
+    color: #1fc829;
+}
+
+.agenda-profissional.table table tbody td .material-icons.andamento{
+    color: #eeee2f;
+}
+
 .agenda-profissional .buttons{
     border: none;
     background-color: #610d75;

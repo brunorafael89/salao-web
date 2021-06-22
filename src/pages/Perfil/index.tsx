@@ -67,13 +67,13 @@ function PerfilPage(){
 
     async function desativar(idCliente: number){
         try{
-            await api.delete(`cliente/${idCliente}`);
+            await api.get(`cliente/desativar/${idCliente}`);
     
-            toast.success('Sua conta foi desativada em nossa base')
+            toast.success('Sua conta foi desativada em nossa base');
             
-            logout()
+            logout();
 
-            history.push('/')
+            history.push('/');
         } catch(err){
             toast.error('Erro ao desativar a conta')
         }

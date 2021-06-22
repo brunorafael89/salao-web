@@ -5,6 +5,7 @@ import MenuLateral from "../../components/MenuLateral";
 import api from "../../services/api";
 import { getUser } from "../../services/auth";
 import {AiFillClockCircle} from "react-icons/ai";
+import {MdCheckCircle} from "react-icons/md";
 
 import "./styles.css";
 import { toast } from "react-toastify";
@@ -14,7 +15,8 @@ function AgendaProfissionalPage(){
     const [servicos, setServicos] = useState([]);
     const [clientes, setClientes] = useState([]);
     const [agendaProfissionais, setAgendaProfissionais] = useState([])
-    const [data, setData] = useState(new Date())
+    //const [data, setData] = useState(new Date())
+    const [data, setData] = useState(new Date("2021-06-27"))
 
     async function getAgenda(){
         const response = await api.get(`agendamento/getAgendamentoProfissional/${user.profissionalId}/${format(data, "yyyy-MM-dd")}`);
@@ -109,10 +111,10 @@ function AgendaProfissionalPage(){
                                         <td></td>
                                         )}
                                         {agendamento.inicio_atendimento && !agendamento.fim_atendimento && (
-                                        <td>em atendimento</td>
+                                            <td><span className="material-icons andamento"><AiFillClockCircle /></span></td>
                                         )}
                                         {agendamento.inicio_atendimento && agendamento.fim_atendimento && (
-                                        <td>finalizado</td>
+                                            <td><span className="material-icons concluido"><MdCheckCircle/></span></td>
                                         )}
                                         {/* <td><span className="material-icons andamento"><AiFillClockCircle /></span></td> */}
                                         <td>{agendamento.nomeCliente}</td>

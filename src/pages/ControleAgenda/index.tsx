@@ -5,6 +5,7 @@ import { toast } from "react-toastify";
 // import {MdCheckCircle, MdCancel} from "react-icons/md";
 import {MdDeleteForever} from "react-icons/md";
 import {AiFillClockCircle} from "react-icons/ai";
+import {MdCheckCircle} from "react-icons/md";
 
 import "./styles.css";
 import format from "date-fns/format";
@@ -31,6 +32,15 @@ function ControleAgendaPage(){
         const agendamentosSelecionados = agendamentos.filter((agendamento: any) => {
             if (agendamento.selecionado) return agendamento; 
         });
+
+        const agendamentosSemInicioAtendimento = agendamentosSelecionados.filter((agendamento: any) => {
+            if (!agendamento.inicio_atendimento) return agendamento;
+        });
+
+        if(agendamentosSemInicioAtendimento.length) {
+            toast.warning("Só pode selecionar atendimentos que já foram iniciados");
+            return;
+        }
 
         if(!agendamentosSelecionados.length) {
             toast.warning("Selecione pelo menos um atendimento");
@@ -123,7 +133,17 @@ function ControleAgendaPage(){
                                     <td>{agendamento.nomeServico}</td>
                                     <td>{agendamento.nomeProfissional}</td>
                                     <td>{agendamento.forma_pagamento}</td>
-                                    <td><span className="material-icons andamento"><AiFillClockCircle /></span></td>
+
+                                    {!agendamento.inicio_atendimento && !agendamento.fim_atendimento && (
+                                        <td></td>
+                                    )}
+                                    {agendamento.inicio_atendimento && !agendamento.fim_atendimento && (
+                                        <td><span className="material-icons andamento"><AiFillClockCircle /></span></td>
+                                    )}
+                                    {agendamento.inicio_atendimento && agendamento.fim_atendimento && (
+                                        <td><span className="material-icons concluido"><MdCheckCircle/></span></td>
+                                    )}
+
                                     <td>R${agendamento.valor},00</td>         
                                     <td>
                                         {!agendamento.inicio_atendimento && (

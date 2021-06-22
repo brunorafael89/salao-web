@@ -13,6 +13,7 @@ import "./styles.css";
 function RelatorioServicoPage(){
     const [relatorioServicos, setRelatorioServico] = useState([]);
     // const [agendamentos, setAgendamentos] = useState([]);
+    const [csvData, setCsvData] = useState<any[]>([]);
     const [servicos, setServicos] = useState([]);
     const [IdServicos, setIdServicos] = useState("");
     const [profissionais, setProfissionais] = useState([]);
@@ -51,19 +52,46 @@ function RelatorioServicoPage(){
 
     async function geraRelatorio(e: FormEvent){
         e.preventDefault();
+        
         const dataFromFormatada = format(dataFrom, "yyyy-MM-dd");
         const dataToFormatada = format(dataTo, "yyyy-MM-dd");
 
-        const response = await api.get(`relatorio/servico/${idProfissional}/${IdServicos}/${dataFromFormatada}/${dataToFormatada}`);
+        //const response = await api.get(`relatorio/servico/${idProfissional}/${IdServicos}/${dataFromFormatada}/${dataToFormatada}`);
 
-        setRelatorioServico(response.data)
+        const response = await api.post("relatorio/servico", {
+            profissional_id: idProfissional,
+            servicos_id: IdServicos,
+            from: dataFromFormatada,
+            to: dataToFormatada
+        });
+
+        const dados = response.data.map((dado: any) => {
+            return {
+                nome_profissional: dado.nome_profissional,
+                data_atendimento: format(new Date(dado.data_atendimento), "dd/MM/yyyy"),
+                horario_agendamento: dado.horario_agendamento,
+                nome_servico: dado.nome_servico,                
+            }            
+        })
+
+        setRelatorioServico(dados);
+
+        const csv = [];
+
+        csv.push(["Profissional", "Data", "Hora", "Serviço"]);
+
+        dados.map((dado: any) => {
+            let linha = [];
+            linha.push(dado.nome_profissional);
+            linha.push(dado.data_atendimento);
+            linha.push(dado.horario_agendamento);
+            linha.push(dado.nome_servico);
+
+            csv.push(linha);
+        })
+
+        setCsvData(csv);
     }
-
-    const csvData = [
-        ["Nome", "Função", "CPF"],
-        ["Carlos Augusto", "Cabeleireiro", "123123123"],
-        ["Carlos Afonso", "Pedicure", "123123124"]
-    ]
 
     return (
         <>
@@ -139,7 +167,7 @@ function RelatorioServicoPage(){
                                 {relatorioServicos.map((relatorioServico: any) => (
                                     <tr>
                                         <td>{relatorioServico.nome_profissional}</td>
-                                        <td>{format(new Date(relatorioServico.data_atendimento), "dd/MM/yyyy")}</td>
+                                        <td>{relatorioServico.data_atendimento}</td>
                                         <td>{relatorioServico.horario_agendamento}</td>
                                         <td>{relatorioServico.nome_servico}</td>
                                     </tr>

@@ -4,7 +4,7 @@ import MenuLateral from "../../components/MenuLateral"
 import Calendar from 'react-calendar'
 import { toast } from "react-toastify";
 import api from "../../services/api";
-// import {MdCheckCircle, MdCancel} from "react-icons/md";
+import {MdCheckCircle} from "react-icons/md";
 import {MdDeleteForever} from "react-icons/md";
 import {AiFillClockCircle} from "react-icons/ai";
 import { addMinutes, isBefore, subMinutes, format, isAfter, isEqual, addSeconds } from "date-fns";
@@ -390,8 +390,15 @@ function AgendamentoPage() {
                                                 agendamento.servicos_id === servico.servicos_id ? `R$${servico.valor},00` : ""
                                             ))} 
                                         </td>
-                                        {/* <td><span className="material-icons concluido"><MdCheckCircle/></span></td> Pagamento autorizado */}
-                                        <td><span className="material-icons andamento"><AiFillClockCircle/></span></td> {/* Agendamento ainda não finalizado pela recepcionista */}
+                                        {!agendamento.inicio_atendimento && !agendamento.fim_atendimento && (
+                                            <td></td>
+                                        )}
+                                        {agendamento.inicio_atendimento && !agendamento.fim_atendimento && (
+                                            <td><span className="material-icons andamento"><AiFillClockCircle /></span></td>
+                                        )}
+                                        {agendamento.inicio_atendimento && agendamento.fim_atendimento && (
+                                            <td><span className="material-icons concluido"><MdCheckCircle/></span></td>
+                                        )}
 
                                         <td>
                                             <div className="form">

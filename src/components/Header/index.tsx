@@ -5,7 +5,7 @@ import { RiMoneyDollarBoxLine } from "react-icons/ri";
 import { MdExitToApp } from "react-icons/md";
 import { GiHamburgerMenu } from "react-icons/gi";
 import logo from "../../assets/images/logo.png";
-//import { logout } from "../../services/auth";
+import { logout } from "../../services/auth";
 import MenuLateral from "../MenuLateral";
 
 import "./styles.css";
@@ -17,7 +17,8 @@ function Header(){
         document.querySelector('nav')?.classList.toggle('show')
     }
 
-    function logout(){
+    function sair(){
+        logout();
         history.replace("login")
     }
 
@@ -40,7 +41,7 @@ function Header(){
 
                     <nav>
                         <ul>
-                            <li><span className="material-icons"><MdExitToApp/></span><a href="" onClick={logout}>Sair</a></li>
+                            <li><span className="material-icons"><MdExitToApp/></span><a href="" onClick={sair}>Sair</a></li>
                             <li><span className="material-icons"><AiOutlineHome/></span><a href="home">Página Principal</a></li>
                             <li><span className="material-icons"><RiMoneyDollarBoxLine/></span><a href="TabelaPreco">Tabela de Preços</a></li>
                             <li><MenuLateral/></li>

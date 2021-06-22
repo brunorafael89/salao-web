@@ -35,7 +35,7 @@ function AgendamentoFunc() {
     const [idFuncionario, setIdFuncionario] = useState("")
     
     useEffect(() => {
-        getAgendamentos()
+        getAgendamentos(data_atendimento)
         getServicos()
         getClientes()
         // getFuncionario()
@@ -45,9 +45,9 @@ function AgendamentoFunc() {
         
     }, [])
 
-    async function getAgendamentos(){
-        try {
-            const response = await api.get("agendamento"); 
+    async function getAgendamentos(data: Date){
+        try {            
+            const response = await api.get(`agendamento/getAgendamentoData/${format(data, "yyyy-MM-dd")}`)
             setAgendamentos(response.data)
         } catch(err) {
             toast.error("Erro ao consultar a agenda");
@@ -55,18 +55,20 @@ function AgendamentoFunc() {
     }
 
     async function getAgendamentosDataCliente(dataSelecionada: Date){
-        try {
-            const dataFormatada = dataSelecionada.getUTCFullYear() + "-" + (dataSelecionada.getUTCMonth() + 1) + "-" + dataSelecionada.getUTCDate()
-            const response = await api.get(`agendamento/getAgendamentoCliente/${idCliente}/${dataFormatada}`); 
+        if(idCliente){
+            try {
+                const dataFormatada = dataSelecionada.getUTCFullYear() + "-" + (dataSelecionada.getUTCMonth() + 1) + "-" + dataSelecionada.getUTCDate()
+                const response = await api.get(`agendamento/getAgendamentoCliente/${idCliente}/${dataFormatada}`); 
 
-            let datasAgendamentosDataCliente: any[] = response.data.map((h:any) => {
-                return converteTempoEmData(h.horario_agendamento, h.tempo_servico, h.data_atendimento);
-            });
-            setAgendamentosHjCliente(datasAgendamentosDataCliente)
-            console.log(datasAgendamentosDataCliente)
+                let datasAgendamentosDataCliente: any[] = response.data.map((h:any) => {
+                    return converteTempoEmData(h.horario_agendamento, h.tempo_servico, h.data_atendimento);
+                });
+                setAgendamentosHjCliente(datasAgendamentosDataCliente)
+                console.log(datasAgendamentosDataCliente)
 
-        } catch(err) {
-            toast.error("Erro ao consultar a agenda");
+            } catch(err) {
+                toast.error("Erro ao consultar a agenda");
+            }
         }
     } 
     
@@ -174,7 +176,7 @@ function AgendamentoFunc() {
             });
             limpar();
             getServicos();
-            getAgendamentos() 
+            getAgendamentos(data_atendimento) 
 
             toast.success("Agendamento adicionado com sucesso!");
 
@@ -195,8 +197,11 @@ function AgendamentoFunc() {
     }
 
     function setData(data: any){
+        setAgendamentos([]);
+
         setDataAtendimento(data);
         getAgendamentosDataCliente(data);
+        getAgendamentos(data);
     }
 
     async function getHorariosProfissionais(id:string) {
@@ -293,7 +298,7 @@ function AgendamentoFunc() {
     
     async function cancelarAgendamento(idAgendamento: Number){
         await api.delete(`agendamento/${idAgendamento}`)
-        getAgendamentos()
+        getAgendamentos(data_atendimento)
     }
 
     
@@ -393,22 +398,16 @@ function AgendamentoFunc() {
                                         <td>{format(new Date(agendamento.data_atendimento), "dd/MM/yyyy")}</td>
                                         <td>{agendamento.horario_agendamento}</td>
                                         <td>
-                                            {clientes.map((cliente: any) => (
-                                                agendamento.cliente_id === cliente.cliente_id ? cliente.nome : ""
-                                            ))}
+                                            {agendamento.nomeCliente}
                                         </td>
                                         <td>
-                                            {agendamento.nome}                                        
+                                            {agendamento.nomeProfissional}                                        
                                         </td>
                                         <td>
-                                            {servicos.map((servico: any) => (
-                                                agendamento.servicos_id === servico.servicos_id ? servico.nome : ""
-                                            ))}
+                                            {agendamento.nomeServico}
                                         </td>
                                         <td>
-                                        {servicos.map((servico: any) => (
-                                                agendamento.servicos_id === servico.servicos_id ? `R$${servico.valor},00` : ""
-                                            ))} 
+                                        R$ {agendamento.valor},00 
                                         </td>
                                         {/* <td><span className="material-icons concluido"><MdCheckCircle/></span></td> Pagamento autorizado */}
                                         <td><span className="material-icons andamento"><AiFillClockCircle/></span></td> {/* Agendamento ainda não finalizado pela recepcionista */}

@@ -13,14 +13,17 @@ import "./styles.css";
 
 function  RelatorioComissaoPage(){
     const [relatorioComissoes, setRelatorioComissao] = useState([]);
+    const [csvData, setCsvData] = useState<any[]>([]);
     const [agendamentos, setAgendamentos] = useState([]);
     const [servicos, setServicos] = useState([]);
     const [IdServicos, setIdServicos] = useState("");
     const [profissionais, setProfissionais] = useState([]);
     const [idProfissional, setIdProfissional] = useState('');
+    const [dataFrom, setDataFrom] = useState(new Date());
+    const [dataTo, setDataTo] = useState(new Date());
 
     useEffect(() => {
-        getAgendamentos() 
+        //getAgendamentos() 
         getProfissional()
         getServicos()
     }, [])
@@ -50,18 +53,47 @@ function  RelatorioComissaoPage(){
 
     async function geraRelatorio(e: FormEvent){
         e.preventDefault();
-        const response = await api.get("relatorio/comissao");
-        setRelatorioComissao(response.data)
+
+        const dataFromFormatada = format(dataFrom, "yyyy-MM-dd");
+        const dataToFormatada = format(dataTo, "yyyy-MM-dd");
+
+        const response = await api.post("relatorio/servico", {
+            profissional_id: idProfissional,
+            from: dataFromFormatada,
+            to: dataToFormatada
+        });
+
+        const dados = response.data.map((dado: any) => {
+            return {
+                nome_profissional: dado.nome_profissional,
+                data_atendimento: format(new Date(dado.data_atendimento), "dd/MM/yyyy"),
+                nome_servico: dado.nome_servico,
+                valor: `R$ ${dado.valor}`,
+                comissao: `${dado.comissao}%`,
+                valorComissao: "R$" + (dado.valor * dado.comissao) / 100
+            }            
+        })
+
+        setRelatorioComissao(dados);
+
+        const csv = [];
+
+        csv.push(["Profissional", "Data Atendimento", "Serviço", "Valor", "Comissão", "Valor da Comissão"]);
+
+        dados.map((dado: any) => {
+            let linha = [];
+            linha.push(dado.nome_profissional);
+            linha.push(dado.data_atendimento);
+            linha.push(dado.nome_servico);
+            linha.push(dado.valor);
+            linha.push(dado.comissao);
+            linha.push(dado.valorComissao);
+
+            csv.push(linha);
+        })
+
+        setCsvData(csv);
     }
-
-
-    // Deixei estes dados como exemplo para saber se o botão de exportar está funcionando
-    // é necessário trazer as informações do banco de dados
-    const csvData = [
-        ["Nome", "Função", "CPF"],
-        ["Carlos Augusto", "Cabeleireiro", "123123123"],
-        ["Carlos Afonso", "Pedicure", "123123124"]
-    ]
 
     return (
         <>
@@ -91,12 +123,17 @@ function  RelatorioComissaoPage(){
                                 <label htmlFor="">
                                     <span>De:</span>
                                     <input 
-                                        type="date" />
+                                        type="date" 
+                                        onChange={(e)=>setDataFrom(new Date(e.target.value))}
+                                    />
                                 </label>
 
                                 <label htmlFor="">
                                     <span>Até:</span>
-                                    <input type="date" />
+                                    <input 
+                                        type="date" 
+                                        onChange={(e)=>setDataTo(new Date(e.target.value))}
+                                    />
                                 </label>
 
                                 <button className="buttons" type="submit">Gerar Relatório</button>
@@ -119,12 +156,12 @@ function  RelatorioComissaoPage(){
                                 <tbody>
                                     {relatorioComissoes.map((relatorioComissao: any) => (
                                         <tr>
-                                            <td>{relatorioComissao.nome}</td>
-                                            <td>{format(new Date(relatorioComissao.data), "dd/MM/yyyy")}</td>
+                                            <td>{relatorioComissao.nome_profissional}</td>
+                                            <td>{relatorioComissao.data_atendimento}</td>
                                             <td>{relatorioComissao.nome_servico}</td>
                                             <td>{relatorioComissao.valor}</td>
-                                            <td>{relatorioComissao.comissao}</td>
-                                            <td>{relatorioComissao.valor_comissao}</td>
+                                            <td>{relatorioComissao.comissao}%</td>
+                                            <td>{relatorioComissao.valorComissao}</td>
                                         </tr>
                                     ))}
                                 </tbody>
@@ -138,7 +175,6 @@ function  RelatorioComissaoPage(){
                                 data={csvData}
                                 filename={`relatorioComissao.csv`}
                                 separator=";"
-                                // filename={`relatorioComissao${relatorioComissao.nome}.csv`}
                             >
                                 Exportar para Excel
                             </CSVLink>
