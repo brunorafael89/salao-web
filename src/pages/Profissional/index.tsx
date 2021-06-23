@@ -6,15 +6,19 @@ import { toast } from "react-toastify";
 import { AiOutlineUpload } from "react-icons/ai";
 import { MdDeleteForever } from "react-icons/md";
 
+import DatePicker, { registerLocale } from "react-datepicker";
+import pt from 'date-fns/locale/pt-BR';
+import { format, parseISO } from "date-fns";
+
 import "./styles.css";
 import "../../components/Table/styles.css";
 
-import format from "date-fns/format";
-
 function ProfissionalPage(){
+    registerLocale('pt', pt);
+
     const [profissionais, setProfissionais] = useState([])
     const [nomeProfissional, setNomeProfissional] = useState("")
-    const [dataNascProfissional, setDataNascProfissional] = useState(format(new Date(), "dd/MM/yyyy"))
+    const [dataNascProfissional, setDataNascProfissional] = useState(new Date())
     const [cpfProfissional, setCpfProfissional] = useState("")
     const [telefoneProfissional, setTelefoneProfissional] = useState("")
     const [emailProfissional, setEmailProfissional] = useState("")
@@ -46,7 +50,7 @@ function ProfissionalPage(){
         try{
             await api.post("profissional", {
                 nome: nomeProfissional,
-                data_nasc: dataNascProfissional,
+                data_nasc: parseISO(format(dataNascProfissional, "yyyy-MM-dd")),                
                 cpf: cpfProfissional,
                 telefone: telefoneProfissional,
                 email: emailProfissional,
@@ -76,7 +80,7 @@ function ProfissionalPage(){
     //Função responsável por preencher o formulário com os dados da tabela
     async function carregar(profissional:any){
         setNomeProfissional(profissional.nome);
-        setDataNascProfissional(profissional.data_nasc);
+        setDataNascProfissional(new Date(profissional.data_nasc));
         setCpfProfissional(profissional.cpf);
         setTelefoneProfissional(profissional.telefone);
         setEmailProfissional(profissional.email);
@@ -86,7 +90,7 @@ function ProfissionalPage(){
 
     async function limpar() {
         setNomeProfissional("");
-        setDataNascProfissional("");
+        setDataNascProfissional(new Date());
         setCpfProfissional("");
         setTelefoneProfissional("");
         setEmailProfissional("");
@@ -98,7 +102,7 @@ function ProfissionalPage(){
         try{
             await api.put(`profissional/${idProfissional}`, {
                 nome: nomeProfissional,
-                data_nasc: dataNascProfissional,
+                data_nasc: parseISO(format(dataNascProfissional, "yyyy-MM-dd")),
                 telefone: telefoneProfissional,
                 email: emailProfissional,
                 senha: senhaProfissional
@@ -137,12 +141,19 @@ function ProfissionalPage(){
 
                             <label htmlFor="data_nasc">
                                 <span>Data Nascimento</span>
-                                <input 
+                                {/* <input 
                                     type="date" 
                                     name="data_nasc" 
                                     value={dataNascProfissional} 
                                     onChange={ (e) => setDataNascProfissional(e.target.value) }
+                                /> */}
+                                <DatePicker 
+                                    selected={dataNascProfissional} 
+                                    onChange={(date: Date) => setDataNascProfissional(date)} 
+                                    locale="pt"
+                                    dateFormat="dd/MM/yyyy"
                                 />
+
                             </label>
 
                             <label htmlFor="cpf">

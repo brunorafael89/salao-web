@@ -3,20 +3,27 @@ import Header from "../../components/Header";
 import MenuLateral from "../../components/MenuLateral";
 import api from "../../services/api";
 import { toast } from "react-toastify";
+
+import DatePicker, { registerLocale } from "react-datepicker";
+import pt from 'date-fns/locale/pt-BR';
+import { format, parseISO } from "date-fns";
+
 import "./styles.css";
 
 // importando os icones
 import { AiOutlineUpload } from "react-icons/ai";
 import { MdDeleteForever } from "react-icons/md";
 
-import format from "date-fns/format";
+
 import ValidarCPF from "../../components/ValidarCPF";
 
 function ClientePage(){
+    registerLocale('pt', pt);
+
     const [clientes, setClientes] = useState([]);
     const [nomeCliente, setNomeCliente] = useState("");
     const [cpfCliente, setCpfCliente] = useState("");
-    const [dataNascCliente, setDataNascCliente] = useState(format(new Date(), "dd/MM/yyyy"));
+    const [dataNascCliente, setDataNascCliente] = useState(new Date());
     const [telefoneCliente, setTelefoneCliente] = useState("");
     const [sexoCliente, setSexoCliente] = useState("");
     const SexoList = [
@@ -59,7 +66,7 @@ function ClientePage(){
                 await api.post("cliente", {
                     nome: nomeCliente,
                     cpf: cpfCliente,
-                    data_nasc: dataNascCliente,
+                    data_nasc: parseISO(format(dataNascCliente, "yyyy-MM-dd")),
                     telefone: telefoneCliente,
                     sexo: sexoCliente,
                     email: emailCliente,
@@ -82,7 +89,7 @@ function ClientePage(){
         try{
             await api.put(`cliente/${idCliente}`, {
                 nome: nomeCliente,
-                data_nasc: dataNascCliente,
+                data_nasc: parseISO(format(dataNascCliente, "yyyy-MM-dd")),
                 telefone: telefoneCliente,
                 sexo: sexoCliente,
                 email: emailCliente,
@@ -111,7 +118,7 @@ function ClientePage(){
     async function carregar(cliente:any){
         setNomeCliente(cliente.nome);
         setCpfCliente(cliente.cpf);
-        setDataNascCliente(cliente.data_nasc);
+        setDataNascCliente(new Date(cliente.data_nasc));
         setTelefoneCliente(cliente.telefone);
         setSexoCliente(cliente.sexo);
         setEmailCliente(cliente.email);
@@ -122,7 +129,7 @@ function ClientePage(){
     async function limpar(){
         setNomeCliente("");
         setCpfCliente("");
-        setDataNascCliente("");
+        setDataNascCliente(new Date());
         setTelefoneCliente("");
         setSexoCliente("");
         setEmailCliente("");
@@ -165,13 +172,26 @@ function ClientePage(){
         
                             <label htmlFor="data_nasc">
                                 <span>Data Nascimento</span>
-                                <input 
+                                {/* <input 
                                     type="date" 
                                     name="data_nasc"
                                     value={dataNascCliente}
                                     onChange={(e) => setDataNascCliente(e.target.value)} 
+                                /> */}
+                                <DatePicker 
+                                    selected={dataNascCliente} 
+                                    onChange={(date: Date) => setDataNascCliente(date)} 
+                                    locale="pt"
+                                    dateFormat="dd/MM/yyyy"
                                 />
                             </label>
+
+                            {/* <DatePicker 
+                                selected={startDate} 
+                                onChange={(date: Date) => setStartDate(date)} 
+                                locale="pt"
+                                dateFormat="dd/MM/yyyy"
+                            /> */}
 
                             <label htmlFor="telefone">
                                 <span>Telefone</span>
