@@ -1,10 +1,8 @@
 import React from "react";
-import { MdPermContactCalendar } from "react-icons/md";
 import { AiOutlineStar } from "react-icons/ai";
-import { FiPhone } from "react-icons/fi";
-import { FiMail } from "react-icons/fi";
-import { MdAttachMoney } from "react-icons/md";
-import { MdExitToApp } from "react-icons/md";
+import { FiPhone, FiMail } from "react-icons/fi";
+import { MdAttachMoney, MdExitToApp } from "react-icons/md";
+import { GiHamburgerMenu } from "react-icons/gi";
 import tratamento from "../../assets/images/tratamento.jpg";
 import unhas from "../../assets/images/unhas.jpg";
 import escova from "../../assets/images/escova.jpg";
@@ -14,7 +12,6 @@ import depilacao from "../../assets/images/depilacao.jpg";
 import pes from "../../assets/images/pes.jpg";
 import logo from "../../assets/images/logo.png";
 import map from "../../assets/images/map.svg";
-import { GiHamburgerMenu } from "react-icons/gi";
 
 import "./styles.css";
 import Components from "../../components/CallToAction"
@@ -85,7 +82,7 @@ function PrincipalPage(){
                             </div>
 
                             <div className="service-description">
-                                <p className="service-description-p">A vida é muito mais fácil com uma bela escova nos cabelos.</p>
+                                <p className="service-description-p">Fios alinhados ou cabelos modelados, você decide, nossos profissionais estão prontos para te atender e fazer você arrasar! </p>
                             </div>
                         </article>
 
@@ -99,7 +96,7 @@ function PrincipalPage(){
                             </div>
 
                             <div className="service-description">
-                                <p className="service-description-p">Uma mulher com as unhas feitas não quer guerra com ninguém.</p>
+                                <p className="service-description-p">Contamos com as mais modernas técnicas de "Nail Designer" disponiveis no mercado, nossos profissionais arrasam na cutilagem e nos desenhos, que são verdadeiras obras de arte, marque seu horário e venha conferir!</p>
                             </div>
                         </article>
 
@@ -113,7 +110,7 @@ function PrincipalPage(){
                             </div>
 
                             <div className="service-description">
-                                <p className="service-description-p">"Felicidade é quando elogiam o seu novo corte de cabelo.</p>
+                                <p className="service-description-p">Cortar os cabelos regularmente evita o ressecamento e o surgimento das pontas duplas. Não corra esse risco, faça-nos uma visita regular, te receberemos com o maior carinho e conforto.</p>
                             </div>
                         </article>
 
@@ -127,7 +124,8 @@ function PrincipalPage(){
                             </div>
 
                             <div className="service-description">
-                                <p className="service-description-p">A vida fica mais divertida quando vc pode usar todas as cores.</p>
+                                <p className="service-description-p">Existem muitas técnicas envolvidas na tintura de cabelos, aqui trabalhamos com profissionalismo para melhor atender as espectativa de nossos clientes. Você que mudar o visual ou simplesmente cobrir os fios brancos, ou a raiz?</p>
+                                <p className="service-description-p">Venha conversar com a gente e descobrir a melhor opção para o seu caso!</p>
                             </div>
                         </article>
 
@@ -141,7 +139,7 @@ function PrincipalPage(){
                             </div>
 
                             <div className="service-description">
-                                <p className="service-description-p">Sem pelos, sem preocupação!</p>
+                                <p className="service-description-p"> Está querendo aquela pele lisinha e livre de pelos? Aqui é o lugar certo, atendemos Homens e mulheres, utilizamos as melhores técnicas para que você não sofra, venha fazer um teste!</p>
                             </div>
                         </article>
 
@@ -155,7 +153,7 @@ function PrincipalPage(){
                             </div>
 
                             <div className="service-description">
-                                <p className="service-description-p">Porque eles merecem e você também.</p>
+                                <p className="service-description-p">Sabe a expressão "Pés de fada", então, aqui você encontra. Oferecemos esfoliação, hidratação e massagens relaxantes. Venha aliviar as tensões e ainda por cima ficar com um pé maravilhoso!</p>
                             </div>
                         </article>
                     </section>

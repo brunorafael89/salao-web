@@ -1,30 +1,29 @@
-import React, { FormEvent, useEffect, useState } from "react";
+import React, { FormEvent, useState } from "react";
 import Header from "../../components/Header";
 import MenuLateral from "../../components/MenuLateral";
 import { toast } from "react-toastify";
-// import {MdCheckCircle, MdCancel} from "react-icons/md";
-import {MdDeleteForever} from "react-icons/md";
+import {MdDeleteForever, MdCheckCircle} from "react-icons/md";
 import {AiFillClockCircle} from "react-icons/ai";
-import {MdCheckCircle} from "react-icons/md";
-
 import "./styles.css";
-import format from "date-fns/format";
+
+import DatePicker, { registerLocale } from "react-datepicker";
+import pt from 'date-fns/locale/pt-BR';
+import { format } from "date-fns";
+
 import api from "../../services/api";
 import { useHistory } from "react-router-dom";
 
 function ControleAgendaPage(){
+    registerLocale('pt', pt)
+
     const history = useHistory();
     const [agendamentos, setAgendamentos] = useState([]);
-    const [servicos, setServicos] = useState([]);
-    const [clientes, setClientes] = useState([]);
-    const [idCliente, setIdCliente] = useState([]);
-    const [profissionais, setProfissionais] = useState([]);
     const [data, setData] = useState(new Date());
 
     async function verAgenda(e:FormEvent) {
         e.preventDefault()
 
-        const response = await api.get(`agendamento/getAgendamentoData/${format(new Date(data), "yyyy-MM-dd")}`)
+        const response = await api.get(`agendamento/getAgendamentoData/${format(data, "yyyy-MM-dd")}`)
         setAgendamentos(response.data)
     }
 
@@ -53,7 +52,7 @@ function ControleAgendaPage(){
         agendamentosSelecionados.map((agendamento: any) => {
             if(!clienteId) {
                 clienteId = agendamento.cliente_id;
-            } else if(clienteId != agendamento.cliente_id) {
+            } else if(clienteId !== agendamento.cliente_id) {
                 agendamentosClientesDiferentes = true;
             }
         });
@@ -88,11 +87,11 @@ function ControleAgendaPage(){
                             <form onSubmit={verAgenda}>
                                 <label htmlFor="">
                                     <span>Dia:</span>
-                                    <input 
-                                        type="date" 
-                                        name="data"
-                                        value={format(new Date(data), "yyyy-MM-dd")}
-                                        onChange={(e) => setData(new Date(e.target.value))} 
+                                    <DatePicker
+                                        selected={data}
+                                        onChange={(date: Date)=>setData(new Date(date))}
+                                        locale="pt"
+                                        dateFormat="dd/MM/yyyy"
                                     />
                                 </label>
 

@@ -4,16 +4,21 @@ import api from "../../services/api";
 import Header from "../../components/Header";
 import MenuLateral from "../../components/MenuLateral";
 import { toast } from "react-toastify";
-import format from "date-fns/format"
 import { getUser, logout } from "../../services/auth";
+
+import DatePicker, { registerLocale } from "react-datepicker";
+import pt from 'date-fns/locale/pt-BR';
+import { format, parseISO } from "date-fns";
 
 import "./styles.css";
 
 function PerfilPage(){
+    registerLocale('pt', pt)
+
     const [idCliente, setIdClientes] = useState("")
     const [nomeCliente, setNomeClientes] = useState("")
     const [cpfCliente, setCpfClientes] = useState("")
-    const [dataNascCliente, setDataNascClientes] = useState(format(new Date(), "dd-MMs-yyyy"))
+    const [dataNascCliente, setDataNascClientes] = useState(new Date())
     const [telefoneCliente, setTelefoneClientes] = useState("")
     const [sexoCliente, setSexoClientes] = useState("")
     const SexoList = [
@@ -30,7 +35,7 @@ function PerfilPage(){
 
     useEffect( ()=>{
         getClientes()
-    }, [] )
+    })
 
     async function getClientes(){
         try{
@@ -38,11 +43,13 @@ function PerfilPage(){
             setIdClientes(response.data.cliente_id)
             setNomeClientes(response.data.nome)
             setCpfClientes(response.data.cpf)
-            setDataNascClientes(response.data.data_nasc)
+            setDataNascClientes(parseISO(format(new Date(response.data.data_nasc), "yyyy-MM-dd")))
             setTelefoneClientes(response.data.telefone)
             setSexoClientes(response.data.sexo)
             setEmailClientes(response.data.email)
             setSenhaClientes(response.data.senha)
+
+            console.log(response.data)
         } catch(err){
             toast.error("Erro ao consultar clientes")
         }
@@ -53,7 +60,7 @@ function PerfilPage(){
         await api.put(`cliente/${idCliente}`, {
             nome: nomeCliente,
             cpf: cpfCliente,
-            data_nasc: dataNascCliente,
+            data_nasc: parseISO(format(dataNascCliente, "yyyy-MM-dd")),
             telefone: telefoneCliente,
             sexo: sexoCliente,
             email: emailCliente,
@@ -113,11 +120,11 @@ function PerfilPage(){
 
                             <label htmlFor="data_nasc">
                                 <span>Data Nascimento</span>
-                                <input 
-                                    type="date" 
-                                    name="data_nasc" 
-                                    // value={format(new Date(dataNascCliente), "yyyy-mm-dd")}
-                                    onChange={ (e) => setDataNascClientes(e.target.value) }
+                                <DatePicker
+                                    selected={dataNascCliente}
+                                    onChange={(date: Date) => setDataNascClientes(date)}
+                                    locale="pt"
+                                    dateFormat="dd/MM/yyyy"
                                 />
                             </label>
 

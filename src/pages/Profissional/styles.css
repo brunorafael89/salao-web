@@ -7,7 +7,7 @@
 .profissional.cadastro-form{
     display: flex;
     flex-direction: column;
-    width: 50%;
+    width: 60%;
     height: 100%;
     margin: 0 auto;
     padding: 10px;
@@ -31,14 +31,22 @@
 
 .profissional.cadastro-form .form label span{
     display: inline-block;
-    width: 18%;
+    width: 25%;
     margin: unset;
     font-size: 20px;
     font-weight: normal;
 }
 
+.profissional.cadastro-form .form label .react-datepicker-wrapper{
+    width: 75%;
+}
+
+.profissional.cadastro-form .form label .react-datepicker-wrapper input{
+    width: 100%;
+}
+
 .profissional.cadastro-form .form label input{
-    width: 80%;
+    width: 75%;
     margin: 5px 0;
     padding: 5px;
     border: none;
@@ -131,6 +139,10 @@
         font-size: 18px;
         font-weight: bold;
         color: #000;
+    }
+
+    .profissional.cadastro-form .form label .react-datepicker-wrapper{
+        width: 100%;
     }
 
     .profissional.cadastro-form .form label input{

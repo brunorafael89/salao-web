@@ -7,7 +7,7 @@ import api from "../../services/api";
 import {MdCheckCircle} from "react-icons/md";
 import {MdDeleteForever} from "react-icons/md";
 import {AiFillClockCircle} from "react-icons/ai";
-import { addMinutes, isBefore, subMinutes, format, isAfter, isEqual, addSeconds } from "date-fns";
+import { addMinutes, isBefore, subMinutes, format, isAfter, addSeconds } from "date-fns";
 
 import "./styles.css";
 import { getUser } from "../../services/auth";
@@ -16,19 +16,16 @@ function AgendamentoPage() {
     const user = getUser();
     const [agendamentos, setAgendamentos] = useState([]);
     const [servicos, setServicos] = useState([]);
-    const [clientes, setClientes] = useState([]);
     const [IdServicos, setIdServicos] = useState("");
-    // const [idFormapagamento, setIdFormapagamento] = useState("");
-    // const [formaPagamentos, setFormaPagamento] = useState([]);
-    const [idAgendamento, setIdAgendamento] = useState("");
-    const [profissionais, setProfissionais] = useState([]);
-    const [horarios, setHorarios] = useState<string[]>([]);
-    const [idProfissional, setIdProfissional] = useState('');
+    const [clientes, setClientes] = useState([]);
     const [idCliente, setIdCliente] = useState(user.clienteId);
+    const [profissionais, setProfissionais] = useState([]);
+    const [idProfissional, setIdProfissional] = useState('');
+    const [horarios, setHorarios] = useState<string[]>([]);
+    const [horario_agendamento, setHorarioAgendamento] = useState('');
     const [data_atendimento, setDataAtendimento] = useState(new Date());
     const [data_agendamento, setDataAgendamento] = useState(new Date());
     const [total, setTotal] = useState('');
-    const [horario_agendamento, setHorarioAgendamento] = useState('');
     const [servicoSelecionado, setServicoSelecionado] = useState<any>();
     const [agendamentosHjCliente, setAgendamentosHjCliente] = useState<any[]>([]);
 
@@ -36,11 +33,7 @@ function AgendamentoPage() {
         getAgendamentos()
         getServicos()
         getClientes()
-        // getProfissionais()
-        // getFormaPagamento()
-        
-        
-    }, [])
+    })
 
     async function getAgendamentos(){
         try {
@@ -94,52 +87,6 @@ function AgendamentoPage() {
         }
     }
 
-    // async function getFormaPagamento(){
-    //     try {
-    //         const response = await api.get("formaPagamento"); 
-    //         setFormaPagamento(response.data)
-    //     } catch(err) {
-    //         toast.error("Erro ao consultar as formas de pagamentos");
-    //     }
-    // }
-
-    // function getHorarios(servico:any){
-    //     servico = JSON.parse(servico)
-    //     const dataInicial = new Date()
-    //     dataInicial.setHours(9, 0, 0);
-
-    //     let dataSomada = dataInicial;
-        
-    //     const dataFinal = new Date()
-    //     dataFinal.setHours(18, 0, 0)
-       
-    //     const horarios = [];
-        
-    //     const tempo:any[] = servico.tempo_servico.split(':')
-    //     const hora = Number(tempo[0]) * 60;
-    //     const minuto = Number(tempo[1]);
-    //     const novaHora = hora + minuto;
-
-    //     let horaFormatada = format(dataSomada, "HH:mm");
-    //     horarios.push(horaFormatada);
-
-    //     const dataLimiteAgendamento = subMinutes(dataFinal, novaHora);
-    
-    //     while(isBefore(dataSomada, dataLimiteAgendamento)){
-    
-    //         dataSomada = addMinutes(dataSomada, novaHora);
-            
-    //         let horaFormatada = format(dataSomada, "HH:mm");
-    
-    //         horarios.push(horaFormatada);
-    //     }
-    
-    //     setHorarios(horarios);
-    //     getProfissionais(servico.funcao_id)
-    //     setTotal(servico.valor)
-    //     setIdServicos(servico.servicos_id)
-    // }
-
     function getHorarios(servico:any){
         servico = JSON.parse(servico)
         
@@ -153,7 +100,6 @@ function AgendamentoPage() {
         e.preventDefault();
         try{
             await api.post('agendamento', {
-                // funcionario_id: idFuncionario,
                 profissional_id: idProfissional,
                 cliente_id: idCliente,
                 data_atendimento: data_atendimento,
@@ -161,8 +107,6 @@ function AgendamentoPage() {
                 total: total,
                 horario_agendamento: format(new Date(), "yyyy-MM-dd") + " " + horario_agendamento + ":00 America/Sao_Paulo",
                 servico_id: IdServicos,
-                // forma_pagamento_id: idFormapagamento
-
             });
             limpar();
             getServicos();
@@ -231,7 +175,7 @@ function AgendamentoPage() {
 
             let achou = false;
 
-            for(var i=0; i<datasProfissional.length; i++){
+            for(var i = 0; i < datasProfissional.length; i++){
                 if(
                     (isAfter(dataInicioAgendamento, datasProfissional[i].dataInicial) && isBefore(dataInicioAgendamento, datasProfissional[i].dataFinal)) 
                     || (isAfter(dataFinalAgendamento, datasProfissional[i].dataInicial) && isBefore(dataFinalAgendamento, datasProfissional[i].dataFinal))
@@ -242,13 +186,13 @@ function AgendamentoPage() {
                 }
             }
 
-            for(var i=0; i<datasClientes.length; i++){
+            for(var j = 0; j < datasClientes.length; j++){
                 if(
-                    (isAfter(dataInicioAgendamento, new Date(datasClientes[i].dataInicial)) && isBefore(dataInicioAgendamento, new Date(datasClientes[i].dataFinal))) 
-                    || (isAfter(dataFinalAgendamento, new Date(datasClientes[i].dataInicial)) && isBefore(dataFinalAgendamento, new Date(datasClientes[i].dataFinal)))
+                    (isAfter(dataInicioAgendamento, new Date(datasClientes[j].dataInicial)) && isBefore(dataInicioAgendamento, new Date(datasClientes[j].dataFinal))) 
+                    || (isAfter(dataFinalAgendamento, new Date(datasClientes[j].dataInicial)) && isBefore(dataFinalAgendamento, new Date(datasClientes[j].dataFinal)))
                 ){
                     achou = true;
-                    datasClientes.splice(i, 1);
+                    datasClientes.splice(j, 1);
                     break;
                 }
             }

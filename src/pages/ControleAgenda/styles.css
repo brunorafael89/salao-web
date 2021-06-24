@@ -42,7 +42,7 @@ main .controle-agenda.main-container{
 
 .controle-agenda.main-container .info-select .select-data form label{
     display: inline-block;
-    width: 33%;
+    width: 36%;
     min-width: 230px;
     margin: 10px 0;
 }

@@ -13,7 +13,7 @@ const GerentePrivateRouter: React.FC<RProps> = ({ component: Component, ...rest 
         <Route 
             {...rest}
             render={({ location }) => {
-                return user.perfilAcessoId == 4
+                return user.perfilAcessoId === 4
                 ? (<Component />)
                 : (
                     <Redirect 

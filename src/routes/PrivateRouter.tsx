@@ -1,6 +1,6 @@
 import React from "react";
 import { RouteProps, Route, Redirect } from "react-router";
-import { getUser, isAuthenticated } from "../services/auth";
+import { getUser } from "../services/auth";
 
 interface RProps extends RouteProps {
     component: React.ComponentType;

@@ -9,7 +9,10 @@ import { MdDeleteForever } from "react-icons/md";
 import "./styles.css";
 import "../../components/Table/styles.css";
 
-import format from "date-fns/format";
+import DatePicker, { registerLocale } from "react-datepicker";
+import pt from 'date-fns/locale/pt-BR';
+import { format, parseISO } from "date-fns";
+
 import ValidarCPF from "../../components/ValidarCPF";
 
 const FUNCIONARIO: any = {
@@ -24,12 +27,13 @@ const FUNCIONARIO: any = {
 }
 
 function FuncionarioPage(){
+    registerLocale('pt', pt)
+
     const [funcionarios, setFuncionarios] = useState([])
     const [idFuncionario, setIdFuncionario] = useState("")
-    const [perfilacessoFuncionario, setIdPerfilacessoFuncionario] = useState("")
     const [nomeFuncionario, setNomeFuncionario] = useState("")
     const [cargoFuncionario, setCargoFuncionario] = useState<string>("");
-    const [dataNascFuncionario, setDataNascFuncionario] = useState(format(new Date(), "yyyy-MM-dd"))
+    const [dataNascFuncionario, setDataNascFuncionario] = useState(new Date())
     const [cpfFuncionario, setCpfFuncionario] = useState("")
     const [telefoneFuncionario, setTelefoneFuncionario] = useState("")
     const [emailFuncionario, setEmailFuncionario] = useState("")
@@ -37,7 +41,6 @@ function FuncionarioPage(){
 
     useEffect( () => {
         getFuncionario()
-        // getPerfilacesso()
     }, [] )
 
     async function getFuncionario(){
@@ -66,7 +69,7 @@ function FuncionarioPage(){
                 await api.post("funcionario", {
                     nome: nomeFuncionario,
                     cargo: cargoFuncionario,
-                    data_nasc: dataNascFuncionario,
+                    data_nasc: parseISO(format(dataNascFuncionario, "yyyy-MM-dd")),
                     cpf: cpfFuncionario,
                     telefone: telefoneFuncionario,
                     email: emailFuncionario,
@@ -131,7 +134,7 @@ function FuncionarioPage(){
     async function carregar(funcionario:any){
         setNomeFuncionario(funcionario.nome);
         setCargoFuncionario(funcionario.cargo);
-        setDataNascFuncionario(funcionario.data_nasc);
+        setDataNascFuncionario(new Date(funcionario.data_nasc));
         setCpfFuncionario(funcionario.cpf);
         setTelefoneFuncionario(funcionario.telefone);
         setEmailFuncionario(funcionario.email);
@@ -142,7 +145,7 @@ function FuncionarioPage(){
     async function limpar() {
         setNomeFuncionario("");
         setCargoFuncionario("");
-        setDataNascFuncionario(format(new Date(), "yyyy/MM/dd"));
+        setDataNascFuncionario(new Date());
         setCpfFuncionario("");
         setTelefoneFuncionario("");
         setEmailFuncionario("");
@@ -155,7 +158,7 @@ function FuncionarioPage(){
             await api.put(`funcionario/${idFuncionario}`, {
                 nome: nomeFuncionario,
                 cargo: cargoFuncionario,
-                data_nasc: format(new Date(dataNascFuncionario), "yyyy-MM-dd"),
+                data_nasc: parseISO(format(dataNascFuncionario, "yyyy-MM-dd")),
                 telefone: telefoneFuncionario,
                 email: emailFuncionario,
                 senha: senhaFuncionario
@@ -192,16 +195,6 @@ function FuncionarioPage(){
                                 />
                             </label>
 
-                            {/* <label htmlFor="cargo">
-                                <span>Cargo</span>
-                                <input 
-                                    type="text" 
-                                    name="cargo" 
-                                    value={cargoFuncionario} 
-                                    onChange={ (e) => setCargoFuncionario(e.target.value) }
-                                    placeholder="Recepcionista ou Gerente"/>
-                            </label> */}
-
                             <label htmlFor="">
                                 <span>Cargo</span>
                                 <select name="cargo" id="" onChange={ (e) => setCargoFuncionario(e.target.value) }>
@@ -214,11 +207,11 @@ function FuncionarioPage(){
 
                             <label htmlFor="data_nasc">
                                 <span>Data Nascimento</span>
-                                <input 
-                                    type="date" 
-                                    name="data_nasc"
-                                    value={format(new Date(dataNascFuncionario), "yyyy-MM-dd")}
-                                    onChange={(e) => setDataNascFuncionario(e.target.value)}
+                                <DatePicker
+                                    selected={dataNascFuncionario}
+                                    onChange={(date: Date) => setDataNascFuncionario(date)}
+                                    locale="pt"
+                                    dateFormat="dd/MM/yyyy"
                                 />
                             </label>
 

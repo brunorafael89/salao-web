@@ -44,6 +44,14 @@
     font-weight: normal;
 }
 
+.area-cliente.cadastro-form .form label .react-datepicker-wrapper{
+    width: 74%;
+}
+
+.area-cliente.cadastro-form .form label .react-datepicker-wrapper input{
+    width: 100%;
+}
+
 .area-cliente.cadastro-form .form label input{
     width: 74%;
     padding: 5px;
@@ -145,6 +153,10 @@
         font-size: 14px;
         font-weight: bold;
         color: #000;
+    }
+
+    .area-cliente.cadastro-form .form label .react-datepicker-wrapper{
+        width: 100%;
     }
 
     .area-cliente.cadastro-form .form label input {

@@ -24,12 +24,12 @@ function CartPage(){
     useEffect(() => {
         getFormaPagamento();
 
-        console.log(location.state)
+        // console.log(location.state)
         setAgendamentos(location.state);
 
         calcularTotal(location.state);
 
-    }, []);
+    });
 
     function calcularTotal(agendamentos: any[]){
         let total = 0;
@@ -64,7 +64,7 @@ function CartPage(){
 
     function excluir(agendamento_id: Number){
         const agendamentosFiltrados = agendamentos.filter(agendamento => {
-            return agendamento.agendamento_id != agendamento_id;
+            return agendamento.agendamento_id !== agendamento_id;
         });
         setAgendamentos(agendamentosFiltrados);
         calcularTotal(agendamentosFiltrados);

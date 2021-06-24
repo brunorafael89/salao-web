@@ -172,12 +172,6 @@ function ClientePage(){
         
                             <label htmlFor="data_nasc">
                                 <span>Data Nascimento</span>
-                                {/* <input 
-                                    type="date" 
-                                    name="data_nasc"
-                                    value={dataNascCliente}
-                                    onChange={(e) => setDataNascCliente(e.target.value)} 
-                                /> */}
                                 <DatePicker 
                                     selected={dataNascCliente} 
                                     onChange={(date: Date) => setDataNascCliente(date)} 
@@ -185,13 +179,6 @@ function ClientePage(){
                                     dateFormat="dd/MM/yyyy"
                                 />
                             </label>
-
-                            {/* <DatePicker 
-                                selected={startDate} 
-                                onChange={(date: Date) => setStartDate(date)} 
-                                locale="pt"
-                                dateFormat="dd/MM/yyyy"
-                            /> */}
 
                             <label htmlFor="telefone">
                                 <span>Telefone</span>
@@ -229,6 +216,15 @@ function ClientePage(){
                                     name="senha"
                                     value={senhaCliente}
                                     onChange={(e) => setSenhaCliente(e.target.value)}
+                                />
+                            </label>
+
+                            <label htmlFor="">
+                                <span>Ativo</span>
+                                <input 
+                                    type="checkbox" 
+                                    name="ativo" 
+                                    checked
                                 />
                             </label>
 

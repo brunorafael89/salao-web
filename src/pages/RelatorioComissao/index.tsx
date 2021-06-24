@@ -1,50 +1,29 @@
 import React, { FormEvent, useEffect, useState } from "react";
-import format from "date-fns/format";
 import Header from "../../components/Header";
 import MenuLateral from "../../components/MenuLateral";
-import { toast } from "react-toastify";
 import api from "../../services/api";
-import {IoMdPrint} from "react-icons/io";
 import {RiFileExcel2Line} from "react-icons/ri";
-
 import { CSVLink } from "react-csv";
+
+import DatePicker, { registerLocale } from "react-datepicker";
+import pt from 'date-fns/locale/pt-BR';
+import { format } from "date-fns";
 
 import "./styles.css";
 
 function  RelatorioComissaoPage(){
+    registerLocale("pt", pt)
+
     const [relatorioComissoes, setRelatorioComissao] = useState([]);
     const [csvData, setCsvData] = useState<any[]>([]);
-    const [agendamentos, setAgendamentos] = useState([]);
-    const [servicos, setServicos] = useState([]);
-    const [IdServicos, setIdServicos] = useState("");
     const [profissionais, setProfissionais] = useState([]);
     const [idProfissional, setIdProfissional] = useState('');
     const [dataFrom, setDataFrom] = useState(new Date());
     const [dataTo, setDataTo] = useState(new Date());
 
     useEffect(() => {
-        //getAgendamentos() 
         getProfissional()
-        getServicos()
     }, [])
-
-    async function getAgendamentos(){
-        try {
-            const response = await api.get("agendamento"); 
-            setAgendamentos(response.data)
-        } catch(err) {
-            toast.error("Erro ao consultar a agenda");
-        }
-    } 
-
-    async function getServicos(){
-        try {
-            const response = await api.get("servicos"); 
-            setServicos(response.data)
-        } catch(err) {
-            toast.error("Erro ao consultar os serviços");
-        }
-    }   
 
     async function getProfissional(){
         const response = await api.get("profissional");
@@ -110,9 +89,9 @@ function  RelatorioComissaoPage(){
                                 <span className="spn-titulo">Selecione o profissional</span>
                                 <select name="comissao" id="" onChange={(e) => setIdProfissional(e.target.value)}>
                                     <option value="">Selecione o profissional</option>
-                                            {profissionais.map((profissional: any) => (
-                                                <option value={profissional.profissional_id}>{profissional.nome}</option>
-                                            ))}
+                                    {profissionais.map((profissional: any) => (
+                                        <option value={profissional.profissional_id}>{profissional.nome}</option>
+                                    ))}
                                 </select>
                             </label>
                         </div>
@@ -122,17 +101,21 @@ function  RelatorioComissaoPage(){
                             <form onSubmit={geraRelatorio}>
                                 <label htmlFor="">
                                     <span>De:</span>
-                                    <input 
-                                        type="date" 
-                                        onChange={(e)=>setDataFrom(new Date(e.target.value))}
+                                    <DatePicker
+                                        selected={dataFrom}
+                                        onChange={(date: Date) => setDataFrom(date)}
+                                        locale="pt"
+                                        dateFormat="dd/MM/yyyy"
                                     />
                                 </label>
 
                                 <label htmlFor="">
                                     <span>Até:</span>
-                                    <input 
-                                        type="date" 
-                                        onChange={(e)=>setDataTo(new Date(e.target.value))}
+                                    <DatePicker
+                                        selected={dataTo}
+                                        onChange={(date: Date) => setDataTo(date)}
+                                        locale="pt"
+                                        dateFormat="dd/MM/yyyy"
                                     />
                                 </label>
 
@@ -160,7 +143,7 @@ function  RelatorioComissaoPage(){
                                             <td>{relatorioComissao.data_atendimento}</td>
                                             <td>{relatorioComissao.nome_servico}</td>
                                             <td>{relatorioComissao.valor}</td>
-                                            <td>{relatorioComissao.comissao}%</td>
+                                            <td>{relatorioComissao.comissao}</td>
                                             <td>{relatorioComissao.valorComissao}</td>
                                         </tr>
                                     ))}

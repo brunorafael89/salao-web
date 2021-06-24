@@ -7,7 +7,7 @@
 .cad-cliente.cadastro-form{
     display: flex;
     flex-direction: column;
-    width: 50%;
+    width: 60%;
     height: 100%;
     margin: 0 auto;
     padding: 10px;
@@ -41,6 +41,14 @@
     margin: unset;
     font-size: 20px;
     font-weight: normal;
+}
+
+.cad-cliente.cadastro-form .form label .react-datepicker-wrapper{
+    width: 74%;
+}
+
+.cad-cliente.cadastro-form .form label .react-datepicker-wrapper input{
+    width: 100%;
 }
 
 .cad-cliente.cadastro-form .form label input{
@@ -152,6 +160,10 @@
         font-size: 18px;
         font-weight: bold;
         color: #000;
+    }
+
+    .cad-cliente.cadastro-form .form label .react-datepicker-wrapper{
+        width: 100%;
     }
 
     .cad-cliente.cadastro-form .form label input,

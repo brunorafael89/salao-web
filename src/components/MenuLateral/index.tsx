@@ -13,12 +13,6 @@ import { getUser } from "../../services/auth";
 
 function MenuLateral(){
     function openClassCadastro(){
-        // if( !document.querySelector('main ul#dropCadastro') ){
-        //     openHeaderCadastro()
-        // } else {
-        //     document.querySelector('main ul#dropCadastro')?.classList.toggle('show')
-        // }
-
         document.querySelector('main ul#dropCadastro') 
         ? document.querySelector('main ul#dropCadastro')?.classList.toggle('show')
         : openHeaderCadastro() 
@@ -72,7 +66,7 @@ function MenuLateral(){
                                 <span><IoIosAdd/></span>
                                 <a href="#" onClick={openClassCadastro}>Cadastros</a>
                                 <ul id="dropCadastro">
-                                    {user.perfilAcessoId == 4 && (
+                                    {user.perfilAcessoId === 4 && (
                                         <li>
                                             <span><AiOutlineUserAdd /></span>
                                             <a href="Funcionario">Cadastrar Funcionários</a>
@@ -82,7 +76,7 @@ function MenuLateral(){
                                         <span><AiOutlineUserAdd /></span>
                                         <a href="Cliente">Cadastrar Clientes</a>
                                     </li>
-                                    {user.perfilAcessoId == 4 && (                       
+                                    {user.perfilAcessoId === 4 && (                       
                                         <li>
                                             <span><AiOutlineTool /></span>
                                             <a href="Funcao">Cadastrar Função</a>
@@ -92,7 +86,7 @@ function MenuLateral(){
                                         <span><AiOutlineTeam /></span>
                                         <a href="Profissional">Cadastrar Profissional</a>
                                     </li>
-                                    {user.perfilAcessoId == 4 && (
+                                    {user.perfilAcessoId === 4 && (
                                         <li>
                                             <span><FaConciergeBell /></span>
                                             <a href="Servico">Cadastrar Serviço</a>
@@ -102,7 +96,7 @@ function MenuLateral(){
                                         <span><AiOutlineAudit /></span>
                                         <a href="ProfissionalFuncao">Profissional-Função</a>
                                     </li>
-                                    {user.perfilAcessoId == 4 && (
+                                    {user.perfilAcessoId === 4 && (
                                         <li>
                                             <span><SiCashapp /></span>
                                             <a href="FormaPagamento">Formas de Pagamento</a>
@@ -110,7 +104,7 @@ function MenuLateral(){
                                     )}
                                 </ul>
                             </li>
-                            {user.perfilAcessoId == 4 && (
+                            {user.perfilAcessoId === 4 && (
                                 <li>
                                     <span><IoIosAdd/></span>
                                     <a href="#" onClick={openClassRelatorio}>Relatórios</a>

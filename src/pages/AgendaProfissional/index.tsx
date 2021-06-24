@@ -1,4 +1,3 @@
-import format from "date-fns/format";
 import React, { useEffect, useState } from "react";
 import Header from "../../components/Header";
 import MenuLateral from "../../components/MenuLateral";
@@ -7,26 +6,25 @@ import { getUser } from "../../services/auth";
 import {AiFillClockCircle} from "react-icons/ai";
 import {MdCheckCircle} from "react-icons/md";
 
+import format from "date-fns/format";
+
 import "./styles.css";
 import { toast } from "react-toastify";
 
 function AgendaProfissionalPage(){
     const user = getUser();
-    const [servicos, setServicos] = useState([]);
-    const [clientes, setClientes] = useState([]);
     const [agendaProfissionais, setAgendaProfissionais] = useState([])
-    //const [data, setData] = useState(new Date())
-    const [data, setData] = useState(new Date("2021-06-27"))
+    const [data, setData] = useState(new Date())
+
+    useEffect(() => {
+        getAgenda()
+    })
 
     async function getAgenda(){
         const response = await api.get(`agendamento/getAgendamentoProfissional/${user.profissionalId}/${format(data, "yyyy-MM-dd")}`);
         setAgendaProfissionais(response.data)
     }
-
-    useEffect(() => {
-        getAgenda()
-    }, [])
-
+    
     async function iniciar() {
         const agendamentoSelecionado: any[] = agendaProfissionais.filter((agendamento: any) => {
             if(agendamento.selecionado) return agendamento;
@@ -88,13 +86,13 @@ function AgendaProfissionalPage(){
                             <thead>
                                 <tr>
                                     <th>Selecionar</th>
-                                    <th>Status</th>
                                     <th>Cliente</th>
                                     <th>Data Agendamento</th>
                                     <th>Hora Agendamento</th>
                                     <th>Serviço</th>
                                     <th>Valor</th>
                                     <th>Comissão</th>
+                                    <th>Status</th>
                                 </tr>
                             </thead>
                             <tbody>
@@ -107,6 +105,12 @@ function AgendaProfissionalPage(){
                                             </form>
                                             )}
                                         </td>
+                                        <td>{agendamento.nomeCliente}</td>
+                                        <td>{format(new Date(agendamento?.data_atendimento), "dd/MM/yyyy")}</td>
+                                        <td>{agendamento.horario_agendamento}</td>
+                                        <td>{agendamento.nomeServico}</td>
+                                        <td>{agendamento.valor}</td>
+                                        <td>{agendamento.comissao}</td>
                                         {!agendamento.inicio_atendimento && !agendamento.fim_atendimento && (
                                         <td></td>
                                         )}
@@ -116,13 +120,6 @@ function AgendaProfissionalPage(){
                                         {agendamento.inicio_atendimento && agendamento.fim_atendimento && (
                                             <td><span className="material-icons concluido"><MdCheckCircle/></span></td>
                                         )}
-                                        {/* <td><span className="material-icons andamento"><AiFillClockCircle /></span></td> */}
-                                        <td>{agendamento.nomeCliente}</td>
-                                        <td>{format(new Date(agendamento?.data_atendimento), "dd/MM/yyyy")}</td>
-                                        <td>{agendamento.horario_agendamento}</td>
-                                        <td>{agendamento.nomeServico}</td>
-                                        <td>{agendamento.valor}</td>
-                                        <td>{agendamento.comissao}</td>                                    
                                     </tr>
                                 ))}                    
                             </tbody>

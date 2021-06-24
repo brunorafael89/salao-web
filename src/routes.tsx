@@ -5,7 +5,6 @@ import Login from "./pages/Login";
 import Home from "./pages/Home";
 import PerfilPage from "./pages/Perfil";
 import FormaPagamentoPage from "./pages/FormaPagamento";
-import ExemploPage from "./pages/Exemplo";
 import ServicoPage from "./pages/Servico";
 import AgendamentoPage from "./pages/Agendamento";
 import FuncaoPage from "./pages/Funcao";
@@ -49,8 +48,6 @@ function Routes() {
       <GerentePrivateRouter path="/funcionario" exact component={FuncionarioPage} />
       <GerentePrivateRouter path="/relatorioServico" exact component={RelatorioServicoPage} />
       <GerentePrivateRouter path="/relatorioComissao" exact component={RelatorioComissaoPage} />
-
-      {/* <FuncionarioPrivateRouter path="/exemplo" exact component={ExemploPage} /> */}
       
       <FuncionarioPrivateRouter path="/profissional" exact component={ProfissionalPage} />
       <FuncionarioPrivateRouter path="/cliente" exact component={ClientePage} />      
