@@ -14,7 +14,6 @@ import "./styles.css";
 import { AiOutlineUpload } from "react-icons/ai";
 import { MdDeleteForever } from "react-icons/md";
 
-
 import ValidarCPF from "../../components/ValidarCPF";
 
 function ClientePage(){

@@ -14,7 +14,7 @@ import { toast } from "react-toastify";
 function AgendaProfissionalPage(){
     const user = getUser();
     const [agendaProfissionais, setAgendaProfissionais] = useState([])
-    const [data, setData] = useState(new Date())
+    const [data] = useState(new Date())
 
     useEffect(() => {
         getAgenda()

@@ -51,10 +51,8 @@ function FormaPagamentoPage() {
       setFormaPagamento("")
       getFormasPagamentos()
 
-      //history.push("/home");
       toast.success("Forma de pagamento cadastrado com sucesso!");
     } catch (err) {
-        console.log(err.error)
       toast.error(err.error);
     }
   }
@@ -128,7 +126,7 @@ function FormaPagamentoPage() {
                         </thead>
                         <tbody>
                             {formasPagamentos.map((forma: any) => (
-                                <tr>
+                                <tr key={forma.forma_pagamento_id}>
                                     <td>{forma.forma_pagamento}</td>
                                     <td>
                                         <div className="form">

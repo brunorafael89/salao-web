@@ -1,18 +1,21 @@
 import React, { FormEvent, useEffect, useState } from "react";
-import format from "date-fns/format";
 import Header from "../../components/Header";
 import MenuLateral from "../../components/MenuLateral";
 import { toast } from "react-toastify";
 import api from "../../services/api";
 import {RiFileExcel2Line} from "react-icons/ri";
-
 import { CSVLink } from "react-csv";
+
+import DatePicker, { registerLocale } from "react-datepicker";
+import pt from 'date-fns/locale/pt-BR';
+import { format, parseISO } from "date-fns";
 
 import "./styles.css";
 
 function RelatorioServicoPage(){
+    registerLocale('pt', pt)
+
     const [relatorioServicos, setRelatorioServico] = useState([]);
-    // const [agendamentos, setAgendamentos] = useState([]);
     const [csvData, setCsvData] = useState<any[]>([]);
     const [servicos, setServicos] = useState([]);
     const [IdServicos, setIdServicos] = useState("");
@@ -22,19 +25,9 @@ function RelatorioServicoPage(){
     const [dataTo, setDataTo] = useState(new Date());
 
     useEffect(() => {
-        // getAgendamentos() 
         getProfissional()
         getServicos()
     }, [])
-
-    // async function getAgendamentos(){
-    //     try {
-    //         const response = await api.get("agendamento"); 
-    //         setAgendamentos(response.data)
-    //     } catch(err) {
-    //         toast.error("Erro ao consultar a agenda");
-    //     }
-    // } 
 
     async function getServicos(){
         try {
@@ -53,10 +46,8 @@ function RelatorioServicoPage(){
     async function geraRelatorio(e: FormEvent){
         e.preventDefault();
         
-        const dataFromFormatada = format(dataFrom, "yyyy-MM-dd");
-        const dataToFormatada = format(dataTo, "yyyy-MM-dd");
-
-        //const response = await api.get(`relatorio/servico/${idProfissional}/${IdServicos}/${dataFromFormatada}/${dataToFormatada}`);
+        const dataFromFormatada = parseISO(format(dataFrom, "yyyy-MM-dd"));
+        const dataToFormatada = parseISO(format(dataTo, "yyyy-MM-dd"));
 
         const response = await api.post("relatorio/servico", {
             profissional_id: idProfissional,
@@ -134,17 +125,21 @@ function RelatorioServicoPage(){
 
                                 <label htmlFor="">
                                     <span>De:</span>
-                                    <input 
-                                        type="date" 
-                                        onChange={(e)=>setDataFrom(new Date(e.target.value))}
+                                    <DatePicker
+                                        selected={dataFrom}
+                                        onChange={ (date: Date)=>setDataFrom(date) }
+                                        locale="pt"
+                                        dateFormat="dd/MM/yyyy"
                                     />
                                 </label>
 
                                 <label htmlFor="">
                                     <span>Até:</span>
-                                    <input 
-                                        type="date" 
-                                        onChange={(e)=>setDataTo(new Date(e.target.value))}
+                                    <DatePicker 
+                                        selected={dataTo}
+                                        onChange={ (date: Date)=>setDataTo(date) }
+                                        locale="pt"
+                                        dateFormat="dd/MM/yyyy"
                                     />
                                 </label>
 

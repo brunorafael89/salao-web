@@ -69,6 +69,14 @@
     font-weight: bold;
 }
 
+.relatorio-servico.main-container .info-select .select-data label .react-datepicker-wrapper{
+    width: 74%;
+}
+
+.relatorio-servico.main-container .info-select .select-data label .react-datepicker-wrapper input{
+    width: 100%;
+}
+
 .relatorio-servico.main-container .info-select .select-data  label input{
     display: inline-block;
     width: calc(100% - 50px);
