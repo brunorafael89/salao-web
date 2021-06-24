@@ -32,7 +32,7 @@ function AgendamentoFunc() {
         getAgendamentos(data_atendimento)
         getServicos()
         getClientes()
-    })
+    }, [])
 
     async function getAgendamentos(data: Date){
         try {            

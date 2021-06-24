@@ -35,7 +35,7 @@ function PerfilPage(){
 
     useEffect( ()=>{
         getClientes()
-    })
+    }, [])
 
     async function getClientes(){
         try{

@@ -19,7 +19,7 @@ function Header(){
 
     function sair(){
         logout();
-        history.replace("login")
+        history.replace("/")
     }
 
     return (

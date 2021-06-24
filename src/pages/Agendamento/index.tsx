@@ -33,7 +33,7 @@ function AgendamentoPage() {
         getAgendamentos()
         getServicos()
         getClientes()
-    })
+    }, [])
 
     async function getAgendamentos(){
         try {

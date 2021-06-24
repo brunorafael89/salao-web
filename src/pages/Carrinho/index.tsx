@@ -29,7 +29,7 @@ function CartPage(){
 
         calcularTotal(location.state);
 
-    });
+    }, []);
 
     function calcularTotal(agendamentos: any[]){
         let total = 0;

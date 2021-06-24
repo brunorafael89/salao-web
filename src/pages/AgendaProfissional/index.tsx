@@ -18,7 +18,7 @@ function AgendaProfissionalPage(){
 
     useEffect(() => {
         getAgenda()
-    })
+    }, [])
 
     async function getAgenda(){
         const response = await api.get(`agendamento/getAgendamentoProfissional/${user.profissionalId}/${format(data, "yyyy-MM-dd")}`);
