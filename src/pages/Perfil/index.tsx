@@ -168,7 +168,7 @@ function PerfilPage(){
                             </label>
 
                             <div className="buttons">
-                                <button className="form-btn" type="submit">Editar</button>
+                                <button className="form-btn" type="submit">Atualizar</button>
                                 <button className="form-btn" onClick={() => desativar(userID)}>Desativar Cadastro</button>
                             </div>
                         </form>
