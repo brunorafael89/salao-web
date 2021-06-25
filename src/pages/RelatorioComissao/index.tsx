@@ -57,8 +57,10 @@ function  RelatorioComissaoPage(){
 
         const csv = [];
 
+        csv.push(["Relatório de Comissão"]);
+        csv.push([format(new Date(), "dd/MM/yyyy hh:MM")]);
         csv.push(["Profissional", "Data Atendimento", "Serviço", "Valor", "Comissão", "Valor da Comissão"]);
-
+        
         dados.map((dado: any) => {
             let linha = [];
             linha.push(dado.nome_profissional);

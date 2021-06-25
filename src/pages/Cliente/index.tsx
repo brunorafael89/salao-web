@@ -15,6 +15,7 @@ import { AiOutlineUpload } from "react-icons/ai";
 import { MdDeleteForever } from "react-icons/md";
 
 import ValidarCPF from "../../components/ValidarCPF";
+import { getUser } from "../../services/auth";
 
 function ClientePage(){
     registerLocale('pt', pt);
@@ -32,6 +33,8 @@ function ClientePage(){
     const [emailCliente, setEmailCliente] = useState("");
     const [senhaCliente, setSenhaCliente] = useState("");
     const [idCliente, setIdCliente] = useState("");
+    const user = getUser();
+    const userID = user.clienteId
 
     useEffect(()=>{
         getCliente()
@@ -136,6 +139,16 @@ function ClientePage(){
         setIdCliente("");
     }
 
+    async function ativar(idCliente: number){
+        try{
+            await api.get(`cliente/ativar/${idCliente}`);
+    
+            toast.success('A conta do cliente foi ativada em nossa base');
+        } catch(err){
+            toast.error('Erro ao ativar a conta')
+        }
+    }
+
     return (
         <>
             <Header/>
@@ -218,16 +231,20 @@ function ClientePage(){
                                 />
                             </label>
 
-                            <label htmlFor="">
+                            {/* <label htmlFor="">
                                 <span>Ativo</span>
-                                <input 
-                                    type="checkbox" 
-                                    name="ativo" 
-                                    checked
-                                />
-                            </label>
+                                {usuario.ativo === true(
+                                    <input 
+                                        type="checkbox" 
+                                        name="ativo"   
+                                        value={f}                               
+                                    />                 
+                                )}                 
+                            </label> */}
 
                             <div className="buttons">
+                                <button className="form-btn" onClick={() => ativar(userID)}>Ativar Cadastro</button>
+                                {/* <button name="acao" value="ativar" type="submit">Ativar</button> */}
                                 <button name="acao" value="cadastrar" type="submit">Cadastrar</button>
                                 <button name="acao" value="editar" type="submit">Alterar</button>
                             </div>

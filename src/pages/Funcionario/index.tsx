@@ -15,17 +15,6 @@ import { format, parseISO } from "date-fns";
 
 import ValidarCPF from "../../components/ValidarCPF";
 
-const FUNCIONARIO: any = {
-    Recepcionista: {
-        id: 3,
-        cargo: "Recepcionista"
-    },
-    Gerente: {
-        id: 4,
-        cargo: "Gerente"
-    }
-}
-
 function FuncionarioPage(){
     registerLocale('pt', pt)
 
@@ -38,6 +27,16 @@ function FuncionarioPage(){
     const [telefoneFuncionario, setTelefoneFuncionario] = useState("")
     const [emailFuncionario, setEmailFuncionario] = useState("")
     const [senhaFuncionario, setSenhaFuncionario] = useState("");
+    const FUNCIONARIO: any = {
+        Recepcionista: {
+            id: 3,
+            cargo: "Recepcionista"
+        },
+        Gerente: {
+            id: 4,
+            cargo: "Gerente"
+        }
+    }
 
     useEffect( () => {
         getFuncionario()

@@ -113,6 +113,7 @@ function AgendamentoPage() {
             getAgendamentos() 
 
             toast.success("Agendamento adicionado com sucesso!");
+            toast.success("Tempo de tolerância 10 min!");
 
         } catch (err) {
             toast.error("Erro ao gerar agendamento!");
