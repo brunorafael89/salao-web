@@ -139,15 +139,15 @@ function ClientePage(){
         setIdCliente("");
     }
 
-    async function ativar(idCliente: number){
-        try{
-            await api.get(`cliente/ativar/${idCliente}`);
+    // async function ativar(idCliente: number){
+    //     try{
+    //         await api.get(`cliente/ativar/${idCliente}`);
     
-            toast.success('A conta do cliente foi ativada em nossa base');
-        } catch(err){
-            toast.error('Erro ao ativar a conta')
-        }
-    }
+    //         toast.success('A conta do cliente foi ativada em nossa base');
+    //     } catch(err){
+    //         toast.error('Erro ao ativar a conta')
+    //     }
+    // }
 
     return (
         <>
@@ -233,18 +233,18 @@ function ClientePage(){
 
                             {/* <label htmlFor="">
                                 <span>Ativo</span>
-                                {usuario.ativo === true(
+                                {!usuario.ativo === true(
                                     <input 
                                         type="checkbox" 
                                         name="ativo"   
-                                        value={f}                               
+                                        value = {false}                             
                                     />                 
                                 )}                 
                             </label> */}
 
                             <div className="buttons">
-                                <button className="form-btn" onClick={() => ativar(userID)}>Ativar Cadastro</button>
-                                {/* <button name="acao" value="ativar" type="submit">Ativar</button> */}
+                                {/* <button className="form-btn" onClick={() => ativar(userID)}>Ativar Cadastro</button>
+                                <button name="acao" value="ativar" type="submit">Ativar</button> */}
                                 <button name="acao" value="cadastrar" type="submit">Cadastrar</button>
                                 <button name="acao" value="editar" type="submit">Alterar</button>
                             </div>
