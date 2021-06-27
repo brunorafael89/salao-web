@@ -12,7 +12,7 @@ import "./styles.css";
 
 // importando os icones
 import { AiOutlineUpload } from "react-icons/ai";
-import { MdDeleteForever } from "react-icons/md";
+import { MdDeleteForever, MdSearch } from "react-icons/md";
 
 import ValidarCPF from "../../components/ValidarCPF";
 import { getUser } from "../../services/auth";
@@ -33,6 +33,7 @@ function ClientePage(){
     const [emailCliente, setEmailCliente] = useState("");
     const [senhaCliente, setSenhaCliente] = useState("");
     const [idCliente, setIdCliente] = useState("");
+    const [pesquisa, setPesquisa] = useState("")
     const user = getUser();
     const userID = user.clienteId
 
@@ -47,6 +48,17 @@ function ClientePage(){
         } catch(err) {
             toast.error("Erro ao consultar cliente");
         }        
+    }
+
+    async function pesquisar(e: FormEvent){
+        e.preventDefault()
+
+        try{
+            const response = await api.get(`cliente/nomeCliente/${pesquisa}`)
+            setClientes(response.data)
+        } catch(err){
+            toast.error(`Erro ao realizar a pesquisa, ${err}`)
+        }
     }
 
     async function salvar(e: FormEvent){
@@ -248,6 +260,20 @@ function ClientePage(){
                                 <button name="acao" value="cadastrar" type="submit">Cadastrar</button>
                                 <button name="acao" value="editar" type="submit">Alterar</button>
                             </div>
+                        </form>
+                    </div>
+
+                    <div className="search">
+                        <form onSubmit={pesquisar}>
+                            <input 
+                                className="pesquisa" 
+                                type="text" 
+                                placeholder="nome do cliente"
+                                onChange={(e)=>setPesquisa(e.target.value)}
+                            />
+                            <span>
+                                <button className="btn_pesquisar" type="submit"><MdSearch/></button>
+                            </span>
                         </form>
                     </div>
             

@@ -7,7 +7,7 @@ import "./styles.css";
 
 // importando os icones
 import { AiOutlineUpload } from "react-icons/ai";
-import { MdDeleteForever } from "react-icons/md";
+import { MdDeleteForever, MdSearch } from "react-icons/md";
 
 function ServicoPage(){
     const [funcoes, setFuncoes] = useState([]);
@@ -18,6 +18,7 @@ function ServicoPage(){
     const [comissaoServico, setComissaoServico] = useState("");
     const [tempoServico, setTempoServico] = useState("");
     const [idServico, setIdServico] = useState("");
+    const [pesquisa, setPesquisa] = useState("")
 
     useEffect(() => {
         getFuncoes() 
@@ -39,6 +40,17 @@ function ServicoPage(){
             setServicos(response.data)
         } catch(err) {
             toast.error("Erro ao consultar servicos");
+        }
+    }
+
+    async function pesquisar(e: FormEvent){
+        e.preventDefault()
+
+        try{
+            const response = await api.get(`servicos/nomeServico/${pesquisa}`)
+            setServicos(response.data)
+        } catch(err){
+            toast.error(`Erro ao realizar a pesquisa, ${err}`)
         }
     }
 
@@ -94,8 +106,6 @@ function ServicoPage(){
     }
 
     async function excluir(id:number){
-        // api.delete('servicos/' + id) ASSIM TBM FUNCIONA  
-
         try{
             await api.delete(`servicos/${id}`)
             getServicos();
@@ -123,21 +133,12 @@ function ServicoPage(){
         setIdServico("");
     }
 
-
-
     return (
         <>
             <Header />
 
             <main>
                 <MenuLateral />
-
-                {/* <div className="search">
-                    <input className="pesquisa" type="text" placeholder="nome do usuário" />
-                    <span>
-                        <button className="btn_pesquisar"><i className="fas fa-search"></i></button>
-                    </span>
-                </div> */}
 
                 <div className="servico main-container">
                     <div className="servico cadastro-form">
@@ -148,7 +149,7 @@ function ServicoPage(){
                                 <select name="nome_funcao" onChange={(e)=> setIdFuncao(e.target.value)}>
                                 <option value="">Selecione a Função</option>
                                     {funcoes.map((funcao: any) => (
-                                        <option 
+                                        <option key={funcao.funcao_id}
                                             id={funcao.funcao_id} 
                                             value={funcao.funcao_id} 
                                             selected={idFuncao && idFuncao === funcao.funcao_id ? true : false}
@@ -206,6 +207,20 @@ function ServicoPage(){
                         </form>
                     </div>
 
+                    <div className="search">
+                        <form onSubmit={pesquisar}>
+                            <input 
+                                className="pesquisa" 
+                                type="text" 
+                                placeholder="nome do serviço"
+                                onChange={(e)=>setPesquisa(e.target.value)} 
+                            />
+                            <span>
+                                <button className="btn_pesquisar" type="submit"><MdSearch/></button>
+                            </span>
+                        </form>
+                    </div>
+
                     <div className="table">
                         <table>
                             <thead>
@@ -220,7 +235,7 @@ function ServicoPage(){
                             </thead>
                             <tbody>
                                 {servicos.map((servico: any) => (
-                                    <tr>
+                                    <tr key={servico.servicos_id}>
                                         <td>
                                             {funcoes.map((funcao: any) => (
                                                 funcao.funcao_id === servico.funcao_id ? funcao.nome_funcao : ""

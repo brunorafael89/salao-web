@@ -109,6 +109,66 @@
     font-weight: bold;
 }
 
+/* ============================================== 
+TESTE DE COMO FICARÁ O CAMPO DE PESQUISAR NA TELA
+=============================================== */
+m/ain .servico.main-container .search{
+    display: inline-block;
+    width: 500px;
+    border: 1px solid #ccc;
+    border-radius: 40px;
+    margin-bottom: 10px;
+}
+
+main .servico.main-container .search input{
+    width: 430px;
+    padding: 5px;
+    border: none;
+    border-radius: 25px;
+    transform: translate(9px, -9px);
+    font-size: 16px;
+    outline: none;
+}
+
+main .servico.main-container .search span{
+    display: inline-block;
+    position: relative;
+    width: 40px;
+    height: 40px;
+    padding: 4px;
+    border: 1px solid #ccc;
+    border-radius: 50%;
+    transform: translate(15px, 4px);
+    transition: all .222s linear;
+}
+
+main .servico.main-container .search .btn_pesquisar{
+    position: absolute;
+    top: 5%;
+    left: 5%;
+    border: none;
+    background-color: transparent;
+    cursor: pointer;
+}
+
+main .servico.main-container .search .btn_pesquisar svg{
+    padding: 5px;
+    font-size: 32px;
+    background-color: transparent;
+    transition: all .222s linear;
+}
+
+main .servico.main-container .search span:hover{
+    background-color: #000;
+}
+main .servico.main-container .search svg:hover{
+    color: #fff;
+}
+
+/* =========================================
+FIM DA ÁREA DE TESTE COM O CAMPO DE PESQUISA
+===========================================*/
+
 @media screen and (min-width: 320px) and (max-width: 480px){
     .servico.main-container{
         width: 100%;

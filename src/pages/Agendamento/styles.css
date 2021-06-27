@@ -237,67 +237,7 @@ main .main-container .historico-agendamento table tbody .form button{
 main .main-container .historico-agendamento table tbody .form button:hover{
     background-color: #d8484e;
     color: #fff;
-} */
-
-/* ============================================== 
-TESTE DE COMO FICARÁ O CAMPO DE PESQUISAR NA TELA
-=============================================== */
-main .main-container .search{
-    display: inline-block;
-    width: 500px;
-    border: 1px solid #ccc;
-    border-radius: 40px;
-    margin-bottom: 10px;
 }
-
-main .main-container .search input{
-    width: 430px;
-    padding: 10px;
-    border: none;
-    border-radius: 25px;
-    transform: translate(5px, -6px);
-    font-size: 18px;
-    outline: none;
-}
-
-main .main-container .search span{
-    display: inline-block;
-    position: relative;
-    width: 40px;
-    height: 40px;
-    padding: 15px;
-    border: 1px solid #ccc;
-    border-radius: 50%;
-    transform: translate(15px, 8px);
-    transition: all .222s linear;
-}
-
-main .main-container .search .btn_pesquisar{
-    position: absolute;
-    top: 5%;
-    left: 5%;
-    border: none;
-    background-color: transparent;
-    cursor: pointer;
-}
-
-main .main-container .search .btn_pesquisar i{
-    padding: 5px;
-    font-size: 24px;
-    background-color: transparent;
-    transition: all .222s linear;
-}
-
-main .main-container .search span:hover{
-    background-color: #000;
-}
-main .main-container .search i:hover{
-    color: #fff;
-}
-
-/* =========================================
-FIM DA ÁREA DE TESTE COM O CAMPO DE PESQUISA
-===========================================*/
 
 @media all and (min-width: 320px) and (max-width: 480px){
     main .main-container{
