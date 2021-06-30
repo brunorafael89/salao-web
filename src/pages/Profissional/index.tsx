@@ -5,6 +5,8 @@ import api from "../../services/api";
 import { toast } from "react-toastify";
 import { AiOutlineUpload } from "react-icons/ai";
 import { MdDeleteForever } from "react-icons/md";
+import { confirmAlert } from "react-confirm-alert";
+import 'react-confirm-alert/src/react-confirm-alert.css'
 
 import DatePicker, { registerLocale } from "react-datepicker";
 import pt from 'date-fns/locale/pt-BR';
@@ -69,9 +71,27 @@ function ProfissionalPage(){
 
     async function excluir(id:number){
         try{
-            await api.delete(`profissional/${id}`)
-            getProfissional();
-            toast.success("Profissional Excluído com sucesso");
+            // await api.delete(`profissional/${id}`)
+            // getProfissional();
+            // toast.success("Profissional Excluído com sucesso");
+            confirmAlert({
+                title: 'Confirmar ação',
+                message: 'Tem certeza que deseja desativar o profissional?',
+                buttons: [
+                    {
+                        label: 'Sim',
+                        onClick: ()=> {
+                            api.delete(`profissional/${id}`)
+                            getProfissional();
+                            toast.success("Profissional Excluído com sucesso");
+                        }
+                    },
+                    {
+                        label: 'Não',
+                        onClick: ()=>{}
+                    }
+                ]
+            });
         } catch(err){
             toast.error("Profissional não pode ser exluído, possui agendamentos");
         }

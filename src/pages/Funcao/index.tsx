@@ -4,6 +4,8 @@ import Header from "../../components/Header/";
 import MenuLateral from "../../components/MenuLateral/";
 import { toast } from "react-toastify";
 import "./styles.css";
+import { confirmAlert } from "react-confirm-alert";
+import 'react-confirm-alert/src/react-confirm-alert.css'
 
 import { AiOutlineUpload } from "react-icons/ai";
 import { MdDeleteForever } from "react-icons/md";
@@ -35,11 +37,28 @@ function FuncaoPage(){
     }
 
     async function excluir(id: number){
-
         try{
-            await api.delete(`funcao/${id}`);
-            getFuncao();
-            toast.success("Função excluida com sucesso!");
+            // await api.delete(`funcao/${id}`);
+            // getFuncao();
+            // toast.success("Função excluida com sucesso!");
+            confirmAlert({
+                title: 'Confirmar ação',
+                message: 'Tem certeza que deseja excluir a função?',
+                buttons: [
+                    {
+                        label: 'Sim',
+                        onClick: ()=> {
+                            api.delete(`funcao/${id}`);
+                            getFuncao();
+                            toast.success("Função excluida com sucesso!");
+                        }
+                    },
+                    {
+                        label: 'Não',
+                        onClick: ()=>{}
+                    }
+                ]
+            });
         } catch(err){
             toast.error("Erro ao excluir função!");
         }

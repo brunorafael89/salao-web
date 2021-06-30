@@ -76,20 +76,17 @@
     color: #fff;
 }
 
+.react-calendar__month-view__days > button:focus, 
+.react-calendar__year-view__months > button:focus,
+.react-calendar__decade-view__years > button:focus,
+.react-calendar__century-view__decades >button:focus{
+    background-color: #bc05d4;
+    color: #fff;
+}
+
 .react-calendar__tile.react-calendar__tile--now.react-calendar__month-view__days__day{
     background-color: #e49df5;
 }
-
-/* .react-calendar__month-view__days > button::after{
-    content: '';
-    position: absolute;
-    bottom: 5px;
-    left: 40px;
-    width: 10px;
-    height: 10px;
-    border-radius: 50%;
-    background-color: #b1e648;
-} */
 
 .react-calendar__tile.react-calendar__month-view__days__day.react-calendar__month-view__days__day--neighboringMonth{
     background-color: #ddd;
@@ -207,10 +204,6 @@ main .main-container .historico-agendamento table tbody td .material-icons.concl
 
 main .main-container .historico-agendamento table tbody td .material-icons.andamento{
     color: #eeee2f;
-}
-
-main .main-container .historico-agendamento table tbody td .material-icons.cancelado{
-    color: #ff0000;
 }
 
 main .main-container .historico-agendamento table tbody tr:nth-child(even){

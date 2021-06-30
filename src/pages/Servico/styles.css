@@ -112,7 +112,7 @@
 /* ============================================== 
 TESTE DE COMO FICARÁ O CAMPO DE PESQUISAR NA TELA
 =============================================== */
-m/ain .servico.main-container .search{
+main .servico.main-container .search{
     display: inline-block;
     width: 500px;
     border: 1px solid #ccc;

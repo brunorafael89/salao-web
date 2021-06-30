@@ -7,6 +7,8 @@ import api from "../../services/api";
 import {MdCheckCircle, MdDeleteForever} from "react-icons/md";
 import {AiFillClockCircle} from "react-icons/ai";
 import { addMinutes, isBefore, subMinutes, format, isAfter, addSeconds } from "date-fns";
+import { confirmAlert } from "react-confirm-alert";
+import 'react-confirm-alert/src/react-confirm-alert.css'
 
 import "./styles.css";
 import { getUser } from "../../services/auth";
@@ -231,8 +233,25 @@ function AgendamentoFunc() {
     }
     
     async function cancelarAgendamento(idAgendamento: Number){
-        await api.delete(`agendamento/${idAgendamento}`)
-        getAgendamentos(data_atendimento)
+        // await api.delete(`agendamento/${idAgendamento}`)
+        // getAgendamentos(data_atendimento)
+        confirmAlert({
+            title: 'Confirmar ação',
+            message: 'Tem certeza que deseja cancelar o agendamento?',
+            buttons: [
+                {
+                    label: 'Sim',
+                    onClick: ()=> {
+                        api.delete(`agendamento/${idAgendamento}`)
+                        getAgendamentos(data_atendimento)
+                    }
+                },
+                {
+                    label: 'Não',
+                    onClick: ()=>{}
+                }
+            ]
+        });
     }
 
     

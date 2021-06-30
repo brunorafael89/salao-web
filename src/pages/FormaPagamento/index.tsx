@@ -7,6 +7,8 @@ import MenuLateral from "../../components/MenuLateral/";
 import { toast } from "react-toastify";
 import { MdDeleteForever } from 'react-icons/md';
 import { AiOutlineUpload } from "react-icons/ai";
+import { confirmAlert } from "react-confirm-alert";
+import 'react-confirm-alert/src/react-confirm-alert.css'
 
 import "./styles.css";
 
@@ -78,9 +80,27 @@ function FormaPagamentoPage() {
 
 
   async function excluir(id: number){
-    await api.delete(`formaPagamento/${id}`);
-    toast.success("Forma de pagamento excluído com sucesso!");
-    getFormasPagamentos() 
+    // await api.delete(`formaPagamento/${id}`);
+    // toast.success("Forma de pagamento excluído com sucesso!");
+    // getFormasPagamentos()
+    confirmAlert({
+        title: 'Confirmar ação',
+        message: 'Tem certeza que deseja excluir a forma de Pagamento?',
+        buttons: [
+            {
+                label: 'Sim',
+                onClick: ()=> {
+                    api.delete(`formaPagamento/${id}`)
+                    toast.success("Forma de pagamento excluído com sucesso!");
+                    getFormasPagamentos()
+                }
+            },
+            {
+                label: 'Não',
+                onClick: ()=>{}
+            }
+        ]
+    });
   }
 
   async function carregar(formaPagamento:any){

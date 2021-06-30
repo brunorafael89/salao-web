@@ -3,6 +3,8 @@ import Header from "../../components/Header";
 import MenuLateral from "../../components/MenuLateral";
 import api from "../../services/api";
 import { toast } from "react-toastify";
+import { confirmAlert } from "react-confirm-alert";
+import 'react-confirm-alert/src/react-confirm-alert.css'
 
 import DatePicker, { registerLocale } from "react-datepicker";
 import pt from 'date-fns/locale/pt-BR';
@@ -121,9 +123,27 @@ function ClientePage(){
 
     async function excluir(id: number){
         try{
-            await api.delete(`cliente/${id}`)
-            getCliente();
-            toast.success("Cliente excluído com sucesso!");
+            // await api.delete(`cliente/${id}`)
+            // getCliente();
+            // toast.success("Cliente excluído com sucesso!");
+            confirmAlert({
+                title: 'Confirmar ação',
+                message: 'Tem certeza que deseja desativar o cliente?',
+                buttons: [
+                    {
+                        label: 'Sim',
+                        onClick: ()=> {
+                            api.delete(`cliente/${id}`)
+                            getCliente();
+                            toast.success("Cliente desativado com sucesso!");
+                        }
+                    },
+                    {
+                        label: 'Não',
+                        onClick: ()=>{}
+                    }
+                ]
+            });
         } catch(err){
             toast.error("Erro ao excluir cliente!");
         }

@@ -5,6 +5,8 @@ import Header from "../../components/Header";
 import MenuLateral from "../../components/MenuLateral";
 import { toast } from "react-toastify";
 import { getUser, logout } from "../../services/auth";
+import { confirmAlert } from "react-confirm-alert";
+import 'react-confirm-alert/src/react-confirm-alert.css'
 
 import DatePicker, { registerLocale } from "react-datepicker";
 import pt from 'date-fns/locale/pt-BR';
@@ -74,13 +76,29 @@ function PerfilPage(){
 
     async function desativar(idCliente: number){
         try{
-            await api.get(`cliente/desativar/${idCliente}`);
-    
-            toast.success('Sua conta foi desativada em nossa base');
-            
-            logout();
-
-            history.push('/');
+            // await api.get(`cliente/desativar/${idCliente}`);
+            // toast.success('Sua conta foi desativada em nossa base');
+            // logout();
+            // history.push('/');
+            confirmAlert({
+                title: 'Confirmar ação',
+                message: 'Tem certeza que deseja desativar seu cadastro?',
+                buttons: [
+                    {
+                        label: 'Sim',
+                        onClick: ()=> {
+                            api.get(`cliente/desativar/${idCliente}`);
+                            toast.success('Sua conta foi desativada em nossa base');
+                            logout();
+                            history.push('/');
+                        }
+                    },
+                    {
+                        label: 'Não',
+                        onClick: ()=>{}
+                    }
+                ]
+            });
         } catch(err){
             toast.error('Erro ao desativar a conta')
         }

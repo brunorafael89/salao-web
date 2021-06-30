@@ -12,6 +12,8 @@ import { format } from "date-fns";
 
 import api from "../../services/api";
 import { useHistory } from "react-router-dom";
+import { confirmAlert } from "react-confirm-alert";
+import 'react-confirm-alert/src/react-confirm-alert.css'
 
 function ControleAgendaPage(){
     registerLocale('pt', pt)
@@ -69,7 +71,24 @@ function ControleAgendaPage(){
     }
 
     async function cancelarAgendamento(idAgendamento: Number){
-        await api.delete(`agendamento/${idAgendamento}`)
+        // await api.delete(`agendamento/${idAgendamento}`)
+        confirmAlert({
+            title: 'Confirmar ação',
+            message: 'Tem certeza que deseja cancelar o agendamento?',
+            buttons: [
+                {
+                    label: 'Sim',
+                    onClick: ()=> {
+                        api.delete(`agendamento/${idAgendamento}`)
+                        toast.success("Forma de pagamento excluído com sucesso!");
+                    }
+                },
+                {
+                    label: 'Não',
+                    onClick: ()=>{}
+                }
+            ]
+        });
     }
 
     return (

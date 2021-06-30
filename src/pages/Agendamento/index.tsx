@@ -8,6 +8,8 @@ import {MdCheckCircle} from "react-icons/md";
 import {MdDeleteForever} from "react-icons/md";
 import {AiFillClockCircle} from "react-icons/ai";
 import { addMinutes, isBefore, subMinutes, format, isAfter, addSeconds } from "date-fns";
+import { confirmAlert } from "react-confirm-alert";
+import 'react-confirm-alert/src/react-confirm-alert.css'
 
 import "./styles.css";
 import { getUser } from "../../services/auth";
@@ -229,8 +231,25 @@ function AgendamentoPage() {
     }
     
     async function cancelarAgendamento(idAgendamento: Number){
-        await api.delete(`agendamento/${idAgendamento}`)
-        getAgendamentos()
+        // await api.delete(`agendamento/${idAgendamento}`)
+        // getAgendamentos()
+        confirmAlert({
+            title: 'Confirmar ação',
+            message: 'Tem certeza que deseja cancelar o agendamento?',
+            buttons: [
+                {
+                    label: 'Sim',
+                    onClick: ()=> {
+                        api.delete(`agendamento/${idAgendamento}`)
+                        getAgendamentos()
+                    }
+                },
+                {
+                    label: 'Não',
+                    onClick: ()=>{}
+                }
+            ]
+        });
     }
 
     return (
@@ -349,9 +368,9 @@ function AgendamentoPage() {
                                             <div className="form">
                                                 <div className='material excluir'>
                                                     {!agendamento.inicio_atendimento && (
-                                                    <button name='acao' id={agendamento.agendamento_id} onClick={()=>cancelarAgendamento(agendamento.agendamento_id)}>
-                                                        <span className="material-icons"><MdDeleteForever /></span>
-                                                    </button>
+                                                        <button name='acao' id={agendamento.agendamento_id} onClick={()=>cancelarAgendamento(agendamento.agendamento_id)}>
+                                                            <span className="material-icons"><MdDeleteForever /></span>
+                                                        </button>
                                                     )}
                                                 </div>
                                             </div>

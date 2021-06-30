@@ -3,6 +3,8 @@ import Header from "../../components/Header/";
 import MenuLateral from "../../components/MenuLateral/";
 import api from "../../services/api";
 import { toast } from "react-toastify";
+import { confirmAlert } from "react-confirm-alert";
+import 'react-confirm-alert/src/react-confirm-alert.css'
 import "./styles.css";
 
 // importando os icones
@@ -107,9 +109,27 @@ function ServicoPage(){
 
     async function excluir(id:number){
         try{
-            await api.delete(`servicos/${id}`)
-            getServicos();
-            toast.success("Serviço excluído com sucesso!");
+            // await api.delete(`servicos/${id}`)
+            // getServicos();
+            // toast.success("Serviço excluído com sucesso!");
+            confirmAlert({
+                title: 'Confirmar ação',
+                message: 'Tem certeza que deseja excluir este serviço?',
+                buttons: [
+                    {
+                        label: 'Sim',
+                        onClick: ()=> {
+                            api.delete(`servicos/${id}`)
+                            getServicos();
+                            toast.success("Serviço excluído com sucesso!");
+                        }
+                    },
+                    {
+                        label: 'Não',
+                        onClick: ()=>{}
+                    }
+                ]
+            });
         } catch(err){
             toast.error("Erro ao excluir serviço!");
         }

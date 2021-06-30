@@ -5,6 +5,8 @@ import MenuLateral from "../../components/MenuLateral";
 import { MdDeleteForever } from "react-icons/md";
 import { AiOutlineUpload } from "react-icons/ai";
 import { toast } from "react-toastify";
+import { confirmAlert } from "react-confirm-alert";
+import 'react-confirm-alert/src/react-confirm-alert.css'
 import "./styles.css";
 
 function ProfissionalFuncaoPage(){
@@ -99,9 +101,27 @@ function ProfissionalFuncaoPage(){
 
     async function excluir(profissional_id:number, funcao_id:number){
         try{
-            await api.delete(`profissionalFuncao/${profissional_id}/${funcao_id}`)
-            getProfissionalFuncao();
-            toast.success("Função do profissional Excluído com sucesso");
+            // await api.delete(`profissionalFuncao/${profissional_id}/${funcao_id}`)
+            // getProfissionalFuncao();
+            // toast.success("Função do profissional Excluído com sucesso");
+            confirmAlert({
+                title: 'Confirmar ação',
+                message: 'Tem certeza que deseja excluir a função deste profissional?',
+                buttons: [
+                    {
+                        label: 'Sim',
+                        onClick: ()=> {
+                            api.delete(`profissionalFuncao/${profissional_id}/${funcao_id}`)
+                            getProfissionalFuncao();
+                            toast.success("Função do profissional Excluído com sucesso");
+                        }
+                    },
+                    {
+                        label: 'Não',
+                        onClick: ()=>{}
+                    }
+                ]
+            });
         } catch(err){
             toast.error("Erro ao excluir função do profissional!");
         }
