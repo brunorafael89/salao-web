@@ -89,8 +89,8 @@ function FormaPagamentoPage() {
         buttons: [
             {
                 label: 'Sim',
-                onClick: ()=> {
-                    api.delete(`formaPagamento/${id}`)
+                onClick: async ()=> {
+                    await api.delete(`formaPagamento/${id}`);
                     toast.success("Forma de pagamento excluído com sucesso!");
                     getFormasPagamentos()
                 }

@@ -132,8 +132,8 @@ function FuncionarioPage(){
                 buttons: [
                     {
                         label: 'Sim',
-                        onClick: ()=> {
-                            api.delete(`funcionario/${id}`)
+                        onClick: async ()=> {
+                            await api.delete(`funcionario/${id}`)
                             getFuncionario();
                             toast.success("Funcionario Excluído com sucesso");
                         }

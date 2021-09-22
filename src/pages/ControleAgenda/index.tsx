@@ -78,8 +78,8 @@ function ControleAgendaPage(){
             buttons: [
                 {
                     label: 'Sim',
-                    onClick: ()=> {
-                        api.delete(`agendamento/${idAgendamento}`)
+                    onClick: async ()=> {
+                        await api.delete(`agendamento/${idAgendamento}`)
                         toast.success("Forma de pagamento excluído com sucesso!");
                     }
                 },

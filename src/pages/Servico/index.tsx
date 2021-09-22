@@ -118,8 +118,8 @@ function ServicoPage(){
                 buttons: [
                     {
                         label: 'Sim',
-                        onClick: ()=> {
-                            api.delete(`servicos/${id}`)
+                        onClick: async ()=> {
+                            await api.delete(`servicos/${id}`)
                             getServicos();
                             toast.success("Serviço excluído com sucesso!");
                         }

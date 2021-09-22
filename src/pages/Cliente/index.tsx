@@ -15,6 +15,8 @@ import "./styles.css";
 // importando os icones
 import { AiOutlineUpload } from "react-icons/ai";
 import { MdDeleteForever, MdSearch } from "react-icons/md";
+import { GiConfirmed } from "react-icons/gi";
+
 
 import ValidarCPF from "../../components/ValidarCPF";
 import { getUser } from "../../services/auth";
@@ -121,7 +123,7 @@ function ClientePage(){
         }
     }
 
-    async function excluir(id: number){
+    async function desativar(id: number){
         try{
             // await api.delete(`cliente/${id}`)
             // getCliente();
@@ -132,8 +134,8 @@ function ClientePage(){
                 buttons: [
                     {
                         label: 'Sim',
-                        onClick: ()=> {
-                            api.delete(`cliente/${id}`)
+                        onClick: async ()=> {
+                            await api.get(`cliente/desativar/${id}`)
                             getCliente();
                             toast.success("Cliente desativado com sucesso!");
                         }
@@ -145,7 +147,7 @@ function ClientePage(){
                 ]
             });
         } catch(err){
-            toast.error("Erro ao excluir cliente!");
+            toast.error("Erro ao desativar cliente!");
         }
     }
 
@@ -171,15 +173,27 @@ function ClientePage(){
         setIdCliente("");
     }
 
-    // async function ativar(idCliente: number){
-    //     try{
-    //         await api.get(`cliente/ativar/${idCliente}`);
-    
-    //         toast.success('A conta do cliente foi ativada em nossa base');
-    //     } catch(err){
-    //         toast.error('Erro ao ativar a conta')
-    //     }
-    // }
+    async function ativar(idCliente: number){
+
+        confirmAlert({
+            title: 'Confirmar ação',
+            message: 'Tem certeza que deseja ativar o cliente?',
+            buttons: [
+                {
+                    label: 'Sim',
+                    onClick: async ()=> {
+                        await api.get(`cliente/ativar/${idCliente}`);
+                        getCliente();
+                        toast.success("Cliente desativado com sucesso!");
+                    }
+                },
+                {
+                    label: 'Não',
+                    onClick: ()=>{}
+                }
+            ]
+        });
+    }
 
     return (
         <>
@@ -189,6 +203,7 @@ function ClientePage(){
                 <MenuLateral/>
                 
                 <div className="cad-cliente main-container">
+
                     <div className="cad-cliente cadastro-form">
                         <h1>Cadastro de Clientes</h1>
             
@@ -237,6 +252,7 @@ function ClientePage(){
                             <label>
                                 <span>Sexo:</span>
                                 <select id="sexo" value={sexoCliente} onChange={(e) => setSexoCliente(e.target.value)}>
+                                    <option value="">Selecione o sexo</option>
                                     {SexoList.map((item) => (
                                         <option value={item.id}>{item.name}</option>
                                     ))}
@@ -321,11 +337,20 @@ function ClientePage(){
                                         <td>{cliente.sexo}</td>
                                         <td>
                                             <div className="form">
-                                                <div className='material excluir'>                                            
-                                                    <button name="acao" value='excluir' onClick={() => excluir(cliente.cliente_id)}>
-                                                        <span className='material-icons'><MdDeleteForever/></span>
-                                                    </button>
-                                                </div>
+                                                {cliente?.ativo && (
+                                                    <div className='material excluir'>                                            
+                                                        <button name="acao" value='excluir' onClick={() => desativar(cliente.cliente_id)}>
+                                                            <span className='material-icons'><MdDeleteForever/></span>
+                                                        </button>
+                                                    </div>
+                                                )}
+                                                {cliente?.ativo == false && (
+                                                    <div className='material excluir'>                                            
+                                                        <button name="acao" value='excluir' onClick={() => ativar(cliente.cliente_id)}>
+                                                            <span className='material-icons'><GiConfirmed/></span>
+                                                        </button>
+                                                    </div>
+                                                )}
                                                 <div className='material carregar'>
                                                     <button name="acao" value='carregar' onClick={() => carregar(cliente)}>
                                                         <span className='material-icons carregar'><AiOutlineUpload/></span>

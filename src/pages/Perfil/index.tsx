@@ -86,8 +86,8 @@ function PerfilPage(){
                 buttons: [
                     {
                         label: 'Sim',
-                        onClick: ()=> {
-                            api.get(`cliente/desativar/${idCliente}`);
+                        onClick: async ()=> {
+                            await api.get(`cliente/desativar/${idCliente}`);
                             toast.success('Sua conta foi desativada em nossa base');
                             logout();
                             history.push('/');

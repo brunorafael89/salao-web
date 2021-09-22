@@ -110,8 +110,8 @@ function ProfissionalFuncaoPage(){
                 buttons: [
                     {
                         label: 'Sim',
-                        onClick: ()=> {
-                            api.delete(`profissionalFuncao/${profissional_id}/${funcao_id}`)
+                        onClick: async ()=> {
+                            await api.delete(`profissionalFuncao/${profissional_id}/${funcao_id}`)
                             getProfissionalFuncao();
                             toast.success("Função do profissional Excluído com sucesso");
                         }

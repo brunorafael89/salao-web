@@ -33,6 +33,7 @@ function AgendamentoPage() {
 
     useEffect(() => {
         getAgendamentos()
+        getAgendamentosDataCliente(new Date())
         getServicos()
         getClientes()
     }, [])
@@ -113,6 +114,7 @@ function AgendamentoPage() {
             limpar();
             getServicos();
             getAgendamentos() 
+            getAgendamentosDataCliente(new Date())
 
             toast.success("Agendamento adicionado com sucesso!");
             toast.success("Tempo de tolerância 10 min!");
@@ -178,24 +180,24 @@ function AgendamentoPage() {
 
             let achou = false;
 
-            for(var i = 0; i < datasProfissional.length; i++){
+            for(var i=0; i<datasProfissional.length; i++){
                 if(
                     (isAfter(dataInicioAgendamento, datasProfissional[i].dataInicial) && isBefore(dataInicioAgendamento, datasProfissional[i].dataFinal)) 
                     || (isAfter(dataFinalAgendamento, datasProfissional[i].dataInicial) && isBefore(dataFinalAgendamento, datasProfissional[i].dataFinal))
                 ){
                     achou = true;
-                    datasProfissional.splice(i, 1);
+                    //datasProfissional.splice(i, 1);
                     break;
                 }
             }
 
-            for(var j = 0; j < datasClientes.length; j++){
+            for(var j=0; j<datasClientes.length; j++){
                 if(
                     (isAfter(dataInicioAgendamento, new Date(datasClientes[j].dataInicial)) && isBefore(dataInicioAgendamento, new Date(datasClientes[j].dataFinal))) 
                     || (isAfter(dataFinalAgendamento, new Date(datasClientes[j].dataInicial)) && isBefore(dataFinalAgendamento, new Date(datasClientes[j].dataFinal)))
                 ){
                     achou = true;
-                    datasClientes.splice(j, 1);
+                    //datasClientes.splice(j, 1);
                     break;
                 }
             }
@@ -239,8 +241,8 @@ function AgendamentoPage() {
             buttons: [
                 {
                     label: 'Sim',
-                    onClick: ()=> {
-                        api.delete(`agendamento/${idAgendamento}`)
+                    onClick: async ()=> {
+                        await api.delete(`agendamento/${idAgendamento}`)
                         getAgendamentos()
                     }
                 },

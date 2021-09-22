@@ -12,6 +12,7 @@ import 'react-confirm-alert/src/react-confirm-alert.css'
 
 import "./styles.css";
 import { getUser } from "../../services/auth";
+import isEqual from "date-fns/isEqual";
 
 function AgendamentoFunc() {
     const user = getUser();
@@ -140,6 +141,11 @@ function AgendamentoFunc() {
         getAgendamentos(data);
     }
 
+    function converteHoraEmData(horario: string){
+        const dataAtual = new Date();
+        return new Date(dataAtual.getUTCFullYear() + "-" + (dataAtual.getUTCMonth() + 1) + "-" + dataAtual.getUTCDate() + " " + horario)
+    }
+
     async function getHorariosProfissionais(id:string) {
         setIdProfissional(id)
         const response = await api.get(`agendamento/getAgendamentoProfissional/${id}/${format(data_atendimento, "yyyy-MM-dd")}`)
@@ -171,6 +177,7 @@ function AgendamentoFunc() {
 
         const datasClientes = JSON.parse(JSON.stringify(agendamentosHjCliente));
         // const datasProfissionais = JSON.parse(JSON.stringify(datasProfissional));
+
     
         while(isBefore(dataInicioAgendamento, dataLimiteAgendamento)){
 
@@ -186,7 +193,7 @@ function AgendamentoFunc() {
                     || (isAfter(dataFinalAgendamento, datasProfissional[i].dataInicial) && isBefore(dataFinalAgendamento, datasProfissional[i].dataFinal))
                 ){
                     achou = true;
-                    datasProfissional.splice(i, 1);
+                    //datasProfissional.splice(i, 1);
                     break;
                 }
             }
@@ -197,7 +204,7 @@ function AgendamentoFunc() {
                     || (isAfter(dataFinalAgendamento, new Date(datasClientes[j].dataInicial)) && isBefore(dataFinalAgendamento, new Date(datasClientes[j].dataFinal)))
                 ){
                     achou = true;
-                    datasClientes.splice(j, 1);
+                    //datasClientes.splice(j, 1);
                     break;
                 }
             }
@@ -241,8 +248,8 @@ function AgendamentoFunc() {
             buttons: [
                 {
                     label: 'Sim',
-                    onClick: ()=> {
-                        api.delete(`agendamento/${idAgendamento}`)
+                    onClick: async ()=> {
+                        await api.delete(`agendamento/${idAgendamento}`)
                         getAgendamentos(data_atendimento)
                     }
                 },
@@ -254,6 +261,25 @@ function AgendamentoFunc() {
         });
     }
 
+
+    async function getAgendamentosCliente(clienteId: string){
+        console.log(clienteId)
+        setIdCliente(Number(clienteId));
+
+        try {
+            const dataFormatada = data_atendimento.getUTCFullYear() + "-" + (data_atendimento.getUTCMonth() + 1) + "-" + data_atendimento.getUTCDate()
+            const response = await api.get(`agendamento/getAgendamentoCliente/${Number(clienteId)}/${dataFormatada}`); 
+
+            let datasAgendamentosDataCliente: any[] = response.data.map((h:any) => {
+                return converteTempoEmData(h.horario_agendamento, h.tempo_servico, h.data_atendimento);
+            });
+            setAgendamentosHjCliente(datasAgendamentosDataCliente)
+            console.log(datasAgendamentosDataCliente)
+
+        } catch(err) {
+            toast.error("Erro ao consultar a agenda");
+        }
+    }
     
 
     return (
@@ -280,7 +306,7 @@ function AgendamentoFunc() {
                                 
                                 <label htmlFor="">
                                     <span>Qual Cliente?</span>
-                                    <select name="cliente" id="" value={idCliente} onChange={(e) => setIdCliente(e.target.value)}>
+                                    <select name="cliente" id="" value={idCliente} onChange={(e) => getAgendamentosCliente(e.target.value)}>
                                         <option value="">Selecione o cliente</option>
                                         {clientes.map((cliente: any) => (
                                             <option value={cliente.cliente_id}>{cliente.nome}</option>

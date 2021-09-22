@@ -47,8 +47,8 @@ function FuncaoPage(){
                 buttons: [
                     {
                         label: 'Sim',
-                        onClick: ()=> {
-                            api.delete(`funcao/${id}`);
+                        onClick: async ()=> {
+                            await api.delete(`funcao/${id}`);
                             getFuncao();
                             toast.success("Função excluida com sucesso!");
                         }

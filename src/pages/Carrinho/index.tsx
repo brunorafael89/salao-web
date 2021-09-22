@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import Header from "../../components/Header/";
 import MenuLateral from "../../components/MenuLateral/";
 
-import coloracao from "../../assets/images/coloração1.jpg";
+import logosalao from "../../assets/images/logosalao.png";
 import { FaTrashAlt } from "react-icons/fa";
 
 import "./styles.css";
@@ -17,27 +17,18 @@ function CartPage(){
     const location = useLocation<any[]>();
     const history = useHistory();
     const [agendamentos, setAgendamentos] = useState<any[]>([]);
-    const [total, setTotal] = useState<Number>(0);
+    const [total, setTotal] = useState<number>(0);
+    const [desconto, setDesconto] = useState<number>(0);
     const [formaPagamentos, setFormaPagamento] = useState([]);
     const [idFormapagamento, setIdFormapagamento] = useState("");
+    const [jaFezAgendamentos, setJaFezAgendamentos] = useState<boolean>(false);
 
     useEffect(() => {
         getFormaPagamento();
+        getJaFezAgendamentos(location.state);
 
-        // console.log(location.state)
         setAgendamentos(location.state);
-
-        calcularTotal(location.state);
-
-    }, []);
-
-    function calcularTotal(agendamentos: any[]){
-        let total = 0;
-        agendamentos.map(agendamento => {
-            total += agendamento.valor;
-        });
-        setTotal(total);
-    }
+    }, [jaFezAgendamentos, desconto]);
     
     async function getFormaPagamento(){
         try {
@@ -46,6 +37,46 @@ function CartPage(){
         } catch(err) {
             toast.error("Erro ao consultar as formas de pagamentos");
         }
+    }
+
+    async function getJaFezAgendamentos(agendamentos: any[]){
+        try {            
+            const response = await api.get(`agendamento/getJaFezAgendamentos/${agendamentos[0].cliente_id}`); 
+            console.log(response.data)
+            const jaFez = response.data[0].count === "0" ? false : true;
+            setJaFezAgendamentos(jaFez);
+            calcularTotal(location.state, jaFez);
+        } catch(err) {
+            toast.error("Erro ao consultar as formas de pagamentos");
+        }
+    }
+
+    function calculaDesconto(data_nasc: string, total: number, jaFez: Boolean){
+        const data = new Date(data_nasc);
+        const mesAniversario = data.getMonth();
+        const diaAniversario = data.getDate();
+
+        const mesAtual = new Date().getMonth();
+        const diaAtual = new Date().getDate();
+
+        console.log(jaFez)
+
+        if(mesAniversario == mesAtual && diaAniversario == diaAtual){
+            console.log(total)
+            setDesconto(total * 20 / 100);
+        } else if(!jaFez){
+            setDesconto(total * 20 / 100);
+        }
+    }
+
+    function calcularTotal(agendamentos: any[], jaFez: Boolean){
+        let total = 0;
+        agendamentos.map(agendamento => {
+            total += agendamento.valor;
+        });
+        setTotal(total); 
+        
+        calculaDesconto(agendamentos[0].data_nasc, total, jaFez);
     }
 
     async function finalizar(){
@@ -67,7 +98,7 @@ function CartPage(){
             return agendamento.agendamento_id !== agendamento_id;
         });
         setAgendamentos(agendamentosFiltrados);
-        calcularTotal(agendamentosFiltrados);
+        calcularTotal(agendamentosFiltrados, jaFezAgendamentos);
     }
 
     return (
@@ -100,7 +131,7 @@ function CartPage(){
                                         <tr className="cart-items" key={agendamento.agendamento_id}>
                                             <td>
                                                 <div className="cart-img">
-                                                    <img src={coloracao} alt="coloração" />
+                                                    <img src={logosalao} alt="logosalao" />
                                                 </div>
                                                 <div className="cart-service">
                                                     <span className="item-service">{agendamento.nomeServico}</span>
@@ -143,7 +174,10 @@ function CartPage(){
                                         <span>Subtotal</span> <span>R$ {total},00</span>
                                     </label>
                                     <label htmlFor="">
-                                        <span>Valor Final</span> <span>R$ {total},00</span>
+                                        <span>Desconto</span> <span>R$ {desconto}</span>
+                                    </label>
+                                    <label htmlFor="">
+                                        <span>Valor Final</span> <span>R$ {total - desconto}{!desconto && (",00")}</span>
                                     </label>
                                 </div>
                             </section>

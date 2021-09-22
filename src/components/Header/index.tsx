@@ -43,7 +43,7 @@ function Header(){
                         <ul>
                             <li><span className="material-icons"><MdExitToApp/></span><a href="" onClick={sair}>Sair</a></li>
                             <li><span className="material-icons"><AiOutlineHome/></span><a href="home">Página Principal</a></li>
-                            <li><span className="material-icons"><RiMoneyDollarBoxLine/></span><a href="TabelaPreco">Tabela de Preços</a></li>
+                            <li><span className="material-icons"><RiMoneyDollarBoxLine/></span><a href="TabelaPreco" target="_blank">Tabela de Preços</a></li>
                             <li><MenuLateral/></li>
                         </ul>
                     </nav>
