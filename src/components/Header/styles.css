@@ -86,6 +86,21 @@ header div.contacts nav ul li a{
     color: inherit;
 }
 
+header div.contacts nav ul li button{
+    background: none;
+    border: none;
+    color: #fff;
+    display: inline;
+    margin-left: 5px;
+    transform: translateY(-3px);
+    font-size: 16px;
+}
+
+header div.contacts nav ul li button:hover{
+    font-weight: bolder;
+    color: #fcff46;
+}
+
 header div.background{
     display: block;
     width: 100%;
@@ -212,6 +227,11 @@ header .menu-lateral{
         margin-left: unset;
         transform: translateY(-7px);
         color: inherit;
+    }
+
+    header div.contacts nav ul li button:hover{
+        font-weight: bolder;
+        color: #fcff46;
     }
 
     header div.contacts .hamburguer + nav.show{

@@ -41,6 +41,22 @@
     width: calc(100% - 44px);
 }
 
+.menu-lateral ul li button{
+    display: inline-block;
+    width: calc(100% - 44px);
+    padding-left: 15px;
+    background: none;
+    border: none;
+    text-align: left;
+    font-size: 18px;
+    color: #fff;
+    cursor: pointer;
+}
+
+.menu-lateral ul li:hover button{
+    font-weight: bold;
+}
+
 main .menu-lateral li #dropCadastro, 
 main .menu-lateral li #dropRelatorio{
     display: none;

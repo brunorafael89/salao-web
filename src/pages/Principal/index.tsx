@@ -12,6 +12,9 @@ import depilacao from "../../assets/images/depilacao.jpg";
 import pes from "../../assets/images/pes.jpg";
 import logo from "../../assets/images/logo.png";
 import map from "../../assets/images/map.svg";
+import insta from "../../assets/images/instagram.png";
+import whats from "../../assets/images/whats.png";
+import face from "../../assets/images/facebook.svg";
 
 import "./styles.css";
 import Components from "../../components/CallToAction"
@@ -162,9 +165,9 @@ function PrincipalPage(){
                 <section className="page social-media">
                     <p>Siga nossas Redes Sociais</p>
                     <span className="social-media-icons">
-                        <a href="http://www.facebook.com.br" target="_blank" rel="noreferrer"><img src="https://www.flaticon.com/svg/static/icons/svg/174/174848.svg" alt="Facebook ícone" title="Facebook grátis ícone" /></a>
-                        <a href="http://www.instagram.com.br" target="_blank" rel="noreferrer"><img src="https://www.flaticon.com/svg/static/icons/svg/174/174855.svg" alt="Instagram ícone" /></a>
-                        <a href="http://www.whatsapp.com.br" target="_blank" rel="noreferrer"><img src="https://www.flaticon.com/svg/static/icons/svg/733/733585.svg" alt="Whatsapp ícone" /></a>
+                        <a href="http://www.facebook.com.br" target="_blank" rel="noreferrer"><img src={face} alt="Facebook ícone" title="Facebook grátis ícone" /></a>
+                        <a href="http://www.instagram.com.br" target="_blank" rel="noreferrer"><img src={insta} alt="Instagram ícone" /></a>
+                        <a href="http://www.whatsapp.com.br" target="_blank" rel="noreferrer"><img src={whats} alt="Whatsapp ícone" /></a>
                     </span>
                 </section>
 

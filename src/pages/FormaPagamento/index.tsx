@@ -1,5 +1,4 @@
 import React, { FormEvent, useEffect, useState } from "react";
-// import { useHistory } from "react-router-dom";
 import api from "../../services/api";
 import Header from "../../components/Header/";
 import MenuLateral from "../../components/MenuLateral/";
@@ -13,7 +12,6 @@ import 'react-confirm-alert/src/react-confirm-alert.css'
 import "./styles.css";
 
 function FormaPagamentoPage() {
-//   const history = useHistory();
   const [formaPagamento, setFormaPagamento] = useState("");
   const [idFormapagamento, setIdFormapagamento] = useState("");
   const [formasPagamentos, setFormasPagamentos] = useState([]);
@@ -80,9 +78,6 @@ function FormaPagamentoPage() {
 
 
   async function excluir(id: number){
-    // await api.delete(`formaPagamento/${id}`);
-    // toast.success("Forma de pagamento excluído com sucesso!");
-    // getFormasPagamentos()
     confirmAlert({
         title: 'Confirmar ação',
         message: 'Tem certeza que deseja excluir a forma de Pagamento?',

@@ -71,7 +71,6 @@ function ControleAgendaPage(){
     }
 
     async function cancelarAgendamento(idAgendamento: Number){
-        // await api.delete(`agendamento/${idAgendamento}`)
         confirmAlert({
             title: 'Confirmar ação',
             message: 'Tem certeza que deseja cancelar o agendamento?',

@@ -101,9 +101,6 @@ function ProfissionalFuncaoPage(){
 
     async function excluir(profissional_id:number, funcao_id:number){
         try{
-            // await api.delete(`profissionalFuncao/${profissional_id}/${funcao_id}`)
-            // getProfissionalFuncao();
-            // toast.success("Função do profissional Excluído com sucesso");
             confirmAlert({
                 title: 'Confirmar ação',
                 message: 'Tem certeza que deseja excluir a função deste profissional?',

@@ -104,10 +104,6 @@ div.table table tbody tr td .form div.material button span.material-icons.carreg
 }
 
 @media screen and (min-width: 320px) and (max-width: 480px){
-    /* .out-container{
-        overflow-x: auto;
-    } */
-
     div.table{
         margin: 0;
         overflow-x: auto;

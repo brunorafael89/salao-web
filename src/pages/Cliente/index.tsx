@@ -17,9 +17,7 @@ import { AiOutlineUpload } from "react-icons/ai";
 import { MdDeleteForever, MdSearch } from "react-icons/md";
 import { GiConfirmed } from "react-icons/gi";
 
-
 import ValidarCPF from "../../components/ValidarCPF";
-import { getUser } from "../../services/auth";
 
 function ClientePage(){
     registerLocale('pt', pt);
@@ -38,8 +36,6 @@ function ClientePage(){
     const [senhaCliente, setSenhaCliente] = useState("");
     const [idCliente, setIdCliente] = useState("");
     const [pesquisa, setPesquisa] = useState("")
-    const user = getUser();
-    const userID = user.clienteId
 
     useEffect(()=>{
         getCliente()
@@ -125,9 +121,6 @@ function ClientePage(){
 
     async function desativar(id: number){
         try{
-            // await api.delete(`cliente/${id}`)
-            // getCliente();
-            // toast.success("Cliente excluído com sucesso!");
             confirmAlert({
                 title: 'Confirmar ação',
                 message: 'Tem certeza que deseja desativar o cliente?',
@@ -279,20 +272,7 @@ function ClientePage(){
                                 />
                             </label>
 
-                            {/* <label htmlFor="">
-                                <span>Ativo</span>
-                                {!usuario.ativo === true(
-                                    <input 
-                                        type="checkbox" 
-                                        name="ativo"   
-                                        value = {false}                             
-                                    />                 
-                                )}                 
-                            </label> */}
-
                             <div className="buttons">
-                                {/* <button className="form-btn" onClick={() => ativar(userID)}>Ativar Cadastro</button>
-                                <button name="acao" value="ativar" type="submit">Ativar</button> */}
                                 <button name="acao" value="cadastrar" type="submit">Cadastrar</button>
                                 <button name="acao" value="editar" type="submit">Alterar</button>
                             </div>
@@ -344,7 +324,7 @@ function ClientePage(){
                                                         </button>
                                                     </div>
                                                 )}
-                                                {cliente?.ativo == false && (
+                                                {cliente?.ativo === false && (
                                                     <div className='material excluir'>                                            
                                                         <button name="acao" value='excluir' onClick={() => ativar(cliente.cliente_id)}>
                                                             <span className='material-icons'><GiConfirmed/></span>

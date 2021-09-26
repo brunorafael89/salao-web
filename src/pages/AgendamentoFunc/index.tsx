@@ -12,7 +12,6 @@ import 'react-confirm-alert/src/react-confirm-alert.css'
 
 import "./styles.css";
 import { getUser } from "../../services/auth";
-import isEqual from "date-fns/isEqual";
 
 function AgendamentoFunc() {
     const user = getUser();
@@ -141,11 +140,6 @@ function AgendamentoFunc() {
         getAgendamentos(data);
     }
 
-    function converteHoraEmData(horario: string){
-        const dataAtual = new Date();
-        return new Date(dataAtual.getUTCFullYear() + "-" + (dataAtual.getUTCMonth() + 1) + "-" + dataAtual.getUTCDate() + " " + horario)
-    }
-
     async function getHorariosProfissionais(id:string) {
         setIdProfissional(id)
         const response = await api.get(`agendamento/getAgendamentoProfissional/${id}/${format(data_atendimento, "yyyy-MM-dd")}`)
@@ -170,14 +164,9 @@ function AgendamentoFunc() {
         const minuto = Number(tempo[1]);
         const tempoServioMinutos = hora + minuto;
 
-        // let horaFormatada = format(dataInicioAgendamento, "HH:mm");
-        // horarios.push(horaFormatada);
-
         const dataLimiteAgendamento = subMinutes(dataFinal, tempoServioMinutos);
 
         const datasClientes = JSON.parse(JSON.stringify(agendamentosHjCliente));
-        // const datasProfissionais = JSON.parse(JSON.stringify(datasProfissional));
-
     
         while(isBefore(dataInicioAgendamento, dataLimiteAgendamento)){
 
@@ -193,7 +182,6 @@ function AgendamentoFunc() {
                     || (isAfter(dataFinalAgendamento, datasProfissional[i].dataInicial) && isBefore(dataFinalAgendamento, datasProfissional[i].dataFinal))
                 ){
                     achou = true;
-                    //datasProfissional.splice(i, 1);
                     break;
                 }
             }
@@ -204,7 +192,6 @@ function AgendamentoFunc() {
                     || (isAfter(dataFinalAgendamento, new Date(datasClientes[j].dataInicial)) && isBefore(dataFinalAgendamento, new Date(datasClientes[j].dataFinal)))
                 ){
                     achou = true;
-                    //datasClientes.splice(j, 1);
                     break;
                 }
             }
@@ -240,8 +227,6 @@ function AgendamentoFunc() {
     }
     
     async function cancelarAgendamento(idAgendamento: Number){
-        // await api.delete(`agendamento/${idAgendamento}`)
-        // getAgendamentos(data_atendimento)
         confirmAlert({
             title: 'Confirmar ação',
             message: 'Tem certeza que deseja cancelar o agendamento?',

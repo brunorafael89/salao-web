@@ -123,9 +123,6 @@ function FuncionarioPage(){
 
     async function excluir(id:number){
         try{
-            // await api.delete(`funcionario/${id}`)
-            // getFuncionario();
-            // toast.success("Funcionario Excluído com sucesso");
             confirmAlert({
                 title: 'Confirmar ação',
                 message: 'Tem certeza que deseja desativar o funcionário?',

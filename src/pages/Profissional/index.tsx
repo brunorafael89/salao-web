@@ -71,9 +71,6 @@ function ProfissionalPage(){
 
     async function excluir(id:number){
         try{
-            // await api.delete(`profissional/${id}`)
-            // getProfissional();
-            // toast.success("Profissional Excluído com sucesso");
             confirmAlert({
                 title: 'Confirmar ação',
                 message: 'Tem certeza que deseja desativar o profissional?',
@@ -161,19 +158,12 @@ function ProfissionalPage(){
 
                             <label htmlFor="data_nasc">
                                 <span>Data Nascimento</span>
-                                {/* <input 
-                                    type="date" 
-                                    name="data_nasc" 
-                                    value={dataNascProfissional} 
-                                    onChange={ (e) => setDataNascProfissional(e.target.value) }
-                                /> */}
                                 <DatePicker 
                                     selected={dataNascProfissional} 
                                     onChange={(date: Date) => setDataNascProfissional(date)} 
                                     locale="pt"
                                     dateFormat="dd/MM/yyyy"
                                 />
-
                             </label>
 
                             <label htmlFor="cpf">

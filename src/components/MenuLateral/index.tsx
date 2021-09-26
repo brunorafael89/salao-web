@@ -64,7 +64,7 @@ function MenuLateral(){
                             </li>
                             <li>
                                 <span><IoIosAdd/></span>
-                                <a href="#" onClick={openClassCadastro}>Cadastros</a>
+                                <button onClick={openClassCadastro}>Cadastros</button>
                                 <ul id="dropCadastro">
                                     {user.perfilAcessoId === 4 && (
                                         <li>
@@ -107,7 +107,7 @@ function MenuLateral(){
                             {user.perfilAcessoId === 4 && (
                                 <li>
                                     <span><IoIosAdd/></span>
-                                    <a href="#" onClick={openClassRelatorio}>Relatórios</a>
+                                    <button onClick={openClassRelatorio}>Relatórios</button>
                                     <ul id="dropRelatorio">
                                         <li>
                                             <span><MdPoll /></span>

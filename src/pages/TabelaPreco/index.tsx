@@ -1,12 +1,9 @@
 import React from "react";
 import logo from "../../assets/images/logo.png";
-import { FiPhone } from "react-icons/fi";
-import { FiMail } from "react-icons/fi";
-import { MdExitToApp } from "react-icons/md";
-import { GiMaggot } from "react-icons/gi";
 import { FaRegHandPeace } from "react-icons/fa";
-import { GiFemaleLegs } from "react-icons/gi";
-import { GiHamburgerMenu } from "react-icons/gi";
+import { FiPhone, FiMail } from "react-icons/fi";
+import { GiMaggot, GiFemaleLegs, GiHamburgerMenu } from "react-icons/gi";
+import { MdExitToApp } from "react-icons/md";
 
 import "./styles.css";
 import Components from "../../components/CallToAction"

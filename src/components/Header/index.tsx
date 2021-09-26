@@ -41,7 +41,11 @@ function Header(){
 
                     <nav>
                         <ul>
-                            <li><span className="material-icons"><MdExitToApp/></span><a href="" onClick={sair}>Sair</a></li>
+                            <li>
+                                <span className="material-icons"><MdExitToApp/></span>
+                                {/* <a href="#" onClick={sair}>Sair</a> */}
+                                <button onClick={sair}>Sair</button>
+                            </li>
                             <li><span className="material-icons"><AiOutlineHome/></span><a href="home">Página Principal</a></li>
                             <li><span className="material-icons"><RiMoneyDollarBoxLine/></span><a href="TabelaPreco" target="_blank">Tabela de Preços</a></li>
                             <li><MenuLateral/></li>
