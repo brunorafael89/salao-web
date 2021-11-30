@@ -1,26 +1,3 @@
-@import url('https://fonts.googleapis.com/css2?family=Alata&family=Montserrat:wght@400;700&display=swap');
-
-*{
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-    font-family: 'Montserrat', 'Roboto', sans-serif;
-}
-
-body{
-    /* background-image: url('../../assets/images/background_salao.jpg'); */
-    overflow-x: hidden; /*Impede que a página se movimente no sentido horizontal*/
-    scroll-behavior: smooth; /*Deixa o deslizamento da página suave*/
-}
-
-li{
-    display: inline;
-    list-style-type: none;
-}
-a{
-    text-decoration: none;
-}
-
 main .mensagem.main-container{
     width: 83%;
     padding: 80px 10px 0 0;

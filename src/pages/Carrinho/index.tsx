@@ -42,7 +42,6 @@ function CartPage(){
     async function getJaFezAgendamentos(agendamentos: any[]){
         try {            
             const response = await api.get(`agendamento/getJaFezAgendamentos/${agendamentos[0].cliente_id}`); 
-            console.log(response.data)
             const jaFez = response.data[0].count === "0" ? false : true;
             setJaFezAgendamentos(jaFez);
             calcularTotal(location.state, jaFez);
@@ -59,10 +58,7 @@ function CartPage(){
         const mesAtual = new Date().getMonth();
         const diaAtual = new Date().getDate();
 
-        console.log(jaFez)
-
-        if(mesAniversario == mesAtual && diaAniversario == diaAtual){
-            console.log(total)
+        if(mesAniversario === mesAtual && diaAniversario === diaAtual){
             setDesconto(total * 20 / 100);
         } else if(!jaFez){
             setDesconto(total * 20 / 100);

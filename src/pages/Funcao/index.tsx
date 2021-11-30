@@ -38,9 +38,6 @@ function FuncaoPage(){
 
     async function excluir(id: number){
         try{
-            // await api.delete(`funcao/${id}`);
-            // getFuncao();
-            // toast.success("Função excluida com sucesso!");
             confirmAlert({
                 title: 'Confirmar ação',
                 message: 'Tem certeza que deseja excluir a função?',

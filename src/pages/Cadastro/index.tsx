@@ -7,8 +7,6 @@ import { toast } from "react-toastify";
 import "./styles.css";
 import ValidarCPF from "../../components/ValidarCPF";
 
-// import { setToken } from "../../services/auth";
-
 function CadastroPage(){
     const history = useHistory();
     const [nome, setNome] = useState("");
@@ -41,7 +39,6 @@ function CadastroPage(){
                     login: email
                 })
     
-                // setToken(response.data);
                 toast.success(response.data);
     
                 history.push('Login');
@@ -119,8 +116,6 @@ function CadastroPage(){
                             value={senha}
                             onChange={(e) => setSenha(e.target.value)}
                         />
-
-                        {/* <input id="repSenha" type="password" placeholder="Repita a senha" /> */}
 
                         <button type="submit"> Cadastrar </button>
 

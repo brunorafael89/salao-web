@@ -129,7 +129,6 @@ function AgendamentoPage() {
         setDataAtendimento(new Date())
         setIdServicos('')
         setIdProfissional('')
-        // setIdFormapagamento('')
         setHorarios([])
         setTotal('')
         setHorarioAgendamento('')
@@ -164,13 +163,9 @@ function AgendamentoPage() {
         const minuto = Number(tempo[1]);
         const tempoServioMinutos = hora + minuto;
 
-        // let horaFormatada = format(dataInicioAgendamento, "HH:mm");
-        // horarios.push(horaFormatada);
-
         const dataLimiteAgendamento = subMinutes(dataFinal, tempoServioMinutos);
 
         const datasClientes = JSON.parse(JSON.stringify(agendamentosHjCliente));
-        // const datasProfissionais = JSON.parse(JSON.stringify(datasProfissional));
     
         while(isBefore(dataInicioAgendamento, dataLimiteAgendamento)){
 
@@ -190,7 +185,6 @@ function AgendamentoPage() {
                     || (isAfter(dataFinalAgendamento, datasProfissional[i].dataInicial) && isBefore(dataFinalAgendamento, datasProfissional[i].dataFinal))
                 ){
                     achou = true;
-                    //datasProfissional.splice(i, 1);
                     break;
                 }
             }
@@ -201,7 +195,6 @@ function AgendamentoPage() {
                     || (isAfter(dataFinalAgendamento, new Date(datasClientes[j].dataInicial)) && isBefore(dataFinalAgendamento, new Date(datasClientes[j].dataFinal)))
                 ){
                     achou = true;
-                    //datasClientes.splice(j, 1);
                     break;
                 }
             }
@@ -237,8 +230,6 @@ function AgendamentoPage() {
     }
     
     async function cancelarAgendamento(idAgendamento: Number){
-        // await api.delete(`agendamento/${idAgendamento}`)
-        // getAgendamentos()
         confirmAlert({
             title: 'Confirmar ação',
             message: 'Tem certeza que deseja cancelar o agendamento?',
