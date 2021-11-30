@@ -180,6 +180,10 @@ function AgendamentoPage() {
 
             let achou = false;
 
+            if (isAfter(new Date(), dataInicioAgendamento)){
+                achou = true;
+            }
+
             for(var i=0; i<datasProfissional.length; i++){
                 if(
                     (isAfter(dataInicioAgendamento, datasProfissional[i].dataInicial) && isBefore(dataInicioAgendamento, datasProfissional[i].dataFinal)) 
